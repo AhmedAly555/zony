@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zony/auth/widgets/language_widget.dart';
 
 import '../../services/size_config.dart';
+import '../widgets/box.widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,6 +13,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  int _selectedIndex = -1;
+
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -38,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Center(
         child: Container(
           width: MediaQuery.of(context).size.width - 50,
-          height: MediaQuery.of(context).size.height - 550,
+          height: SizeConfig.heightPercent(0.38),
           decoration: BoxDecoration(
             color: Color(0xFFFFFFFF),
             borderRadius: BorderRadius.circular(24),
@@ -60,83 +63,117 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Expanded(
-                      child: Container(
-                        height: SizeConfig.heightPercent(0.16),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFf4f4f4),
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/svgs/PODU_logo.svg',
-                              color: Color(0xFF49159B),
-
-                              /* width: 32,
-                              height: 32, */
-                              //color: ,
-                            ),
-                            SizedBox(height: SizeConfig.heightPercent(0.02)),
-                            Text(
-                              'PODU',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFF49159B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    BoxChoice(
+                      svgPath: 'assets/svgs/PODU_logo.svg',
+                      title: 'PODU',
+                      onTap: () {
+                        setState(() {
+                          _selectedIndex = 0; // Select PODU
+                        });
+                        print('Selected:::::::: $_selectedIndex');
+                      },
+                      isSelected: _selectedIndex == 0,
                     ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: Container(
-                        height: SizeConfig.heightPercent(0.16),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFf4f4f4),
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
 
-                          children: [
-                            SvgPicture.asset(
-                              color: Color(0xFF49159B),
-                              'assets/svgs/Courier_logo.svg',
-                              /* width: 32,
-                              height: 32, */
-                              //color: ,
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.02,
-                            ),
-                            Text(
-                              'Courier',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFF49159B),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    SizedBox(width: 10),
+                    BoxChoice(
+                      svgPath: 'assets/svgs/Courier_logo.svg',
+                      title: 'Courier',
+                      onTap: () {
+                        setState(() {
+                          _selectedIndex = 1; // Select Courier
+                        });
+                        print('Selected:::::::: $_selectedIndex');
+                      },
+                      isSelected: _selectedIndex == 1,
                     ),
                   ],
                 ),
                 SizedBox(height: 20),
-                SizedBox(
+                TweenAnimationBuilder<double>(
+                  tween: Tween<double>(
+                    begin: 0.0,
+                    end:
+                        (_selectedIndex == 0 || _selectedIndex == 1)
+                            ? 1.0
+                            : 0.0,
+                  ),
+                  duration: Duration(seconds: 1),
+                  curve: Curves.easeInOut,
+                  builder: (context, value, child) {
+                    return Container(
+                      width: double.infinity,
+                      height: 52,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [
+                            Color(0xFF49159B),
+                            Color.lerp(
+                              Color(0xFF49159B),
+                              Color(0xFFF4F4F4),
+                              1 - value,
+                            )!, // مزج الرمادي
+                          ],
+                          stops: [0.0, value.clamp(0.0, 1.0)],
+                        ),
+                      ),
+                      child: ElevatedButton(
+                        onPressed:
+                            (_selectedIndex == 0 || _selectedIndex == 1)
+                                ? () {
+                                  // أكشن هنا
+                                }
+                                : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          shadowColor: Colors.transparent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text(
+                          'Confirm',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+
+                /*SizedBox(
                   width: double.infinity,
                   height: 52,
                   child: ElevatedButton(
                     onPressed: () {
-                      // TODO:
+                      /* 
+                      if (_selectedIndex == 0) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PODUFilterPage(),
+                          ),
+                        );
+                      } else if (_selectedIndex == 1) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CourierFilterPage(),
+                          ),
+                        );
+                      } */
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF49159B),
+                      backgroundColor:
+                          (_selectedIndex == 0 || _selectedIndex == 1)
+                              ? Color(0xFF49159B)
+                              : Color(0xFFBDBDBD),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -151,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                ),
+                ),*/
               ],
             ),
           ),
