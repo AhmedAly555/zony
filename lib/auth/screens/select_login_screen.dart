@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zony/auth/screens/login_screen.dart';
 import 'package:zony/auth/widgets/language_widget.dart';
 
 import '../../services/size_config.dart';
@@ -20,6 +21,8 @@ class _SelectLoginScreenState extends State<SelectLoginScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: Stack(
           alignment: Alignment.center,
           children: [
@@ -123,7 +126,11 @@ class _SelectLoginScreenState extends State<SelectLoginScreen> {
                         onPressed:
                             (_selectedIndex == 0 || _selectedIndex == 1)
                                 ? () {
-                                  //
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => const LoginScreen(),
+                                    ),
+                                  );
                                 }
                                 : null,
                         style: ElevatedButton.styleFrom(

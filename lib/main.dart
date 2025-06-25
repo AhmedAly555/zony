@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zony/auth/screens/generic_login_screen.dart';
 
 import 'auth/screens/login_screen.dart';
 import 'auth/screens/select_login_screen.dart';
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Color(0xFFF4F4F4),
       ),
       //home: const LoginScreen(),
-      home: const SelectLoginScreen(),
+      //home: const SelectLoginScreen(),
+      home: const GenericLoginScreen(),
     );
   }
 }
