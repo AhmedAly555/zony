@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppbar({super.key});
+  final String? title;
+  const CustomAppbar({super.key, this.title});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -19,7 +20,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
           Align(
             alignment: Alignment.center,
             child: Text(
-              'login',
+              title ?? 'login',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
             ),
           ),

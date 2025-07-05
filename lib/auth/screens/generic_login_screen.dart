@@ -5,7 +5,13 @@ import '../widgets/custom_appbar.dart';
 import 'login_screen.dart';
 
 class GenericLoginScreen extends StatefulWidget {
-  const GenericLoginScreen({super.key});
+
+  final PreferredSizeWidget appBar;
+  final Widget child;
+  final double height;
+  const GenericLoginScreen({super.key,
+    required this.child,
+    required this.height, required this.appBar,});
 
   @override
   State<GenericLoginScreen> createState() => _GenericLoginScreenState();
@@ -17,18 +23,27 @@ class _GenericLoginScreenState extends State<GenericLoginScreen> {
     SizeConfig.init(context);
 
     return Scaffold(
-      appBar: CustomAppbar(),
-      body: Center(
+      appBar: widget.appBar,
+      body: Align(
+        alignment: Alignment.center,
         child: Container(
           width: MediaQuery.of(context).size.width - 50,
-          height: SizeConfig.heightPercent(0.52),
+          height: widget.height,
           decoration: BoxDecoration(
             color: Color(0xFFFFFFFF),
             borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 25,
+                blurRadius: 50,
+                offset: Offset(0, 0),
+              ),
+            ],
           ),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: LoginScreen(),
+            child: widget.child,
           ),
         ),
       ),

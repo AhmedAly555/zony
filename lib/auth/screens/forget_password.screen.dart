@@ -7,22 +7,25 @@ import '../widgets/password_text_field.widget.dart';
 import '../widgets/username_text_field.widget.dart';
 import 'generic_login_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class ForgetPasswordScreen extends StatefulWidget {
+  const ForgetPasswordScreen({super.key});
+
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  bool _rememberMe = false;
+class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return GenericLoginScreen(
-      appBar: CustomAppbar(),
-      height: SizeConfig.heightPercent(0.52),
+
+      height: SizeConfig.heightPercent(0.30),
+      appBar: CustomAppbar(
+        title: 'Forget Password',
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,54 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
           Divider(height: 1, color: Color(0xFFF4F4F4)),
           SizedBox(height: 20),
           UsernameTextField(),
-
-          const SizedBox(height: 20.0),
-          const Text(
-            'Password',
-            style: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.w500,
-              color: Colors.black87,
-            ),
-          ),
-          const SizedBox(height: 8.0),
-          PasswordTextField(),
           SizedBox(height: 20),
-          Row(
-            children: [
-              SizedBox(
-                width: 24.0,
-                height: 24.0,
-                child: Checkbox(
-                  value: _rememberMe,
-                  onChanged: (bool? newValue) {
-                    setState(() {
-                      _rememberMe = newValue!;
-                    });
-                  },
-                  activeColor: Colors.deepPurple,
-                  checkColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4.0),
-                  ),
-                ),
-              ),
 
-              const Text('Remember me', style: TextStyle(fontSize: 15.0)),
-              const Spacer(),
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  'Forgot Password',
-                  style: TextStyle(
-                    color: Colors.deepPurple,
-                    fontSize: 15.0,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ),
-            ],
-          ),
           TweenAnimationBuilder<double>(
             tween: Tween<double>(
               begin: 0.0,

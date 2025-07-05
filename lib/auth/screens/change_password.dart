@@ -7,82 +7,74 @@ import '../widgets/password_text_field.widget.dart';
 import '../widgets/username_text_field.widget.dart';
 import 'generic_login_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class ChangePasswordScreen extends StatefulWidget {
+  const ChangePasswordScreen({super.key});
+
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  bool _rememberMe = false;
+class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return GenericLoginScreen(
-      appBar: CustomAppbar(),
-      height: SizeConfig.heightPercent(0.52),
+
+      height: SizeConfig.heightPercent(0.55),
+      appBar: CustomAppbar(
+        title: 'Change Your Password',
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Enter your personal information',
+            'Change Password',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 3),
           Divider(height: 1, color: Color(0xFFF4F4F4)),
-          SizedBox(height: 20),
-          UsernameTextField(),
-
-          const SizedBox(height: 20.0),
+          SizedBox(height: 12),
           const Text(
-            'Password',
+            'Current password',
             style: TextStyle(
               fontSize: 16.0,
               fontWeight: FontWeight.w500,
               color: Colors.black87,
             ),
           ),
-          const SizedBox(height: 8.0),
+          //const SizedBox(height: 3.0),
+          PasswordTextField(
+            hintText: 'Enter Current Password',
+          ),
+          SizedBox(height: 12),
+          const Text(
+            'New password',
+            style: TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
+            ),
+          ),
+          //const SizedBox(height: 8.0),
+          PasswordTextField(
+            hintText: 'Enter New Password',
+          ),
+          SizedBox(height: 12),
+          const Text(
+            'Confirm password',
+            style: TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
+            ),
+          ),
+          //const SizedBox(height: 8.0),
           PasswordTextField(),
           SizedBox(height: 20),
-          Row(
-            children: [
-              SizedBox(
-                width: 24.0,
-                height: 24.0,
-                child: Checkbox(
-                  value: _rememberMe,
-                  onChanged: (bool? newValue) {
-                    setState(() {
-                      _rememberMe = newValue!;
-                    });
-                  },
-                  activeColor: Colors.deepPurple,
-                  checkColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4.0),
-                  ),
-                ),
-              ),
 
-              const Text('Remember me', style: TextStyle(fontSize: 15.0)),
-              const Spacer(),
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  'Forgot Password',
-                  style: TextStyle(
-                    color: Colors.deepPurple,
-                    fontSize: 15.0,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ),
-            ],
-          ),
           TweenAnimationBuilder<double>(
             tween: Tween<double>(
               begin: 0.0,
