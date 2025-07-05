@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:zony/auth/screens/forget_password.screen.dart';
+import 'package:zony/auth/screens/generic_login_screen.dart';
 
-import 'screens/splash_screen.dart';
+import 'auth/screens/change_password.dart';
+import 'auth/screens/login_screen.dart';
+import 'auth/screens/select_login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,10 +17,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Zony',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        fontFamily: 'Poppins',
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF49159B)),
+        scaffoldBackgroundColor: Color(0xFFF4F4F4),
       ),
-      home: const SplashScreen(),
+      //home: const LoginScreen(),
+      //home: const SelectLoginScreen(),
+      //home: const ForgetPasswordScreen(),
+      home: const ChangePasswordScreen(),
     );
   }
 }
