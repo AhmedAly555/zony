@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'modules/auth/screens/change_password.dart';
+import 'modules/couriers/views/screens/home.screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,8 +22,8 @@ class MyApp extends StatelessWidget {
       ),
       //home: const LoginScreen(),
       //home: const SelectLoginScreen(),
-      //home: const ForgetPasswordScreen(),
-      home: const ChangePasswordScreen(),
+      home: const HomeScreen(),
+      //home: const ChangePasswordScreen(),
     );
   }
 }
