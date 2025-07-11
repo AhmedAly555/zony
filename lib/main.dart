@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zony/auth/screens/forget_password.screen.dart';
-import 'package:zony/auth/screens/generic_login_screen.dart';
 
-import 'auth/screens/change_password.dart';
-import 'auth/screens/login_screen.dart';
-import 'auth/screens/select_login_screen.dart';
+import 'modules/auth/screens/change_password.dart';
 
 void main() {
   runApp(const MyApp());
