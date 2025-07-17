@@ -31,7 +31,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Change Password',
+            'Change Your Password',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
           SizedBox(height: 3),
@@ -40,8 +40,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           const Text(
             'Current password',
             style: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.w500,
+              fontSize: 14.0,
+              fontWeight: FontWeight.w400,
               color: Colors.black87,
             ),
           ),
@@ -53,8 +53,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           const Text(
             'New password',
             style: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.w500,
+              fontSize: 14.0,
+              fontWeight: FontWeight.w400,
               color: Colors.black87,
             ),
           ),
@@ -66,8 +66,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           const Text(
             'Confirm password',
             style: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.w500,
+              fontSize: 14.0,
+              fontWeight: FontWeight.w400,
               color: Colors.black87,
             ),
           ),

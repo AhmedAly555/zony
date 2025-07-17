@@ -24,6 +24,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       obscureText: !_isPasswordVisible,
       decoration: InputDecoration(
         hintText: widget.hintText ?? 'Enter Password',
+        hintStyle: TextStyle(color: Color(0xFF929292), fontSize: 14.0,fontWeight: FontWeight.w400),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: const BorderSide(color: Colors.grey),
