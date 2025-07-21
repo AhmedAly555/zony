@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../views/widgets/custome_container_icon.widget.dart';
-import '../../../../views/widgets/default_navigation_bar.widget.dart';
-import '../widgets/custom_home_service_container.widget.dart';
+import '../../../../../../views/widgets/custome_container_icon.widget.dart';
+import '../../../../../../views/widgets/default_navigation_bar.widget.dart';
+import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
+import '../../../widgets/custom_home_service_container.widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFF4F4F4),
+    return TemplateAppScaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 60.0, right: 18, left: 18),
         child: Column(
@@ -123,7 +123,6 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: DefaultNavigationBar(),
     );
   }
 }

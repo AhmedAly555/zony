@@ -49,8 +49,8 @@ class CustomHomeServiceContainer extends StatelessWidget {
           /*Icon(Icons.arrow_forward_ios, color: Colors.grey),*/
           SvgPicture.asset(
             'assets/svgs/right_arrow_ios.svg',
-           /* width: 12,
-            height: 20,*/
+            width: 7,
+            height: 12,
             color: Color(0xFF1E1E1E),
 
           ),
