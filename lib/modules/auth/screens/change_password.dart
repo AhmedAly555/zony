@@ -4,28 +4,22 @@ import '../../../services/size_config.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_login_button.widget.dart';
 import '../widgets/password_text_field.widget.dart';
-import '../widgets/username_text_field.widget.dart';
 import 'generic_login_screen.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
-
 
   @override
   State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
 }
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
-
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return GenericLoginScreen(
-
       height: SizeConfig.heightPercent(0.55),
-      appBar: CustomAppbar(
-        title: 'Change Your Password',
-      ),
+      appBar: CustomAppbar(title: 'Change Your Password'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,9 +40,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             ),
           ),
           //const SizedBox(height: 3.0),
-          PasswordTextField(
-            hintText: 'Enter Current Password',
-          ),
+          PasswordTextField(hintText: 'Enter Current Password'),
           SizedBox(height: 12),
           const Text(
             'New password',
@@ -59,9 +51,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             ),
           ),
           //const SizedBox(height: 8.0),
-          PasswordTextField(
-            hintText: 'Enter New Password',
-          ),
+          PasswordTextField(hintText: 'Enter New Password'),
           SizedBox(height: 12),
           const Text(
             'Confirm password',
