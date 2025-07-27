@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zony/services/navigator.services/app_navigator.services.dart';
 
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../widgets/coustome_row_more_screen.widget.dart';
+import 'account_settings.screen.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({super.key});
@@ -29,7 +30,7 @@ class MoreScreen extends StatelessWidget {
             iconPath: 'assets/svgs/account.svg',
             title: 'Account Settings',
             onTap: () {
-              // Navigate to Account Settings
+              AppNavigator.navigateTo(context, () => const AccountSettingsScreen());
             },
           ),
           const SizedBox(height: 16),

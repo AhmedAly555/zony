@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_login_button.widget.dart';
 import '../widgets/password_text_field.widget.dart';
 import '../widgets/username_text_field.widget.dart';
+import 'change_password.dart';
 import 'generic_login_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -40,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
           const Text(
             'Password',
             style: TextStyle(
-              fontSize: 16.0,
+              fontSize: 14.0,
               fontWeight: FontWeight.w500,
               color: Colors.black87,
             ),
@@ -49,6 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
           PasswordTextField(),
           SizedBox(height: 20),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
                 width: 24.0,
@@ -68,15 +71,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
 
-              const Text('Remember me', style: TextStyle(fontSize: 15.0)),
-              const Spacer(),
+              const Text(
+                'Remember me',
+                style: TextStyle(
+                  fontSize: 14.0,
+                  color: Color(0xFF92929D),
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              //const Spacer(),
               TextButton(
-                onPressed: () {},
+                onPressed: () {AppNavigator.navigateTo(context, () => const ChangePasswordScreen());},
                 child: const Text(
                   'Forgot Password',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.deepPurple,
-                    fontSize: 15.0,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w400,
                     decoration: TextDecoration.underline,
                   ),
                 ),

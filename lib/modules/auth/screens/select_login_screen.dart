@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../widgets/box.widget.dart';
 import '../widgets/language_widget.dart';
@@ -126,11 +127,7 @@ class _SelectLoginScreenState extends State<SelectLoginScreen> {
                         onPressed:
                             (_selectedIndex == 0 || _selectedIndex == 1)
                                 ? () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => const LoginScreen(),
-                                    ),
-                                  );
+                              AppNavigator.navigateTo(context, () => const LoginScreen());
                                 }
                                 : null,
                         style: ElevatedButton.styleFrom(
