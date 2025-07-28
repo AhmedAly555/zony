@@ -30,7 +30,7 @@ class MoreScreen extends StatelessWidget {
             iconPath: 'assets/svgs/account.svg',
             title: 'Account Settings',
             onTap: () {
-              AppNavigator.navigateTo(context, () => const AccountSettingsScreen());
+              AppNavigator.navigateTo(context, () =>  AccountSettingsScreen());
             },
           ),
           const SizedBox(height: 16),
