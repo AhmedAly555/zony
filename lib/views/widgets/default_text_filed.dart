@@ -2,13 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-enum DefaultTextFieldType {
-  text,
-  email,
-  password,
-  phone,
-  name,
-}
+enum DefaultTextFieldType { text, email, password, phone, name }
 
 class DefaultTextField extends StatefulWidget {
   final String? hintText;
@@ -60,7 +54,9 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
-      obscureText: widget.fieldType == DefaultTextFieldType.password && !_isPasswordVisible,
+      obscureText:
+          widget.fieldType == DefaultTextFieldType.password &&
+          !_isPasswordVisible,
       readOnly: !_isEditable,
       keyboardType: _getKeyboardType(),
       inputFormatters: _getInputFormatters(),
@@ -109,8 +105,9 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
   Widget? _buildSuffixIcon() {
     List<Widget> suffixWidgets = [];
 
-    // إضافة فاصل إذا كان هناك أيقونات
-    if (widget.fieldType == DefaultTextFieldType.password || widget.showEditIcon) {
+    // Virtical devider
+    if (widget.fieldType == DefaultTextFieldType.password ||
+        widget.showEditIcon) {
       suffixWidgets.add(
         Container(
           width: 1,
@@ -121,7 +118,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
       );
     }
 
-    // أيقونة إظهار/إخفاء كلمة المرور
+    // Password icon
     if (widget.fieldType == DefaultTextFieldType.password) {
       suffixWidgets.add(
         IconButton(
@@ -139,19 +136,21 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
       );
     }
 
-    // أيقونة التعديل للملف الشخصي
+    // Edit icon أ
     if (widget.showEditIcon) {
       suffixWidgets.add(
         GestureDetector(
-          child: _isEditable ? SvgPicture.asset(
-            'assets/svgs/editing_pen.svg',
-            width: 17,
-            height: 16.5,
-            color: const Color(0xFF49159B),
-          ) : Icon(Icons.check),
+          child:
+              _isEditable
+                  ? Icon(Icons.check)
+                  : SvgPicture.asset(
+                    'assets/svgs/editing_pen.svg',
+                    width: 17,
+                    height: 16.5,
+                    color: const Color(0xFF49159B),
+                  ),
           onTap: () {
             if (_isEditable) {
-
               if (widget.onEditPressed != null) {
                 widget.onEditPressed!();
               }
@@ -159,7 +158,6 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
                 _isEditable = false;
               });
             } else {
-
               setState(() {
                 _isEditable = true;
               });
@@ -196,10 +194,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
       return null;
     }
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: suffixWidgets,
-    );
+    return Row(mainAxisSize: MainAxisSize.min, children: suffixWidgets);
   }
 
   TextInputType _getKeyboardType() {
@@ -225,9 +220,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
           LengthLimitingTextInputFormatter(11),
         ];
       case DefaultTextFieldType.name:
-        return [
-          FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Zأ-ي\s]')),
-        ];
+        return [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Zأ-ي\s]'))];
       default:
         return null;
     }
@@ -249,6 +242,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
     }
   }
 }
+
 /*
 
 // EX
