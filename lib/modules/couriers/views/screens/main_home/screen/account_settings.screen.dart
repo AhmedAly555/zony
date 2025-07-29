@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../views/widgets/default_text_filed.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
+import '../../../../../auth/widgets/custom_login_button.widget.dart';
 import '../../../../../auth/widgets/username_text_field.widget.dart';
 
 class AccountSettingsScreen extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-   AccountSettingsScreen({super.key});
+  AccountSettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +36,17 @@ class AccountSettingsScreen extends StatelessWidget {
                       ],
                     ),
                     padding: const EdgeInsets.all(8),
-                    child: const Icon(Icons.arrow_back_ios_new, size: 18),
+                    child: SvgPicture.asset(
+                      'assets/svgs/arrow_back.svg',
+                      width: 17,
+                      height: 16.5,
+                      color: const Color(0xFF49159B),
+                    ),
                   ),
                   const Spacer(),
                   const Text(
                     "Account Settings",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const Spacer(flex: 2),
                 ],
@@ -58,7 +63,7 @@ class AccountSettingsScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    // ==== Profile Image with Edit Icon ====
+                    //Profile Image with Edit Icon
                     Stack(
                       alignment: Alignment.bottomRight,
                       children: [
@@ -76,10 +81,7 @@ class AccountSettingsScreen extends StatelessWidget {
                               border: Border.all(color: Colors.grey.shade300),
                             ),
                             padding: const EdgeInsets.all(4),
-                            child: const Icon(
-                              Icons.edit,
-                              size: 16,
-                            ),
+                            child: const Icon(Icons.edit, size: 16),
                           ),
                         ),
                       ],
@@ -101,43 +103,111 @@ class AccountSettingsScreen extends StatelessWidget {
                     // ==== Username ====
                     const Text(
                       "ahmaly555@gmail.com",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
-                      ),
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
                     ),
                   ],
                 ),
               ),
+
+              //personal information
               Container(
                 width: double.infinity,
                 //height: widget.height,
                 decoration: BoxDecoration(
                   color: Color(0xFFFFFFFF),
                   borderRadius: BorderRadius.circular(24),
-
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Personal Information'),
-                      Divider(height: 1, color: Color(0xFFF4F4F4),),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: Divider(height: 1, color: Color(0xFFF4F4F4)),
+                      ),
                       DefaultTextField(
                         controller: _nameController,
                         fieldType: DefaultTextFieldType.name,
                         showEditIcon: true,
                         isReadOnly: true,
                         hintText: 'Ahmed M. Aly',
-                        onEditPressed: () {
-                          // حفظ التغييرات
-                        },
+                        onEditPressed: () {},
                       ),
-                      SizedBox(height: 20,),
-                      UsernameTextField(
-                        title: 'E-Mail',
+                      SizedBox(height: 20),
+                      DefaultTextField(
+                        controller: _emailController,
+                        fieldType: DefaultTextFieldType.email,
+                        showEditIcon: true,
+                        isReadOnly: true,
+                        hintText: 'ahmaly555@gmail.com',
+                        onEditPressed: () {},
+                      ),
+                      SizedBox(height: 20),
+                      DefaultTextField(
+                        controller: _phoneController,
+                        fieldType: DefaultTextFieldType.phone,
+                        showEditIcon: true,
+                        isReadOnly: true,
+                        hintText: '+201206543069',
+                        onEditPressed: () {},
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 18),
+              Container(
+                width: double.infinity,
+                //height: widget.height,
+                decoration: BoxDecoration(
+                  color: Color(0xFFFFFFFF),
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Change Password'),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: Divider(height: 1, color: Color(0xFFF4F4F4)),
+                      ),
+                      DefaultTextField(
+                        controller: _passwordController,
+                        fieldType: DefaultTextFieldType.password,
+                        //showEditIcon: true,
+                        isReadOnly: true,
+                        hintText: 'Ahmed M. Aly',
+                        onEditPressed: () {},
+                      ),
+                      SizedBox(height: 20),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF49159B),
 
-                        hintTitle: 'ahmaly555@gmail.com',
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 85,
+                              vertical: 14,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: () {},
+                          child: Text(
+                            'Change Password',
+                            style: TextStyle(
+                              color: Color(0xFFFFFFFF),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
