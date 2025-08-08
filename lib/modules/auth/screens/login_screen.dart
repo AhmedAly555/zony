@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart'; // import the fluttertoast library
 
 import '../../../services/auth_service.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../../../views/widgets/default_text_filed.dart';
+import '../../couriers/views/screens/main_home/screen/main_home_screen.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_login_button.widget.dart';
 import 'change_password.dart';
@@ -24,16 +26,14 @@ class _LoginScreenState extends State<LoginScreen> {
   final authService = AuthService();
 
   bool isLoading = false;
-  String? errorMessage;
+  // errorMessage is no longer needed since we're using toasts
+  // String? errorMessage;
 
   void handleLogin() async {
-
-    print('Input: ${_emailController.text.trim()} / ${_passwordController.text.trim()}');
-
-
     setState(() {
       isLoading = true;
-      errorMessage = null;
+      // errorMessage is no longer needed
+      // errorMessage = null;
     });
 
     try {
@@ -41,19 +41,33 @@ class _LoginScreenState extends State<LoginScreen> {
         _emailController.text.trim(),
         _passwordController.text.trim(),
       );
+      // If not, we stop execution to avoid using an invalid context.
+      if (!mounted) return;
 
-
-      // ✅ login success
-      showDialog(
-        context: context,
-        builder:
-            (_) => AlertDialog(
-              title: const Text('Login Successful'),
-              content: Text('welcome ${response.user.username} 👋'),
-            ),
+      // login success: Show a green toast
+      Fluttertoast.showToast(
+        msg: '✅ Login Successful',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
+
+      AppNavigator.navigateTo(context, () => const MainHomeScreen());
+
     } catch (e) {
-      errorMessage = 'Filed to login';
+      // login failed: Show a red toast
+      Fluttertoast.showToast(
+        msg: 'Failed to login', // Corrected the typo 'Filed' to 'Failed'
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.redAccent,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
     } finally {
       setState(() {
         isLoading = false;
@@ -141,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   AppNavigator.navigateTo(
                     context,
-                    () => const ChangePasswordScreen(),
+                        () => const ChangePasswordScreen(),
                   );
                 },
                 child: const Text(
@@ -159,8 +173,9 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
 
-          if (errorMessage != null)
-            Text(errorMessage!, style: const TextStyle(color: Colors.red)),
+          // The error message widget is no longer needed with toasts
+          // if (errorMessage != null)
+          //   Text(errorMessage!, style: const TextStyle(color: Colors.red)),
           TweenAnimationBuilder<double>(
             tween: Tween<double>(
               begin: 0.0,
@@ -194,16 +209,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: CustomLoginButton(
                   onTap: () => isLoading ? null : handleLogin(),
                   child:
-                      isLoading
-                          ? const CircularProgressIndicator()
-                          : const Text(
-                            'Confirm',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                            ),
-                          ),
+                  isLoading
+                      ? const CircularProgressIndicator()
+                      : const Text(
+                    'Confirm',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
               );
             },
@@ -213,3 +228,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
