@@ -1,0 +1,16 @@
+{
+  "valid_email": "ahmaly555@gmail.com",
+  "valid_password": "123456",
+  "response": {
+    "status": "success",
+    "message": "Login successful",
+    "access_token": "abc123_token",
+    "refresh_token": "xyz456_token",
+    "user": {
+      "username": "ahmeddev",
+      "email": "ahmaly555@gmail.com",
+      "role": "Zony Couriers",
+      "last_login": "2025-08-06T13:00:00Z"
+    }
+  }
+}
