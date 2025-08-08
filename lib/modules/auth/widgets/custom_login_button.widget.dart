@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class CustomLoginButton extends StatelessWidget {
   final VoidCallback onTap;
-  const CustomLoginButton({super.key, required this.onTap});
+  final Widget? child;
+  const CustomLoginButton({super.key, required this.onTap, this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class CustomLoginButton extends StatelessWidget {
         shadowColor: Colors.transparent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
-      child: const Text(
+      child: child ?? const Text(
         'Confirm',
         style: TextStyle(
           color: Colors.white,
