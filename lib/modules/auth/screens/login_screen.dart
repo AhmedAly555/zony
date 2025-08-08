@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../services/auth_service.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
+import '../../../views/widgets/default_text_filed.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_login_button.widget.dart';
-import '../widgets/password_text_field.widget.dart';
-import '../widgets/username_text_field.widget.dart';
 import 'change_password.dart';
 import 'generic_login_screen.dart';
 
@@ -18,6 +18,55 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final authService = AuthService();
+
+  bool isLoading = false;
+  String? errorMessage;
+
+  void handleLogin() async {
+
+    print('Input: ${_emailController.text.trim()} / ${_passwordController.text.trim()}');
+
+
+    setState(() {
+      isLoading = true;
+      errorMessage = null;
+    });
+
+    try {
+      final response = await authService.login(
+        _emailController.text.trim(),
+        _passwordController.text.trim(),
+      );
+
+
+      // ✅ login success
+      showDialog(
+        context: context,
+        builder:
+            (_) => AlertDialog(
+              title: const Text('Login Successful'),
+              content: Text('welcome ${response.user.username} 👋'),
+            ),
+      );
+    } catch (e) {
+      errorMessage = 'Filed to login';
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +85,11 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(height: 10),
           Divider(height: 1, color: Color(0xFFF4F4F4)),
           SizedBox(height: 20),
-          UsernameTextField(),
+          DefaultTextField(
+            hintText: 'Enter Username Or Phone Number',
+            controller: _emailController,
+            fieldType: DefaultTextFieldType.email,
+          ),
 
           const SizedBox(height: 20.0),
           const Text(
@@ -48,10 +101,14 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           const SizedBox(height: 8.0),
-          PasswordTextField(),
+          DefaultTextField(
+            controller: _passwordController,
+            hintText: "Enter Password",
+            fieldType: DefaultTextFieldType.password,
+          ),
           SizedBox(height: 20),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
                 width: 24.0,
@@ -79,9 +136,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              //const Spacer(),
+              const Spacer(),
               TextButton(
-                onPressed: () {AppNavigator.navigateTo(context, () => const ChangePasswordScreen());},
+                onPressed: () {
+                  AppNavigator.navigateTo(
+                    context,
+                    () => const ChangePasswordScreen(),
+                  );
+                },
                 child: const Text(
                   'Forgot Password',
                   maxLines: 1,
@@ -96,6 +158,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ],
           ),
+
+          if (errorMessage != null)
+            Text(errorMessage!, style: const TextStyle(color: Colors.red)),
           TweenAnimationBuilder<double>(
             tween: Tween<double>(
               begin: 0.0,
@@ -126,7 +191,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     stops: [0.0, value.clamp(0.0, 1.0)],
                   ),
                 ),
-                child: CustomLoginButton(onTap: () {}),
+                child: CustomLoginButton(
+                  onTap: () => isLoading ? null : handleLogin(),
+                  child:
+                      isLoading
+                          ? const CircularProgressIndicator()
+                          : const Text(
+                            'Confirm',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                          ),
+                ),
               );
             },
           ),
