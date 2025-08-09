@@ -47,7 +47,10 @@ class AccountSettingsScreen extends StatelessWidget {
                     const Spacer(),
                     const Text(
                       "Account Settings",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const Spacer(flex: 2),
                   ],
@@ -70,7 +73,9 @@ class AccountSettingsScreen extends StatelessWidget {
                         children: [
                           const CircleAvatar(
                             radius: 45,
-                            backgroundImage: AssetImage('assets/images/user.jpg'),
+                            backgroundImage: AssetImage(
+                              'assets/images/user.jpg',
+                            ),
                           ),
                           Positioned(
                             bottom: 0,
