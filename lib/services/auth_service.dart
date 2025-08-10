@@ -5,7 +5,7 @@ import '../models/base_response.dart';
 import '../models/user_model.dart';
 
 class AuthService {
-  // login function with mock data
+  // Login function with mock data
   Future<LoginResponse> login(String email, String password) async {
     await Future.delayed(const Duration(seconds: 1));
 
@@ -19,11 +19,10 @@ class AuthService {
     final inputEmail = email.trim().toLowerCase();
     final inputPassword = password.trim();
 
-    // ✅ اطبع كل حاجة للمقارنة
-    print('🔐 inputEmail: $inputEmail');
-    print('🔐 inputPassword: $inputPassword');
-    print('📄 validEmail: ${validEmail.toLowerCase()}');
-    print('📄 validPassword: $validPassword');
+    /*print('inputEmail: $inputEmail');
+    print('inputPassword: $inputPassword');
+    print('validEmail: ${validEmail.toLowerCase()}');
+    print('validPassword: $validPassword');*/
 
     if (inputEmail != validEmail.toLowerCase() || inputPassword != validPassword) {
       throw Exception('Invalid email or password');
@@ -33,23 +32,25 @@ class AuthService {
     return LoginResponse.fromJson(responseData);
   }
 
-/*
-  Future<LoginResponse> login(String email, String password) async {
+  // Register function with mock data
+  Future<BaseResponse> resetPassword(String email) async {
     await Future.delayed(const Duration(seconds: 1));
 
-    final jsonString =
-    await rootBundle.loadString('lib/mock_data/mock_login_response.json');
+    final jsonString = await rootBundle
+        .loadString('lib/mock_data/mock_reset_password_response.json');
     final jsonData = jsonDecode(jsonString);
 
     final validEmail = jsonData['valid_email'];
-    final validPassword = jsonData['valid_password'];
 
-    if (email != validEmail || password != validPassword) {
-      throw Exception('Invalid email or password');
+    if (email != validEmail) {
+      throw Exception("Email not found");
     }
 
-// if login success
-    final responseData = jsonData['response'];
-    return LoginResponse.fromJson(responseData);
-  }*/
+    return BaseResponse.fromJson({
+      "status": jsonData['status'],
+      "message": jsonData['message']
+    });
+  }
+
+
 }

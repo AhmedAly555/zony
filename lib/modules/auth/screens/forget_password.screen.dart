@@ -1,30 +1,75 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../../services/auth_service.dart';
 import '../../../services/size_config.dart';
+import '../../../views/widgets/default_text_filed.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_login_button.widget.dart';
-import '../widgets/username_text_field.widget.dart';
 import 'generic_login_screen.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
-
 
   @override
   State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
 }
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final authService = AuthService();
+
+  bool isLoading = false;
+
+  void handleReset() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      final response = await authService.resetPassword(
+        _emailController.text.trim(),
+      );
+
+      if (!mounted) return;
+
+      Fluttertoast.showToast(
+        msg: 'Valid email.',
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 2,
+        backgroundColor: Colors.greenAccent,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+
+    } catch (e) {
+      if (!mounted) return;
+
+      Fluttertoast.showToast(
+        msg: "Failed: Please check your email.",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 2,
+        backgroundColor: Colors.redAccent,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return GenericLoginScreen(
-
       height: SizeConfig.heightPercent(0.30),
-      appBar: CustomAppbar(
-        title: 'Forget Password',
-      ),
+      appBar: CustomAppbar(title: 'Forget Password'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,7 +81,20 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           SizedBox(height: 10),
           Divider(height: 1, color: Color(0xFFF4F4F4)),
           SizedBox(height: 20),
-          UsernameTextField(),
+          const Text(
+            'username or phone number',
+            style: TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
+            ),
+          ),
+          const SizedBox(height: 8.0),
+          DefaultTextField(
+            hintText: 'Enter Username Or Phone Number',
+            controller: _emailController,
+            fieldType: DefaultTextFieldType.email,
+          ),
           SizedBox(height: 20),
 
           TweenAnimationBuilder<double>(
@@ -52,7 +110,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             builder: (context, value, child) {
               return Container(
                 width: double.infinity,
-                height: SizeConfig.heightPercent(0.07), //52,
+                height: SizeConfig.heightPercent(0.06), //52,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   gradient: LinearGradient(
@@ -69,7 +127,22 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     stops: [0.0, value.clamp(0.0, 1.0)],
                   ),
                 ),
-                child: CustomLoginButton(onTap: () {}),
+                child: CustomLoginButton(
+                  onTap: () {
+                    isLoading ? null : handleReset();
+                  },
+                  child:
+                  isLoading
+                      ? const CircularProgressIndicator()
+                      : const  Text(
+                    'Confirm',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
               );
             },
           ),
