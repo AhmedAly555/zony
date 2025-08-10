@@ -9,6 +9,7 @@ import '../../couriers/views/screens/main_home/screen/main_home_screen.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_login_button.widget.dart';
 import 'change_password.dart';
+import 'forget_password.screen.dart';
 import 'generic_login_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -29,6 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
   // errorMessage is no longer needed since we're using toasts
   // String? errorMessage;
 
+  // Function to handle login
   void handleLogin() async {
     setState(() {
       isLoading = true;
@@ -99,6 +101,15 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(height: 10),
           Divider(height: 1, color: Color(0xFFF4F4F4)),
           SizedBox(height: 20),
+          const Text(
+            'username or phone number',
+            style: TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
+            ),
+          ),
+          const SizedBox(height: 8.0),
           DefaultTextField(
             hintText: 'Enter Username Or Phone Number',
             controller: _emailController,
@@ -155,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   AppNavigator.navigateTo(
                     context,
-                        () => const ChangePasswordScreen(),
+                        () => const ForgetPasswordScreen(),
                   );
                 },
                 child: const Text(

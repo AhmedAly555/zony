@@ -66,7 +66,7 @@ flutter:
   assets:
     - assets/svgs/
     - assets/images/
-    - lib/mock_data/mock_login_response.json
+    - lib/mock_data/
   #   - images/a_dot_ham.jpeg
 
 
