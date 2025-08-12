@@ -54,3 +54,33 @@ class AuthService {
 
 
 }
+
+// log out function
+Future<void> logout() async {
+  // if use shared preferences and SecureStorage
+  // Delete the tokens
+  // await storage.delete(key: 'access_token');
+  // await storage.delete(key: 'refresh_token');
+
+  // mock delay
+  await Future.delayed(const Duration(milliseconds: 500));
+
+  // لو فيه system notifications أو push topics
+  // FirebaseMessaging.instance.deleteToken(); // لو بتستخدم FCM
+
+}
+
+ //log out ui
+/*ElevatedButton(
+  onPressed: () async {
+    await authService.logout();
+
+    // بعد المسح نروح لشاشة اللوجين ونمسح كل الهستوري
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
+      (Route<dynamic> route) => false,
+    );
+  },
+  child: const Text("Logout"),
+)
+*/
