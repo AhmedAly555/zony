@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../services/auth_service.dart';
+import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../../../views/widgets/default_text_filed.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_login_button.widget.dart';
 import 'generic_login_screen.dart';
+import 'otp_screen.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
@@ -130,6 +132,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 child: CustomLoginButton(
                   onTap: () {
                     isLoading ? null : handleReset();
+                    AppNavigator.navigateTo(
+                      context,
+                          () =>  const OTPScreen(),
+                    );
                   },
                   child:
                   isLoading
