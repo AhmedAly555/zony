@@ -3,8 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../views/widgets/default_text_filed.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
-import '../../../../../auth/widgets/custom_login_button.widget.dart';
-import '../../../../../auth/widgets/username_text_field.widget.dart';
+
 
 class AccountSettingsScreen extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();

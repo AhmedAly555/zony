@@ -1,15 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:zony/services/navigator.services/app_navigator.services.dart';
 
+import '../../../../../../services/size_config.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../widgets/coustome_row_more_screen.widget.dart';
-import 'account_settings.screen.dart';
+import '../../../widgets/language_sheet.dart';
+import '../../account_settings.screen.dart';
 
-class MoreScreen extends StatelessWidget {
+class MoreScreen extends StatefulWidget {
   const MoreScreen({super.key});
 
   @override
+  State<MoreScreen> createState() => _MoreScreenState();
+}
+
+class _MoreScreenState extends State<MoreScreen> {
+  String currentLanguage = 'English';
+
+  void showLanguageBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: true,
+      enableDrag: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        SizeConfig.init(context);
+        return Container(
+          constraints: BoxConstraints(
+            maxHeight: SizeConfig.heightPercent(0.75),
+            minHeight: SizeConfig.heightPercent(0.65),
+          ),
+          child: IntrinsicHeight(
+            child: LanguageBottomSheet(),
+          ),
+        );
+      },
+      /*=> DraggableScrollableSheet(
+        initialChildSize: 0.7,
+        minChildSize: 0.7,
+        maxChildSize: 0.9,
+        expand: false,
+        builder: (context, scrollController) => LanguageBottomSheet(),
+      ),*/
+    ).then((selectedLang) {
+      // selectedLang contains the selected language
+      if (selectedLang != null) {
+        setState(() {
+          currentLanguage = selectedLang;
+        });
+        print('Selected Language: $selectedLang');
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+
     return TemplateAppScaffold(
       body: Column(
         children: [
@@ -38,7 +85,8 @@ class MoreScreen extends StatelessWidget {
             iconPath: 'assets/svgs/svg_language.svg',
             title: 'Language',
             onTap: () {
-              // Navigate to Language Settings
+
+              showLanguageBottomSheet();
             },
           ),
           const SizedBox(height: 16),
