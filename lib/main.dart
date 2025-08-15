@@ -25,9 +25,9 @@ class MyApp extends StatelessWidget {
       ),
       //home: const LoginScreen(),
       //home: const SelectLoginScreen(),
-      //home: const MainHomeScreen(),
+      home: const MainHomeScreen(),
       //home: const ChangePasswordScreen(),
-      home: const OTPScreen(),
+      //home: const OTPScreen(),
     );
   }
 }
