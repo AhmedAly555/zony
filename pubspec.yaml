@@ -38,6 +38,7 @@ dependencies:
   shared_preferences: ^2.5.3
   path_provider: ^2.1.5
   http: ^1.4.0
+  fluttertoast: ^8.2.12
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +66,7 @@ flutter:
   assets:
     - assets/svgs/
     - assets/images/
+    - lib/mock_data/
   #   - images/a_dot_ham.jpeg
 
 

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart'; // import the fluttertoast library
 
+import '../../../services/auth_service.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
+import '../../../views/widgets/default_text_filed.dart';
+import '../../couriers/views/screens/main_home/screen/main_home_screen.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_login_button.widget.dart';
-import '../widgets/password_text_field.widget.dart';
-import '../widgets/username_text_field.widget.dart';
 import 'change_password.dart';
+import 'forget_password.screen.dart';
 import 'generic_login_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -18,6 +21,68 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final authService = AuthService();
+
+  bool isLoading = false;
+  // errorMessage is no longer needed since we're using toasts
+  // String? errorMessage;
+
+  // Function to handle login
+  void handleLogin() async {
+    setState(() {
+      isLoading = true;
+      // errorMessage is no longer needed
+      // errorMessage = null;
+    });
+
+    try {
+      final response = await authService.login(
+        _emailController.text.trim(),
+        _passwordController.text.trim(),
+      );
+      // If not, we stop execution to avoid using an invalid context.
+      if (!mounted) return;
+
+      // login success: Show a green toast
+      Fluttertoast.showToast(
+        msg: '✅ Login Successful',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+
+      AppNavigator.navigateTo(context, () => const MainHomeScreen());
+
+    } catch (e) {
+      // login failed: Show a red toast
+      Fluttertoast.showToast(
+        msg: 'Failed to login', // Corrected the typo 'Filed' to 'Failed'
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.redAccent,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +101,20 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(height: 10),
           Divider(height: 1, color: Color(0xFFF4F4F4)),
           SizedBox(height: 20),
-          UsernameTextField(),
+          const Text(
+            'username or phone number',
+            style: TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
+            ),
+          ),
+          const SizedBox(height: 8.0),
+          DefaultTextField(
+            hintText: 'Enter Username Or Phone Number',
+            controller: _emailController,
+            fieldType: DefaultTextFieldType.email,
+          ),
 
           const SizedBox(height: 20.0),
           const Text(
@@ -48,10 +126,14 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           const SizedBox(height: 8.0),
-          PasswordTextField(),
+          DefaultTextField(
+            controller: _passwordController,
+            hintText: "Enter Password",
+            fieldType: DefaultTextFieldType.password,
+          ),
           SizedBox(height: 20),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
                 width: 24.0,
@@ -79,9 +161,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              //const Spacer(),
+              const Spacer(),
               TextButton(
-                onPressed: () {AppNavigator.navigateTo(context, () => const ChangePasswordScreen());},
+                onPressed: () {
+                  AppNavigator.navigateTo(
+                    context,
+                        () => const ForgetPasswordScreen(),
+                  );
+                },
                 child: const Text(
                   'Forgot Password',
                   maxLines: 1,
@@ -96,6 +183,10 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ],
           ),
+
+          // The error message widget is no longer needed with toasts
+          // if (errorMessage != null)
+          //   Text(errorMessage!, style: const TextStyle(color: Colors.red)),
           TweenAnimationBuilder<double>(
             tween: Tween<double>(
               begin: 0.0,
@@ -126,7 +217,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     stops: [0.0, value.clamp(0.0, 1.0)],
                   ),
                 ),
-                child: CustomLoginButton(onTap: () {}),
+                child: CustomLoginButton(
+                  onTap: () => isLoading ? null : handleLogin(),
+                  child:
+                  isLoading
+                      ? const CircularProgressIndicator()
+                      : const Text(
+                    'Confirm',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
               );
             },
           ),
@@ -135,3 +239,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+

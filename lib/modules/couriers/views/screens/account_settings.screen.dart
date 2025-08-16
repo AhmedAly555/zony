@@ -3,8 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../views/widgets/default_text_filed.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
-import '../../../../../auth/widgets/custom_login_button.widget.dart';
-import '../../../../../auth/widgets/username_text_field.widget.dart';
+
 
 class AccountSettingsScreen extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
@@ -47,12 +46,15 @@ class AccountSettingsScreen extends StatelessWidget {
                     const Spacer(),
                     const Text(
                       "Account Settings",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const Spacer(flex: 2),
                   ],
                 ),
-          
+
                 // Profile Card
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 24),
@@ -70,7 +72,9 @@ class AccountSettingsScreen extends StatelessWidget {
                         children: [
                           const CircleAvatar(
                             radius: 45,
-                            backgroundImage: AssetImage('assets/images/user.jpg'),
+                            backgroundImage: AssetImage(
+                              'assets/images/user.jpg',
+                            ),
                           ),
                           Positioned(
                             bottom: 0,
@@ -87,9 +91,9 @@ class AccountSettingsScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-          
+
                       const SizedBox(height: 16),
-          
+
                       // ==== Name ====
                       const Text(
                         "Ahmed M. Aly",
@@ -98,9 +102,9 @@ class AccountSettingsScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-          
+
                       const SizedBox(height: 4),
-          
+
                       // ==== Username ====
                       const Text(
                         "ahmaly555@gmail.com",
@@ -109,7 +113,7 @@ class AccountSettingsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-          
+
                 //personal information
                 Container(
                   width: double.infinity,
@@ -190,7 +194,7 @@ class AccountSettingsScreen extends StatelessWidget {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Color(0xFF49159B),
-          
+
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 85,
                                 vertical: 14,
