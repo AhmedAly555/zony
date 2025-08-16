@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../modules/auth/widgets/custom_login_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
-
 class LanguageBottomSheet extends StatefulWidget {
   const LanguageBottomSheet({super.key});
 
@@ -36,9 +35,9 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
           HandleBarLine(),
 
           //const SizedBox(height: 60),
-Spacer(),
+          Spacer(),
           // Language icon
-          LanguageIcon(svgPath: 'assets/svgs/svg_language.svg',),
+          LanguageIcon(svgPath: 'assets/svgs/svg_language.svg'),
 
           const SizedBox(height: 16),
 
@@ -59,81 +58,90 @@ Spacer(),
             'Lorem ipsum dolor sit amet, consectetur nadipiscing elit, sed do eiusmod',
             textAlign: TextAlign.center,
 
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey,
-              height: 1.4,
-            ),
+            style: TextStyle(fontSize: 14, color: Colors.grey, height: 1.4),
           ),
 
           Spacer(),
 
           // Language options
-          ...languages.map((language) => Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    selectedLanguage = language;
-                  });
-                },
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: selectedLanguage == language
-                        ? const Color(0xFFE8EAF6)
-                        : Colors.transparent,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Row(
-                    children: [
-                      AnimatedContainer(
+          ...languages
+              .map(
+                (language) => Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 4,
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedLanguage = language;
+                        });
+                      },
+                      child: AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
-                        width: 20,
-                        height: 20,
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: selectedLanguage == language
-                                ? const Color(0xFF6366F1)
-                                : Colors.grey[400]!,
-                            width: 2,
-                          ),
-                          color: selectedLanguage == language
-                              ? const Color(0xFF6366F1)
-                              : Colors.transparent,
+                          color:
+                              selectedLanguage == language
+                                  ? const Color(0xFFE8EAF6)
+                                  : Colors.transparent,
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        child: selectedLanguage == language
-                            ? const Icon(
-                          Icons.check,
-                          size: 12,
-                          color: Colors.white,
-                        )
-                            : null,
-                      ),
-                      const SizedBox(width: 16),
-                      Text(
-                        language,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: selectedLanguage == language
-                              ? FontWeight.w600
-                              : FontWeight.w400,
-                          color: selectedLanguage == language
-                              ? const Color(0xFF6366F1)
-                              : Colors.black87,
+                        child: Row(
+                          children: [
+                            AnimatedContainer(
+                              duration: const Duration(milliseconds: 200),
+                              width: 20,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color:
+                                      selectedLanguage == language
+                                          ? const Color(0xFF6366F1)
+                                          : Colors.grey[400]!,
+                                  width: 2,
+                                ),
+                                color:
+                                    selectedLanguage == language
+                                        ? const Color(0xFF6366F1)
+                                        : Colors.transparent,
+                              ),
+                              child:
+                                  selectedLanguage == language
+                                      ? const Icon(
+                                        Icons.check,
+                                        size: 12,
+                                        color: Colors.white,
+                                      )
+                                      : null,
+                            ),
+                            const SizedBox(width: 16),
+                            Text(
+                              language,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight:
+                                    selectedLanguage == language
+                                        ? FontWeight.w600
+                                        : FontWeight.w400,
+                                color:
+                                    selectedLanguage == language
+                                        ? const Color(0xFF6366F1)
+                                        : Colors.black87,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-          )).toList(),
+              )
+              .toList(),
 
           Spacer(),
           Padding(
@@ -145,4 +153,3 @@ Spacer(),
     );
   }
 }
-
