@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:zony/services/navigator.services/app_navigator.services.dart';
 
 import '../../../../../../services/size_config.dart';
+import '../../../../../../views/widgets/bottom_sheet/language_sheet.dart';
+import '../../../../../../views/widgets/bottom_sheet/log_out_bottom_sheet.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../widgets/coustome_row_more_screen.widget.dart';
-import '../../../widgets/language_sheet.dart';
 import '../../account_settings.screen.dart';
 
 class MoreScreen extends StatefulWidget {
@@ -28,8 +29,8 @@ class _MoreScreenState extends State<MoreScreen> {
         SizeConfig.init(context);
         return Container(
           constraints: BoxConstraints(
-            maxHeight: SizeConfig.heightPercent(0.75),
-            minHeight: SizeConfig.heightPercent(0.65),
+            maxHeight: SizeConfig.heightPercent(0.90),
+            minHeight: SizeConfig.heightPercent(0.80),
           ),
           child: IntrinsicHeight(
             child: LanguageBottomSheet(),
@@ -52,6 +53,29 @@ class _MoreScreenState extends State<MoreScreen> {
         print('Selected Language: $selectedLang');
       }
     });
+  }
+
+  void showLogoutBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: true,
+      enableDrag: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        SizeConfig.init(context);
+        return Container(
+          constraints: BoxConstraints(
+            maxHeight: SizeConfig.heightPercent(0.75),
+            minHeight: SizeConfig.heightPercent(0.45),
+          ),
+          child: IntrinsicHeight(
+            child: LogOutBottomSheet(),
+          ),
+        );
+      },
+
+    );
   }
 
   @override
@@ -94,7 +118,7 @@ class _MoreScreenState extends State<MoreScreen> {
             iconPath: 'assets/svgs/logout.svg',
             title: 'Logout',
             onTap: () {
-              // Logout Function
+              showLogoutBottomSheet();
             },
           ),
           Spacer(),
