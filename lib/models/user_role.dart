@@ -2,5 +2,6 @@
 enum UserRole {
   zonyCouriers,
   couriers,
-  pudu,
+  podu,
+  zonyHub,
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../../../views/widgets/custome_container_icon.widget.dart';
 import '../../../../../../views/widgets/default_navigation_bar.widget.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../widgets/custom_home_service_container.widget.dart';
+import '../../notification.screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -38,7 +40,12 @@ class HomeScreen extends StatelessWidget {
                   svgPath: 'assets/svgs/technical_support.svg',
                 ),
                 SizedBox(width: 10),
-                CostumeContainerIcon(svgPath: 'assets/svgs/notification.svg'),
+                CostumeContainerIcon(
+                    svgPath: 'assets/svgs/notification.svg',
+                onTap: (){
+                      AppNavigator.navigateTo(context, () =>  NotificationScreen());
+                },
+                ),
               ],
             ),
             SizedBox(height: 20),

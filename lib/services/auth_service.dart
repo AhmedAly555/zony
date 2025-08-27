@@ -32,7 +32,7 @@ class AuthService {
     return LoginResponse.fromJson(responseData);
   }
 
-  // Register function with mock data
+  // Register function with mock data(not needed)
   Future<BaseResponse> resetPassword(String email) async {
     await Future.delayed(const Duration(seconds: 1));
 

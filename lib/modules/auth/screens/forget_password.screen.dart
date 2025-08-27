@@ -70,7 +70,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return GenericLoginScreen(
-      height: SizeConfig.heightPercent(0.30),
+      height: SizeConfig.heightPercent(0.35),
       appBar: CustomAppbar(title: 'Forget Password'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

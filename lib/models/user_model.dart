@@ -56,8 +56,8 @@ UserRole? parseUserRole(String? roleString) {
       return UserRole.zonyCouriers;
     case 'couriers':
       return UserRole.couriers;
-    case 'pudu':
-      return UserRole.pudu;
+    case 'podu':
+      return UserRole.podu;
     default:
       return null;
   }
