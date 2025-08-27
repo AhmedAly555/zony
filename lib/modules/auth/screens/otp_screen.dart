@@ -101,7 +101,7 @@ class _OTPScreenState extends State<OTPScreen> {
     SizeConfig.init(context);
 
     return GenericLoginScreen(
-      height: SizeConfig.heightPercent(0.35),
+      height: SizeConfig.heightPercent(0.47),
 
       appBar: CustomAppbar(title: 'Authentication Code'),
       child: Column(
@@ -156,20 +156,24 @@ class _OTPScreenState extends State<OTPScreen> {
               ),
             ],
           ),
-          CustomLoginButton(
-            onTap: () {
-              AppNavigator.navigateTo(
-                context,
-                    () =>  const MainHomeScreen(),
-              );
-            },
-            child:
-            const  Text(
-              'Verify the code',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
+          SizedBox(height: 10),
+          Align(
+            alignment: Alignment.center,
+            child: CustomLoginButton(
+              onTap: () {
+                AppNavigator.navigateTo(
+                  context,
+                      () =>  const MainHomeScreen(),
+                );
+              },
+              child:
+              const  Text(
+                'Verify the code',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
               ),
             ),
           ),

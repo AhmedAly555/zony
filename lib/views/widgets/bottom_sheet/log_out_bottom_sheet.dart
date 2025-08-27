@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../modules/auth/screens/login_screen.dart';
 import '../../../modules/auth/widgets/custom_login_button.widget.dart';
+import '../../../services/navigator.services/app_navigator.services.dart';
 import '../custome_outline_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
@@ -25,7 +27,7 @@ class LogOutBottomSheet extends StatelessWidget {
             // Handle bar line
             HandleBarLine(),
 
-        Spacer(),
+            Spacer(),
             // Language icon
             LanguageIcon(svgPath: 'assets/svgs/logout.svg'),
 
@@ -57,24 +59,35 @@ class LogOutBottomSheet extends StatelessWidget {
               children: [
                 Expanded(
                   child: CustomLoginButton(
-                      child: Text(
-                        'Yes, I\'m sure.',
-                        textAlign: TextAlign.center,
+                    onTap: () => AppNavigator.navigateAndRemoveUntil(context, () => const LoginScreen()),
+                    child: Text(
+                      'Yes, I\'m sure.',
+                      textAlign: TextAlign.center,
 
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
                       ),
-                      onTap: () {}),
+                    ),
+                  ),
                 ),
                 SizedBox(width: 8),
                 Expanded(
-                  child: CustomeOutlineButton(),
+                  child: CustomeOutlineButton(
+                    title: Text(
+                      'No, cancel',
+                      style: TextStyle(
+                        color: Color(0xFF49159B),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
+            Padding(padding: const EdgeInsets.only(bottom: 16)),
           ],
         ),
       ),

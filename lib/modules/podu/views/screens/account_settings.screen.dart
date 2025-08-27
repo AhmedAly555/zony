@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:zony/services/navigator.services/app_navigator.services.dart';
 
 import '../../../../../../views/widgets/default_text_filed.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
-import '../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../auth/screens/login_screen.dart';
 
 
@@ -26,28 +26,23 @@ class AccountSettingsScreen extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 5,
-                            ),
-                          ],
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        child: SvgPicture.asset(
-                          'assets/svgs/arrow_back.svg',
-                          width: 17,
-                          height: 16.5,
-                          color: const Color(0xFF49159B),
-                        ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 5,
+                          ),
+                        ],
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: SvgPicture.asset(
+                        'assets/svgs/arrow_back.svg',
+                        width: 17,
+                        height: 16.5,
+                        color: const Color(0xFF49159B),
                       ),
                     ),
                     const Spacer(),

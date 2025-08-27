@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart'; // import the fluttertoast library
+import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../../models/user_role.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../../../views/widgets/default_text_filed.dart';
 import '../../couriers/views/screens/main_home/screen/main_home_screen.dart';
+
+import '../../couriers/views/screens/notification.screen.dart';
+import '../../podu/views/screens/main_home/screen/main_home_screen.podu.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_login_button.widget.dart';
 import 'change_password.dart';
@@ -57,12 +61,17 @@ class _LoginScreenState extends State<LoginScreen> {
         fontSize: 16.0,
       );
 
-      AppNavigator.navigateTo(context, () => const MainHomeScreen());
+      if (response.user.role == UserRole.couriers) {
+        AppNavigator.navigateTo(context, () => const MainHomeScreen());
+      } else if (response.user.role == UserRole.podu){
+        // Replace NotificationScreen with your actual notification screen
+        AppNavigator.navigateTo(context, () => const MainHomeScreenPodu());
+      }
 
     } catch (e) {
       // login failed: Show a red toast
       Fluttertoast.showToast(
-        msg: 'Failed to login', // Corrected the typo 'Filed' to 'Failed'
+        msg: 'Failed to login', 
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
@@ -221,7 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onTap: () => isLoading ? null : handleLogin(),
                   child:
                   isLoading
-                      ? const CircularProgressIndicator()
+                      ? const CircularProgressIndicator(color: Colors.white)
                       : const Text(
                     'Confirm',
                     style: TextStyle(
