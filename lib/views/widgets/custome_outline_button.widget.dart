@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CustomeOutlineButton extends StatelessWidget {
-  const CustomeOutlineButton({super.key});
+
+  final Widget title;
+  const CustomeOutlineButton({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +22,7 @@ class CustomeOutlineButton extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 14),
-        child: const Text(
-          'No, cancel',
-          style: TextStyle(
-            color: Color(0xFF49159B),
-            fontWeight: FontWeight.w600,
-            fontSize: 16,
-          ),
-        ),
+        child:  title,
       ),
     );
   }

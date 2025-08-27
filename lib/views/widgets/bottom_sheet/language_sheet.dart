@@ -90,7 +90,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
                                   : Colors.transparent,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Row(
+                        child: Row( 
                           children: [
                             AnimatedContainer(
                               duration: const Duration(milliseconds: 200),
