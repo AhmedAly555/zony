@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:zony/modules/couriers/views/screens/main_home/screen/receiving_screen.dart';
 
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
-import 'delivering_screen.dart';
-import 'home.screen.dart';
-import 'more.screen.dart';
+import '../../../../../couriers/views/screens/main_home/screen/delivering_screen.dart';
+import '../../../../../couriers/views/screens/main_home/screen/home.screen.dart';
+import '../../../../../couriers/views/screens/main_home/screen/more.screen.dart';
+import '../../../../../couriers/views/screens/main_home/screen/receiving_screen.dart';
 
 class MainHomeScreen extends StatefulWidget {
-  const MainHomeScreen({super.key});
+  final int initialIndex;
+  const MainHomeScreen({super.key, this.initialIndex = 0});
 
   @override
   State<MainHomeScreen> createState() => _MainHomeScreenState();
 }
 
 class _MainHomeScreenState extends State<MainHomeScreen> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
 
   final List<Widget> _screens = const [
     HomeScreen(),
@@ -22,6 +23,12 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
     DeliveringScreen(),
     MoreScreen(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+  }
 
   void _onItemTapped(int index) {
     setState(() {

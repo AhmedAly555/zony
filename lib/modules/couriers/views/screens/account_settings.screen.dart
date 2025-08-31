@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../../../views/widgets/default_text_filed.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../services/navigator.services/app_navigator.services.dart';
+import '../../../../views/widgets/secondary_appbar.dart';
 import '../../../auth/screens/login_screen.dart';
 
 
@@ -24,7 +25,7 @@ class AccountSettingsScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
             child: Column(
               children: [
-                Row(
+                /*Row(
                   children: [
                     GestureDetector(
                       onTap: () {
@@ -60,7 +61,8 @@ class AccountSettingsScreen extends StatelessWidget {
                     ),
                     const Spacer(flex: 2),
                   ],
-                ),
+                ),*/
+                SecondaryAppBar(title: 'Account Settings',),
 
                 // Profile Card
                 Container(

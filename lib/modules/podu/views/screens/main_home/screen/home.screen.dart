@@ -170,21 +170,23 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Column(
-                children: [
-                  CustomHomeServiceContainer(
-                    title: 'Receiving',
-                    svgIconPath: 'assets/svgs/receiving.svg',
-                  ),
-                  CustomHomeServiceContainer(
-                    title: 'Delivering',
-                    svgIconPath: 'assets/svgs/delivering.svg',
-                  ),
-                  CustomHomeServiceContainer(
-                    title: 'Inventory',
-                    svgIconPath: 'assets/svgs/my_parcels.svg',
-                  ),
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    CustomHomeServiceContainer(
+                      title: 'Receiving',
+                      svgIconPath: 'assets/svgs/receiving.svg',
+                    ),
+                    CustomHomeServiceContainer(
+                      title: 'Delivering',
+                      svgIconPath: 'assets/svgs/delivering.svg',
+                    ),
+                    CustomHomeServiceContainer(
+                      title: 'Inventory',
+                      svgIconPath: 'assets/svgs/my_parcels.svg',
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

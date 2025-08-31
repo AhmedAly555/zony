@@ -5,6 +5,7 @@ import '../../../../../../services/navigator.services/app_navigator.services.dar
 import '../../../../../../views/widgets/custome_container_icon.widget.dart';
 import '../../../../../../views/widgets/default_navigation_bar.widget.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
+import '../../../../../couriers/views/screens/main_home/screen/delivering_screen.dart';
 import '../../../widgets/custom_home_service_container.widget.dart';
 import '../../notification.screen.dart';
 
@@ -41,10 +42,13 @@ class HomeScreen extends StatelessWidget {
                 ),
                 SizedBox(width: 10),
                 CostumeContainerIcon(
-                    svgPath: 'assets/svgs/notification.svg',
-                onTap: (){
-                      AppNavigator.navigateTo(context, () =>  NotificationScreen());
-                },
+                  svgPath: 'assets/svgs/notification.svg',
+                  onTap: () {
+                    AppNavigator.navigateTo(
+                      context,
+                      () => NotificationScreen(),
+                    );
+                  },
                 ),
               ],
             ),
@@ -96,7 +100,14 @@ class HomeScreen extends StatelessWidget {
                           color: Color(0xFF49159B),
                         ),
                       ),
-                      Text('ahmaly555', style: TextStyle(color: Color(0xFF929292), fontSize: 12, fontWeight: FontWeight.w300)),
+                      Text(
+                        'ahmaly555',
+                        style: TextStyle(
+                          color: Color(0xFF929292),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
                     ],
                   ),
                   Spacer(),
@@ -104,7 +115,6 @@ class HomeScreen extends StatelessWidget {
                   SvgPicture.asset(
                     'assets/svgs/copy.svg',
                     color: Theme.of(context).primaryColor,
-
                   ),
                 ],
               ),
@@ -120,10 +130,24 @@ class HomeScreen extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  CustomHomeServiceContainer(title: 'Receiving', svgIconPath: 'assets/svgs/receiving.svg',),
-                  CustomHomeServiceContainer(title: 'Delivering',svgIconPath: 'assets/svgs/delivering.svg',),
-                  CustomHomeServiceContainer(title: 'My Parcels',svgIconPath: 'assets/svgs/my_parcels.svg',),
-                  CustomHomeServiceContainer(title: 'PODUs',svgIconPath: 'assets/svgs/my_parcels.svg',),
+                  CustomHomeServiceContainer(
+                    title: 'Receiving',
+                    svgIconPath: 'assets/svgs/receiving.svg', onTap: () {},
+                  ),
+                  CustomHomeServiceContainer(
+                    title: 'Delivering',
+                    svgIconPath: 'assets/svgs/delivering.svg', onTap: () {
+                      AppNavigator.navigateTo(context, () => DeliveringScreen());
+                  },
+                  ),
+                  CustomHomeServiceContainer(
+                    title: 'My Parcels',
+                    svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {  },
+                  ),
+                  CustomHomeServiceContainer(
+                    title: 'PODUs',
+                    svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {  },
+                  ),
                 ],
               ),
             ),

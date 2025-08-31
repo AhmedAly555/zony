@@ -1,12 +1,12 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:zony/views/widgets/template_app_scaffold.widget.dart';
 
-import '../../../../../../views/widgets/secondary_appbar.dart';
-import '../../../../../recieve_parcel/widgets/custom_menu_recieve.widget.dart';
+import '../../../views/widgets/secondary_appbar.dart';
+import '../widgets/custom_menu_recieve.widget.dart';
 
-
-class DeliveringScreen extends StatelessWidget {
-  const DeliveringScreen({super.key});
+class ScannerQrManualScreen extends StatelessWidget {
+  const ScannerQrManualScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +22,10 @@ class DeliveringScreen extends StatelessWidget {
                 MenuItemData(
                   svgPath: 'assets/svgs/small_qr.svg',
                   title: "QR Scanner",
-                  onTap: (){},
-                  /*onTap: () async {
-                    final code = await openScannerBottomSheet(context);
-                    if (code != null) {
-                      // اعمل اللي انت عايزه بالكود
-                      debugPrint('Scanned::::::::::::: $code');
-                    }
-                  },*/
+                  onTap: () {
+                    // navigation or logic
+                    debugPrint("Scan Barcode tapped");
+                  },
                 ),
                 MenuItemData(
                   svgPath: 'assets/svgs/small_qr.svg',
@@ -47,3 +43,4 @@ class DeliveringScreen extends StatelessWidget {
     );
   }
 }
+*/
