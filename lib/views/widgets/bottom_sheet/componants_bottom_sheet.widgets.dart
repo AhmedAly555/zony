@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
  // Handle bar line
-class HandleBarLine extends StatelessWidget {
-  const HandleBarLine({super.key});
+class HederBottomSheetLine extends StatelessWidget {
+  const HederBottomSheetLine({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +19,10 @@ class HandleBarLine extends StatelessWidget {
   }
 }
 
-// Language icon
-class LanguageIcon extends StatelessWidget {
+// Bottom Sheet Icon
+class BottomSheetIcon extends StatelessWidget {
   final String svgPath;
-  const LanguageIcon({super.key, required this.svgPath});
+  const BottomSheetIcon({super.key, required this.svgPath});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class LanguageIcon extends StatelessWidget {
         svgPath,
         width: 24,
         height: 24,
-        color: Color(0xFF49159B),
+        //color: Color(0xFF49159B),
 
       ),
     );

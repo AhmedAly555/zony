@@ -26,9 +26,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF49159B)),
         scaffoldBackgroundColor: Color(0xFFF4F4F4),
       ),
-      home: const LoginScreen(),
+      //home: const LoginScreen(),
       //home: const SelectLoginScreen(),
-      //home: const MainHomeScreen(),
+      home: const MainHomeScreen(),
       //home: const ScannerQrManualScreen(),
     );
   }
