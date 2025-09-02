@@ -110,7 +110,7 @@ class DeliveringScreen extends StatelessWidget {
                 ),
                 MenuItemData(
                   svgPath: 'assets/svgs/small_qr.svg',
-                  title: "test wrong bottom sheet",
+                  title: "test wrong",
                   onTap: () {
                     showWrongLocationBottomSheet(context);
                   },
