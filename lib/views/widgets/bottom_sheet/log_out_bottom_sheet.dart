@@ -25,11 +25,11 @@ class LogOutBottomSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             // Handle bar line
-            HandleBarLine(),
+            HederBottomSheetLine(),
 
             Spacer(),
             // Language icon
-            LanguageIcon(svgPath: 'assets/svgs/logout.svg'),
+            BottomSheetIcon(svgPath: 'assets/svgs/logout.svg'),
 
             const SizedBox(height: 16),
 

@@ -149,49 +149,6 @@ class _SelectLoginScreenState extends State<SelectLoginScreen> {
                     );
                   },
                 ),
-
-                /*SizedBox(
-                  width: double.infinity,
-                  height: 52,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      /* 
-                      if (_selectedIndex == 0) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PODUFilterPage(),
-                          ),
-                        );
-                      } else if (_selectedIndex == 1) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CourierFilterPage(),
-                          ),
-                        );
-                      } */
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          (_selectedIndex == 0 || _selectedIndex == 1)
-                              ? Color(0xFF49159B)
-                              : Color(0xFFBDBDBD),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      elevation: 5,
-                    ),
-                    child: const Text(
-                      'Confirm',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ),*/
               ],
             ),
           ),

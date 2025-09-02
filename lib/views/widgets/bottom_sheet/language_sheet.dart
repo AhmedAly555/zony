@@ -32,12 +32,12 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           // Handle bar line
-          HandleBarLine(),
+          HederBottomSheetLine(),
 
           //const SizedBox(height: 60),
           Spacer(),
           // Language icon
-          LanguageIcon(svgPath: 'assets/svgs/svg_language.svg'),
+          BottomSheetIcon(svgPath: 'assets/svgs/svg_language.svg'),
 
           const SizedBox(height: 16),
 
