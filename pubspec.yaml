@@ -40,9 +40,8 @@ dependencies:
   http: ^1.4.0
   fluttertoast: ^8.2.12
   mobile_scanner: ^7.0.1
-  #barcode_scanner: ^7.1.0
-  #qr_code_scanner: ^1.0.1
-  #permission_handler: ^10.2.0
+  camera: ^0.11.2
+
 
 dev_dependencies:
   flutter_test:
