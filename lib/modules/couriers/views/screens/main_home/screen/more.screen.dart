@@ -18,6 +18,7 @@ class MoreScreen extends StatefulWidget {
 class _MoreScreenState extends State<MoreScreen> {
   String currentLanguage = 'English';
 
+  // Language bottom sheet
   void showLanguageBottomSheet() {
     showModalBottomSheet(
       context: context,
@@ -55,6 +56,7 @@ class _MoreScreenState extends State<MoreScreen> {
     });
   }
 
+  // Logout bottom sheet
   void showLogoutBottomSheet() {
     showModalBottomSheet(
       context: context,
