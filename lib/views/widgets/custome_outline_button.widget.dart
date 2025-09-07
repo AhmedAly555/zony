@@ -7,22 +7,25 @@ class CustomeOutlineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
 
-      onPressed: (){},
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white,
-        side: BorderSide(
-          width: 2,
-          color: Color(0xFF49159B),
+        onPressed: (){},
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          side: BorderSide(
+            width: 2,
+            color: Color(0xFF49159B),
+          ),
+
+          // shadowColor: Colors.transparent,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
-
-        // shadowColor: Colors.transparent,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 14),
-        child:  title,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          child:  title,
+        ),
       ),
     );
   }
