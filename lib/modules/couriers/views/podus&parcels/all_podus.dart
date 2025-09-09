@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zony/views/widgets/secondary_appbar.dart';
 
+import '../../../../services/size_config.dart';
+import '../../../../views/widgets/bottom_sheet/pickup_point_bottom_sheet.dart';
 import '../../../../views/widgets/template_app_scaffold.widget.dart';
 
-class PODUsScreen extends StatelessWidget {
-  const PODUsScreen({super.key});
+class AllPODUsScreen extends StatelessWidget {
+  const AllPODUsScreen({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,20 +43,25 @@ class PODUsScreen extends StatelessWidget {
                   ),
                   SizedBox(width: 12),
                   // Map Button
-                  Container(
-                    width: 44,
-                    height: 44,
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF49159B),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: SvgPicture.asset(
-                      'assets/svgs/podus_location.svg',
-                      //color: Theme.of(context).primaryColor,
-                      width: 24,
-                      height: 24,
+                  GestureDetector(
+                    onTap: (){
+                      showPickupPointBottomSheet(context);
+                    },
+                    child: Container(
+                      width: 44,
+                      height: 44,
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF49159B),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/svgs/podus_location.svg',
+                        //color: Theme.of(context).primaryColor,
+                        width: 24,
+                        height: 24,
 
+                      ),
                     ),
                   ),
                 ],

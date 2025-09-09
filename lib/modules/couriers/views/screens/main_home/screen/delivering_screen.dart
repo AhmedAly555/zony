@@ -34,51 +34,6 @@ class DeliveringScreen extends StatelessWidget {
     );
   }
 
-  //Show wrong location bottom sheet
-  void showWrongLocationBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      isDismissible: true,
-      enableDrag: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        SizeConfig.init(context);
-        return Container(
-          width: double.infinity,
-          constraints: BoxConstraints(
-            maxHeight: SizeConfig.heightPercent(0.45),
-            minHeight: SizeConfig.heightPercent(0.35),
-          ),
-          child: WrongLocationBottomSheet(),
-        );
-      },
-
-    );
-  }
-
-  //Show manually username bottom sheet
-  void showManuallyUsernameBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      isDismissible: true,
-      enableDrag: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        SizeConfig.init(context);
-        return Container(
-          width: double.infinity,
-          constraints: BoxConstraints(
-            maxHeight: SizeConfig.heightPercent(0.75),
-            minHeight: SizeConfig.heightPercent(0.45),
-          ),
-          child: IntrinsicHeight(child: ManuallyUsernameBottomSheet()),
-        );
-      },
-
-    );
-  }
   @override
   Widget build(BuildContext context) {
     return TemplateAppScaffold(
