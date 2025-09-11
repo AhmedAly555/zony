@@ -2,10 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import '../../../modules/auth/screens/login_screen.dart';
-import '../../../modules/auth/widgets/custom_login_button.widget.dart';
-import '../../../services/navigator.services/app_navigator.services.dart';
-import '../custome_outline_button.widget.dart';
+
+import '../../../services/size_config.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
 class ManuallyUsernameBottomSheet extends StatefulWidget {
@@ -60,7 +58,7 @@ class _ManuallyUsernameBottomSheetState
       setState(() {
         _hasError = true;
       });
-      // شغل الاهتزاز
+      // vibration
       _animationController.forward(from: 0);
     }
   }
@@ -234,4 +232,27 @@ class _ManuallyUsernameBottomSheetState
       ),
     );
   }
+}
+
+//Show manually username bottom sheet(callback)
+void showManuallyUsernameBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    isDismissible: true,
+    enableDrag: true,
+    backgroundColor: Colors.transparent,
+    builder: (context) {
+      SizeConfig.init(context);
+      return Container(
+        width: double.infinity,
+        constraints: BoxConstraints(
+          maxHeight: SizeConfig.heightPercent(0.75),
+          minHeight: SizeConfig.heightPercent(0.45),
+        ),
+        child: IntrinsicHeight(child: ManuallyUsernameBottomSheet()),
+      );
+    },
+
+  );
 }

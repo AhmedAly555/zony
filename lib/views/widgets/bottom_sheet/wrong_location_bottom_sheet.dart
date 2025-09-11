@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../modules/auth/screens/login_screen.dart';
 import '../../../modules/auth/widgets/custom_login_button.widget.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
+import '../../../services/size_config.dart';
 import '../custome_outline_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
@@ -66,4 +67,27 @@ class WrongLocationBottomSheet extends StatelessWidget {
       ),
     );
   }
+}
+
+//Show wrong location bottom sheet(callback)
+void showWrongLocationBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    isDismissible: true,
+    enableDrag: true,
+    backgroundColor: Colors.transparent,
+    builder: (context) {
+      SizeConfig.init(context);
+      return Container(
+        width: double.infinity,
+        constraints: BoxConstraints(
+          maxHeight: SizeConfig.heightPercent(0.45),
+          minHeight: SizeConfig.heightPercent(0.35),
+        ),
+        child: WrongLocationBottomSheet(),
+      );
+    },
+
+  );
 }

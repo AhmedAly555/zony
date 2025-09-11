@@ -6,8 +6,8 @@ import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../widgets/parcel_row.widget.dart';
 import '../widgets/search_button.widget.dart';
 
-class PudoParcels extends StatelessWidget {
-  const PudoParcels({super.key});
+class PudoParcelsScreen extends StatelessWidget {
+  const PudoParcelsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
