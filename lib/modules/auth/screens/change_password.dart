@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../services/size_config.dart';
+import '../../../core/services/size_config.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_login_button.widget.dart';
 import '../widgets/password_text_field.widget.dart';

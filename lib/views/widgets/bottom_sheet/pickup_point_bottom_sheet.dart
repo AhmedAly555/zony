@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../core/services/size_config.dart';
 import '../../../modules/auth/screens/login_screen.dart';
 import '../../../modules/auth/widgets/custom_login_button.widget.dart';
 import '../../../modules/couriers/views/delivering/widgets/parcel_row.widget.dart';
-import '../../../services/navigator.services/app_navigator.services.dart';
-import '../../../services/size_config.dart';
+import '../../../core/services/navigator.services/app_navigator.services.dart';
 import '../custome_outline_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 

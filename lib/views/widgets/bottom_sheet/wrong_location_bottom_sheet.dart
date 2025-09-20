@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../modules/auth/screens/login_screen.dart';
+import '../../../core/services/size_config.dart';
 import '../../../modules/auth/widgets/custom_login_button.widget.dart';
-import '../../../services/navigator.services/app_navigator.services.dart';
-import '../../../services/size_config.dart';
-import '../custome_outline_button.widget.dart';
+
 import 'componants_bottom_sheet.widgets.dart';
 
 class WrongLocationBottomSheet extends StatelessWidget {

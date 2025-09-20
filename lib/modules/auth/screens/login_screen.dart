@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../../models/user_role.dart';
-import '../../../services/auth_service.dart';
-import '../../../services/navigator.services/app_navigator.services.dart';
-import '../../../services/size_config.dart';
+import '../../../core/enums/user_role.dart';
+import '../../../core/services/auth_service.dart';
+import '../../../core/services/navigator.services/app_navigator.services.dart';
+import '../../../core/services/size_config.dart';
 import '../../../views/widgets/default_text_filed.dart';
 import '../../couriers/views/screens/main_home/screen/main_home_screen.dart';
 

@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 
-import '../../../services/size_config.dart';
+import '../../../core/services/size_config.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
 class ManuallyUsernameBottomSheet extends StatefulWidget {

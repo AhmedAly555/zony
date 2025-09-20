@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:zony/views/widgets/template_app_scaffold.widget.dart';
 
-import '../../../../../../services/size_config.dart';
 import '../../../../../../views/widgets/bottom_sheet/manually_username_bottom_sheet.dart';
 import '../../../../../../views/widgets/bottom_sheet/qr_scanner.dart';
 import '../../../../../../views/widgets/bottom_sheet/wrong_location_bottom_sheet.dart';

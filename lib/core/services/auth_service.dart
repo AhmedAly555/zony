@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import '../models/login_response.dart';
-import '../models/base_response.dart';
-import '../models/user_model.dart';
+
+import '../../models/base_response.dart';
+import '../../models/login_response.dart';
+
 
 class AuthService {
   // Login function with mock data

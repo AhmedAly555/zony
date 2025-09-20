@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:zony/services/navigator.services/app_navigator.services.dart';
 
-import '../../../../../../services/size_config.dart';
+import '../../../../../../core/services/navigator.services/app_navigator.services.dart';
+import '../../../../../../core/services/size_config.dart';
 import '../../../../../../views/widgets/bottom_sheet/language_sheet.dart';
 import '../../../../../../views/widgets/bottom_sheet/log_out_bottom_sheet.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';

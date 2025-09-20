@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../../services/navigator.services/app_navigator.services.dart';
+import '../../../../../../core/services/navigator.services/app_navigator.services.dart';
 import '../../../../../../views/widgets/custome_container_icon.widget.dart';
 import '../../../../../../views/widgets/custome_outline_button.widget.dart';
 import '../../../../../../views/widgets/default_navigation_bar.widget.dart';

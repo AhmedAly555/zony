@@ -1,71 +1,8 @@
-/* import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../services/size_config.dart';
-
-class BoxChoice extends StatelessWidget {
-  final String svgPath;
-  final String title;
-  final VoidCallback onTap;
-  final bool isSelected;
-  const BoxChoice({
-    super.key,
-    required this.svgPath,
-    required this.title,
-    required this.onTap,
-    this.isSelected = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    // Initialize SizeConfig to use responsive sizing
-    SizeConfig.init(context);
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          height: SizeConfig.heightPercent(0.16),
-          decoration: BoxDecoration(
-            color: Color(0xFFf4f4f4),
-            border: Border.all(
-              color: isSelected ? Color(0xFF49159B) : Color(0xFFf4f4f4),
-              width: 2,
-            ),
-            borderRadius: BorderRadius.circular(24),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                svgPath,
-                color: Color(0xFF49159B),
-
-                /* width: 32,
-                                height: 32, */
-                //color: ,
-              ),
-              SizedBox(height: SizeConfig.heightPercent(0.02)),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF49159B),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
- */
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../services/size_config.dart';
+import '../../../core/services/size_config.dart';
 
 class BoxChoice extends StatelessWidget {
   final String svgPath;

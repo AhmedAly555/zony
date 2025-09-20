@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../services/size_config.dart';
+import '../../../core/services/size_config.dart';
 import '../widgets/custom_appbar.dart';
 import 'login_screen.dart';
 

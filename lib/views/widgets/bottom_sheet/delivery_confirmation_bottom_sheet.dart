@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/services/navigator.services/app_navigator.services.dart';
 import '../../../modules/auth/screens/login_screen.dart';
 import '../../../modules/auth/widgets/custom_login_button.widget.dart';
-import '../../../services/navigator.services/app_navigator.services.dart';
 import '../custome_outline_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 

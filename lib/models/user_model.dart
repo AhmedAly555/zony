@@ -1,5 +1,5 @@
 
-import 'user_role.dart';
+import '../core/enums/user_role.dart';
 
 class UserModel {
   final String? userId;

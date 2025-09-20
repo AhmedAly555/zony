@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zony/views/widgets/secondary_appbar.dart';
 
-import '../../../../services/size_config.dart';
 import '../../../../views/widgets/bottom_sheet/pickup_point_bottom_sheet.dart';
 import '../../../../views/widgets/template_app_scaffold.widget.dart';
 

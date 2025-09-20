@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../../services/auth_service.dart';
-import '../../../services/navigator.services/app_navigator.services.dart';
-import '../../../services/size_config.dart';
+import '../../../core/services/auth_service.dart';
+import '../../../core/services/navigator.services/app_navigator.services.dart';
+import '../../../core/services/size_config.dart';
 import '../../../views/widgets/default_text_filed.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_login_button.widget.dart';

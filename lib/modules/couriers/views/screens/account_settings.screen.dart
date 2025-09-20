@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../views/widgets/default_text_filed.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
-import '../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../views/widgets/secondary_appbar.dart';
 import '../../../auth/screens/login_screen.dart';
 
