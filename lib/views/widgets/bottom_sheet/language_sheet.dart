@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../modules/auth/widgets/custom_login_button.widget.dart';
+import '../default_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
 class LanguageBottomSheet extends StatefulWidget {
@@ -146,7 +146,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
           Spacer(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: CustomLoginButton(onTap: () {}),
+            child: DefaultButton(onTap: () {}),
           ),
         ],
       ),

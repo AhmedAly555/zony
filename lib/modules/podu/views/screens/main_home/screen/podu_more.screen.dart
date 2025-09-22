@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:zony/services/navigator.services/app_navigator.services.dart';
 
 import '../../../../../../services/size_config.dart';
+import '../../../../../../theme/app_text_styles.dart';
 import '../../../../../../views/widgets/bottom_sheet/language_sheet.dart';
 import '../../../../../../views/widgets/bottom_sheet/log_out_bottom_sheet.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
-import '../../../widgets/coustome_row_more_screen.widget.dart';
+import '../../../../../couriers/views/widgets/coustome_row_more_screen.widget.dart';
 import '../../account_settings.screen.dart';
 
-class MoreScreen extends StatefulWidget {
-  const MoreScreen({super.key});
+class PoduMoreScreen extends StatefulWidget {
+  const PoduMoreScreen({super.key});
 
   @override
-  State<MoreScreen> createState() => _MoreScreenState();
+  State<PoduMoreScreen> createState() => _PoduMoreScreenState();
 }
 
-class _MoreScreenState extends State<MoreScreen> {
+class _PoduMoreScreenState extends State<PoduMoreScreen> {
   String currentLanguage = 'English';
 
   void showLanguageBottomSheet() {
@@ -88,11 +89,7 @@ class _MoreScreenState extends State<MoreScreen> {
           const Center(
             child: Text(
               'More Settings',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF1E1E1E),
-              ),
+              style: AppTextStyles.textStyle24black,
             ),
           ),
           //const SizedBox(height: 50),
@@ -109,7 +106,6 @@ class _MoreScreenState extends State<MoreScreen> {
             iconPath: 'assets/svgs/svg_language.svg',
             title: 'Language',
             onTap: () {
-
               showLanguageBottomSheet();
             },
           ),
@@ -117,9 +113,7 @@ class _MoreScreenState extends State<MoreScreen> {
           CoustomeRowMoreScreen(
             iconPath: 'assets/svgs/revenue.svg',
             title: 'Revenue',
-            onTap: () {
-              //showLogoutBottomSheet();
-            },
+            onTap: () {},
           ),
           const SizedBox(height: 16),
           CoustomeRowMoreScreen(

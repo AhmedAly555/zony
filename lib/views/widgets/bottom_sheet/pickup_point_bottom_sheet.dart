@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../modules/auth/screens/login_screen.dart';
-import '../../../modules/auth/widgets/custom_login_button.widget.dart';
-import '../../../modules/couriers/views/delivering/widgets/parcel_row.widget.dart';
+import '../../../modules/couriers/delivering/widgets/parcel_row.widget.dart';
+import '../default_button.widget.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
-import '../custome_outline_button.widget.dart';
+import '../custom_outline_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
 class PickupPointBottomSheet extends StatelessWidget {
@@ -103,7 +103,7 @@ class PickupPointBottomSheet extends StatelessWidget {
               text: 'Closed - open all days from 9:00AM to 10PM',
             ),
             const SizedBox(height: 24),
-            CustomLoginButton(
+            DefaultButton(
               onTap: () => AppNavigator.navigateAndRemoveUntil(context, () => const LoginScreen()),
               child: Text(
                 'Show Details',
@@ -117,7 +117,7 @@ class PickupPointBottomSheet extends StatelessWidget {
               ),
             ),
             SizedBox(height:13),
-            CustomeOutlineButton(
+            CustomOutlineButton(
               title: Text(
                 'Cancel',
                 style: TextStyle(

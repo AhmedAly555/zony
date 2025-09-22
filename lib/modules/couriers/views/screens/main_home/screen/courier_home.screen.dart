@@ -2,46 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../services/navigator.services/app_navigator.services.dart';
-import '../../../../../../views/widgets/custome_container_icon.widget.dart';
+import '../../../../../../theme/app_text_styles.dart';
+import '../../../../../../views/widgets/custom_container_icon.widget.dart';
+import '../../../../../../views/widgets/custom_zony_logo.dart';
 import '../../../../../../views/widgets/default_navigation_bar.widget.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
-import '../../../../../couriers/views/screens/main_home/screen/delivering_screen.dart';
+import '../../../../../couriers/views/screens/main_home/screen/courier_delivering_screen.dart';
+import '../../../../podus&parcels/all_podus.dart';
 import '../../../widgets/custom_home_service_container.widget.dart';
 import '../../notification.screen.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class CourierHomeScreen extends StatelessWidget {
+  const CourierHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return TemplateAppScaffold(
       body: Padding(
-        padding: const EdgeInsets.only(top: 60.0, right: 18, left: 18),
+        padding: const EdgeInsets.only(top: 40.0, right: 18, left: 18),
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                /*SvgPicture.asset(
-                  'assets/svgs/image 13.svg',
-                  color: Theme.of(context).primaryColor,
-                  width: 24,
-                  height: 24,
-                ),*/
-                Image.asset(
-                  'assets/images/image 13.png',
-                  width: 102,
-                  height: 50,
-                ),
+                CustomZonyLogo(),
                 Spacer(),
-                CostumeContainerIcon(svgPath: 'assets/svgs/svg_language.svg'),
+                CustomContainerIcon(svgPath: 'assets/svgs/svg_language.svg'),
                 SizedBox(width: 10),
-                CostumeContainerIcon(
+                CustomContainerIcon(
                   svgPath: 'assets/svgs/technical_support.svg',
                 ),
                 SizedBox(width: 10),
-                CostumeContainerIcon(
+                CustomContainerIcon(
                   svgPath: 'assets/svgs/notification.svg',
                   onTap: () {
                     AppNavigator.navigateTo(
@@ -58,7 +51,7 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 14),
               child: Text(
                 'Account',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                style: AppTextStyles.textStyle14,
               ),
             ),
             Container(
@@ -124,7 +117,7 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 14),
               child: Text(
                 'Services',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                style: AppTextStyles.textStyle14,
               ),
             ),
             Expanded(
@@ -137,16 +130,18 @@ class HomeScreen extends StatelessWidget {
                   CustomHomeServiceContainer(
                     title: 'Delivering',
                     svgIconPath: 'assets/svgs/delivering.svg', onTap: () {
-                      AppNavigator.navigateTo(context, () => DeliveringScreen());
+                      AppNavigator.navigateTo(context, () => CourierDeliveringScreen());
                   },
                   ),
                   CustomHomeServiceContainer(
                     title: 'My Parcels',
-                    svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {  },
+                    svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {},
                   ),
                   CustomHomeServiceContainer(
                     title: 'PODUs',
-                    svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {  },
+                    svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {
+                    AppNavigator.navigateTo(context, () => AllPODUsScreen());
+                  },
                   ),
                 ],
               ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:zony/modules/auth/widgets/custom_login_button.widget.dart';
+import 'package:zony/views/widgets/default_button.widget.dart';
 
-import '../../../../../views/widgets/custome_outline_button.widget.dart';
+import '../../../../../theme/app_text_styles.dart';
+import '../../../../../views/widgets/custom_outline_button.widget.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 
 class SuccessfulDelivering extends StatelessWidget {
@@ -15,28 +16,20 @@ class SuccessfulDelivering extends StatelessWidget {
           Text(
             "Successful Delivering process",
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
-              color: Theme.of(context).primaryColor,
-            ),
+            style: AppTextStyles.textStyle24,
           ),
           const SizedBox(height: 18),
           Text(
             "The time and location of the pickup will be recorded automatically.",
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: Color(0xFF929292),
-            ),
+            style: AppTextStyles.textStyle14Grey,
           ),
           Spacer(),
           Padding(
             padding: const EdgeInsets.only(bottom: 20, right: 18, left: 18),
             child: Column(
               children: [
-                CustomLoginButton(
+                DefaultButton(
                   onTap: () {},
                   child: Text(
                     'Deliver New Parcel',
@@ -50,14 +43,10 @@ class SuccessfulDelivering extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 18),
-                CustomeOutlineButton(
+                CustomOutlineButton(
                   title: Text(
                     'Back To Parcel List',
-                    style: TextStyle(
-                      color: Color(0xFF49159B),
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
+                    style: AppTextStyles.textStyle16,
                   ),
                 ),
               ],

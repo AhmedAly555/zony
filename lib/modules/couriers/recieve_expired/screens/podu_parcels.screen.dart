@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../../theme/app_text_styles.dart';
 import '../../../../../views/widgets/secondary_appbar.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
-import '../widgets/parcel_row.widget.dart';
-import '../widgets/search_button.widget.dart';
+import '../../delivering/widgets/parcel_row.widget.dart';
+import '../../delivering/widgets/search_button.widget.dart';
+
 
 class PudoParcelsScreen extends StatelessWidget {
   const PudoParcelsScreen({super.key});
@@ -39,11 +41,7 @@ class PudoParcelsScreen extends StatelessWidget {
                   children: [
                     const Text(
                       'Search By',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF49159B),
-                      ),
+                      style: AppTextStyles.textStyle18,
                     ),
                     const SizedBox(height: 8),
                     Row(

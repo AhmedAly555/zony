@@ -1,3 +1,5 @@
+// We make this screen reusable
+/*
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -5,14 +7,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 
-class CustomCameraScreen extends StatefulWidget {
-  const CustomCameraScreen({super.key});
+class CouriersCameraScreen extends StatefulWidget {
+  const CouriersCameraScreen({super.key});
 
   @override
-  State<CustomCameraScreen> createState() => _CustomCameraScreenState();
+  State<CouriersCameraScreen> createState() => _CouriersCameraScreenState();
 }
 
-class _CustomCameraScreenState extends State<CustomCameraScreen> {
+class _CouriersCameraScreenState extends State<CouriersCameraScreen> {
   CameraController? _controller;
   Future<void>? _initializeControllerFuture;
   File? _capturedImage;
@@ -51,12 +53,14 @@ class _CustomCameraScreenState extends State<CustomCameraScreen> {
       });
 
 
-      /*Navigator.push(
+      */
+/*Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => DisplayPictureScreen(imagePath: file.path),
         ),
-      );*/
+      );*//*
+
     } catch (e) {
       debugPrint('Error taking picture: $e');
     }
@@ -140,16 +144,5 @@ class _CustomCameraScreenState extends State<CustomCameraScreen> {
     );
   }
 }
+*/
 
-/*class DisplayPictureScreen extends StatelessWidget {
-  final String imagePath;
-  const DisplayPictureScreen({super.key, required this.imagePath});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Preview')),
-      body: Center(child: Image.file(File(imagePath))),
-    );
-  }
-}*/

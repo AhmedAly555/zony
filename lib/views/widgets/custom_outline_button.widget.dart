@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
-class CustomeOutlineButton extends StatelessWidget {
+class CustomOutlineButton extends StatelessWidget {
 
   final Widget title;
-  const CustomeOutlineButton({super.key, required this.title});
+  final VoidCallback? onTap;
+
+  const CustomOutlineButton({super.key,
+    required this.title,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +16,7 @@ class CustomeOutlineButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
 
-        onPressed: (){},
+        onPressed: onTap,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
           side: BorderSide(

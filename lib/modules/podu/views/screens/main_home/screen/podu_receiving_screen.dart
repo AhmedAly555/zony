@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 
-class ReceivingScreen extends StatelessWidget {
-  const ReceivingScreen({super.key});
+class PoduReceivingScreen extends StatelessWidget {
+  const PoduReceivingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../modules/auth/screens/login_screen.dart';
-import '../../../modules/auth/widgets/custom_login_button.widget.dart';
+import '../default_button.widget.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
-import '../custome_outline_button.widget.dart';
+import '../custom_outline_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
 class LogOutBottomSheet extends StatelessWidget {
@@ -58,7 +58,7 @@ class LogOutBottomSheet extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: CustomLoginButton(
+                  child: DefaultButton(
                     onTap: () => AppNavigator.navigateAndRemoveUntil(context, () => const LoginScreen()),
                     child: Text(
                       'Yes, I\'m sure.',
@@ -74,7 +74,7 @@ class LogOutBottomSheet extends StatelessWidget {
                 ),
                 SizedBox(width: 8),
                 Expanded(
-                  child: CustomeOutlineButton(
+                  child: CustomOutlineButton(
                     title: Text(
                       'No, cancel',
                       style: TextStyle(

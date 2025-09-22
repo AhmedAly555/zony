@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../modules/auth/screens/login_screen.dart';
-import '../../../modules/auth/widgets/custom_login_button.widget.dart';
+import '../default_button.widget.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
-import '../custome_outline_button.widget.dart';
+import '../custom_outline_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
 class WrongLocationBottomSheet extends StatelessWidget {
@@ -48,7 +48,7 @@ class WrongLocationBottomSheet extends StatelessWidget {
             Spacer(
               flex: 2,
             ),
-            CustomLoginButton(
+            DefaultButton(
               onTap: () {
                 Navigator.pop(context);
               },

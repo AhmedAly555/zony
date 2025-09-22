@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:zony/services/navigator.services/app_navigator.services.dart';
 
 import '../../../../../../services/size_config.dart';
+import '../../../../../../theme/app_text_styles.dart';
 import '../../../../../../views/widgets/bottom_sheet/language_sheet.dart';
 import '../../../../../../views/widgets/bottom_sheet/log_out_bottom_sheet.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../widgets/coustome_row_more_screen.widget.dart';
 import '../../account_settings.screen.dart';
 
-class MoreScreen extends StatefulWidget {
-  const MoreScreen({super.key});
+class CourierMoreScreen extends StatefulWidget {
+  const CourierMoreScreen({super.key});
 
   @override
-  State<MoreScreen> createState() => _MoreScreenState();
+  State<CourierMoreScreen> createState() => _CourierMoreScreenState();
 }
 
-class _MoreScreenState extends State<MoreScreen> {
+class _CourierMoreScreenState extends State<CourierMoreScreen> {
   String currentLanguage = 'English';
 
   // Language bottom sheet
@@ -33,9 +34,7 @@ class _MoreScreenState extends State<MoreScreen> {
             maxHeight: SizeConfig.heightPercent(0.90),
             minHeight: SizeConfig.heightPercent(0.80),
           ),
-          child: IntrinsicHeight(
-            child: LanguageBottomSheet(),
-          ),
+          child: IntrinsicHeight(child: LanguageBottomSheet()),
         );
       },
       /*=> DraggableScrollableSheet(
@@ -71,31 +70,20 @@ class _MoreScreenState extends State<MoreScreen> {
             maxHeight: SizeConfig.heightPercent(0.75),
             minHeight: SizeConfig.heightPercent(0.45),
           ),
-          child: IntrinsicHeight(
-            child: LogOutBottomSheet(),
-          ),
+          child: IntrinsicHeight(child: LogOutBottomSheet()),
         );
       },
-
     );
   }
 
   @override
   Widget build(BuildContext context) {
-
     return TemplateAppScaffold(
       body: Column(
         children: [
           const SizedBox(height: 24),
           const Center(
-            child: Text(
-              'More Settings',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF1E1E1E),
-              ),
-            ),
+            child: Text('More Settings', style: AppTextStyles.textStyle24black),
           ),
           //const SizedBox(height: 50),
           Spacer(),
@@ -103,7 +91,7 @@ class _MoreScreenState extends State<MoreScreen> {
             iconPath: 'assets/svgs/account.svg',
             title: 'Account Settings',
             onTap: () {
-              AppNavigator.navigateTo(context, () =>  AccountSettingsScreen());
+              AppNavigator.navigateTo(context, () => AccountSettingsScreen());
             },
           ),
           const SizedBox(height: 16),
@@ -111,7 +99,6 @@ class _MoreScreenState extends State<MoreScreen> {
             iconPath: 'assets/svgs/svg_language.svg',
             title: 'Language',
             onTap: () {
-
               showLanguageBottomSheet();
             },
           ),
@@ -129,4 +116,3 @@ class _MoreScreenState extends State<MoreScreen> {
     );
   }
 }
-

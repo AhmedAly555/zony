@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CustomLoginButton extends StatelessWidget {
+class DefaultButton extends StatelessWidget {
   final VoidCallback onTap;
   final Widget? child;
   final Color? buttonColor;
 
-  const CustomLoginButton({
+  const DefaultButton({
     super.key,
     required this.onTap,
     this.child,

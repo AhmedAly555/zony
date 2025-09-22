@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 
-class CostumeContainerIcon extends StatelessWidget {
+class CustomContainerIcon extends StatelessWidget {
   final String svgPath;
   final VoidCallback? onTap;
-  const CostumeContainerIcon({super.key, required this.svgPath, this.onTap});
+  const CustomContainerIcon({super.key, required this.svgPath, this.onTap});
 
   @override
   Widget build(BuildContext context) {

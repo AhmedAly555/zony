@@ -2,16 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../services/navigator.services/app_navigator.services.dart';
-import '../../../../../../views/widgets/custome_container_icon.widget.dart';
-import '../../../../../../views/widgets/custome_outline_button.widget.dart';
-import '../../../../../../views/widgets/default_navigation_bar.widget.dart';
+import '../../../../../../services/size_config.dart';
+import '../../../../../../views/widgets/bottom_sheet/podu_qr_bottom_sheet.dart';
+import '../../../../../../views/widgets/custom_container_icon.widget.dart';
+import '../../../../../../views/widgets/custom_outline_button.widget.dart';
+import '../../../../../../views/widgets/custom_zony_logo.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
-import '../../../widgets/custom_home_service_container.widget.dart';
+import '../../../../../couriers/views/widgets/custom_home_service_container.widget.dart';
 import '../../notification.screen.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class PoduHomeScreen extends StatelessWidget {
+  const PoduHomeScreen({super.key});
 
+  void showPoduQRBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: true,
+      enableDrag: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        SizeConfig.init(context);
+        return Container(
+          constraints: BoxConstraints(
+            maxHeight: SizeConfig.heightPercent(0.85),
+            minHeight: SizeConfig.heightPercent(0.75),
+          ),
+          child: IntrinsicHeight(child: PoduQRBottomSheet()),
+        );
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return TemplateAppScaffold(
@@ -23,25 +44,15 @@ class HomeScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                /*SvgPicture.asset(
-                  'assets/svgs/image 13.svg',
-                  color: Theme.of(context).primaryColor,
-                  width: 24,
-                  height: 24,
-                ),*/
-                Image.asset(
-                  'assets/images/image 13.png',
-                  width: 102,
-                  height: 50,
-                ),
+                CustomZonyLogo(),
                 Spacer(),
-                CostumeContainerIcon(svgPath: 'assets/svgs/svg_language.svg'),
+                CustomContainerIcon(svgPath: 'assets/svgs/svg_language.svg'),
                 SizedBox(width: 10),
-                CostumeContainerIcon(
+                CustomContainerIcon(
                   svgPath: 'assets/svgs/technical_support.svg',
                 ),
                 SizedBox(width: 10),
-                CostumeContainerIcon(
+                CustomContainerIcon(
                   svgPath: 'assets/svgs/notification.svg',
                   onTap: () {
                     AppNavigator.navigateTo(
@@ -53,6 +64,7 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
+            // will make it costume widget in the future
             Align(
               alignment: Alignment.center,
               child: Padding(
@@ -136,7 +148,10 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 24),
-                  CustomeOutlineButton(
+                  CustomOutlineButton(
+                    onTap: () {
+                      showPoduQRBottomSheet(context);
+                    },
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -175,15 +190,15 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     CustomHomeServiceContainer(
                       title: 'Receiving',
-                      svgIconPath: 'assets/svgs/receiving.svg',
+                      svgIconPath: 'assets/svgs/receiving.svg', onTap: () {},
                     ),
                     CustomHomeServiceContainer(
                       title: 'Delivering',
-                      svgIconPath: 'assets/svgs/delivering.svg',
+                      svgIconPath: 'assets/svgs/delivering.svg', onTap: () {},
                     ),
                     CustomHomeServiceContainer(
                       title: 'Inventory',
-                      svgIconPath: 'assets/svgs/my_parcels.svg',
+                      svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {},
                     ),
                   ],
                 ),

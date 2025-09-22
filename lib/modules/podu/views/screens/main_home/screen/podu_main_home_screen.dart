@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:zony/modules/couriers/views/screens/main_home/screen/receiving_screen.dart';
+import 'package:zony/modules/couriers/views/screens/main_home/screen/courier_receiving_screen.dart';
 
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
-import 'delivering_screen.dart';
-import 'home.screen.dart';
-import 'more.screen.dart';
+import 'podu_delivering_screen.dart';
+import 'podu_home_screen.dart';
+import 'podu_more.screen.dart';
 
-class MainHomeScreenPodu extends StatefulWidget {
-  const MainHomeScreenPodu({super.key});
+class PoduMainHomeScreen extends StatefulWidget {
+  const PoduMainHomeScreen({super.key});
 
   @override
-  State<MainHomeScreenPodu> createState() => _MainHomeScreenPoduState();
+  State<PoduMainHomeScreen> createState() => _PoduMainHomeScreenState();
 }
 
-class _MainHomeScreenPoduState extends State<MainHomeScreenPodu> {
+class _PoduMainHomeScreenState extends State<PoduMainHomeScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = const [
-    HomeScreen(),
-    ReceivingScreen(),
-    DeliveringScreen(),
-    MoreScreen(),
+    PoduHomeScreen(),
+    CourierReceivingScreen(),
+    PoduDeliveringScreen(),
+    PoduMoreScreen(),
   ];
 
   void _onItemTapped(int index) {

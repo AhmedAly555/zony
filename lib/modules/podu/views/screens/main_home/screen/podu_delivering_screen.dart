@@ -10,8 +10,8 @@ import '../../../../../../views/widgets/secondary_appbar.dart';
 import '../../../../../recieve_parcel/widgets/custom_menu_recieve.widget.dart';
 
 
-class DeliveringScreen extends StatelessWidget {
-  const DeliveringScreen({super.key});
+class PoduDeliveringScreen extends StatelessWidget {
+  const PoduDeliveringScreen({super.key});
 
   //Open the scanner bottom sheet
   Future<String?> openScannerBottomSheet(BuildContext context) {
@@ -63,13 +63,14 @@ class DeliveringScreen extends StatelessWidget {
                     showManuallyUsernameBottomSheet(context);
                   },
                 ),
-                MenuItemData(
+                //showWrongLocationBottomSheet
+                /*MenuItemData(
                   svgPath: 'assets/svgs/small_qr.svg',
                   title: "test wrong",
                   onTap: () {
                     showWrongLocationBottomSheet(context);
                   },
-                ),
+                ),*/
               ],
             ),
             const Spacer(),
