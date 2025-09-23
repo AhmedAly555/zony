@@ -8,8 +8,8 @@ import '../../../services/navigator.services/app_navigator.services.dart';
 import '../custom_outline_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
-class DeliveryConfirmationBottomSheet extends StatelessWidget {
-  const DeliveryConfirmationBottomSheet({super.key});
+class ConfirmParcelBottomSheet extends StatelessWidget {
+  const ConfirmParcelBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +20,16 @@ class DeliveryConfirmationBottomSheet extends StatelessWidget {
           // Handle bar line
           HederBottomSheetLine(),
 
-          Spacer(),
-          // Language icon
-          BottomSheetIcon(svgPath: 'assets/svgs/check_icon.svg'),
-
-          const SizedBox(height: 16),
+          const Spacer(),
 
           // Title
           const Text(
-            'Delivery Confirmation',
+            'Parcel Approve Confirmation',
             textAlign: TextAlign.center,
             style: AppTextStyles.bottomSheetTitle,
           ),
 
-          const SizedBox(height: 8),
+          const SizedBox(height: 18),
 
           // Description
           const Text(
@@ -42,19 +38,15 @@ class DeliveryConfirmationBottomSheet extends StatelessWidget {
             style: AppTextStyles.bottomSheetDescription,
           ),
 
-          Spacer(),
+          const Spacer(),
 
           Row(
             children: [
               Expanded(
                 child: DefaultButton(
-                  onTap:
-                      () => AppNavigator.navigateAndRemoveUntil(
-                    context,
-                        () => const LoginScreen(),
-                  ),
+                  onTap: () => AppNavigator.navigateAndRemoveUntil(context, () => const LoginScreen()),
                   child: Text(
-                    'Yes, I\'m Confirm.',
+                    'Yes, I confirm',
                     textAlign: TextAlign.center,
 
                     style: TextStyle(
@@ -69,7 +61,7 @@ class DeliveryConfirmationBottomSheet extends StatelessWidget {
               Expanded(
                 child: CustomOutlineButton(
                   title: Text(
-                    'TRY AGAIN',
+                    'No, cancel',
                     style: TextStyle(
                       color: Color(0xFF49159B),
                       fontWeight: FontWeight.w600,
@@ -86,29 +78,3 @@ class DeliveryConfirmationBottomSheet extends StatelessWidget {
     );
   }
 }
-
-//callback function to show bottom sheet
-/*
-void showDeliveryConfirmationBottomSheet() {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      isDismissible: true,
-      enableDrag: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        SizeConfig.init(context);
-        return Container(
-          constraints: BoxConstraints(
-            maxHeight: SizeConfig.heightPercent(0.75),
-            minHeight: SizeConfig.heightPercent(0.45),
-          ),
-          child: IntrinsicHeight(
-            child: DeliveryConfirmationBottomSheet(),
-          ),
-        );
-      },
-
-    );
-  }
-*/

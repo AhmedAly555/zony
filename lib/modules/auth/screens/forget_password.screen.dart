@@ -6,7 +6,7 @@ import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../../../views/widgets/default_text_filed.dart';
 import '../widgets/custom_appbar.dart';
-import '../widgets/custom_login_button.widget.dart';
+import '../../../views/widgets/default_button.widget.dart';
 import 'generic_login_screen.dart';
 import 'otp_screen.dart';
 
@@ -129,7 +129,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     stops: [0.0, value.clamp(0.0, 1.0)],
                   ),
                 ),
-                child: CustomLoginButton(
+                child: DefaultButton(
                   onTap: () {
                     isLoading ? null : handleReset();
                     AppNavigator.navigateTo(

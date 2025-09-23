@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../services/size_config.dart';
 import '../widgets/custom_appbar.dart';
-import '../widgets/custom_login_button.widget.dart';
+import '../../../views/widgets/default_button.widget.dart';
 import '../widgets/password_text_field.widget.dart';
 import 'generic_login_screen.dart';
 
@@ -95,7 +95,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     stops: [0.0, value.clamp(0.0, 1.0)],
                   ),
                 ),
-                child: CustomLoginButton(onTap: () {}),
+                child: DefaultButton(onTap: () {}),
               );
             },
           ),

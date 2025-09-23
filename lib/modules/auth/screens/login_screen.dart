@@ -6,12 +6,12 @@ import '../../../services/auth_service.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../../../views/widgets/default_text_filed.dart';
-import '../../couriers/views/screens/main_home/screen/main_home_screen.dart';
+import '../../couriers/views/screens/main_home/screen/courier_main_home_screen.dart';
 
 import '../../couriers/views/screens/notification.screen.dart';
-import '../../podu/views/screens/main_home/screen/main_home_screen.podu.dart';
+import '../../podu/views/screens/main_home/screen/podu_main_home_screen.dart';
 import '../widgets/custom_appbar.dart';
-import '../widgets/custom_login_button.widget.dart';
+import '../../../views/widgets/default_button.widget.dart';
 import 'change_password.dart';
 import 'forget_password.screen.dart';
 import 'generic_login_screen.dart';
@@ -62,10 +62,10 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       if (response.user.role == UserRole.couriers) {
-        AppNavigator.navigateTo(context, () => const MainHomeScreen());
+        AppNavigator.navigateTo(context, () => const CourierMainHomeScreen());
       } else if (response.user.role == UserRole.podu){
         // Replace NotificationScreen with your actual notification screen
-        AppNavigator.navigateTo(context, () => const MainHomeScreenPodu());
+        AppNavigator.navigateTo(context, () => const PoduMainHomeScreen());
       }
 
     } catch (e) {
@@ -226,7 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     stops: [0.0, value.clamp(0.0, 1.0)],
                   ),
                 ),
-                child: CustomLoginButton(
+                child: DefaultButton(
                   onTap: () => isLoading ? null : handleLogin(),
                   child:
                   isLoading

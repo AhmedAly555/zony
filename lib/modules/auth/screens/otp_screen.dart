@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:zony/modules/couriers/views/screens/main_home/screen/main_home_screen.dart';
+import 'package:zony/modules/couriers/views/screens/main_home/screen/courier_main_home_screen.dart';
 
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../widgets/custom_appbar.dart';
-import '../widgets/custom_login_button.widget.dart';
+import '../../../views/widgets/default_button.widget.dart';
 import 'generic_login_screen.dart';
 
 class OTPScreen extends StatefulWidget {
@@ -159,11 +159,11 @@ class _OTPScreenState extends State<OTPScreen> {
           SizedBox(height: 10),
           Align(
             alignment: Alignment.center,
-            child: CustomLoginButton(
+            child: DefaultButton(
               onTap: () {
                 AppNavigator.navigateTo(
                   context,
-                      () =>  const MainHomeScreen(),
+                      () =>  const CourierMainHomeScreen(),
                 );
               },
               child:
