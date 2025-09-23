@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../views/widgets/circler_icon.dart';
 import '../../delivering/widgets/parcel_row.widget.dart';
 
 class PODOParcels extends StatelessWidget {
@@ -32,21 +33,7 @@ class PODOParcels extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF3F4F6),
-                        shape: BoxShape.circle,
-                        //borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: SvgPicture.asset(
-                        'assets/svgs/bag_icon.svg',
-                        color: Theme.of(context).primaryColor,
-                        width: 19.5,
-                        height: 22,
-
-                      ),
-                    ),
+                    CirclerIcon(svgPath: 'assets/svgs/bag_icon.svg'),
                     const SizedBox(width: 12),
                     const Expanded(
                       child: Column(

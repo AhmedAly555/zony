@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../theme/app_text_styles.dart';
+import '../bottom_sheet_container.dart';
 import '../default_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
@@ -18,14 +20,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-      ),
+    return BottomSheetContainer(
       child: Column(
         //mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,11 +39,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
           // Title
           const Text(
             'Choose your language',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              color: Colors.black,
-            ),
+            style: AppTextStyles.bottomSheetTitle,
           ),
 
           const SizedBox(height: 8),
@@ -58,7 +49,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
             'Lorem ipsum dolor sit amet, consectetur nadipiscing elit, sed do eiusmod',
             textAlign: TextAlign.center,
 
-            style: TextStyle(fontSize: 14, color: Colors.grey, height: 1.4),
+            style: AppTextStyles.bottomSheetDescription,
           ),
 
           Spacer(),
@@ -90,7 +81,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
                                   : Colors.transparent,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Row( 
+                        child: Row(
                           children: [
                             AnimatedContainer(
                               duration: const Duration(milliseconds: 200),

@@ -39,4 +39,17 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     color: Color(0xFF49159B),
   );
+
+  // Bottom sheet titles
+  static const TextStyle bottomSheetTitle = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+    color: Colors.black,
+  );
+  // Bottom sheet descriptions
+  static const TextStyle bottomSheetDescription = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: Colors.grey,
+  );
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../modules/auth/screens/login_screen.dart';
+import '../../../theme/app_text_styles.dart';
+import '../bottom_sheet_container.dart';
 import '../default_button.widget.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
@@ -12,58 +14,44 @@ class WrongLocationBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 22),
-        child: Column(
-          //mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            // Handle bar line
-            HederBottomSheetLine(),
+    return BottomSheetContainer(
+      child: Column(
+        //mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          // Handle bar line
+          HederBottomSheetLine(),
 
-            Spacer(),
-            // Language icon
-            BottomSheetIcon(svgPath: 'assets/svgs/wrong_location.svg'),
+          Spacer(),
+          // Language icon
+          BottomSheetIcon(svgPath: 'assets/svgs/wrong_location.svg'),
 
-            const SizedBox(height: 24),
+          const SizedBox(height: 24),
 
-            // Title
-            const Text(
-              'YOU ARE AT A WRONG LOCATION  ',
-              textAlign: TextAlign.center,
+          // Title
+          const Text(
+            'YOU ARE AT A WRONG LOCATION  ',
+            textAlign: TextAlign.center,
+            style: AppTextStyles.bottomSheetTitle,
+          ),
+          Spacer(
+            flex: 2,
+          ),
+          DefaultButton(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Text(
+              "My Pickup Points",
               style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.black,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
               ),
             ),
-            Spacer(
-              flex: 2,
-            ),
-            DefaultButton(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                "My Pickup Points",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-            Padding(padding: const EdgeInsets.only(bottom: 16)),
-          ],
-        ),
+          ),
+          Padding(padding: const EdgeInsets.only(bottom: 16)),
+        ],
       ),
     );
   }
