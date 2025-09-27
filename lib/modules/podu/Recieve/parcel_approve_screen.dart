@@ -50,7 +50,7 @@ class ParcelApproveScreen extends StatelessWidget {
           
               const SizedBox(height: 24),
           
-              CustomParcelDetails(
+              /*CustomParcelDetails(
                 child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -109,9 +109,9 @@ class ParcelApproveScreen extends StatelessWidget {
                     ),),
                   ),
                 ],
-              ),),
+              ),),*/
 
-              //NotFoundWidget(),
+              NotFoundWidget(),
           
           
             ],
