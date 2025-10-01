@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../../services/auth_service.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../../../views/widgets/default_text_filed.dart';
@@ -19,7 +18,6 @@ class ForgetPasswordScreen extends StatefulWidget {
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
-  final authService = AuthService();
 
   bool isLoading = false;
 
@@ -29,9 +27,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     });
 
     try {
-      final response = await authService.resetPassword(
+      /*final response = await authService.resetPassword(
         _emailController.text.trim(),
-      );
+      );*/
 
       if (!mounted) return;
 
