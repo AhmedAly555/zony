@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../models/user_role.dart';
-import '../../../services/auth_service.dart';
+import '../../../services/api_service.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../../../views/widgets/default_text_filed.dart';
 import '../../couriers/views/screens/main_home/screen/courier_main_home_screen.dart';
 
-import '../../couriers/views/screens/notification.screen.dart';
 import '../../podu/views/screens/main_home/screen/podu_main_home_screen.dart';
 import '../widgets/custom_appbar.dart';
 import '../../../views/widgets/default_button.widget.dart';
-import 'change_password.dart';
 import 'forget_password.screen.dart';
 import 'generic_login_screen.dart';
 
@@ -28,9 +26,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  final authService = AuthService();
-
   bool isLoading = false;
+
+  final ApiService _apiService = ApiService(); // Create ApiService instance
+
   // errorMessage is no longer needed since we're using toasts
   // String? errorMessage;
 
@@ -43,35 +42,44 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     try {
-      final response = await authService.login(
+      final response = await _apiService.login(
         _emailController.text.trim(),
         _passwordController.text.trim(),
       );
-      // If not, we stop execution to avoid using an invalid context.
-      if (!mounted) return;
 
-      // login success: Show a green toast
+      // Extract tokens and role from response
+      final accessToken = response['access_token'];
+      final refreshToken = response['refresh_token'];
+      final role = response['user']['role'];
+      final message = response['message'];
+
+      // Save tokens + role in ApiService & SharedPreferences
+      _apiService.setTokens(accessToken, refreshToken);
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('access_token', accessToken);
+      await prefs.setString('refresh_token', refreshToken);
+      await prefs.setString('role', role);
+
+      // Show success toast with backend message
       Fluttertoast.showToast(
-        msg: '✅ Login Successful',
+        msg: '✅ $message',
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
         backgroundColor: Colors.green,
         textColor: Colors.white,
         fontSize: 16.0,
       );
 
-      if (response.user.role == UserRole.couriers) {
+      if (!mounted) return;
+      if (role == "courier") {
         AppNavigator.navigateTo(context, () => const CourierMainHomeScreen());
-      } else if (response.user.role == UserRole.podu){
-        // Replace NotificationScreen with your actual notification screen
+      } else if (role == "podu") {
         AppNavigator.navigateTo(context, () => const PoduMainHomeScreen());
       }
-
     } catch (e) {
       // login failed: Show a red toast
       Fluttertoast.showToast(
-        msg: 'Failed to login', 
+        msg: 'Failed to login',
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
@@ -175,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   AppNavigator.navigateTo(
                     context,
-                        () => const ForgetPasswordScreen(),
+                    () => const ForgetPasswordScreen(),
                   );
                 },
                 child: const Text(
@@ -229,16 +237,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: DefaultButton(
                   onTap: () => isLoading ? null : handleLogin(),
                   child:
-                  isLoading
-                      ? const CircularProgressIndicator(color: Colors.white)
-                      : const Text(
-                    'Confirm',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
-                  ),
+                      isLoading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : const Text(
+                            'Confirm',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                          ),
                 ),
               );
             },
@@ -248,4 +256,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-

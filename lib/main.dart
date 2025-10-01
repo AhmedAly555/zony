@@ -1,5 +1,7 @@
  import 'package:flutter/material.dart';
+import 'package:zony/views/screens/splash_screen.dart';
 
+import 'modules/auth/screens/login_screen.dart';
 import 'modules/couriers/delivering/screens/parcel_details.screen.dart';
 import 'modules/couriers/delivering/screens/successful_delivering.screen.dart';
 import 'modules/podu/Recieve/parcel_approve_screen.dart';
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
       ),
       //home: const LoginScreen(),
       //home: const SelectLoginScreen(),
-      home: const ParcelApproveScreen(),
+      home: const SplashScreen(),
       //home: const CustomCameraScreen(),
       //home: const SuccessfulDelivering(),
       //home: const ParcelDetailsScreen(),
