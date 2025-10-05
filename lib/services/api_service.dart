@@ -2,19 +2,20 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'base_api_service.dart';
-import 'token_storage.dart';
+import 'shered_preferences/token_storage.dart';
 
-/// ApiService is the main service that talks to your backend.
-/// It extends BaseApiService to reuse common request logic.
-/// Responsible for authentication (login/logout/refresh) and requests with tokens.
 class ApiService extends BaseApiService {
-  ApiService() : super(baseUrl: "http://149.104.71.115:8000");
+  // ---------------- Singleton ----------------
+  static final ApiService _instance = ApiService._internal();
+  factory ApiService() => _instance;
+  ApiService._internal() : super(baseUrl: "http://149.104.71.115:8000");
 
-  /// Tokens (cached in memory for faster access)
+  static ApiService get instance => _instance;
+
+  // ---------------- Tokens ----------------
   String? _accessToken;
   String? _refreshToken;
 
-  /// Save tokens in memory + SharedPreferences
   Future<void> setTokens(String accessToken, String refreshToken) async {
     _accessToken = accessToken;
     _refreshToken = refreshToken;
@@ -24,20 +25,18 @@ class ApiService extends BaseApiService {
     );
   }
 
-  /// Load tokens from SharedPreferences (e.g., on app start)
   Future<void> loadTokens() async {
     _accessToken = await TokenStorage.getAccessToken();
     _refreshToken = await TokenStorage.getRefreshToken();
   }
 
-  /// Clear tokens (in memory + SharedPreferences)
   Future<void> clearTokens() async {
     _accessToken = null;
     _refreshToken = null;
     await TokenStorage.clearTokens();
   }
 
-  /// Login to the system and get tokens
+  // ---------------- Auth APIs ----------------
   Future<Map<String, dynamic>> login(String email, String password) async {
     final url = Uri.parse('$baseUrl/auth/login');
 
@@ -52,24 +51,16 @@ class ApiService extends BaseApiService {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-
-      /// Save access & refresh tokens
       await setTokens(data['access_token'], data['refresh_token']);
-
       return data;
     } else {
       throw Exception("Login failed: ${response.body}");
     }
   }
 
-  /// Logout user (invalidate session on server)
   Future<void> logout() async {
     final url = Uri.parse('$baseUrl/auth/logout');
-
-    final response = await http.post(
-      url,
-      headers: _authorizedHeaders(),
-    );
+    final response = await http.post(url, headers: _authorizedHeaders());
 
     if (response.statusCode == 200) {
       await clearTokens();
@@ -78,7 +69,6 @@ class ApiService extends BaseApiService {
     }
   }
 
-  /// Refresh the access token using refresh token
   Future<void> refreshAccessToken() async {
     if (_refreshToken == null) {
       throw Exception("No refresh token found, user must login again.");
@@ -96,11 +86,8 @@ class ApiService extends BaseApiService {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-
-      /// Update only the access token
       _accessToken = data['access_token'];
 
-      /// Save new token to storage
       await TokenStorage.saveTokens(
         accessToken: _accessToken!,
         refreshToken: _refreshToken!,
@@ -110,7 +97,7 @@ class ApiService extends BaseApiService {
     }
   }
 
-  /// Helper: Authorized headers with access token
+  // ---------------- Helpers ----------------
   Map<String, String> _authorizedHeaders() {
     if (_accessToken == null) {
       throw Exception("No access token set, please login first.");
@@ -121,54 +108,99 @@ class ApiService extends BaseApiService {
     };
   }
 
-  /// Example of GET request with token handling
-  Future<Map<String, dynamic>> getData(String endpoint) async {
-    final url = Uri.parse('$baseUrl/$endpoint');
+  Future<Map<String, dynamic>> _sendRequest(
+      String method,
+      String endpoint, {
+        Map<String, dynamic>? body,
+        Map<String, String>? extraHeaders,
+        Map<String, dynamic>? queryParameters,
+      }) async {
+    final uri = Uri.parse('$baseUrl/$endpoint').replace(
+      queryParameters: queryParameters?.map((k, v) => MapEntry(k, v.toString())),
+    );
 
-    var response = await http.get(url, headers: _authorizedHeaders());
+    final headers = {
+      ..._authorizedHeaders(),
+      if (extraHeaders != null) ...extraHeaders,
+    };
+
+    http.Response response = await _makeRequest(method, uri, body, headers);
 
     if (response.statusCode == 401) {
-      /// Token expired → try refresh
       await refreshAccessToken();
-
-      /// Retry request with new token
-      response = await http.get(url, headers: _authorizedHeaders());
+      response = await _makeRequest(method, uri, body, headers);
     }
 
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       return jsonDecode(response.body);
     } else {
-      throw Exception("Request failed: ${response.body}");
+      throw Exception("Request failed [${response.statusCode}]: ${response.body}");
     }
   }
 
-  /// Example of POST request with token handling
-  Future<Map<String, dynamic>> postData(
-      String endpoint, Map<String, dynamic> body) async {
-    final url = Uri.parse('$baseUrl/$endpoint');
+  Future<http.Response> _makeRequest(
+      String method,
+      Uri url,
+      Map<String, dynamic>? body,
+      Map<String, String> headers,
+      ) {
+    switch (method.toUpperCase()) {
+      case 'GET':
+        return http.get(url, headers: headers);
+      case 'POST':
+        return http.post(url, headers: headers, body: jsonEncode(body));
+      case 'PUT':
+        return http.put(url, headers: headers, body: jsonEncode(body));
+      case 'PATCH':
+        return http.patch(url, headers: headers, body: jsonEncode(body));
+      case 'DELETE':
+        return http.delete(url, headers: headers);
+      default:
+        throw Exception("Unsupported HTTP method: $method");
+    }
+  }
 
-    var response = await http.post(
-      url,
-      headers: _authorizedHeaders(),
-      body: jsonEncode(body),
+  // ---------- Overrides from BaseApiService ----------
+  @override
+  Future<dynamic> get(
+      String path, {
+        Map<String, String>? extraHeaders,
+        Map<String, dynamic>? queryParameters,
+      }) {
+    return _sendRequest(
+      "GET",
+      path,
+      extraHeaders: extraHeaders,
+      queryParameters: queryParameters,
     );
+  }
 
-    if (response.statusCode == 401) {
-      /// Token expired → try refresh
-      await refreshAccessToken();
+  @override
+  Future<dynamic> postJson(
+      String path,
+      Map<String, dynamic> jsonBody, {
+        Map<String, String>? extraHeaders,
+      }) {
+    return _sendRequest(
+      "POST",
+      path,
+      body: jsonBody,
+      extraHeaders: extraHeaders,
+    );
+  }
 
-      /// Retry request with new token
-      response = await http.post(
-        url,
-        headers: _authorizedHeaders(),
-        body: jsonEncode(body),
-      );
-    }
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception("Request failed: ${response.body}");
-    }
+  @override
+  Future<dynamic> patchJson(
+      String path,
+      Map<String, dynamic> jsonBody, {
+        Map<String, String>? extraHeaders,
+      }) {
+    return _sendRequest(
+      "PATCH",
+      path,
+      body: jsonBody,
+      extraHeaders: extraHeaders,
+    );
   }
 }

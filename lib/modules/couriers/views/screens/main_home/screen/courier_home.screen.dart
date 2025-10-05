@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../../../models/profile_model.dart';
 import '../../../../../../services/navigator.services/app_navigator.services.dart';
+import '../../../../../../services/shered_preferences/profile_storage.dart';
 import '../../../../../../theme/app_text_styles.dart';
 import '../../../../../../views/widgets/custom_container_icon.widget.dart';
 import '../../../../../../views/widgets/custom_zony_logo.dart';
@@ -49,10 +51,7 @@ class CourierHomeScreen extends StatelessWidget {
             //Account
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 14),
-              child: Text(
-                'Account',
-                style: AppTextStyles.textStyle14,
-              ),
+              child: Text('Account', style: AppTextStyles.textStyle14),
             ),
             Container(
               //margin: EdgeInsets.all(16.0),
@@ -82,26 +81,42 @@ class CourierHomeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 15),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Ahmed M.Aly',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16,
-                          color: Color(0xFF49159B),
-                        ),
-                      ),
-                      Text(
-                        'ahmaly555',
-                        style: TextStyle(
-                          color: Color(0xFF929292),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ],
+                  FutureBuilder<Profile?>(
+                    future: ProfileStorage.getProfile(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        ); // لودينج
+                      }
+
+                      if (!snapshot.hasData || snapshot.data == null) {
+                        return Center(child: Text("No Data"));
+                      }
+
+                      final profile = snapshot.data!;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${profile.firstName} ${profile.lastName}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16,
+                              color: Color(0xFF49159B),
+                            ),
+                          ),
+                          Text(
+                            profile.username,
+                            style: TextStyle(
+                              color: Color(0xFF929292),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                   Spacer(),
                   /*Icon(Icons.arrow_forward_ios, color: Colors.grey),*/
@@ -115,33 +130,37 @@ class CourierHomeScreen extends StatelessWidget {
             // Services
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 14),
-              child: Text(
-                'Services',
-                style: AppTextStyles.textStyle14,
-              ),
+              child: Text('Services', style: AppTextStyles.textStyle14),
             ),
             Expanded(
               child: Column(
                 children: [
                   CustomHomeServiceContainer(
                     title: 'Receiving',
-                    svgIconPath: 'assets/svgs/receiving.svg', onTap: () {},
+                    svgIconPath: 'assets/svgs/receiving.svg',
+                    onTap: () {},
                   ),
                   CustomHomeServiceContainer(
                     title: 'Delivering',
-                    svgIconPath: 'assets/svgs/delivering.svg', onTap: () {
-                      AppNavigator.navigateTo(context, () => CourierDeliveringScreen());
-                  },
+                    svgIconPath: 'assets/svgs/delivering.svg',
+                    onTap: () {
+                      AppNavigator.navigateTo(
+                        context,
+                        () => CourierDeliveringScreen(),
+                      );
+                    },
                   ),
                   CustomHomeServiceContainer(
                     title: 'My Parcels',
-                    svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {},
+                    svgIconPath: 'assets/svgs/my_parcels.svg',
+                    onTap: () {},
                   ),
                   CustomHomeServiceContainer(
                     title: 'PODUs',
-                    svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {
-                    AppNavigator.navigateTo(context, () => AllPODUsScreen());
-                  },
+                    svgIconPath: 'assets/svgs/my_parcels.svg',
+                    onTap: () {
+                      AppNavigator.navigateTo(context, () => AllPODUsScreen());
+                    },
                   ),
                 ],
               ),
