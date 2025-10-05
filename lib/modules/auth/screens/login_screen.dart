@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../services/api_service.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
+import '../../../services/user_profile_service.dart';
 import '../../../views/widgets/default_text_filed.dart';
 import '../../couriers/views/screens/main_home/screen/courier_main_home_screen.dart';
 
@@ -29,6 +30,14 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
 
   final ApiService _apiService = ApiService(); // Create ApiService instance
+  late  UserService userService;
+
+  @override
+  void initState() {
+    super.initState();
+    userService = UserService.instance;
+  }
+
 
   // errorMessage is no longer needed since we're using toasts
   // String? errorMessage;
@@ -59,6 +68,24 @@ class _LoginScreenState extends State<LoginScreen> {
       await prefs.setString('access_token', accessToken);
       await prefs.setString('refresh_token', refreshToken);
       await prefs.setString('role', role);
+
+
+      try {
+        final profileResponse = await userService.getProfile();
+        debugPrint(profileResponse.status);
+      } catch (err, stack) {
+        Fluttertoast.showToast(
+          msg: '$err',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.redAccent,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+        debugPrint("❌ Error in getProfile: $err");
+        //print(stack);
+      }
 
       // Show success toast with backend message
       Fluttertoast.showToast(

@@ -69,7 +69,6 @@ flutter:
   assets:
     - assets/svgs/
     - assets/images/
-    - lib/mock_data/
   #   - images/a_dot_ham.jpeg
 
 
