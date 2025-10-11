@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'base_api_service.dart';
+import 'shered_preferences/profile_storage.dart';
 import 'shered_preferences/token_storage.dart';
 
 class ApiService extends BaseApiService {
@@ -202,5 +203,12 @@ class ApiService extends BaseApiService {
       body: jsonBody,
       extraHeaders: extraHeaders,
     );
+  }
+
+  //clear tokens + profile data => logout
+  static Future<void> clearUserData() async {
+    await TokenStorage.clearTokens();
+    await ProfileStorage.clearProfile();
+
   }
 }

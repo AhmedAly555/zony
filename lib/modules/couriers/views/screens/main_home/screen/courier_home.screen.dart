@@ -87,7 +87,7 @@ class CourierHomeScreen extends StatelessWidget {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(
                           child: CircularProgressIndicator(),
-                        ); // لودينج
+                        );
                       }
 
                       if (!snapshot.hasData || snapshot.data == null) {
@@ -119,7 +119,6 @@ class CourierHomeScreen extends StatelessWidget {
                     },
                   ),
                   Spacer(),
-                  /*Icon(Icons.arrow_forward_ios, color: Colors.grey),*/
                   SvgPicture.asset(
                     'assets/svgs/copy.svg',
                     color: Theme.of(context).primaryColor,

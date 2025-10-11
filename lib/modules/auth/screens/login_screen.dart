@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../services/api_service.dart';
+import '../../../services/get_pudos_service.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../../../services/user_profile_service.dart';
@@ -70,6 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await prefs.setString('role', role);
 
 
+      //get courier profile information
       try {
         final profileResponse = await userService.getProfile();
         debugPrint(profileResponse.status);
@@ -87,6 +89,25 @@ class _LoginScreenState extends State<LoginScreen> {
         //print(stack);
       }
 
+      //get pudo information
+      try {
+        final pudoResponse = await PudoService.instance.getPudos();
+        debugPrint('Total PUDOs: ${pudoResponse.message}');
+
+      } catch (err, stack) {
+        Fluttertoast.showToast(
+          msg: '$err',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.redAccent,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+        debugPrint("❌ Error in getPudos: $err");
+        //print(stack);
+      }
+
       // Show success toast with backend message
       Fluttertoast.showToast(
         msg: '✅ $message',
@@ -100,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
       if (role == "courier") {
         AppNavigator.navigateTo(context, () => const CourierMainHomeScreen());
-      } else if (role == "podu") {
+      } else if (role == "responsible") {
         AppNavigator.navigateTo(context, () => const PoduMainHomeScreen());
       }
     } catch (e) {
