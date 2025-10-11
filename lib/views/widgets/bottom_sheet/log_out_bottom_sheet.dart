@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../modules/auth/screens/login_screen.dart';
+import '../../../services/api_service.dart';
+import '../../../services/get_pudos_service.dart';
 import '../../../theme/app_text_styles.dart';
 import '../bottom_sheet_container.dart';
 import '../default_button.widget.dart';
@@ -48,7 +51,23 @@ class LogOutBottomSheet extends StatelessWidget {
             children: [
               Expanded(
                 child: DefaultButton(
-                  onTap: () => AppNavigator.navigateAndRemoveUntil(context, () => const LoginScreen()),
+                  onTap: () async {
+                    await ApiService.clearUserData();
+                    await PudoService.instance.clearPudos();
+
+
+                    if (context.mounted) {
+                      AppNavigator.navigateAndRemoveUntil(context, () => const LoginScreen());
+                      Fluttertoast.showToast(
+                        msg: 'Logged out successfully!',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        backgroundColor: Color(0xFF333333),
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
+                    }
+                  },
                   child: Text(
                     'Yes, I\'m sure.',
                     textAlign: TextAlign.center,

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../../../models/pudo_model.dart';
+import '../../../../../../services/get_pudos_service.dart';
 import '../../../../../../services/navigator.services/app_navigator.services.dart';
+import '../../../../../../services/shered_preferences/pudos_storage.dart';
 import '../../../../../../services/size_config.dart';
 import '../../../../../../views/widgets/bottom_sheet/podu_qr_bottom_sheet.dart';
 import '../../../../../../views/widgets/custom_container_icon.widget.dart';
@@ -28,7 +31,7 @@ class PoduHomeScreen extends StatelessWidget {
             maxHeight: SizeConfig.heightPercent(0.85),
             minHeight: SizeConfig.heightPercent(0.75),
           ),
-          child: IntrinsicHeight(child: PoduQRBottomSheet()),
+          child: IntrinsicHeight(child: PudoQRBottomSheet()),
         );
       },
     );
@@ -65,7 +68,7 @@ class PoduHomeScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             // will make it costume widget in the future
-            Align(
+            /*Align(
               alignment: Alignment.center,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 32),
@@ -78,7 +81,7 @@ class PoduHomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+            ),*/
 
             //Account
             Padding(
@@ -118,7 +121,57 @@ class PoduHomeScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 15),
-                      Column(
+                      FutureBuilder<List<Pudo>>(
+
+                        future: PudosStorage.loadPudos(),
+
+                        builder: (context, snapshot) {
+
+                          //loading when data is being fetched
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+
+                          //if no data found
+                          if (!snapshot.hasData || snapshot.data == null) {
+                            return Center(child: Text("No PUDO Data Found"));
+                          }
+
+                          //if list is empty
+                          final pudosList = snapshot.data!;
+                          if (pudosList.isEmpty) {
+                            return Center(child: Text("No PUDO Data Stored"));
+                          }
+
+                          final pudo = pudosList.first;
+
+                          //UI
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                pudo.name,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
+                                  color: Color(0xFF49159B),
+                                ),
+                              ),
+                              Text(
+                                "${pudo.id}",
+                                style: TextStyle(
+                                  color: Color(0xFF929292),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                      /*Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -138,7 +191,7 @@ class PoduHomeScreen extends StatelessWidget {
                             ),
                           ),
                         ],
-                      ),
+                      ),*/
                       Spacer(),
                       /*Icon(Icons.arrow_forward_ios, color: Colors.grey),*/
                       SvgPicture.asset(
@@ -185,23 +238,21 @@ class PoduHomeScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    CustomHomeServiceContainer(
-                      title: 'Receiving',
-                      svgIconPath: 'assets/svgs/receiving.svg', onTap: () {},
-                    ),
-                    CustomHomeServiceContainer(
-                      title: 'Delivering',
-                      svgIconPath: 'assets/svgs/delivering.svg', onTap: () {},
-                    ),
-                    CustomHomeServiceContainer(
-                      title: 'Inventory',
-                      svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {},
-                    ),
-                  ],
-                ),
+              child: Column(
+                children: [
+                  CustomHomeServiceContainer(
+                    title: 'Receiving',
+                    svgIconPath: 'assets/svgs/receiving.svg', onTap: () {},
+                  ),
+                  CustomHomeServiceContainer(
+                    title: 'Delivering',
+                    svgIconPath: 'assets/svgs/delivering.svg', onTap: () {},
+                  ),
+                  CustomHomeServiceContainer(
+                    title: 'Inventory',
+                    svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {},
+                  ),
+                ],
               ),
             ),
           ],
