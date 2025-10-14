@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../services/api_service.dart';
@@ -155,151 +156,156 @@ class _LoginScreenState extends State<LoginScreen> {
     return GenericLoginScreen(
       appBar: CustomAppbar(),
       height: SizeConfig.heightPercent(0.52),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Enter your personal information',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-          ),
-          SizedBox(height: 10),
-          Divider(height: 1, color: Color(0xFFF4F4F4)),
-          SizedBox(height: 20),
-          const Text(
-            'username or phone number',
-            style: TextStyle(
-              fontSize: 14.0,
-              fontWeight: FontWeight.w500,
-              color: Colors.black87,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Enter your personal information',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
-          ),
-          const SizedBox(height: 8.0),
-          DefaultTextField(
-            hintText: 'Enter Username Or Phone Number',
-            controller: _emailController,
-            fieldType: DefaultTextFieldType.email,
-          ),
-
-          const SizedBox(height: 20.0),
-          const Text(
-            'Password',
-            style: TextStyle(
-              fontSize: 14.0,
-              fontWeight: FontWeight.w500,
-              color: Colors.black87,
+            SizedBox(height: 10),
+            Divider(height: 1, color: Color(0xFFF4F4F4)),
+            SizedBox(height: 20),
+            const Text(
+              'username or phone number',
+              style: TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.w500,
+                color: Colors.black87,
+              ),
             ),
-          ),
-          const SizedBox(height: 8.0),
-          DefaultTextField(
-            controller: _passwordController,
-            hintText: "Enter Password",
-            fieldType: DefaultTextFieldType.password,
-          ),
-          SizedBox(height: 20),
-          Row(
-            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: 24.0,
-                height: 24.0,
-                child: Checkbox(
-                  value: _rememberMe,
-                  onChanged: (bool? newValue) {
-                    setState(() {
-                      _rememberMe = newValue!;
-                    });
-                  },
-                  activeColor: Colors.deepPurple,
-                  checkColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4.0),
+            const SizedBox(height: 8.0),
+            DefaultTextField(
+              hintText: 'Enter Username Or Phone Number',
+              controller: _emailController,
+              fieldType: DefaultTextFieldType.email,
+            ),
+        
+            const SizedBox(height: 20.0),
+            const Text(
+              'Password',
+              style: TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.w500,
+                color: Colors.black87,
+              ),
+            ),
+            const SizedBox(height: 8.0),
+            DefaultTextField(
+              controller: _passwordController,
+              hintText: "Enter Password",
+              fieldType: DefaultTextFieldType.password,
+            ),
+            SizedBox(height: 20),
+            Row(
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 24.0,
+                  height: 24.0,
+                  child: Checkbox(
+                    value: _rememberMe,
+                    onChanged: (bool? newValue) {
+                      setState(() {
+                        _rememberMe = newValue!;
+                      });
+                    },
+                    activeColor: Colors.deepPurple,
+                    checkColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4.0),
+                    ),
                   ),
                 ),
-              ),
-
-              const Text(
-                'Remember me',
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Color(0xFF92929D),
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              const Spacer(),
-              TextButton(
-                onPressed: () {
-                  AppNavigator.navigateTo(
-                    context,
-                    () => const ForgetPasswordScreen(),
-                  );
-                },
-                child: const Text(
-                  'Forgot Password',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+        
+                const Text(
+                  'Remember me',
                   style: TextStyle(
-                    color: Colors.deepPurple,
                     fontSize: 14.0,
+                    color: Color(0xFF92929D),
                     fontWeight: FontWeight.w400,
-                    decoration: TextDecoration.underline,
                   ),
                 ),
-              ),
-            ],
-          ),
-
-          // The error message widget is no longer needed with toasts
-          // if (errorMessage != null)
-          //   Text(errorMessage!, style: const TextStyle(color: Colors.red)),
-          TweenAnimationBuilder<double>(
-            tween: Tween<double>(
-              begin: 0.0,
-              end: 1.0,
-              /* (_selectedIndex == 0 || _selectedIndex == 1)
-                      ? 1.0
-                      : 0.0, */
+                const Spacer(),
+                TextButton(
+                  onPressed: () {
+                    AppNavigator.navigateTo(
+                      context,
+                      () => const ForgetPasswordScreen(),
+                    );
+                  },
+                  child: const Text(
+                    'Forgot Password',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Colors.deepPurple,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w400,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            duration: Duration(seconds: 1),
-            curve: Curves.easeInOut,
-            builder: (context, value, child) {
-              return Container(
-                width: double.infinity,
-                height: SizeConfig.heightPercent(0.07), //52,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                    colors: [
-                      Color(0xFF49159B),
-                      Color.lerp(
+        
+            // The error message widget is no longer needed with toasts
+            // if (errorMessage != null)
+            //   Text(errorMessage!, style: const TextStyle(color: Colors.red)),
+            TweenAnimationBuilder<double>(
+              tween: Tween<double>(
+                begin: 0.0,
+                end: 1.0,
+                /* (_selectedIndex == 0 || _selectedIndex == 1)
+                        ? 1.0
+                        : 0.0, */
+              ),
+              duration: Duration(seconds: 1),
+              curve: Curves.easeInOut,
+              builder: (context, value, child) {
+                return Container(
+                  width: double.infinity,
+                  height: SizeConfig.heightPercent(0.07), //52,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
                         Color(0xFF49159B),
-                        Color(0xFFF4F4F4),
-                        1 - value,
-                      )!,
-                    ],
-                    stops: [0.0, value.clamp(0.0, 1.0)],
+                        Color.lerp(
+                          Color(0xFF49159B),
+                          Color(0xFFF4F4F4),
+                          1 - value,
+                        )!,
+                      ],
+                      stops: [0.0, value.clamp(0.0, 1.0)],
+                    ),
                   ),
-                ),
-                child: DefaultButton(
-                  onTap: () => isLoading ? null : handleLogin(),
-                  child:
-                      isLoading
-                          ? const CircularProgressIndicator(color: Colors.white)
-                          : const Text(
-                            'Confirm',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
+                  child: DefaultButton(
+                    onTap: () => isLoading ? null : handleLogin(),
+                    child:
+                        isLoading
+                            ? LoadingAnimationWidget.threeArchedCircle(
+                          color: Colors.white,
+                          size: 30,
+                        )
+                            : const Text(
+                              'Confirm',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
                             ),
-                          ),
-                ),
-              );
-            },
-          ),
-        ],
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../services/get_pudos_service.dart';
 import '../../services/navigator.services/app_navigator.services.dart';
@@ -77,9 +78,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: CircularProgressIndicator(),
+        child: LoadingAnimationWidget.threeArchedCircle(
+          color: Color(0xFF49159B),
+          size: 50,
+        ),
       ),
     );
   }

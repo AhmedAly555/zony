@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:zony/views/widgets/template_app_scaffold.widget.dart';
 
@@ -8,6 +9,7 @@ import '../../../../../../views/widgets/bottom_sheet/qr_scanner.dart';
 import '../../../../../../views/widgets/bottom_sheet/wrong_location_bottom_sheet.dart';
 import '../../../../../../views/widgets/secondary_appbar.dart';
 import '../../../../../recieve_parcel/widgets/custom_menu_recieve.widget.dart';
+import '../../../../delivering/screens/podu_parcels.screen.dart';
 
 
 class CourierDeliveringScreen extends StatelessWidget {
@@ -34,6 +36,52 @@ class CourierDeliveringScreen extends StatelessWidget {
     );
   }
 
+  Future<void> _handleQRScan(BuildContext context) async {
+    final controller = MobileScannerController();
+
+    final pudoId = await showModalBottomSheet<String>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => QRScannerBottomSheet(
+        sheetHeight: MediaQuery.of(context).size.height * 0.9,
+        controller: controller,
+      ),
+    );
+
+    // after returning stop the camera
+    await controller.stop();
+
+    if (pudoId != null && pudoId.isNotEmpty) {
+      //print('✅ Scanned Pudo ID: $pudoId');
+      Fluttertoast.showToast(
+        msg: 'PUDO parcels retrieved successfully',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => PudoParcelsScreen(pudoId: pudoId),
+        ),
+      );
+    } else {
+      Fluttertoast.showToast(
+        msg: '⚠️ No QR code detected',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.redAccent,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return TemplateAppScaffold(
@@ -49,10 +97,48 @@ class CourierDeliveringScreen extends StatelessWidget {
                   svgPath: 'assets/svgs/small_qr.svg',
                   title: "QR Scanner",
                   onTap: () async {
-                    final code = await openScannerBottomSheet(context);
-                    if (code != null) {
-                      //function to handle the code
-                      debugPrint('Scanned::::::::::::: $code');
+                    final controller = MobileScannerController();
+
+                    final pudoId = await showModalBottomSheet<String>(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (_) => QRScannerBottomSheet(
+                        sheetHeight: MediaQuery.of(context).size.height * 0.9,
+                        controller: controller,
+                      ),
+                    );
+
+                    // after returning stop the camera
+                    await controller.stop();
+
+                    if (pudoId != null && pudoId.isNotEmpty) {
+                      //print('✅ Scanned Pudo ID: $pudoId');
+                      Fluttertoast.showToast(
+                        msg: 'PUDO parcels retrieved successfully',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => PudoParcelsScreen(pudoId: pudoId),
+                        ),
+                      );
+                    } else {
+                      Fluttertoast.showToast(
+                        msg: '⚠️ No QR code detected',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.redAccent,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
                     }
                   },
                 ),
@@ -63,14 +149,6 @@ class CourierDeliveringScreen extends StatelessWidget {
                     showManuallyUsernameBottomSheet(context);
                   },
                 ),
-                //showWrongLocationBottomSheet
-                /*MenuItemData(
-                  svgPath: 'assets/svgs/small_qr.svg',
-                  title: "test wrong",
-                  onTap: () {
-                    showWrongLocationBottomSheet(context);
-                  },
-                ),*/
               ],
             ),
             const Spacer(),

@@ -10,9 +10,57 @@ import '../default_button.widget.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../custom_outline_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-class LogOutBottomSheet extends StatelessWidget {
+class LogOutBottomSheet extends StatefulWidget {
   const LogOutBottomSheet({super.key});
+
+  @override
+  State<LogOutBottomSheet> createState() => _LogOutBottomSheetState();
+}
+
+class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
+  bool isLoading = false;
+
+  Future<void> _handleLogout() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      await ApiService.clearUserData();
+      await PudoService.instance.clearPudos();
+
+      if (context.mounted) {
+        AppNavigator.navigateAndRemoveUntil(context, () => const LoginScreen());
+        Fluttertoast.showToast(
+          msg: 'Logged out successfully!',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: const Color(0xFF333333),
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        Fluttertoast.showToast(
+          msg: 'حدث خطأ: ${e.toString()}',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +99,8 @@ class LogOutBottomSheet extends StatelessWidget {
             children: [
               Expanded(
                 child: DefaultButton(
-                  onTap: () async {
+                  onTap: () => isLoading ? null : _handleLogout(),
+                  /*() async {
                     await ApiService.clearUserData();
                     await PudoService.instance.clearPudos();
 
@@ -67,17 +116,23 @@ class LogOutBottomSheet extends StatelessWidget {
                         fontSize: 16.0,
                       );
                     }
-                  },
-                  child: Text(
-                    'Yes, I\'m sure.',
-                    textAlign: TextAlign.center,
+                  },*/
+                  child:
+                      isLoading
+                          ? LoadingAnimationWidget.threeArchedCircle(
+                            color: Colors.white,
+                            size: 30,
+                          )
+                          : Text(
+                            'Yes, I\'m sure.',
+                            textAlign: TextAlign.center,
 
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
-                  ),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                          ),
                 ),
               ),
               SizedBox(width: 8),

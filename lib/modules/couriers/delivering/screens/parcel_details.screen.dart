@@ -8,7 +8,14 @@ import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../widgets/parcel_row.widget.dart';
 
 class ParcelDetailsScreen extends StatelessWidget {
-  const ParcelDetailsScreen({super.key});
+
+  final String parcelId;
+  final String pudoId;
+
+  const ParcelDetailsScreen({
+    super.key,
+     required this.parcelId, required this.pudoId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +41,14 @@ class ParcelDetailsScreen extends StatelessWidget {
                     'Product info',
                     style: AppTextStyles.textStyle16LightPurple,
                   ),
-
+                  Text(
+                    'PUDO ID: $pudoId',
+                    style: AppTextStyles.textStyle16LightPurple,
+                  ),
+                  Text(
+                    'Parcel ID: $parcelId',
+                    style: AppTextStyles.textStyle16LightPurple,
+                  ),
                   const SizedBox(height: 18),
 
                   // Info items
