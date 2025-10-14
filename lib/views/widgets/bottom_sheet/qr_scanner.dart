@@ -4,19 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../scanner_line.dart';
+import 'componants_bottom_sheet.widgets.dart';
 
 class QRScannerBottomSheet extends StatelessWidget {
-
   final double sheetHeight;
   final MobileScannerController controller;
 
-  const QRScannerBottomSheet({super.key, required this.sheetHeight, required this.controller});
-
-
+  const QRScannerBottomSheet({
+    super.key,
+    required this.sheetHeight,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
-
     bool popped = false;
 
     return SizedBox(
@@ -49,22 +50,13 @@ class QRScannerBottomSheet extends StatelessWidget {
 
             // dash
             Positioned(
-              top: 24,
+              top: 10,
               left: 0,
               right: 0,
-              child: Center(
-                child: Container(
-                  width: 100,
-                  height: 6,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF929292),
-                    borderRadius: BorderRadius.circular(3),
-                  ),
-                ),
-              ),
+              child: Center(child: const HederBottomSheetLine()),
             ),
 
-            // Cornersا
+            // Corners
             Center(
               child: SizedBox(
                 width: 260,
@@ -73,7 +65,7 @@ class QRScannerBottomSheet extends StatelessWidget {
               ),
             ),
 
-            Center (
+            Center(
               child: ScannerLine(
                 width: 260,
                 height: 260,
@@ -83,15 +75,13 @@ class QRScannerBottomSheet extends StatelessWidget {
               ),
             ),
 
-
             Padding(
-              padding: const EdgeInsets.only(top: 420,right: 18,left: 18,),
+              padding: const EdgeInsets.only(top: 420, right: 18, left: 18),
               child: Center(
                 child: Text(
                   "Scan QR code in front of the camera",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-
                     color: Color(0xFF49159B),
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -110,12 +100,13 @@ class _CornersPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     const double cornerLength = 28.0; // how far each corner goes
-    const double radius = 12.0;       // the radius of the bend
-    final Paint p = Paint()
-      ..color = const Color(0xFF49159B)
-      ..strokeWidth = 4
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round;
+    const double radius = 12.0; // the radius of the bend
+    final Paint p =
+        Paint()
+          ..color = const Color(0xFF49159B)
+          ..strokeWidth = 4
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round;
 
     // helper: draw an arc corner at a given rect and start angle
     void drawCorner(Offset origin, double startAngle) {
@@ -136,56 +127,15 @@ class _CornersPainter extends CustomPainter {
 
     // Bottom-right
     drawCorner(
-        Offset(size.width - radius * 2, size.height - radius * 2), 0); // right → up
+      Offset(size.width - radius * 2, size.height - radius * 2),
+      0,
+    ); // right → up
 
     // Bottom-left
-    drawCorner(
-        Offset(0, size.height - radius * 2), pi / 2); // bottom → right
+    drawCorner(Offset(0, size.height - radius * 2), pi / 2); // bottom → right
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
-
-/*
-class _CornersPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    const corner = 28.0;
-    final p =
-        Paint()
-          ..color = Color(0xFF49159B)
-          ..strokeWidth = 4
-          ..strokeCap = StrokeCap.round
-          ..style = PaintingStyle.stroke;
-
-    // top-left
-    canvas.drawLine(const Offset(0, 0), Offset(corner, 0), p);
-    canvas.drawLine(const Offset(0, 0), Offset(0, corner), p);
-
-    // top-right
-    canvas.drawLine(Offset(size.width, 0), Offset(size.width - corner, 0), p);
-    canvas.drawLine(Offset(size.width, 0), Offset(size.width, corner), p);
-
-    // bottom-left
-    canvas.drawLine(Offset(0, size.height), Offset(0, size.height - corner), p);
-    canvas.drawLine(Offset(0, size.height), Offset(corner, size.height), p);
-
-    // bottom-right
-    canvas.drawLine(
-      Offset(size.width, size.height),
-      Offset(size.width - corner, size.height),
-      p,
-    );
-    canvas.drawLine(
-      Offset(size.width, size.height),
-      Offset(size.width, size.height - corner),
-      p,
-    );
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
-*/
