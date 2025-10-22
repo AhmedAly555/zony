@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../../../modules/auth/screens/login_screen.dart';
@@ -9,7 +11,11 @@ import '../custom_outline_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
 class PhotoConfirmarionBottomSheet extends StatelessWidget {
-  const PhotoConfirmarionBottomSheet({super.key});
+  final File imageFile;
+
+  final VoidCallback onConfirm;
+
+  const PhotoConfirmarionBottomSheet({super.key, required this.imageFile, required this.onConfirm});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +27,13 @@ class PhotoConfirmarionBottomSheet extends StatelessWidget {
           HederBottomSheetLine(),
 
           Spacer(),
+
           // icon
-          BottomSheetIcon(svgPath: 'assets/svgs/check_icon.svg'),
+          //BottomSheetIcon(svgPath: 'assets/svgs/check_icon.svg'),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+
+            child: Image.file(imageFile, fit: BoxFit.contain),),
 
           const SizedBox(height: 16),
 
@@ -33,15 +44,13 @@ class PhotoConfirmarionBottomSheet extends StatelessWidget {
             style: AppTextStyles.bottomSheetTitle,
           ),
 
-          const SizedBox(height: 8),
-
+          /*const SizedBox(height: 8),
           // Description
           const Text(
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod',
             textAlign: TextAlign.center,
             style: AppTextStyles.bottomSheetDescription,
-          ),
-
+          ),*/
           Spacer(),
 
           Row(
@@ -49,10 +58,10 @@ class PhotoConfirmarionBottomSheet extends StatelessWidget {
               Expanded(
                 child: DefaultButton(
                   onTap:
-                      () => AppNavigator.navigateAndRemoveUntil(
-                        context,
-                        () => const LoginScreen(),
-                      ),
+                      () {
+                    onConfirm();
+                    //Navigator.pop(context);
+                    },
                   child: Text(
                     'Yes, I\'m Confirm.',
                     textAlign: TextAlign.center,

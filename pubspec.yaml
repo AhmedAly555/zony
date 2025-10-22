@@ -45,9 +45,16 @@ dependencies:
   url_launcher: ^6.1.14
   qr_flutter: ^4.1.0
   loading_animation_widget: ^1.3.0
+  rename: ^3.1.0
+  flutter_launcher_icons: ^0.14.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/zony-logo.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

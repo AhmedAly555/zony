@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../../../views/widgets/default_text_filed.dart';
+import '../../../views/widgets/toasts.dart';
 import '../widgets/custom_appbar.dart';
 import '../../../views/widgets/default_button.widget.dart';
 import 'generic_login_screen.dart';
@@ -33,28 +33,12 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
       if (!mounted) return;
 
-      Fluttertoast.showToast(
-        msg: 'Valid email.',
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 2,
-        backgroundColor: Colors.greenAccent,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+      showCorrectToast(message: 'Valid email.');
 
     } catch (e) {
       if (!mounted) return;
 
-      Fluttertoast.showToast(
-        msg: "Failed: Please check your email.",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 2,
-        backgroundColor: Colors.redAccent,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+      showErrorToast(message: 'Failed: Please check your email.');
     } finally {
       if (mounted) {
         setState(() {

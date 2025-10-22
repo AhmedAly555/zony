@@ -9,10 +9,13 @@ import '../custom_outline_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
 class DeliveryConfirmationBottomSheet extends StatelessWidget {
-  const DeliveryConfirmationBottomSheet({super.key});
+  final VoidCallback onConfirm;
+
+  const DeliveryConfirmationBottomSheet({super.key, required this.onConfirm});
 
   @override
   Widget build(BuildContext context) {
+
     return BottomSheetContainer(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -49,10 +52,10 @@ class DeliveryConfirmationBottomSheet extends StatelessWidget {
               Expanded(
                 child: DefaultButton(
                   onTap:
-                      () => AppNavigator.navigateAndRemoveUntil(
-                    context,
-                        () => const LoginScreen(),
-                  ),
+                      () {
+                        onConfirm();
+
+                      },
                   child: Text(
                     'Yes, I\'m Confirm.',
                     textAlign: TextAlign.center,
