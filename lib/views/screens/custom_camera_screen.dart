@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 
@@ -67,7 +68,10 @@ class _CustomCameraScreenState extends State<CustomCameraScreen> {
   Widget build(BuildContext context) {
     return TemplateAppScaffold(
       body: _controller == null
-          ? const Center(child: CircularProgressIndicator())
+          ?  Center(child: LoadingAnimationWidget.threeArchedCircle(
+        color: Color(0xFF49159B),
+        size: 50,
+      ),)
           : FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {

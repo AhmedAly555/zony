@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,6 +8,7 @@ import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../../../services/user_profile_service.dart';
 import '../../../views/widgets/default_text_filed.dart';
+import '../../../views/widgets/toasts.dart';
 import '../../couriers/views/screens/main_home/screen/courier_main_home_screen.dart';
 
 import '../../podu/views/screens/main_home/screen/podu_main_home_screen.dart';
@@ -77,15 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
         final profileResponse = await userService.getProfile();
         debugPrint(profileResponse.status);
       } catch (err, stack) {
-        Fluttertoast.showToast(
-          msg: '$err',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.redAccent,
-          textColor: Colors.white,
-          fontSize: 16.0,
-        );
+        showErrorToast(message: '$err');
         debugPrint("❌ Error in getProfile: $err");
         //print(stack);
       }
@@ -96,28 +88,13 @@ class _LoginScreenState extends State<LoginScreen> {
         debugPrint('Total PUDOs: ${pudoResponse.message}');
 
       } catch (err, stack) {
-        Fluttertoast.showToast(
-          msg: '$err',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.redAccent,
-          textColor: Colors.white,
-          fontSize: 16.0,
-        );
+        showErrorToast(message: '$err');
         debugPrint("❌ Error in getPudos: $err");
         //print(stack);
       }
 
       // Show success toast with backend message
-      Fluttertoast.showToast(
-        msg: '✅ $message',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.green,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+      showCorrectToast(message: '✅ $message');
 
       if (!mounted) return;
       if (role == "courier") {
@@ -127,15 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     } catch (e) {
       // login failed: Show a red toast
-      Fluttertoast.showToast(
-        msg: 'Failed to login',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.redAccent,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+      showErrorToast(message: 'Failed to login');
     } finally {
       setState(() {
         isLoading = false;

@@ -3,6 +3,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../views/widgets/toasts.dart';
+
 class MapPoint {
   final String id;
   final String title;
@@ -97,9 +99,7 @@ class _MyPUDOsScreenState extends State<MyPUDOsScreen> {
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Could not open Google Maps')),
-      );
+      showErrorToast(message: 'Could not open Google Maps');
     }
   }
 

@@ -11,6 +11,7 @@ import '../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../couriers/delivering/widgets/parcel_row.widget.dart';
 import '../views/widgets/not_found.widget.dart';
 import '../views/widgets/parcel_states.widget.dart';
+import '../views/widgets/total_parcels_approved.widget.dart';
 
 class ParcelApproveScreen extends StatelessWidget {
   const ParcelApproveScreen({super.key});
@@ -49,8 +50,12 @@ class ParcelApproveScreen extends StatelessWidget {
               SecondaryAppBar(title: 'Parcel Approve'),
           
               const SizedBox(height: 24),
-          
-              /*CustomParcelDetails(
+
+              TotalParcelsApproved(),
+
+              const SizedBox(height: 24),
+
+              CustomParcelDetails(
                 child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -109,9 +114,9 @@ class ParcelApproveScreen extends StatelessWidget {
                     ),),
                   ),
                 ],
-              ),),*/
+              ),),
 
-              NotFoundWidget(),
+              /*NotFoundWidget(),*/
           
           
             ],

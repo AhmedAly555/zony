@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:zony/views/widgets/template_app_scaffold.widget.dart';
 
-import '../../../../../../services/size_config.dart';
 import '../../../../../../views/widgets/bottom_sheet/manually_username_bottom_sheet.dart';
 import '../../../../../../views/widgets/bottom_sheet/qr_scanner.dart';
-import '../../../../../../views/widgets/bottom_sheet/wrong_location_bottom_sheet.dart';
 import '../../../../../../views/widgets/secondary_appbar.dart';
+import '../../../../../../views/widgets/toasts.dart';
 import '../../../../../recieve_parcel/widgets/custom_menu_recieve.widget.dart';
 import '../../../../delivering/screens/podu_parcels.screen.dart';
 
@@ -54,14 +52,7 @@ class CourierDeliveringScreen extends StatelessWidget {
 
     if (pudoId != null && pudoId.isNotEmpty) {
       //print('✅ Scanned Pudo ID: $pudoId');
-      Fluttertoast.showToast(
-        msg: 'PUDO parcels retrieved successfully',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.green,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+      showCorrectToast(message: 'PUDO parcels retrieved successfully');
 
       Navigator.push(
         context,
@@ -70,15 +61,7 @@ class CourierDeliveringScreen extends StatelessWidget {
         ),
       );
     } else {
-      Fluttertoast.showToast(
-        msg: '⚠️ No QR code detected',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.redAccent,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+      showErrorToast(message: '⚠️ No QR code detected');
     }
   }
 
@@ -114,14 +97,7 @@ class CourierDeliveringScreen extends StatelessWidget {
 
                     if (pudoId != null && pudoId.isNotEmpty) {
                       //print('✅ Scanned Pudo ID: $pudoId');
-                      Fluttertoast.showToast(
-                        msg: 'PUDO parcels retrieved successfully',
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        backgroundColor: Colors.green,
-                        textColor: Colors.white,
-                        fontSize: 16.0,
-                      );
+                      showCorrectToast(message: 'PUDO parcels retrieved successfully');
 
                       Navigator.push(
                         context,
@@ -130,15 +106,7 @@ class CourierDeliveringScreen extends StatelessWidget {
                         ),
                       );
                     } else {
-                      Fluttertoast.showToast(
-                        msg: '⚠️ No QR code detected',
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.redAccent,
-                        textColor: Colors.white,
-                        fontSize: 16.0,
-                      );
+                      showErrorToast(message: '⚠️ No QR code detected');
                     }
                   },
                 ),

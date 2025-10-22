@@ -9,6 +9,7 @@ import '../bottom_sheet_container.dart';
 import '../default_button.widget.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../custom_outline_button.widget.dart';
+import '../toasts.dart';
 import 'componants_bottom_sheet.widgets.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -44,13 +45,8 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
       }
     } catch (e) {
       if (context.mounted) {
-        Fluttertoast.showToast(
-          msg: 'حدث خطأ: ${e.toString()}',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0,
+        showErrorToast(
+          message: 'An error occurred: ${e.toString()}',
         );
       }
     } finally {
@@ -100,23 +96,6 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
               Expanded(
                 child: DefaultButton(
                   onTap: () => isLoading ? null : _handleLogout(),
-                  /*() async {
-                    await ApiService.clearUserData();
-                    await PudoService.instance.clearPudos();
-
-
-                    if (context.mounted) {
-                      AppNavigator.navigateAndRemoveUntil(context, () => const LoginScreen());
-                      Fluttertoast.showToast(
-                        msg: 'Logged out successfully!',
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        backgroundColor: Color(0xFF333333),
-                        textColor: Colors.white,
-                        fontSize: 16.0,
-                      );
-                    }
-                  },*/
                   child:
                       isLoading
                           ? LoadingAnimationWidget.threeArchedCircle(

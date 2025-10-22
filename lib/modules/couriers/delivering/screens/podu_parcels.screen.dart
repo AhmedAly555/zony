@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:zony/modules/couriers/delivering/screens/parcel_details.screen.dart';
 
@@ -9,6 +8,7 @@ import '../../../../../views/widgets/secondary_appbar.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../services/parcel_service.dart';
 import '../../../../views/widgets/bottom_sheet/qr_scanner.dart';
+import '../../../../views/widgets/toasts.dart';
 import '../widgets/parcel_row.widget.dart';
 import '../widgets/search_button.widget.dart';
 
@@ -63,14 +63,7 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
         ),
       );
     } else {
-      Fluttertoast.showToast(
-        msg: '⚠️ No Parcel QR detected',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.redAccent,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+      showErrorToast(message: '⚠️ No Parcel QR detected!');
     }
   }
 
@@ -222,8 +215,8 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                       ),
                                     ),
                                     const SizedBox(width: 6),
-                                    const Text(
-                                      'Recieved',
+                                     Text(
+                                      '${parcel.status}',
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,

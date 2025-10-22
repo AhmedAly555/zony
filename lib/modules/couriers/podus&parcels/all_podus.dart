@@ -20,7 +20,7 @@ class AllPODUsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SecondaryAppBar(title: 'PODUs'),
+              SecondaryAppBar(title: 'My PODUs'),
               SizedBox(height: 28,),
               // Search Row with TextField and Map Button
               Row(
