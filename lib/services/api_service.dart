@@ -9,7 +9,7 @@ class ApiService extends BaseApiService {
   // ---------------- Singleton ----------------
   static final ApiService _instance = ApiService._internal();
   factory ApiService() => _instance;
-  ApiService._internal() : super(baseUrl: "http://149.104.71.115:8000") {
+  ApiService._internal() : super(baseUrl: "https://api.zony.sa") {
     // Load tokens automatically on instance creation
     loadTokens();
   }
