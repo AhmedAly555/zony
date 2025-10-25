@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zony/modules/couriers/views/screens/main_home/screen/courier_receiving_screen.dart';
 
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
+import '../../../../Recieve/parcel_approve_screen.dart';
 import 'podu_delivering_screen.dart';
 import 'podu_home_screen.dart';
 import 'podu_more.screen.dart';
@@ -18,7 +19,7 @@ class _PoduMainHomeScreenState extends State<PoduMainHomeScreen> {
 
   final List<Widget> _screens = const [
     PoduHomeScreen(),
-    CourierReceivingScreen(),
+    ParcelApproveScreen(),
     PoduDeliveringScreen(),
     PoduMoreScreen(),
   ];

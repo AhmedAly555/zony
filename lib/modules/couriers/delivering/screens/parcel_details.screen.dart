@@ -14,6 +14,7 @@ import '../../../../services/upload_parsel_image_service.dart';
 import '../../../../views/screens/custom_camera_screen.dart';
 import '../../../../views/widgets/bottom_sheet/delivery_confirmation_bottom_sheet.dart';
 import '../../../../views/widgets/bottom_sheet/photo_confirmation_bottom_sheet.dart';
+import '../../../../views/widgets/loading.widget.dart';
 import '../../../../views/widgets/toasts.dart';
 import '../widgets/parcel_row.widget.dart';
 
@@ -58,71 +59,16 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
             child: PhotoConfirmarionBottomSheet(
               imageFile: imageFile,
               onConfirm: () async {
-                try {
-                  // Show a simple loading indicator so the user knows something is happening
-                  showDialog(
-                    context: context, // The context here is for the builder
-                    barrierDismissible: false,
-                    builder:
-                        (_) => const Center(child: CircularProgressIndicator()),
-                  );
-
-                  // 1️⃣ Call the service
-                  final uploadResponse = await ParcelImageService.instance
-                      .createSignedUrl(
-                    parcelId: widget.parcelId,
-                    imageType:
-                    ParcelImageType
-                        .warehouseImage
-                        .apiValue, // This changes based on the flow
-                  );
-                  print(
-                    '✅ Step 1 Done -> uploadUrl: ${uploadResponse.uploadUrl}',
-                  );
-                  print(
-                    '✅ Step 1 Done -> publicUrl: ${uploadResponse.publicUrl}',
-                  );
-
-                  // 2️⃣ Upload the image to Cloudflare using the uploadUrl
-                  final bytes = await imageFile.readAsBytes();
-
-                  await ParcelImageService.instance.uploadToSignedUrl(
-                    uploadUrl: uploadResponse.uploadUrl,
-                    fileBytes: bytes,
-                    contentType: 'image/jpeg',
-                  );
-
-                  debugPrint('✅ Step 2 Done -> Image uploaded successfully');
-
-                  // 3️⃣ Store the publicUrl temporarily for the third request later
-                  setState(() {
-                    _uploadedImagePublicUrl = uploadResponse.publicUrl;
-                  });
-
-                  // Close the loading indicator
-                  Navigator.pop(
-                    context,
-                  ); // Closes the loading dialog (context here is for the dialog)
-
-                  showCorrectToast(message: '✅ Image uploaded successfully!');
-
-                  // Finally, close the first bottom sheet and return true for success
-                  Navigator.pop(
-                    context,
-                    true,
-                  ); // pop the bottom sheet and return true
-                } catch (e, s) {
-                  if (Navigator.canPop(context)) {
-                    // Ensure the loading dialog is open before closing
-                    Navigator.pop(context); // Close the loading indicator in case of error
-                  }
-                  debugPrint('❌ Error uploading parcel image: $e');
-                  debugPrintStack(stackTrace: s);
-                  showErrorToast(message: 'Failed to upload image: $e');
-
-                  // In case of error, close the bottom sheet and return false
-                  Navigator.pop(context, false);
-                }
+                await _uploadImageToCloudflare(
+                  context: context,
+                  parcelId: widget.parcelId,
+                  imageFile: imageFile,
+                  onPublicUrlSet: (publicUrl) {
+                    setState(() {
+                      _uploadedImagePublicUrl = publicUrl;
+                    });
+                  },
+                );
               },
             ),
           ),
@@ -133,6 +79,118 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
     // After closing the first bottom sheet, check the result and show the second one
     if (result == true) {
       _showDeliveryConfirmationBottomSheet(); // This automatically opens the second one
+    }
+  }
+
+  //helper function to upload image to cloudflare
+  Future<void> _uploadImageToCloudflare({
+    required BuildContext context,
+    required String parcelId,
+    required File imageFile,
+    required Function(String) onPublicUrlSet,
+  }) async {
+    try {
+      // Show a simple loading indicator so the user knows something is happening
+      showDialog(
+        context: context, // The context here is for the builder
+        barrierDismissible: false,
+        builder:
+            (_) => const Center(child: LoadingWidget()),
+      );
+
+      // 1️⃣ Call the service
+      final uploadResponse = await ParcelImageService.instance
+          .createSignedUrl(
+        parcelId: parcelId,
+        imageType:
+        ParcelImageType
+            .warehouseImage
+            .apiValue, // This changes based on the flow
+      );
+      //print('✅ Step 1 Done -> uploadUrl: ${uploadResponse.uploadUrl}',);
+      //print('✅ Step 1 Done -> publicUrl: ${uploadResponse.publicUrl}',);
+
+      // 2️⃣ Upload the image to Cloudflare using the uploadUrl
+      final bytes = await imageFile.readAsBytes();
+
+      await ParcelImageService.instance.uploadToSignedUrl(
+        uploadUrl: uploadResponse.uploadUrl,
+        fileBytes: bytes,
+        contentType: 'image/jpeg',
+      );
+
+      debugPrint('✅ Step 2 Done -> Image uploaded successfully');
+
+      // 3️⃣ Store the publicUrl temporarily for the third request later
+      onPublicUrlSet(uploadResponse.publicUrl);
+
+      // Close the loading indicator
+      Navigator.pop(
+        context,
+      ); // Closes the loading dialog (context here is for the dialog)
+
+      showCorrectToast(message: '✅ Image uploaded successfully!');
+
+      // Finally, close the first bottom sheet and return true for success
+      Navigator.pop(
+        context,
+        true,
+      ); // pop the bottom sheet and return true
+    } catch (e, s) {
+      if (Navigator.canPop(context)) {
+        // Ensure the loading dialog is open before closing
+        Navigator.pop(context); // Close the loading indicator in case of error
+      }
+      debugPrint('❌ Error uploading parcel image: $e');
+      debugPrintStack(stackTrace: s);
+      showErrorToast(message: 'Failed to upload image: $e');
+
+      // In case of error, close the bottom sheet and return false
+      Navigator.pop(context, false);
+    }
+  }
+
+  // helper function to handle parcel confirmation
+  Future<void> _handleParcelConfirmation({
+    required BuildContext context,
+    required String parcelId,
+    required String uploadedImagePublicUrl,
+  }) async {
+    try {
+      // Show a simple loading indicator
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => const Center(child: LoadingWidget()),
+      );
+
+      if (uploadedImagePublicUrl.isEmpty) {
+        Navigator.pop(context);
+        showErrorToast(message: '❗ Please upload image first');
+        return;
+      }
+
+      // 1️⃣ Call the PATCH request to update the Parcel status
+      await ParcelImageService.instance.updateParcelAfterUpload(
+        parcelId: parcelId,
+        status: ParcelStatusType.waitingConfirmation.apiValue, // This changes based on the flow
+        imageFieldName: ParcelImageType.warehouseImage.apiValue, // This also changes based on the flow
+        imageUrl: uploadedImagePublicUrl,
+        latitude: 24.7136,
+        longitude: 46.6753,
+      );
+
+      // ✅ Update successful
+      Navigator.pop(context); // Closes the loading indicator
+      Navigator.pop(context); // Closes the bottom sheet
+      showCorrectToast(message: '✅ Parcel updated successfully!');
+
+    } catch (e, s) {
+      Navigator.pop(context); // Closes the loading indicator in case of error
+      debugPrint('❌ Error updating parcel: $e');
+      debugPrintStack(stackTrace: s);
+
+      showErrorToast(message: 'Failed to update parcel: $e');
     }
   }
 
@@ -154,43 +212,16 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
           child: IntrinsicHeight(
             child: DeliveryConfirmationBottomSheet(
               onConfirm: () async {
-                try {
-                  // Show a simple loading indicator
-                  showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (_) => const Center(child: CircularProgressIndicator()),
-                  );
-
-                  if (_uploadedImagePublicUrl == null || _uploadedImagePublicUrl!.isEmpty) {
-                    showErrorToast(message: '❗ Please upload image first');
-                    return;
-                  }
-
-                  // 1️⃣ Call the PATCH request to update the Parcel status
-                  await ParcelImageService.instance.updateParcelAfterUpload(
-                    parcelId: widget.parcelId,
-                    status: ParcelStatusType.courierReceived.apiValue, // This changes based on the flow
-                    imageFieldName: ParcelImageType
-                        .warehouseImage
-                        .apiValue, // This also changes based on the flow
-                    imageUrl: _uploadedImagePublicUrl ?? "",
-                    latitude: 24.7136,
-                    longitude: 46.6753,
-                  );
-
-                  // ✅ Update successful
-                  Navigator.pop(context); // Closes the loading indicator
-                  Navigator.pop(context); // Closes the bottom sheet
-                  showCorrectToast(message: '✅ Parcel updated successfully!');
-
-                } catch (e, s) {
-                  Navigator.pop(context); // Closes the loading indicator in case of error
-                  debugPrint('❌ Error updating parcel: $e');
-                  debugPrintStack(stackTrace: s);
-
-                  showErrorToast(message: 'Failed to update parcel: $e');
+                if (_uploadedImagePublicUrl == null || _uploadedImagePublicUrl!.isEmpty) {
+                  showErrorToast(message: '❗ Please upload image first');
+                  return;
                 }
+
+                await _handleParcelConfirmation(
+                  context: context,
+                  parcelId: widget.parcelId,
+                  uploadedImagePublicUrl: _uploadedImagePublicUrl!,
+                );
               },),
           ),
         );

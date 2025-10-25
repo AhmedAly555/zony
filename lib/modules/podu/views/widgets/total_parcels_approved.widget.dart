@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
 
-class TotalParcelsApproved extends StatelessWidget {
-  const TotalParcelsApproved({super.key});
+class TotalParcelsApproved extends StatefulWidget {
 
+  final GlobalKey<TotalParcelsApprovedState> counterKey;
+
+  const TotalParcelsApproved({super.key, required this.counterKey});
+
+  @override
+  State<TotalParcelsApproved> createState() => TotalParcelsApprovedState();
+}
+
+class TotalParcelsApprovedState extends State<TotalParcelsApproved> {
+  int _successCount = 0;
+
+  void incrementCounter() {
+    setState(() {
+      _successCount++;
+    });
+  }
+  int getCurrentCount() => _successCount;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,7 +49,7 @@ class TotalParcelsApproved extends StatelessWidget {
           const SizedBox(height: 12),
 
           Text(
-            '1',
+            '$_successCount',
             style: TextStyle(
               color: Color(0xFF49159B),
               fontSize: 45,

@@ -9,7 +9,10 @@ import '../custom_outline_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
 class ConfirmParcelBottomSheet extends StatelessWidget {
-  const ConfirmParcelBottomSheet({super.key});
+  final VoidCallback onConfirm;
+  final String parcelId;
+
+  const ConfirmParcelBottomSheet({super.key, required this.onConfirm,required this.parcelId});
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +35,8 @@ class ConfirmParcelBottomSheet extends StatelessWidget {
           const SizedBox(height: 18),
 
           // Description
-          const Text(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod',
+          Text(
+            'Are you sure you want to approve this parcel?(id: #${parcelId})',
             textAlign: TextAlign.center,
             style: AppTextStyles.bottomSheetDescription,
           ),
@@ -44,7 +47,10 @@ class ConfirmParcelBottomSheet extends StatelessWidget {
             children: [
               Expanded(
                 child: DefaultButton(
-                  onTap: () => AppNavigator.navigateAndRemoveUntil(context, () => const LoginScreen()),
+                  onTap: (){
+                    onConfirm();
+
+                  },
                   child: Text(
                     'Yes, I confirm',
                     textAlign: TextAlign.center,
@@ -60,6 +66,9 @@ class ConfirmParcelBottomSheet extends StatelessWidget {
               SizedBox(width: 8),
               Expanded(
                 child: CustomOutlineButton(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
                   title: Text(
                     'No, cancel',
                     style: TextStyle(

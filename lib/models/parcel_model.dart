@@ -1,8 +1,8 @@
-/*
+
 class Parcel {
-  final int id;
-  final int pudoId;
-  final String courierId;
+  final String id;
+  final String pudoId;
+  final String? courierId;
   final String clientName;
   final String cityName;
   final String zoneName;
@@ -10,60 +10,7 @@ class Parcel {
   final String status;
   final String receivingDate;
 
-  Parcel({
-    required this.id,
-    required this.pudoId,
-    required this.courierId,
-    required this.clientName,
-    required this.cityName,
-    required this.zoneName,
-    required this.trackingNumber,
-    required this.status,
-    required this.receivingDate,
-  });
-
-  factory Parcel.fromJson(Map<String, dynamic> json) {
-    return Parcel(
-      id: json['id'],
-      pudoId: json['pudo_id'],
-      courierId: json['courier_id'],
-      clientName: json['client_name'],
-      cityName: json['city_name'],
-      zoneName: json['zone_name'],
-      trackingNumber: json['tracking_number'],
-      status: json['status'],
-      receivingDate: json['receiving_date'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'pudo_id': pudoId,
-      'courier_id': courierId,
-      'client_name': clientName,
-      'city_name': cityName,
-      'zone_name': zoneName,
-      'tracking_number': trackingNumber,
-      'status': status,
-      'receiving_date': receivingDate,
-    };
-  }
-}
-*/
-
-class Parcel {
-  final int id;
-  final int pudoId;
-  final String courierId;
-  final String clientName;
-  final String cityName;
-  final String zoneName;
-  final String trackingNumber;
-  final String status;
-  final String receivingDate;
-
-  // الحقول الجديدة من الإندبوينت الثانية
+  // New fields from the second endpoint
   final String? barcode;
   final String? customerPhoneNumber;
   final String? deliveringDate;
@@ -71,18 +18,18 @@ class Parcel {
   final String? receivingCode;
   final String? createdAt;
   final String? updatedAt;
-  final dynamic images; // ممكن تبقى List أو null حسب الـ API
+  final dynamic images;
 
   Parcel({
     required this.id,
     required this.pudoId,
-    required this.courierId,
     required this.clientName,
     required this.cityName,
     required this.zoneName,
     required this.trackingNumber,
     required this.status,
     required this.receivingDate,
+    this.courierId,
     this.barcode,
     this.customerPhoneNumber,
     this.deliveringDate,
@@ -95,8 +42,8 @@ class Parcel {
 
   factory Parcel.fromJson(Map<String, dynamic> json) {
     return Parcel(
-      id: json['id'],
-      pudoId: json['pudo_id'],
+      id: json['id'].toString(),
+      pudoId: json['pudo_id'].toString(),
       courierId: json['courier_id'],
       clientName: json['client_name'],
       cityName: json['city_name'],

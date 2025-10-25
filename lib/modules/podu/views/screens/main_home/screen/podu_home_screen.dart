@@ -12,6 +12,7 @@ import '../../../../../../views/widgets/custom_outline_button.widget.dart';
 import '../../../../../../views/widgets/custom_zony_logo.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../../couriers/views/widgets/custom_home_service_container.widget.dart';
+import '../../../../Recieve/parcel_approve_screen.dart';
 import '../../notification.screen.dart';
 
 class PoduHomeScreen extends StatelessWidget {
@@ -67,21 +68,6 @@ class PoduHomeScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            // will make it costume widget in the future
-            /*Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 32),
-                child: Text(
-                  'RUH-5-AZ-10',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xFF49159B),
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),*/
 
             //Account
             Padding(
@@ -242,7 +228,9 @@ class PoduHomeScreen extends StatelessWidget {
                 children: [
                   CustomHomeServiceContainer(
                     title: 'Receiving',
-                    svgIconPath: 'assets/svgs/receiving.svg', onTap: () {},
+                    svgIconPath: 'assets/svgs/receiving.svg', onTap: () {
+                      AppNavigator.navigateTo(context, () => ParcelApproveScreen());
+                  },
                   ),
                   CustomHomeServiceContainer(
                     title: 'Delivering',
