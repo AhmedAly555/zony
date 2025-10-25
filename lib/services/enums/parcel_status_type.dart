@@ -1,31 +1,28 @@
 enum ParcelStatusType {
   courierReceived,
-  inWarehouse,
-  outForDelivery,
-  delivered,
-  returned,
-  cancelled,
-  expired,
+  waitingConfirmation,
+  PUDOReceived,
+  customerReceived,
+  expiredReceived,
+  pending,
 }
 
 extension ParcelStatusTypeExtension on ParcelStatusType {
-  /// يحول الـ enum لقيمة النص اللي الـ API محتاجها
+  // convert enum to string for API
   String get apiValue {
     switch (this) {
       case ParcelStatusType.courierReceived:
         return 'courier_received';
-      case ParcelStatusType.inWarehouse:
-        return 'in_warehouse';
-      case ParcelStatusType.outForDelivery:
-        return 'out_for_delivery';
-      case ParcelStatusType.delivered:
-        return 'delivered';
-      case ParcelStatusType.returned:
-        return 'returned';
-      case ParcelStatusType.cancelled:
-        return 'cancelled';
-      case ParcelStatusType.expired:
-        return 'expired';
+      case ParcelStatusType.waitingConfirmation:
+        return 'waiting_confirmation';
+      case ParcelStatusType.PUDOReceived:
+        return 'PUDO_received';
+      case ParcelStatusType.customerReceived:
+        return 'customer_received';
+      case ParcelStatusType.expiredReceived:
+        return 'expired_received';
+      case ParcelStatusType.pending:
+        return 'pending';
     }
   }
 }

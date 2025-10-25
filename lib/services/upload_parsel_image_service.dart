@@ -61,7 +61,7 @@ class ParcelImageService {
     double? longitude,
   }) async {
 
-    final now = DateTime.now().toLocal(); // استخدم local time عشان AM/PM يشتغل صح
+    final now = DateTime.now().toLocal();
     final timestampFormatter = DateFormat('yyyy-MM-dd hh:mm:ss a', 'en_US');
     final formattedTimestamp = timestampFormatter.format(now);
 

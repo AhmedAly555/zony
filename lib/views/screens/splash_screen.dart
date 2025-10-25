@@ -7,6 +7,7 @@ import '../../modules/couriers/views/screens/main_home/screen/courier_main_home_
 import '../../modules/podu/views/screens/main_home/screen/podu_main_home_screen.dart';
 import '../../modules/auth/screens/login_screen.dart';
 import '../../services/user_profile_service.dart';
+import '../widgets/loading.widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -80,10 +81,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: LoadingAnimationWidget.threeArchedCircle(
-          color: Color(0xFF49159B),
-          size: 50,
-        ),
+        child: LoadingWidget(),
       ),
     );
   }

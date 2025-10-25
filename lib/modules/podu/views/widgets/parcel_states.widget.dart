@@ -47,7 +47,7 @@ class WaitingWidget extends StatelessWidget {
           children: [
             SvgPicture.asset('assets/svgs/waiting_approve_icon.svg'),
             const SizedBox(width: 5.5),
-            const Text('Waiting Approve', style: AppTextStyles.textStyle16),
+            const Text('Waiting', style: AppTextStyles.textStyle16),
           ],
         ),
       ),
