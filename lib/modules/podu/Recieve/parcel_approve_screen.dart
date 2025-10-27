@@ -44,7 +44,7 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
     try {
       // get all pudos
       final pudosList = await PudosStorage.loadPudos();
-      print('PUDOs loaded. Count: ${pudosList.length}');
+      //print('PUDOs loaded. Count: ${pudosList.length}');
 
       // get the first pudo id and check if it is not empty
       String pudoId;
@@ -55,7 +55,7 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
       } else {
         // if
         setState(() => isLoading = false);
-        print('No PUDOs found, showing NotFoundWidget.');
+        //print('No PUDOs found, showing NotFoundWidget.');
         return;
       }
 

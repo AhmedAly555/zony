@@ -33,6 +33,22 @@ class ParcelsService {
     }
   }
 
+  /// Fetch parcel by receiving code
+  // deliver from podu to customer
+  Future<ParcelsResponse> getParcelByReceivingCode(
+      String pudoId,
+      String receivingCode,
+      ) async {
+    try {
+      final response = await ApiService.instance.get(
+        '/pudos/$pudoId/parcels?receiving_code=$receivingCode',
+      );
+      return ParcelsResponse.fromJson(response);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   /// Fetch detailed info for a specific parcel inside a PUDO
   Future<ParcelResponse> getParcelDetails(
     String pudoId,
