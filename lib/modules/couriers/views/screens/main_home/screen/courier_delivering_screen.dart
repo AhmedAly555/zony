@@ -34,7 +34,12 @@ class CourierDeliveringScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _handleQRScan(BuildContext context) async {
+  //Handle Pudo QR Scanning
+  Future<void> _handlePudoQrScanning({
+    required BuildContext context,
+    required Function showCorrectToast,
+    required Function showErrorToast,
+  }) async {
     final controller = MobileScannerController();
 
     final pudoId = await showModalBottomSheet<String>(
@@ -51,7 +56,6 @@ class CourierDeliveringScreen extends StatelessWidget {
     await controller.stop();
 
     if (pudoId != null && pudoId.isNotEmpty) {
-      //print('✅ Scanned Pudo ID: $pudoId');
       showCorrectToast(message: 'PUDO parcels retrieved successfully');
 
       Navigator.push(
@@ -64,6 +68,7 @@ class CourierDeliveringScreen extends StatelessWidget {
       showErrorToast(message: '⚠️ No QR code detected');
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,34 +85,11 @@ class CourierDeliveringScreen extends StatelessWidget {
                   svgPath: 'assets/svgs/small_qr.svg',
                   title: "QR Scanner",
                   onTap: () async {
-                    final controller = MobileScannerController();
-
-                    final pudoId = await showModalBottomSheet<String>(
+                    await _handlePudoQrScanning(
                       context: context,
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      builder: (_) => QRScannerBottomSheet(
-                        sheetHeight: MediaQuery.of(context).size.height * 0.9,
-                        controller: controller,
-                      ),
+                      showCorrectToast: showCorrectToast ,
+                      showErrorToast: showErrorToast,
                     );
-
-                    // after returning stop the camera
-                    await controller.stop();
-
-                    if (pudoId != null && pudoId.isNotEmpty) {
-                      //print('✅ Scanned Pudo ID: $pudoId');
-                      showCorrectToast(message: 'PUDO parcels retrieved successfully');
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => PudoParcelsScreen(pudoId: pudoId),
-                        ),
-                      );
-                    } else {
-                      showErrorToast(message: '⚠️ No QR code detected');
-                    }
                   },
                 ),
                 MenuItemData(
