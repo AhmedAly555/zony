@@ -5,8 +5,8 @@ import '../../../../../theme/app_text_styles.dart';
 import '../../../../../views/widgets/custom_outline_button.widget.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 
-class SuccessfulDelivering extends StatelessWidget {
-  const SuccessfulDelivering({super.key});
+class SuccessfulRecieve extends StatelessWidget {
+  const SuccessfulRecieve({super.key});
 
   @override
   Widget build(BuildContext context) {

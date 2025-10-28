@@ -33,6 +33,24 @@ class ParcelsService {
     }
   }
 
+  /// Fetch parcel by barcode
+  // deliver from courier to podu
+  Future<ParcelsResponse> getParcelByBarcode({
+    required String pudoId,
+    required String barcode,
+  }) async {
+    try {
+      // Build the URL with query parameters
+      final url = '/pudos/$pudoId/parcels?barcode=$barcode';
+
+      final response = await ApiService.instance.get(url);
+      return ParcelsResponse.fromJson(response);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+
   /// Fetch parcel by receiving code
   // deliver from podu to customer
   Future<ParcelsResponse> getParcelByReceivingCode(

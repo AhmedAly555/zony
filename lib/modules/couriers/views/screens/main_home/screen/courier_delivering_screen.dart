@@ -7,7 +7,7 @@ import '../../../../../../views/widgets/bottom_sheet/qr_scanner.dart';
 import '../../../../../../views/widgets/secondary_appbar.dart';
 import '../../../../../../views/widgets/toasts.dart';
 import '../../../../../recieve_parcel/widgets/custom_menu_recieve.widget.dart';
-import '../../../../delivering/screens/podu_parcels.screen.dart';
+import '../../../../delivering/screens/pudo_parcels.screen.dart';
 
 
 class CourierDeliveringScreen extends StatelessWidget {
