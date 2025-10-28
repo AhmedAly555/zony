@@ -49,7 +49,7 @@ class PudoParcelsScreen extends StatelessWidget {
                         Expanded(
                           child: SearchButton(
                             svgPath: 'assets/svgs/small_qr.svg',
-                            text: 'Scan barCode',
+                            text: 'Parcel List',
                             onTap: () {},
                           ),
                         ),
@@ -57,7 +57,7 @@ class PudoParcelsScreen extends StatelessWidget {
                         Expanded(
                           child: SearchButton(
                             svgPath: 'assets/svgs/small_qr.svg',
-                            text: 'code Number',
+                            text: 'Individual Parcel',
                             onTap: () {},
                           ),
                         ),

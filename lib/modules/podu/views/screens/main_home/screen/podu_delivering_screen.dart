@@ -8,7 +8,6 @@ import '../../../../../../views/widgets/secondary_appbar.dart';
 import '../../../../../../views/widgets/toasts.dart';
 import '../../../../../recieve_parcel/widgets/custom_menu_recieve.widget.dart';
 import '../../../../deliver_customer/screens/parcel_details.screen.dart';
-import '../../../../deliver_customer/screens/podu_parcels.screen.dart';
 
 
 class PoduDeliveringScreen extends StatelessWidget {

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:zony/modules/podu/deliver_customer/screens/successful_delivering.screen.dart';
 import 'package:zony/views/widgets/loading.widget.dart';
 
 import '../../../../../theme/app_text_styles.dart';
@@ -9,8 +10,10 @@ import '../../../../../views/widgets/default_button.widget.dart';
 import '../../../../../views/widgets/secondary_appbar.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../models/get_parcels_response_model.dart';
+import '../../../../models/parcel_model.dart';
 import '../../../../services/enums/parcel_image_type.dart';
 import '../../../../services/enums/parcel_status_type.dart';
+import '../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../services/parcel_service.dart';
 import '../../../../services/shered_preferences/pudos_storage.dart';
 import '../../../../services/size_config.dart';
@@ -35,7 +38,7 @@ class ParcelDetailsScreen extends StatefulWidget {
 class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
   late Future<ParcelsResponse> _parcelFuture;
-  @override
+  Parcel? _currentParcel;
   @override
   void initState() {
     super.initState();
@@ -66,7 +69,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         );
       });
     } catch (e) {
-      debugPrint('❌ Error while initializing parcel data: $e');
+      //debugPrint('❌ Error while initializing parcel data: $e');
       setState(() {
         _parcelFuture = Future.error('Failed to load parcel data');
       });
@@ -99,9 +102,13 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
             child: PhotoConfirmarionBottomSheet(
               imageFile: imageFile,
               onConfirm: () async {
+                if (_currentParcel == null) {
+                  showErrorToast(message: '❗ Parcel data not loaded yet.');
+                  return; // منع المتابعة إذا لم يتم تحميل البيانات
+                }
                 await _uploadImageToCloudflare(
                   context: context,
-                  parcelId: widget.receivingCode,
+                  parcelId: _currentParcel!.id,
                   imageFile: imageFile,
                   onPublicUrlSet: (publicUrl) {
                     setState(() {
@@ -159,7 +166,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         contentType: 'image/jpeg',
       );
 
-      debugPrint('✅ Step 2 Done -> Image uploaded successfully');
+      //print('✅ Step 2 Done -> Image uploaded successfully');
 
       // 3️⃣ Store the publicUrl temporarily for the third request later
       onPublicUrlSet(uploadResponse.publicUrl);
@@ -181,7 +188,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         // Ensure the loading dialog is open before closing
         Navigator.pop(context); // Close the loading indicator in case of error
       }
-      debugPrint('❌ Error uploading parcel image: $e');
+      //print('❌ Error uploading parcel image: $e');
       debugPrintStack(stackTrace: s);
       showErrorToast(message: 'Failed to upload image: $e');
 
@@ -214,7 +221,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       await ParcelImageService.instance.updateParcelAfterUpload(
         parcelId: parcelId,
         status: ParcelStatusType.customerReceived.apiValue, // This changes based on the flow
-        imageFieldName: ParcelImageType.warehouseImage.apiValue, // This also changes based on the flow
+        imageFieldName: ParcelImageType.customerImage.apiValue, // This also changes based on the flow
         imageUrl: uploadedImagePublicUrl,
         latitude: 24.7136,
         longitude: 46.6753,
@@ -223,11 +230,12 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       // ✅ Update successful
       Navigator.pop(context); // Closes the loading indicator
       Navigator.pop(context); // Closes the bottom sheet
-      showCorrectToast(message: '✅ Parcel updated successfully!');
+      showCorrectToast(message: '✅ Parcel Delivered successfully!');
+      AppNavigator.navigateAndRemoveUntil(context, () => const SuccessfulDelivering());
 
     } catch (e, s) {
       Navigator.pop(context); // Closes the loading indicator in case of error
-      debugPrint('❌ Error updating parcel: $e');
+      //debugPrint('❌ Error updating parcel: $e');
       debugPrintStack(stackTrace: s);
 
       showErrorToast(message: 'Failed to update parcel: $e');
@@ -259,7 +267,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
                 await _handleParcelConfirmation(
                   context: context,
-                  parcelId: widget.receivingCode,
+                  parcelId: _currentParcel!.id,
                   uploadedImagePublicUrl: _uploadedImagePublicUrl!,
                 );
               },),
@@ -320,6 +328,15 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                     final parcels = snapshot.data!.parcels;
                     if (parcels.isEmpty) return const NotFoundWidget();
                     final parcel = parcels.first;
+
+                    if (_currentParcel == null || _currentParcel!.id != parcel.id) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        setState(() {
+                          _currentParcel = parcel;
+                        });
+                      });
+                    }
+
                     return SingleChildScrollView(
                       child: CustomParcelDetails(
                         child: Column(
@@ -345,7 +362,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
                             InfoItem(
                               svgPath: 'assets/svgs/profile_icon_with_background.svg',
-                              text: parcel.clientName,
+                              text: parcel.id,
                             ),
                             const SizedBox(height: 12),
                             InfoItem(
