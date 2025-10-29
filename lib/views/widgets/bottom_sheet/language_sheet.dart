@@ -137,8 +137,11 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
           Spacer(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: DefaultButton(onTap: () {}),
+            child: DefaultButton(onTap: () {
+              Navigator.pop(context);
+            }),
           ),
+          Padding(padding: const EdgeInsets.only(bottom: 16)),
         ],
       ),
     );

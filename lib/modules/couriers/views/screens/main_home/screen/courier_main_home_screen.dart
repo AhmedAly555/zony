@@ -17,11 +17,11 @@ class CourierMainHomeScreen extends StatefulWidget {
 class _CourierMainHomeScreenState extends State<CourierMainHomeScreen> {
   late int _selectedIndex;
 
-  final List<Widget> _screens = const [
+  final List<Widget> _screens = [
     CourierHomeScreen(),
-    CourierReceivingScreen(),
-    CourierDeliveringScreen(),
-    CourierMoreScreen(),
+    const CourierReceivingScreen(),
+    const CourierDeliveringScreen(),
+    const CourierMoreScreen(),
   ];
 
   @override

@@ -8,6 +8,8 @@ class CourierReceivingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const TemplateAppScaffold(
-      body: SizedBox(),);
+      body: Center(
+        child: Text('Receiving'),
+      ));
   }
 }

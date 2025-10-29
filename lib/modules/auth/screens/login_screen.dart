@@ -8,6 +8,8 @@ import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../../../services/user_profile_service.dart';
 import '../../../views/widgets/default_text_filed.dart';
+import '../../../views/widgets/secondary_appbar.dart';
+import '../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../views/widgets/toasts.dart';
 import '../../couriers/views/screens/main_home/screen/courier_main_home_screen.dart';
 
@@ -46,6 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // Function to handle login
   void handleLogin() async {
+    FocusScope.of(context).unfocus();
     setState(() {
       isLoading = true;
       // errorMessage is no longer needed
@@ -122,146 +125,173 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return GenericLoginScreen(
-      appBar: CustomAppbar(),
-      height: SizeConfig.heightPercent(0.52),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Enter your personal information',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+    return TemplateAppScaffold(
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'Log in',
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
             ),
-            SizedBox(height: 10),
-            Divider(height: 1, color: Color(0xFFF4F4F4)),
-            SizedBox(height: 20),
-            const Text(
-              'username or phone number',
-              style: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.w500,
-                color: Colors.black87,
+          ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            child: Container(
+
+              decoration: BoxDecoration(
+                color: Color(0xFFFFFFFF),
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 25,
+                    blurRadius: 50,
+                    offset: Offset(0, 0),
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(height: 8.0),
-            DefaultTextField(
-              hintText: 'Enter Username Or Phone Number',
-              controller: _emailController,
-              fieldType: DefaultTextFieldType.email,
-            ),
-        
-            const SizedBox(height: 20.0),
-            const Text(
-              'Password',
-              style: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.w500,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 8.0),
-            DefaultTextField(
-              controller: _passwordController,
-              hintText: "Enter Password",
-              fieldType: DefaultTextFieldType.password,
-            ),
-            SizedBox(height: 20),
-            Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: 24.0,
-                  height: 24.0,
-                  child: Checkbox(
-                    value: _rememberMe,
-                    onChanged: (bool? newValue) {
-                      setState(() {
-                        _rememberMe = newValue!;
-                      });
-                    },
-                    activeColor: Colors.deepPurple,
-                    checkColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child:Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Enter your personal information',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                     ),
-                  ),
-                ),
-        
-                const Text(
-                  'Remember me',
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    color: Color(0xFF92929D),
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                const Spacer(),
-                TextButton(
-                  onPressed: () {
-                    AppNavigator.navigateTo(
-                      context,
-                      () => const ForgetPasswordScreen(),
-                    );
-                  },
-                  child: const Text(
-                    'Forgot Password',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: Colors.deepPurple,
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w400,
-                      decoration: TextDecoration.underline,
+                    SizedBox(height: 10),
+                    Divider(height: 1, color: Color(0xFFF4F4F4)),
+                    SizedBox(height: 20),
+                    const Text(
+                      'username or phone number',
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black87,
+                      ),
                     ),
-                  ),
-                ),
-              ],
-            ),
-        
-            // The error message widget is no longer needed with toasts
-            // if (errorMessage != null)
-            //   Text(errorMessage!, style: const TextStyle(color: Colors.red)),
-            TweenAnimationBuilder<double>(
-              tween: Tween<double>(
-                begin: 0.0,
-                end: 1.0,
-                /* (_selectedIndex == 0 || _selectedIndex == 1)
-                        ? 1.0
-                        : 0.0, */
-              ),
-              duration: Duration(seconds: 1),
-              curve: Curves.easeInOut,
-              builder: (context, value, child) {
-                return Container(
-                  width: double.infinity,
-                  height: SizeConfig.heightPercent(0.07), //52,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [
-                        Color(0xFF49159B),
-                        Color.lerp(
-                          Color(0xFF49159B),
-                          Color(0xFFF4F4F4),
-                          1 - value,
-                        )!,
+                    const SizedBox(height: 8.0),
+                    DefaultTextField(
+                      hintText: 'Enter Username Or Phone Number',
+                      controller: _emailController,
+                      fieldType: DefaultTextFieldType.email,
+                    ),
+
+                    const SizedBox(height: 20.0),
+                    const Text(
+                      'Password',
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    const SizedBox(height: 8.0),
+                    DefaultTextField(
+                      controller: _passwordController,
+                      hintText: "Enter Password",
+                      fieldType: DefaultTextFieldType.password,
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: 24.0,
+                          height: 24.0,
+                          child: Checkbox(
+                            value: _rememberMe,
+                            onChanged: (bool? newValue) {
+                              setState(() {
+                                _rememberMe = newValue!;
+                              });
+                            },
+                            activeColor: Colors.deepPurple,
+                            checkColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4.0),
+                            ),
+                          ),
+                        ),
+
+                        const Text(
+                          'Remember me',
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            color: Color(0xFF92929D),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const Spacer(),
+                        /*TextButton(
+                          onPressed: () {
+                            AppNavigator.navigateTo(
+                              context,
+                                  () => const ForgetPasswordScreen(),
+                            );
+                          },
+                          child: const Text(
+                            'Forgot Password',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: Colors.deepPurple,
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w400,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),*/
                       ],
-                      stops: [0.0, value.clamp(0.0, 1.0)],
                     ),
-                  ),
-                  child: DefaultButton(
-                    onTap: () => isLoading ? null : handleLogin(),
-                    child:
-                        isLoading
-                            ? LoadingAnimationWidget.threeArchedCircle(
-                          color: Colors.white,
-                          size: 30,
-                        )
-                            : const Text(
+
+                    // The error message widget is no longer needed with toasts
+                    // if (errorMessage != null)
+                    //   Text(errorMessage!, style: const TextStyle(color: Colors.red)),
+                    /*TweenAnimationBuilder<double>(
+                      tween: Tween<double>(
+                        begin: 0.0,
+                        end: 1.0,
+                        *//* (_selectedIndex == 0 || _selectedIndex == 1)
+                          ? 1.0
+                          : 0.0, *//*
+                      ),
+                      duration: Duration(seconds: 1),
+                      curve: Curves.easeInOut,
+                      builder: (context, value, child) {
+                        return Container(
+                          width: double.infinity,
+                          height: SizeConfig.heightPercent(0.07), //52,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            gradient: LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              colors: [
+                                Color(0xFF49159B),
+                                Color.lerp(
+                                  Color(0xFF49159B),
+                                  Color(0xFFF4F4F4),
+                                  1 - value,
+                                )!,
+                              ],
+                              stops: [0.0, value.clamp(0.0, 1.0)],
+                            ),
+                          ),
+                          child: DefaultButton(
+                            onTap: () => isLoading ? null : handleLogin(),
+                            child:
+                            isLoading
+                                ? LoadingAnimationWidget.threeArchedCircle(
+                              color: Colors.white,
+                              size: 30,
+                            )
+                                : const Text(
                               'Confirm',
                               style: TextStyle(
                                 color: Colors.white,
@@ -269,12 +299,36 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontSize: 16,
                               ),
                             ),
-                  ),
-                );
-              },
+                          ),
+                        );
+                      },
+                    ),*/
+                    SizedBox(height: 10),
+                    DefaultButton(
+                      onTap: () => isLoading ? null : handleLogin(),
+                      child:
+                      isLoading
+                          ? LoadingAnimationWidget.threeArchedCircle(
+                        color: Colors.white,
+                        size: 30,
+                      )
+                          : const Text(
+                        'Confirm',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ],
-        ),
+          ),
+          const Spacer(),
+
+        ],
       ),
     );
   }

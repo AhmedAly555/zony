@@ -179,7 +179,7 @@ class AccountSettingsScreen extends StatelessWidget {
                         onEditPressed: () {},
                       ),
                       SizedBox(height: 20),
-                      SizedBox(
+                      /*SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -204,7 +204,7 @@ class AccountSettingsScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ),
+                      ),*/
                     ],
                   ),
                 ),
