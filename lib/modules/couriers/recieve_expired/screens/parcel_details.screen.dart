@@ -8,9 +8,12 @@ import '../../../../../views/widgets/custom_parcel_details.dart';
 import '../../../../../views/widgets/default_button.widget.dart';
 import '../../../../../views/widgets/secondary_appbar.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
+import '../../../../models/parcel_model.dart';
 import '../../../../services/enums/parcel_image_type.dart';
 import '../../../../services/enums/parcel_status_type.dart';
 import '../../../../services/navigator.services/app_navigator.services.dart';
+import '../../../../services/parcel_service.dart';
+import '../../../../services/shered_preferences/profile_storage.dart';
 import '../../../../services/size_config.dart';
 import '../../../../services/upload_parsel_image_service.dart';
 import '../../../../views/screens/custom_camera_screen.dart';
@@ -21,13 +24,15 @@ import '../../../../views/widgets/toasts.dart';
 import '../../delivering/widgets/parcel_row.widget.dart';
 
 class ParcelDetailsScreen extends StatefulWidget {
-  final String parcelId;
-  final String pudoId;
+  //final String parcelId;
+  //final String pudoId;
+  final String barcode;
 
   const ParcelDetailsScreen({
     super.key,
-    required this.parcelId,
-    required this.pudoId,
+    required this.barcode,
+    //required this.parcelId,
+    //required this.pudoId,
   });
 
   @override
@@ -35,7 +40,40 @@ class ParcelDetailsScreen extends StatefulWidget {
 }
 
 class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
+  bool _isLoading = true;
+  Parcel? _parcel;
+
+  //parcel id from response getParcelByBarcode
+  String? _parcelId;
+
   String? _uploadedImagePublicUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchParcelDetails();
+  }
+
+  Future<void> _fetchParcelDetails() async {
+    try {
+      final response = await ParcelsService.instance.getGlobalParcelByBarcode(
+        barcode: widget.barcode,
+      );
+
+      setState(() {
+        _parcel = response.parcels.isNotEmpty
+            ? response.parcels.first
+            : null;
+        _parcelId = _parcel?.id.toString();
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      showErrorToast(message: '❌ Failed to fetch parcel details: $e');
+    }
+  }
 
   // Image Preview Bottom Sheet (modified for await and result)
   void _showImagePreviewBottomSheet(
@@ -63,7 +101,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
               onConfirm: () async {
                 await _uploadImageToCloudflare(
                   context: context,
-                  parcelId: widget.parcelId,
+                  parcelId: _parcelId!,
                   imageFile: imageFile,
                   onPublicUrlSet: (publicUrl) {
                     setState(() {
@@ -167,8 +205,18 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         return;
       }
 
+      final profile = await ProfileStorage.getProfile();
+
+      if (profile == null) {
+        Navigator.pop(context);
+        showErrorToast(message: '⚠️ Failed to retrieve courier ID');
+        return;
+      }
+
+      final courierId = profile.id.toString();
+
       // 1️⃣ Call the PATCH request to update the Parcel status
-      await ParcelImageService.instance.updateParcelAfterUpload(
+      await ParcelImageService.instance.updateParcelAfterUploadByCourier(
         parcelId: parcelId,
         status: ParcelStatusType.courierReceived.apiValue,
         // This changes based on the flow
@@ -177,13 +225,17 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         imageUrl: uploadedImagePublicUrl,
         latitude: 24.7136,
         longitude: 46.6753,
+        courierId: courierId,
       );
 
       // ✅ Update successful
       Navigator.pop(context); // Closes the loading indicator
       Navigator.pop(context); // Closes the bottom sheet
       showCorrectToast(message: '✅ Parcel Recieve successfully!');
-      AppNavigator.navigateAndRemoveUntil(context, () => const SuccessfulRecieve());
+      AppNavigator.navigateAndRemoveUntil(
+        context,
+        () => const SuccessfulRecieve(),
+      );
     } catch (e, s) {
       Navigator.pop(context); // Closes the loading indicator in case of error
       debugPrint('❌ Error updating parcel: $e');
@@ -218,7 +270,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
                 await _handleParcelConfirmation(
                   context: context,
-                  parcelId: widget.parcelId,
+                  parcelId: _parcelId!,
                   uploadedImagePublicUrl: _uploadedImagePublicUrl!,
                 );
               },
@@ -253,7 +305,11 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return TemplateAppScaffold(
-      body: Padding(
+      body: _isLoading
+          ? const Center(child: LoadingWidget())
+          : _parcel == null
+          ? const Center(child: Text('❌ No parcel data found'))
+          : Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
         child: Column(
           children: [
@@ -274,31 +330,23 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                     'Product info',
                     style: AppTextStyles.textStyle16LightPurple,
                   ),
-                  Text(
-                    'PUDO ID: ${widget.pudoId}',
-                    style: AppTextStyles.textStyle16LightPurple,
-                  ),
-                  Text(
-                    'Parcel ID: ${widget.parcelId}',
-                    style: AppTextStyles.textStyle16LightPurple,
-                  ),
                   const SizedBox(height: 18),
 
                   // Info items
                   InfoItem(
                     svgPath: 'assets/svgs/profile_icon_with_background.svg',
-                    text: 'Cameron Williamson',
+                    text: _parcel?.clientName ?? 'Unknown Client',
                   ),
                   const SizedBox(height: 12),
                   InfoItem(
                     svgPath: 'assets/svgs/location_icon_with_background.svg',
-                    text: '4140 Parker Rd, Allentown, New Mexico',
-                  ),
+                    text: _parcel?.cityName ??
+                        'Unknown address',                  ),
                   const SizedBox(height: 12),
                   InfoItem(
                     svgPath: 'assets/svgs/call_icon_with_background.svg',
-                    text: '(205) 555-0100',
-                  ),
+                    text: _parcel?.customerPhoneNumber ??
+                        'No phone number',                  ),
                 ],
               ),
             ),

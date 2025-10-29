@@ -5,12 +5,13 @@ class CustomHomeServiceContainer extends StatelessWidget {
   final VoidCallback onTap;
   final String title;
   final String svgIconPath;
+  final Color? color;
 
   const CustomHomeServiceContainer({
     super.key,
     required this.title,
     required this.svgIconPath,
-    required this.onTap,
+    required this.onTap, this.color,
   });
 
   @override
@@ -21,7 +22,7 @@ class CustomHomeServiceContainer extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 16.0),
         padding: EdgeInsets.all(18.0),
         decoration: BoxDecoration(
-          color: const Color(0xFFFFFFFF),
+          color: color ?? const Color(0xFFFFFFFF),
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: Row(
