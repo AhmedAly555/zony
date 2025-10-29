@@ -1,21 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../models/profile_model.dart';
 import '../../../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../../../services/shered_preferences/profile_storage.dart';
+import '../../../../../../services/size_config.dart';
 import '../../../../../../theme/app_text_styles.dart';
+import '../../../../../../views/widgets/bottom_sheet/language_sheet.dart';
 import '../../../../../../views/widgets/custom_container_icon.widget.dart';
 import '../../../../../../views/widgets/custom_zony_logo.dart';
-import '../../../../../../views/widgets/default_navigation_bar.widget.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
+import '../../../../../../views/widgets/toasts.dart';
 import '../../../../../couriers/views/screens/main_home/screen/courier_delivering_screen.dart';
 import '../../../../podus&parcels/all_podus.dart';
 import '../../../widgets/custom_home_service_container.widget.dart';
 import '../../notification.screen.dart';
+import 'courier_receiving_screen.dart';
 
-class CourierHomeScreen extends StatelessWidget {
+class CourierHomeScreen extends StatefulWidget {
   const CourierHomeScreen({super.key});
+
+  @override
+  State<CourierHomeScreen> createState() => _CourierHomeScreenState();
+}
+
+class _CourierHomeScreenState extends State<CourierHomeScreen> {
+  // Copy to clipboard function
+  void _copyToClipboard(BuildContext context, String username) async {
+    await Clipboard.setData(ClipboardData(text: username));
+
+    if (context.mounted) {
+      showCorrectToast(message: 'Username copied to clipboard');
+    }
+  }
+
+  String currentLanguage = 'English';
+
+  // Language bottom sheet
+  void showLanguageBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: true,
+      enableDrag: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        SizeConfig.init(context);
+        return Container(
+          constraints: BoxConstraints(
+            maxHeight: SizeConfig.heightPercent(0.90),
+            minHeight: SizeConfig.heightPercent(0.80),
+          ),
+          child: IntrinsicHeight(child: LanguageBottomSheet()),
+        );
+      },
+      /*=> DraggableScrollableSheet(
+        initialChildSize: 0.7,
+        minChildSize: 0.7,
+        maxChildSize: 0.9,
+        expand: false,
+        builder: (context, scrollController) => LanguageBottomSheet(),
+      ),*/
+    ).then((selectedLang) {
+      // selectedLang contains the selected language
+      if (selectedLang != null) {
+        setState(() {
+          currentLanguage = selectedLang;
+        });
+        print('Selected Language: $selectedLang');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +86,16 @@ class CourierHomeScreen extends StatelessWidget {
               children: [
                 CustomZonyLogo(),
                 Spacer(),
-                CustomContainerIcon(svgPath: 'assets/svgs/svg_language.svg'),
-                SizedBox(width: 10),
                 CustomContainerIcon(
-                  svgPath: 'assets/svgs/technical_support.svg',
+                  svgPath: 'assets/svgs/svg_language.svg',
+                  onTap: () {
+                    showLanguageBottomSheet(context);
+                  },
                 ),
+                SizedBox(width: 10),
+                /*CustomContainerIcon(
+                  svgPath: 'assets/svgs/technical_support.svg',
+                ),*/
                 SizedBox(width: 10),
                 CustomContainerIcon(
                   svgPath: 'assets/svgs/notification.svg',
@@ -60,42 +121,40 @@ class CourierHomeScreen extends StatelessWidget {
                 color: const Color(0xFFFFFFFF),
                 borderRadius: BorderRadius.circular(18.0),
               ),
-              child: Row(
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20.0,
-                      vertical: 14.0,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.0),
-                      color: Color(0xFFF4F4F4),
-                    ),
-                    child: Text(
-                      'A',
-                      style: TextStyle(
-                        color: Color(0xFF929292),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
+              child: FutureBuilder<Profile?>(
+                future: ProfileStorage.getProfile(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+
+                  if (!snapshot.hasData || snapshot.data == null) {
+                    return Center(child: Text("No Data"));
+                  }
+
+                  final profile = snapshot.data!;
+                  return Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 14.0,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color: Color(0xFFF4F4F4),
+                        ),
+                        child: Text(
+                          'A',
+                          style: TextStyle(
+                            color: Color(0xFF929292),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  SizedBox(width: 15),
-                  FutureBuilder<Profile?>(
-                    future: ProfileStorage.getProfile(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-
-                      if (!snapshot.hasData || snapshot.data == null) {
-                        return Center(child: Text("No Data"));
-                      }
-
-                      final profile = snapshot.data!;
-                      return Column(
+                      SizedBox(width: 15),
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -115,15 +174,20 @@ class CourierHomeScreen extends StatelessWidget {
                             ),
                           ),
                         ],
-                      );
-                    },
-                  ),
-                  Spacer(),
-                  SvgPicture.asset(
-                    'assets/svgs/copy.svg',
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ],
+                      ),
+                      Spacer(),
+                      GestureDetector(
+                        onTap: () {
+                          _copyToClipboard(context, profile.username);
+                        },
+                        child: SvgPicture.asset(
+                          'assets/svgs/copy.svg',
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
             // Services
@@ -137,7 +201,12 @@ class CourierHomeScreen extends StatelessWidget {
                   CustomHomeServiceContainer(
                     title: 'Receiving',
                     svgIconPath: 'assets/svgs/receiving.svg',
-                    onTap: () {},
+                    onTap: () {
+                      AppNavigator.navigateTo(
+                        context,
+                        () => CourierReceivingScreen(),
+                      );
+                    },
                   ),
                   CustomHomeServiceContainer(
                     title: 'Delivering',
@@ -149,18 +218,18 @@ class CourierHomeScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  CustomHomeServiceContainer(
+                  /*CustomHomeServiceContainer(
                     title: 'My Parcels',
                     svgIconPath: 'assets/svgs/my_parcels.svg',
                     onTap: () {},
-                  ),
-                  CustomHomeServiceContainer(
+                  ),*/
+                  /*CustomHomeServiceContainer(
                     title: 'PODUs',
                     svgIconPath: 'assets/svgs/my_parcels.svg',
                     onTap: () {
                       AppNavigator.navigateTo(context, () => AllPODUsScreen());
                     },
-                  ),
+                  ),*/
                 ],
               ),
             ),

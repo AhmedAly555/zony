@@ -117,6 +117,7 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
               SizedBox(width: 8),
               Expanded(
                 child: CustomOutlineButton(
+                  onTap: () => Navigator.pop(context),
                   title: Text(
                     'No, cancel',
                     style: TextStyle(
