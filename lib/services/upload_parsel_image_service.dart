@@ -79,8 +79,51 @@ class ParcelImageService {
       imageField: imageField,
     );
 
-    print('Request body: ${req.toJson()}');
+    //print('Request body: ${req.toJson()}');
 
     await _api.patchJson("parcels/$parcelId", req.toJson());
   }
+
+  /// PATCH /parcels/{parcelId} when courier receives parcel from warehouse
+  /// This function updates a parcel after the courier uploads an image.
+  /// It includes the courier_id in the request body.
+  Future<void> updateParcelAfterUploadByCourier({
+    required String parcelId,
+    required String status,
+    required String imageFieldName,
+    required String imageUrl,
+    required String courierId,
+    double? latitude,
+    double? longitude,
+  }) async {
+    final now = DateTime.now().toLocal();
+    final timestampFormatter = DateFormat('yyyy-MM-dd hh:mm:ss a', 'en_US');
+    final formattedTimestamp = timestampFormatter.format(now);
+
+    final imageField = ParcelImageFieldModel(
+      url: imageUrl,
+      timestamp: formattedTimestamp,
+      location: (latitude != null && longitude != null)
+          ? LocationModel(latitude: latitude, longitude: longitude)
+          : null,
+    );
+
+    // Build the request body
+    final req = {
+      "status": status,
+      "courier_id": courierId,
+      imageFieldName: {
+        "url": imageUrl,
+        "timestamp": formattedTimestamp,
+        if (latitude != null && longitude != null)
+          "location": {
+            "latitude": latitude,
+            "longitude": longitude,
+          },
+      },
+    };
+
+    await _api.patchJson("parcels/$parcelId", req);
+  }
+
 }

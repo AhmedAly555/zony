@@ -1,3 +1,5 @@
+import 'package:zony/models/parcel_model.dart';
+
 import '../models/get_parcel_response_model.dart';
 import '../models/get_parcels_response_model.dart';
 import 'api_service.dart';
@@ -81,4 +83,22 @@ class ParcelsService {
       rethrow;
     }
   }
+
+  /// Fetch parcel by barcode (global search)
+  // used when searching parcel directly without pudoId
+  Future<ParcelsResponse> getGlobalParcelByBarcode({
+    required String barcode,
+  }) async {
+    try {
+      // Build the URL with query parameters
+      final url = '/parcels?barcode=$barcode';
+
+      final response = await ApiService.instance.get(url);
+      return ParcelsResponse.fromJson(response);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+
 }

@@ -56,11 +56,11 @@ class _SplashScreenState extends State<SplashScreen> {
     if (accessToken != null && role != null) {
       // try to get profile from cache
       final cachedProfile = await UserService.instance.getCachedProfile();
-      debugPrint("Cached user: ${cachedProfile?.firstName}");
+      //debugPrint("Cached user: ${cachedProfile?.firstName}");
 
       // try to get pudos from cache
       final cachedPudos = await PudoService.instance.getCachedPudos();
-      debugPrint('Cached PUDOs: ${cachedPudos.length}');
+      //debugPrint('Cached PUDOs: ${cachedPudos.length}');
 
 
       //go to main screen depends on role
