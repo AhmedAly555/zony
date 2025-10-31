@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:zony/modules/couriers/delivering/screens/successful_delivering.screen.dart';
 import 'package:zony/services/navigator.services/app_navigator.services.dart';
 
 import '../../../../../theme/app_text_styles.dart';
@@ -8,7 +9,6 @@ import '../../../../../views/widgets/custom_parcel_details.dart';
 import '../../../../../views/widgets/default_button.widget.dart';
 import '../../../../../views/widgets/secondary_appbar.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
-import '../../../../models/get_parcels_response_model.dart';
 import '../../../../models/parcel_model.dart';
 import '../../../../services/enums/parcel_image_type.dart';
 import '../../../../services/enums/parcel_status_type.dart';
@@ -20,7 +20,6 @@ import '../../../../views/widgets/bottom_sheet/delivery_confirmation_bottom_shee
 import '../../../../views/widgets/bottom_sheet/photo_confirmation_bottom_sheet.dart';
 import '../../../../views/widgets/loading.widget.dart';
 import '../../../../views/widgets/toasts.dart';
-import '../../../podu/deliver_customer/screens/successful_delivering.screen.dart';
 import '../widgets/parcel_row.widget.dart';
 
 class ParcelDetailsScreen extends StatefulWidget {
@@ -100,7 +99,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
               onConfirm: () async {
                 await _uploadImageToCloudflare(
                   context: context,
-                    parcelId: _parcelId ?? '',
+                    parcelId: _parcelId!,
                   imageFile: imageFile,
                   onPublicUrlSet: (publicUrl) {
                     setState(() {
@@ -205,7 +204,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       }
 
       // 1️⃣ Call the PATCH request to update the Parcel status
-      await ParcelImageService.instance.updateParcelAfterUpload(
+      await ParcelImageService.instance.updateParcelWithPudoidAfterUpload(
         parcelId: parcelId,
         status: ParcelStatusType.waitingConfirmation.apiValue,
         // This changes based on the flow
@@ -214,6 +213,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         imageUrl: uploadedImagePublicUrl,
         latitude: 24.7136,
         longitude: 46.6753,
+        pudoId:  widget.pudoId,
       );
 
       // ✅ Update successful
@@ -222,7 +222,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       showCorrectToast(message: '✅ Parcel Delivered successfully!');
       AppNavigator.navigateAndRemoveUntil(
         context,
-        () => const SuccessfulDelivering(),
+        () => SuccessfulDelivering(poduId: widget.pudoId),
       );
     } catch (e, s) {
       Navigator.pop(context); // Closes the loading indicator in case of error

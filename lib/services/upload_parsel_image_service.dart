@@ -52,8 +52,47 @@ class ParcelImageService {
 
   /// 3) PATCH /parcels/{parcelId}
   /// imageFieldName: the key name (e.g. "warehouse_image")
-  Future<void> updateParcelAfterUpload({
+  /*Future<void> updateParcelAfterUpload({
     required String parcelId,
+    required String status, // e.g. "courier_received" — decided by UI/flow
+    required String imageFieldName,
+    required String imageUrl, // public_url from step 1
+
+    double? latitude,
+    double? longitude,
+  }) async {
+
+    final now = DateTime.now().toLocal();
+    final timestampFormatter = DateFormat('yyyy-MM-dd hh:mm:ss a', 'en_US');
+    final formattedTimestamp = timestampFormatter.format(now);
+
+    final imageField = ParcelImageFieldModel(
+      url: imageUrl,
+      timestamp: formattedTimestamp,
+      location: (latitude != null && longitude != null)
+          ? LocationModel(latitude: latitude, longitude: longitude)
+          : null,
+    );
+
+    final req = UpdateParcelRequestModel(
+      status: status,
+      imageFieldName: imageFieldName,
+      imageField: imageField,
+    );
+
+    //print('Request body: ${req.toJson()}');
+
+    await _api.patchJson("parcels/$parcelId", req.toJson());
+  }*/
+
+  ///  PATCH /pudos/$pudoId/parcels/{parcelId}
+  /// imageFieldName: the key name (e.g. "warehouse_image")
+  /// deliver from courier to podu
+  /// receive from podu to customer
+  /// deliver from podu to customer
+  Future<void> updateParcelWithPudoidAfterUpload({
+    required String parcelId,
+    required String pudoId,
     required String status, // e.g. "courier_received" — decided by UI/flow
     required String imageFieldName,
     required String imageUrl, // public_url from step 1
@@ -81,9 +120,8 @@ class ParcelImageService {
 
     //print('Request body: ${req.toJson()}');
 
-    await _api.patchJson("parcels/$parcelId", req.toJson());
+    await _api.patchJson("/pudos/$pudoId/parcels/$parcelId", req.toJson());
   }
-
   /// PATCH /parcels/{parcelId} when courier receives parcel from warehouse
   /// This function updates a parcel after the courier uploads an image.
   /// It includes the courier_id in the request body.
@@ -92,7 +130,7 @@ class ParcelImageService {
     required String status,
     required String imageFieldName,
     required String imageUrl,
-    required String courierId,
+    //required String courierId,
     double? latitude,
     double? longitude,
   }) async {
@@ -111,7 +149,7 @@ class ParcelImageService {
     // Build the request body
     final req = {
       "status": status,
-      "courier_id": courierId,
+      //"courier_id": courierId,
       imageFieldName: {
         "url": imageUrl,
         "timestamp": formattedTimestamp,

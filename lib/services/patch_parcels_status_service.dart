@@ -9,6 +9,7 @@ class ParcelStatusService {
 
   Future<void> updateParcelStatus({
     required String parcelId,
+    required String pudoId,
     required String status,
   }) async {
 
@@ -18,7 +19,7 @@ class ParcelStatusService {
 
     //print('Request body: $reqBody');
 
-    await _api.patchJson("parcels/$parcelId", reqBody);
+    await _api.patchJson("/pudos/$pudoId/parcels/$parcelId", reqBody);
   }
 
 }

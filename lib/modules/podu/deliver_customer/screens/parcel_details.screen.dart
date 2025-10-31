@@ -23,7 +23,7 @@ import '../../../../views/widgets/bottom_sheet/delivery_confirmation_bottom_shee
 import '../../../../views/widgets/bottom_sheet/photo_confirmation_bottom_sheet.dart';
 import '../../../../views/widgets/toasts.dart';
 import '../../../couriers/delivering/widgets/parcel_row.widget.dart';
-import '../../views/widgets/not_found.widget.dart';
+import '../../../../views/widgets/not_found.widget.dart';
 
 class ParcelDetailsScreen extends StatefulWidget {
   final String receivingCode;
@@ -39,6 +39,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
   late Future<ParcelsResponse> _parcelFuture;
   Parcel? _currentParcel;
+  String? _pudoId;
   @override
   void initState() {
     super.initState();
@@ -57,14 +58,14 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         return;
       }
 
-      final pudoId = pudosList.first.id.toString();
+      final _pudoId = pudosList.first.id.toString();
       //print('PUDO ID: $pudoId');
       //print('Receiving Code: ${widget.receivingCode}');
 
       // get parcel by receiving code
       setState(() {
         _parcelFuture = ParcelsService.instance.getParcelByReceivingCode(
-          pudoId,
+          _pudoId,
           widget.receivingCode,
         );
       });
@@ -104,7 +105,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
               onConfirm: () async {
                 if (_currentParcel == null) {
                   showErrorToast(message: '❗ Parcel data not loaded yet.');
-                  return; // منع المتابعة إذا لم يتم تحميل البيانات
+                  return;
                 }
                 await _uploadImageToCloudflare(
                   context: context,
@@ -218,20 +219,22 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       }
 
       // 1️⃣ Call the PATCH request to update the Parcel status
-      await ParcelImageService.instance.updateParcelAfterUpload(
+      await ParcelImageService.instance.updateParcelWithPudoidAfterUpload(
         parcelId: parcelId,
         status: ParcelStatusType.customerReceived.apiValue, // This changes based on the flow
         imageFieldName: ParcelImageType.customerImage.apiValue, // This also changes based on the flow
         imageUrl: uploadedImagePublicUrl,
         latitude: 24.7136,
-        longitude: 46.6753,
+        longitude: 46.6753, pudoId: _pudoId!,
       );
 
       // ✅ Update successful
       Navigator.pop(context); // Closes the loading indicator
       Navigator.pop(context); // Closes the bottom sheet
       showCorrectToast(message: '✅ Parcel Delivered successfully!');
-      AppNavigator.navigateAndRemoveUntil(context, () => const SuccessfulDelivering());
+      AppNavigator.navigateAndRemoveUntil(context, () => SuccessfulPoduDelivering(
+          //pudoId: _pudoId!
+      ));
 
     } catch (e, s) {
       Navigator.pop(context); // Closes the loading indicator in case of error
@@ -367,12 +370,12 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                             const SizedBox(height: 12),
                             InfoItem(
                               svgPath: 'assets/svgs/location_icon_with_background.svg',
-                              text: parcel.zoneName,
+                              text: parcel.zoneName ?? 'Unknown Zone',
                             ),
                             const SizedBox(height: 12),
                             InfoItem(
                               svgPath: 'assets/svgs/call_icon_with_background.svg',
-                              text: parcel.cityName,
+                              text: parcel.cityName ?? 'Unknown City',
                             ),
 
                           ],

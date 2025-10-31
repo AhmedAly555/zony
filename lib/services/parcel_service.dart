@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:zony/models/parcel_model.dart';
 
 import '../models/get_parcel_response_model.dart';
@@ -90,14 +91,16 @@ class ParcelsService {
     required String barcode,
   }) async {
     try {
+
       // Build the URL with query parameters
       final url = '/parcels?barcode=$barcode';
 
       final response = await ApiService.instance.get(url);
       return ParcelsResponse.fromJson(response);
-    } catch (e) {
-      rethrow;
-    }
+    } catch (e, s) {
+      debugPrint('❌ Error inside ParcelsService: $e');
+      debugPrintStack(stackTrace: s);
+      rethrow;    }
   }
 
 

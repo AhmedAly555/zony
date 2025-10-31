@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class TotalParcelsApproved extends StatefulWidget {
 
   final GlobalKey<TotalParcelsApprovedState> counterKey;
+  final String title;
 
-  const TotalParcelsApproved({super.key, required this.counterKey});
+  const TotalParcelsApproved({super.key, required this.counterKey, required this.title});
 
   @override
   State<TotalParcelsApproved> createState() => TotalParcelsApprovedState();
@@ -12,6 +13,7 @@ class TotalParcelsApproved extends StatefulWidget {
 
 class TotalParcelsApprovedState extends State<TotalParcelsApproved> {
   int _successCount = 0;
+
 
   void incrementCounter() {
     setState(() {
@@ -39,7 +41,7 @@ class TotalParcelsApprovedState extends State<TotalParcelsApproved> {
       child: Column(
         children: [
           Text(
-            'Total Approved',
+            widget.title,
             style: TextStyle(
               color: Color(0xFF929292),
               fontSize: 18,
