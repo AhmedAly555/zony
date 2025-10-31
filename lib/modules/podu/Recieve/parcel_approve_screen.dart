@@ -15,7 +15,7 @@ import '../../../views/widgets/loading.widget.dart';
 import '../../../views/widgets/secondary_appbar.dart';
 import '../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../couriers/delivering/widgets/parcel_row.widget.dart';
-import '../views/widgets/not_found.widget.dart';
+import '../../../views/widgets/not_found.widget.dart';
 import '../views/widgets/parcel_states.widget.dart';
 import '../views/widgets/total_parcels_approved.widget.dart';
 
@@ -24,7 +24,6 @@ class ParcelApproveScreen extends StatefulWidget {
 
   @override
   State<ParcelApproveScreen> createState() => _ParcelApproveScreenState();
-
 }
 
 class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
@@ -98,6 +97,21 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
     required GlobalKey<TotalParcelsApprovedState> counterKey,
   }) async {
     try {
+      final pudosList = await PudosStorage.loadPudos();
+      //print('PUDOs loaded. Count: ${pudosList.length}');
+
+      // get the first pudo id and check if it is not empty
+      String pudoId;
+      if (pudosList.isNotEmpty) {
+        //get the first pudo id
+        pudoId = pudosList.first.id.toString();
+        //print('PUDO ID to use:::::::::::::::::::: $pudoId');
+      } else {
+        // if
+        setState(() => isLoading = false);
+        //print('No PUDOs found, showing NotFoundWidget.');
+        return;
+      }
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -107,6 +121,7 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
       await parcelStatusService.updateParcelStatus(
         parcelId: parcelId,
         status: ParcelStatusType.PUDOReceived.apiValue,
+        pudoId: pudoId,
       );
 
       counterKey.currentState?.incrementCounter();
@@ -115,17 +130,14 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
       Navigator.pop(context); // Closes the bottom sheet
 
       showCorrectToast(message: 'Parcel confirmed successfully!');
-
     } catch (e) {
       //print('Error updating parcel status: $e');
       showErrorToast(message: 'Failed to confirm parcel. Please try again.');
-
     }
   }
 
   // helper function to show confirm parcel bottom sheet
   void showConfirmParcelBottomSheet(BuildContext context, String parcelId) {
-
     final parcelStatusService = ParcelStatusService.instance;
 
     showModalBottomSheet(
@@ -149,7 +161,8 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
                   context: context,
                   parcelId: parcelId,
                   parcelStatusService: parcelStatusService,
-                  fetchParcels: fetchParcels, counterKey: _counterKey,
+                  fetchParcels: fetchParcels,
+                  counterKey: _counterKey,
                 );
               },
             ),
@@ -159,7 +172,6 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return TemplateAppScaffold(
@@ -167,7 +179,7 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
           isLoading
               ? const Center(child: LoadingWidget())
               : parcels.isEmpty
-              ? const NotFoundWidget()
+              ? const Center(child: NotFoundWidget())
               : RefreshIndicator(
                 onRefresh: fetchParcels,
                 color: Color(0xFF49159B),
@@ -183,7 +195,10 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
                       children: [
                         const SecondaryAppBar(title: 'Parcel Approve'),
                         const SizedBox(height: 24),
-                        TotalParcelsApproved(counterKey: _counterKey),
+                        TotalParcelsApproved(
+                          counterKey: _counterKey,
+                          title: 'Total Approved',
+                        ),
                         const SizedBox(height: 24),
 
                         // show all parcels

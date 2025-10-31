@@ -1,14 +1,14 @@
 
 class Parcel {
   final String id;
-  final String pudoId;
+  final String? pudoId;
   final String? courierId;
   final String clientName;
-  final String cityName;
-  final String zoneName;
+  final String? cityName;
+  final String? zoneName;
   final String trackingNumber;
   final String status;
-  final String receivingDate;
+  final String? receivingDate;
 
   // New fields from the second endpoint
   final String? barcode;
@@ -22,13 +22,13 @@ class Parcel {
 
   Parcel({
     required this.id,
-    required this.pudoId,
+    this.pudoId,
     required this.clientName,
-    required this.cityName,
-    required this.zoneName,
+    this.cityName,
+    this.zoneName,
     required this.trackingNumber,
     required this.status,
-    required this.receivingDate,
+    this.receivingDate,
     this.courierId,
     this.barcode,
     this.customerPhoneNumber,

@@ -52,7 +52,7 @@ class ConfirmParcelBottomSheet extends StatelessWidget {
 
                   },
                   child: Text(
-                    'Yes, I confirm',
+                    'Confirm',
                     textAlign: TextAlign.center,
 
                     style: TextStyle(

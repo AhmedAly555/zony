@@ -1,6 +1,7 @@
  import 'package:flutter/material.dart';
 import 'package:zony/views/screens/splash_screen.dart';
 
+
 void main() {
   runApp(const MyApp());
 }

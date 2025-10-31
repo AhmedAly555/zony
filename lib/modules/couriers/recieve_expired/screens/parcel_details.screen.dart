@@ -51,14 +51,22 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
   @override
   void initState() {
     super.initState();
+    //print('🚀 Fetching parcel with barcode::::::::::::::::: ${widget.barcode}');
+
     _fetchParcelDetails();
   }
 
   Future<void> _fetchParcelDetails() async {
     try {
+      print('📡 Fetching parcel details for barcode: ${widget.barcode}');
+
       final response = await ParcelsService.instance.getGlobalParcelByBarcode(
         barcode: widget.barcode,
       );
+
+      //print('Parcels count::::::::::::::::::::::::: ${response.parcels.length}');
+      //print('First parcel:""""""""""""""""""""""" ${response.parcels.first}');
+
 
       setState(() {
         _parcel = response.parcels.isNotEmpty
@@ -72,6 +80,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         _isLoading = false;
       });
       showErrorToast(message: '❌ Failed to fetch parcel details: $e');
+      //print('❌ Failed to fetch parcel details: $e');
     }
   }
 
@@ -145,8 +154,8 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                 .warehouseImage
                 .apiValue, // This changes based on the flow
       );
-      //print('✅ Step 1 Done -> uploadUrl: ${uploadResponse.uploadUrl}',);
-      //print('✅ Step 1 Done -> publicUrl: ${uploadResponse.publicUrl}',);
+      print('✅ Step 1 Done -> uploadUrl: ${uploadResponse.uploadUrl}',);
+      print('✅ Step 1 Done -> publicUrl: ${uploadResponse.publicUrl}',);
 
       // 2️⃣ Upload the image to Cloudflare using the uploadUrl
       final bytes = await imageFile.readAsBytes();
@@ -176,7 +185,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         // Ensure the loading dialog is open before closing
         Navigator.pop(context); // Close the loading indicator in case of error
       }
-      //debugPrint('❌ Error uploading parcel image: $e');
+      debugPrint('❌ Error uploading parcel image::::::::::: $e');
       debugPrintStack(stackTrace: s);
       showErrorToast(message: 'Failed to upload image: $e');
 
@@ -213,7 +222,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         return;
       }
 
-      final courierId = profile.id.toString();
+      //final courierId = profile.id.toString();
 
       // 1️⃣ Call the PATCH request to update the Parcel status
       await ParcelImageService.instance.updateParcelAfterUploadByCourier(
@@ -225,7 +234,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         imageUrl: uploadedImagePublicUrl,
         latitude: 24.7136,
         longitude: 46.6753,
-        courierId: courierId,
+        //courierId: courierId,
       );
 
       // ✅ Update successful
@@ -234,11 +243,11 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       showCorrectToast(message: '✅ Parcel Recieve successfully!');
       AppNavigator.navigateAndRemoveUntil(
         context,
-        () => const SuccessfulRecieve(),
+        () => const SuccessfulRecieveScreen(),
       );
     } catch (e, s) {
       Navigator.pop(context); // Closes the loading indicator in case of error
-      debugPrint('❌ Error updating parcel: $e');
+      //debugPrint('❌ Error updating parcel: $e');
       debugPrintStack(stackTrace: s);
       showErrorToast(message: 'Failed to update parcel: $e');
     }

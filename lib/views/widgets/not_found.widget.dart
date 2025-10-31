@@ -7,9 +7,11 @@ class NotFoundWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      //crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SvgPicture.asset(
-            'assets/svgs/not_found.svg',
+            'assets/svgs/not_found_icon.svg',
             height: 400,
             width: 400,
         ),

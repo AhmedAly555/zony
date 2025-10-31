@@ -63,7 +63,7 @@ class PhotoConfirmarionBottomSheet extends StatelessWidget {
                     //Navigator.pop(context);
                     },
                   child: Text(
-                    'Yes, I\'m Confirm.',
+                    'Confirm',
                     textAlign: TextAlign.center,
 
                     style: TextStyle(

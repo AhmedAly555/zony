@@ -21,7 +21,7 @@ class SearchButton extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: const Color(0xFFF4F4F4),
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(12),
 
         ),
         child: Column(
