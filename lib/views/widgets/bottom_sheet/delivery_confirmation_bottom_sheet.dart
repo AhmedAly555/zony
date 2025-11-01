@@ -57,7 +57,7 @@ class DeliveryConfirmationBottomSheet extends StatelessWidget {
 
                       },
                   child: Text(
-                    'Yes, I\'m Confirm.',
+                    'Confirm.',
                     textAlign: TextAlign.center,
 
                     style: TextStyle(
