@@ -110,11 +110,11 @@ class _PoduMoreScreenState extends State<PoduMoreScreen> {
             },
           ),
           const SizedBox(height: 16),
-          CoustomeRowMoreScreen(
+          /*CoustomeRowMoreScreen(
             iconPath: 'assets/svgs/revenue.svg',
             title: 'Revenue',
             onTap: () {},
-          ),
+          ),*/
           const SizedBox(height: 16),
           CoustomeRowMoreScreen(
             iconPath: 'assets/svgs/logout.svg',

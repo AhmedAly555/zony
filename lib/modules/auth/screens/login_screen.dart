@@ -8,16 +8,12 @@ import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../../../services/user_profile_service.dart';
 import '../../../views/widgets/default_text_filed.dart';
-import '../../../views/widgets/secondary_appbar.dart';
 import '../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../views/widgets/toasts.dart';
 import '../../couriers/views/screens/main_home/screen/courier_main_home_screen.dart';
 
 import '../../podu/views/screens/main_home/screen/podu_main_home_screen.dart';
-import '../widgets/custom_appbar.dart';
 import '../../../views/widgets/default_button.widget.dart';
-import 'forget_password.screen.dart';
-import 'generic_login_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -78,21 +74,21 @@ class _LoginScreenState extends State<LoginScreen> {
       //get courier profile information
       try {
         final profileResponse = await userService.getProfile();
-        debugPrint(profileResponse.status);
+        //debugPrint(profileResponse.status);
       } catch (err, stack) {
         showErrorToast(message: '$err');
-        debugPrint("❌ Error in getProfile: $err");
+        //debugPrint("❌ Error in getProfile: $err");
         //print(stack);
       }
 
       //get pudo information
       try {
         final pudoResponse = await PudoService.instance.getPudos();
-        debugPrint('Total PUDOs: ${pudoResponse.message}');
+        //debugPrint('Total PUDOs: ${pudoResponse.message}');
 
       } catch (err, stack) {
         showErrorToast(message: '$err');
-        debugPrint("❌ Error in getPudos: $err");
+        //debugPrint("❌ Error in getPudos: $err");
         //print(stack);
       }
 
@@ -129,15 +125,17 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
+
         children: [
+          const Spacer(flex: 1,),
           Text(
             'Log in',
             style: const TextStyle(
-              fontSize: 24,
+              fontSize: 32,
               fontWeight: FontWeight.w600,
             ),
           ),
-          const Spacer(),
+          const Spacer(flex: 2,),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18.0),
             child: Container(
@@ -326,7 +324,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          const Spacer(),
+          const Spacer(flex: 2,),
 
         ],
       ),

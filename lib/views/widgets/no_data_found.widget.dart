@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class NotFoundWidget extends StatelessWidget {
-  const NotFoundWidget({super.key});
+class NoDataFoundWidget extends StatelessWidget {
+  const NoDataFoundWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      //crossAxisAlignment: CrossAxisAlignment.center,
+      //crossAxisAlignment: CrossAxisAlignmen t.center,
       children: [
         SvgPicture.asset(
             'assets/svgs/not_found_icon.svg',
-            height: 400,
-            width: 400,
+            height: 205,
+            width: 185,
         ),
         const SizedBox(height: 32),
         const Text(

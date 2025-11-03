@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:zony/modules/podu/views/screens/main_home/screen/podu_delivering_screen.dart';
 
 import '../../../../../../models/pudo_model.dart';
 import '../../../../../../services/get_pudos_service.dart';
 import '../../../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../../../services/shered_preferences/pudos_storage.dart';
 import '../../../../../../services/size_config.dart';
+import '../../../../../../views/widgets/bottom_sheet/language_sheet.dart';
 import '../../../../../../views/widgets/bottom_sheet/podu_qr_bottom_sheet.dart';
 import '../../../../../../views/widgets/custom_container_icon.widget.dart';
 import '../../../../../../views/widgets/custom_outline_button.widget.dart';
@@ -13,10 +15,55 @@ import '../../../../../../views/widgets/custom_zony_logo.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../../couriers/views/widgets/custom_home_service_container.widget.dart';
 import '../../../../Recieve/parcel_approve_screen.dart';
+import '../../../../inventory/screens/enter_shipment.dart';
 import '../../notification.screen.dart';
 
-class PoduHomeScreen extends StatelessWidget {
+class PoduHomeScreen extends StatefulWidget {
   const PoduHomeScreen({super.key});
+
+  @override
+  State<PoduHomeScreen> createState() => _PoduHomeScreenState();
+}
+
+class _PoduHomeScreenState extends State<PoduHomeScreen> {
+  String currentLanguage = 'English';
+
+  void showLanguageBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: true,
+      enableDrag: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        SizeConfig.init(context);
+        return Container(
+          constraints: BoxConstraints(
+            maxHeight: SizeConfig.heightPercent(0.90),
+            minHeight: SizeConfig.heightPercent(0.80),
+          ),
+          child: IntrinsicHeight(
+            child: LanguageBottomSheet(),
+          ),
+        );
+      },
+      /*=> DraggableScrollableSheet(
+        initialChildSize: 0.7,
+        minChildSize: 0.7,
+        maxChildSize: 0.9,
+        expand: false,
+        builder: (context, scrollController) => LanguageBottomSheet(),
+      ),*/
+    ).then((selectedLang) {
+      // selectedLang contains the selected language
+      if (selectedLang != null) {
+        setState(() {
+          currentLanguage = selectedLang;
+        });
+        print('Selected Language: $selectedLang');
+      }
+    });
+  }
 
   void showPoduQRBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -37,6 +84,7 @@ class PoduHomeScreen extends StatelessWidget {
       },
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return TemplateAppScaffold(
@@ -50,11 +98,15 @@ class PoduHomeScreen extends StatelessWidget {
               children: [
                 CustomZonyLogo(),
                 Spacer(),
-                CustomContainerIcon(svgPath: 'assets/svgs/svg_language.svg'),
-                SizedBox(width: 10),
                 CustomContainerIcon(
+                    svgPath: 'assets/svgs/svg_language.svg',
+                    onTap: () {
+                      showLanguageBottomSheet(context);
+                    }),
+                SizedBox(width: 10),
+                /*CustomContainerIcon(
                   svgPath: 'assets/svgs/technical_support.svg',
-                ),
+                ),*/
                 SizedBox(width: 10),
                 CustomContainerIcon(
                   svgPath: 'assets/svgs/notification.svg',
@@ -234,11 +286,15 @@ class PoduHomeScreen extends StatelessWidget {
                   ),
                   CustomHomeServiceContainer(
                     title: 'Delivering',
-                    svgIconPath: 'assets/svgs/delivering.svg', onTap: () {},
+                    svgIconPath: 'assets/svgs/delivering.svg', onTap: () {
+                      AppNavigator.navigateTo(context, () => PoduDeliveringScreen());
+                  },
                   ),
                   CustomHomeServiceContainer(
                     title: 'Inventory',
-                    svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {},
+                    svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {
+                      AppNavigator.navigateTo(context, () => EnterShipment());
+                  },
                   ),
                 ],
               ),

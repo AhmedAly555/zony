@@ -28,6 +28,9 @@ class ParcelsService {
     try {
       // Build the URL with query parameters
       final url = '/pudos/$pudoId/parcels?status=$status';
+      //print('➡️ Calling URL: $url');
+      //print('➡️ With params: pudoId=$pudoId, status=$status');
+
 
       final response = await ApiService.instance.get(url);
       return ParcelsResponse.fromJson(response);
