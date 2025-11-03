@@ -15,7 +15,7 @@ import '../../../views/widgets/loading.widget.dart';
 import '../../../views/widgets/secondary_appbar.dart';
 import '../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../couriers/delivering/widgets/parcel_row.widget.dart';
-import '../../../views/widgets/not_found.widget.dart';
+import '../../../views/widgets/no_data_found.widget.dart';
 import '../views/widgets/parcel_states.widget.dart';
 import '../views/widgets/total_parcels_approved.widget.dart';
 
@@ -27,19 +27,19 @@ class ParcelApproveScreen extends StatefulWidget {
 }
 
 class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
-  final GlobalKey<TotalParcelsApprovedState> _counterKey = GlobalKey();
-
+  //final GlobalKey<TotalParcelsApprovedState> _counterKey = GlobalKey();
+  int _approvedCount = 0;
   bool isLoading = true;
   List<Parcel> parcels = [];
 
   @override
   void initState() {
     super.initState();
-    fetchParcels();
+    fetchwaitingConfirmationParcels();
   }
 
   // helper function to fetch parcels
-  Future<void> fetchParcels() async {
+  Future<void> fetchwaitingConfirmationParcels() async {
     try {
       // get all pudos
       final pudosList = await PudosStorage.loadPudos();
@@ -94,7 +94,7 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
     required String parcelId,
     required ParcelStatusService parcelStatusService,
     required VoidCallback fetchParcels,
-    required GlobalKey<TotalParcelsApprovedState> counterKey,
+    //required GlobalKey<TotalParcelsApprovedState> counterKey,
   }) async {
     try {
       final pudosList = await PudosStorage.loadPudos();
@@ -124,7 +124,10 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
         pudoId: pudoId,
       );
 
-      counterKey.currentState?.incrementCounter();
+      //counterKey.currentState?.incrementCounter();
+      setState(() {
+        _approvedCount++;
+      });
       fetchParcels();
       Navigator.pop(context); // Closes the loading indicator
       Navigator.pop(context); // Closes the bottom sheet
@@ -161,8 +164,8 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
                   context: context,
                   parcelId: parcelId,
                   parcelStatusService: parcelStatusService,
-                  fetchParcels: fetchParcels,
-                  counterKey: _counterKey,
+                  fetchParcels: fetchwaitingConfirmationParcels,
+                  //counterKey: _counterKey,
                 );
               },
             ),
@@ -179,9 +182,9 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
           isLoading
               ? const Center(child: LoadingWidget())
               : parcels.isEmpty
-              ? const Center(child: NotFoundWidget())
+              ? const Center(child: NoDataFoundWidget())
               : RefreshIndicator(
-                onRefresh: fetchParcels,
+                onRefresh: fetchwaitingConfirmationParcels,
                 color: Color(0xFF49159B),
 
                 child: SingleChildScrollView(
@@ -195,9 +198,10 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
                       children: [
                         const SecondaryAppBar(title: 'Parcel Approve'),
                         const SizedBox(height: 24),
-                        TotalParcelsApproved(
-                          counterKey: _counterKey,
+                        TotalParcelsCounter(
+                          //counterKey: _counterKey,
                           title: 'Total Approved',
+                          value: _approvedCount.toString(),
                         ),
                         const SizedBox(height: 24),
 

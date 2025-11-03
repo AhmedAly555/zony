@@ -60,8 +60,14 @@ class _ParcelStatusItemState extends State<ParcelStatusItem>
     final borderColor =
     widget.isSelected ? const Color(0xFF49159B) : Colors.transparent;
 
+    final bool isDisabled = widget.count == 0;
+
+    // Disable the item if count is 0
+    final Color disabledColor = isDisabled ? Colors.grey : const Color(0xFF49159B);
+
+
     return GestureDetector(
-      onTap: widget.onTap,
+      onTap: isDisabled ? null : widget.onTap,
       child: ScaleTransition(
         scale: _scaleAnimation,
         child: AnimatedContainer(
@@ -75,12 +81,13 @@ class _ParcelStatusItemState extends State<ParcelStatusItem>
             border: Border.all(color: borderColor, width: 1.5),
             boxShadow: widget.isSelected
                 ? [
-              BoxShadow(
-                color: const Color(0xFF49159B).withOpacity(0.25),
-                blurRadius: 12,
-                offset: const Offset(0, 4),
-              ),
-            ]
+                    BoxShadow(
+                      // replaced with explicit ARGB color to avoid using deprecated withOpacity
+                      color: const Color(0x4049159B),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ]
                 : [],
           ),
           child: Row(
@@ -90,25 +97,25 @@ class _ParcelStatusItemState extends State<ParcelStatusItem>
                 widget.iconPath,
                 width: 32,
                 height: 32,
-                colorFilter: const ColorFilter.mode(
-                  Color(0xFF49159B),
+                colorFilter: ColorFilter.mode(
+                  disabledColor,
                   BlendMode.srcIn,
                 ),
               ),
               Text(
                 widget.title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w400,
-                  color: Color(0xFF1E1E1E),
+                  color: disabledColor,
                 ),
               ),
               Text(
                 "(${widget.count})",
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
-                  color: Color(0xFF49159B),
+                  color: disabledColor,
                 ),
               ),
             ],

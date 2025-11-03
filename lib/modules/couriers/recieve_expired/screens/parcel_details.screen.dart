@@ -20,6 +20,7 @@ import '../../../../views/screens/custom_camera_screen.dart';
 import '../../../../views/widgets/bottom_sheet/delivery_confirmation_bottom_sheet.dart';
 import '../../../../views/widgets/bottom_sheet/photo_confirmation_bottom_sheet.dart';
 import '../../../../views/widgets/loading.widget.dart';
+import '../../../../views/widgets/no_data_found.widget.dart';
 import '../../../../views/widgets/toasts.dart';
 import '../../delivering/widgets/parcel_row.widget.dart';
 
@@ -317,7 +318,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       body: _isLoading
           ? const Center(child: LoadingWidget())
           : _parcel == null
-          ? const Center(child: Text('❌ No parcel data found'))
+          ? const Center(child: NoDataFoundWidget())
           : Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
         child: Column(
@@ -379,3 +380,4 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
     );
   }
 }
+

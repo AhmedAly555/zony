@@ -7,19 +7,20 @@ import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../models/parcel_model.dart';
 import '../../../../services/parcel_service.dart';
 import '../../../../views/widgets/loading.widget.dart';
+import '../../../../views/widgets/no_data_found.widget.dart';
 import '../../../../views/widgets/toasts.dart';
 import '../../../couriers/delivering/widgets/parcel_row.widget.dart';
 
 class ShipmentDetailsScreen extends StatefulWidget {
   //final String parcelId;
-  //final String pudoId;
+  final String pudoId;
   final String barcode;
 
   const ShipmentDetailsScreen({
     super.key,
     required this.barcode,
     //required this.parcelId,
-    //required this.pudoId,
+    required this.pudoId,
   });
 
   @override
@@ -68,7 +69,7 @@ class _ShipmentDetailsScreenState extends State<ShipmentDetailsScreen> {
       body: _isLoading
           ? const Center(child: LoadingWidget())
           : _parcel == null
-          ? const Center(child: Text('❌ No parcel data found'))
+          ? const Center(child: NoDataFoundWidget())
           : Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
         child: Column(

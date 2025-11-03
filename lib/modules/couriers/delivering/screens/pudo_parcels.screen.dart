@@ -11,7 +11,7 @@ import '../../../../services/enums/parcel_status_type.dart';
 import '../../../../services/parcel_service.dart';
 import '../../../../views/widgets/bottom_sheet/qr_scanner.dart';
 import '../../../../views/widgets/toasts.dart';
-import '../../../../views/widgets/not_found.widget.dart';
+import '../../../../views/widgets/no_data_found.widget.dart';
 import '../widgets/parcel_row.widget.dart';
 import '../widgets/search_button.widget.dart';
 
@@ -30,6 +30,11 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
   @override
   void initState() {
     super.initState();
+    _loadParcels();
+    //print('Loading parcels for Pudo ID: ${widget.pudoId}');
+  }
+
+  void _loadParcels() {
     future = ParcelsService.instance.getParcelsByStatus(
       status: ParcelStatusType.courierReceived.apiValue,
       pudoId: '${widget.pudoId}',
@@ -86,7 +91,8 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
               return const Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
+              return Center(child: NoDataFoundWidget());
+              //print(snapshot.error);
             }
 
             final response = snapshot.data!;
@@ -144,7 +150,7 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                   //podu parcels
                   if (response.parcels.isEmpty)
                     Center(
-                      child: NotFoundWidget(),
+                      child: NoDataFoundWidget(),
                     )
                   else
                     ListView.builder(

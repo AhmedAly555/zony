@@ -23,7 +23,7 @@ import '../../../../views/widgets/bottom_sheet/delivery_confirmation_bottom_shee
 import '../../../../views/widgets/bottom_sheet/photo_confirmation_bottom_sheet.dart';
 import '../../../../views/widgets/toasts.dart';
 import '../../../couriers/delivering/widgets/parcel_row.widget.dart';
-import '../../../../views/widgets/not_found.widget.dart';
+import '../../../../views/widgets/no_data_found.widget.dart';
 
 class ParcelDetailsScreen extends StatefulWidget {
   final String receivingCode;
@@ -58,14 +58,14 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         return;
       }
 
-      final _pudoId = pudosList.first.id.toString();
+      _pudoId = pudosList.first.id.toString();
       //print('PUDO ID: $pudoId');
       //print('Receiving Code: ${widget.receivingCode}');
 
       // get parcel by receiving code
       setState(() {
         _parcelFuture = ParcelsService.instance.getParcelByReceivingCode(
-          _pudoId,
+          _pudoId!,
           widget.receivingCode,
         );
       });
@@ -225,7 +225,8 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         imageFieldName: ParcelImageType.customerImage.apiValue, // This also changes based on the flow
         imageUrl: uploadedImagePublicUrl,
         latitude: 24.7136,
-        longitude: 46.6753, pudoId: _pudoId!,
+        longitude: 46.6753,
+        pudoId: _pudoId!,
       );
 
       // ✅ Update successful
@@ -323,13 +324,14 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
                   // Error state
                   if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
+                    return Center(child: NoDataFoundWidget());
+                    //print(snapshot.error);
                   }
 
                   // Data state
                   if (snapshot.hasData) {
                     final parcels = snapshot.data!.parcels;
-                    if (parcels.isEmpty) return const NotFoundWidget();
+                    if (parcels.isEmpty) return const NoDataFoundWidget();
                     final parcel = parcels.first;
 
                     if (_currentParcel == null || _currentParcel!.id != parcel.id) {
@@ -384,7 +386,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                     );
                   }
 
-                  return const NotFoundWidget();
+                  return const NoDataFoundWidget();
                 },
               ),
             ),

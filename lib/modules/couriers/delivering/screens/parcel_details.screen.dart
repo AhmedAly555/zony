@@ -19,6 +19,7 @@ import '../../../../views/screens/custom_camera_screen.dart';
 import '../../../../views/widgets/bottom_sheet/delivery_confirmation_bottom_sheet.dart';
 import '../../../../views/widgets/bottom_sheet/photo_confirmation_bottom_sheet.dart';
 import '../../../../views/widgets/loading.widget.dart';
+import '../../../../views/widgets/no_data_found.widget.dart';
 import '../../../../views/widgets/toasts.dart';
 import '../widgets/parcel_row.widget.dart';
 
@@ -75,9 +76,9 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
   // Image Preview Bottom Sheet (modified for await and result)
   void _showImagePreviewBottomSheet(
-    BuildContext context,
-    File imageFile,
-  ) async {
+      BuildContext context,
+      File imageFile,
+      ) async {
     final result = await showModalBottomSheet<bool>(
       // Added <bool> for the return type
       context: context,
@@ -99,7 +100,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
               onConfirm: () async {
                 await _uploadImageToCloudflare(
                   context: context,
-                    parcelId: _parcelId!,
+                  parcelId: _parcelId!,
                   imageFile: imageFile,
                   onPublicUrlSet: (publicUrl) {
                     setState(() {
@@ -139,9 +140,9 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       final uploadResponse = await ParcelImageService.instance.createSignedUrl(
         parcelId: parcelId,
         imageType:
-            ParcelImageType
-                .pudoImage
-                .apiValue, // This changes based on the flow
+        ParcelImageType
+            .pudoImage
+            .apiValue, // This changes based on the flow
       );
       //print('✅ Step 1 Done -> uploadUrl: ${uploadResponse.uploadUrl}',);
       //print('✅ Step 1 Done -> publicUrl: ${uploadResponse.publicUrl}',);
@@ -222,7 +223,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       showCorrectToast(message: '✅ Parcel Delivered successfully!');
       AppNavigator.navigateAndRemoveUntil(
         context,
-        () => SuccessfulDelivering(poduId: widget.pudoId),
+            () => SuccessfulDelivering(poduId: widget.pudoId),
       );
     } catch (e, s) {
       Navigator.pop(context); // Closes the loading indicator in case of error
@@ -276,16 +277,16 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       MaterialPageRoute(
         builder:
             (context) => CustomCameraScreen(
-              // This is the key: the onPictureTaken function
-              onPictureTaken: (File image) {
-                // 1. Close the camera screen first
-                // (Since the camera screen was opened using push, we use pop to close it)
-                Navigator.pop(context);
+          // This is the key: the onPictureTaken function
+          onPictureTaken: (File image) {
+            // 1. Close the camera screen first
+            // (Since the camera screen was opened using push, we use pop to close it)
+            Navigator.pop(context);
 
-                // 2. Show the Bottom Sheet to display the image
-                _showImagePreviewBottomSheet(context, image);
-              },
-            ),
+            // 2. Show the Bottom Sheet to display the image
+            _showImagePreviewBottomSheet(context, image);
+          },
+        ),
       ),
     );
   }
@@ -296,7 +297,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       body: _isLoading
           ? const Center(child: LoadingWidget())
           : _parcel == null
-          ? const Center(child: Text('❌ No parcel data found'))
+          ? const Center(child: NoDataFoundWidget())
           : Padding(
         padding:
         const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),

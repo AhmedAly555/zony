@@ -89,13 +89,13 @@ class PoduDeliveringScreen extends StatelessWidget {
                     );
                   },
                 ),
-                MenuItemData(
+                /*MenuItemData(
                   svgPath: 'assets/svgs/small_qr.svg',
                   title: "Enter Username",
                   onTap: () {
                     showManuallyUsernameBottomSheet(context);
                   },
-                ),
+                ),*/
               ],
             ),
             const Spacer(),
