@@ -18,14 +18,14 @@ import '../../../couriers/delivering/widgets/parcel_row.widget.dart';
 import '../../../couriers/delivering/widgets/search_button.widget.dart';
 
 
-class ShipmentMenuScreen extends StatefulWidget {
-  const ShipmentMenuScreen({super.key});
+class ShipmentExpiredMenuScreen extends StatefulWidget {
+  const ShipmentExpiredMenuScreen({super.key});
 
   @override
-  State<ShipmentMenuScreen> createState() => _ShipmentMenuScreenState();
+  State<ShipmentExpiredMenuScreen> createState() => _ShipmentExpiredMenuScreenState();
 }
 
-class _ShipmentMenuScreenState extends State<ShipmentMenuScreen> {
+class _ShipmentExpiredMenuScreenState extends State<ShipmentExpiredMenuScreen> {
   late Future<ParcelsResponse> _parcelsFuture;
   String? _pudoId;
 
@@ -67,7 +67,7 @@ class _ShipmentMenuScreenState extends State<ShipmentMenuScreen> {
 
     setState(() {
       _parcelsFuture = ParcelsService.instance.getParcelsByStatus(
-        status: ParcelStatusType.courierReceived.apiValue,
+        status: ParcelStatusType.expired.apiValue,
         pudoId: _pudoId!,
       );
     });
@@ -113,7 +113,9 @@ class _ShipmentMenuScreenState extends State<ShipmentMenuScreen> {
     return TemplateAppScaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
-        child: FutureBuilder<ParcelsResponse>(
+        child: _pudoId == null
+            ? const Center(child: LoadingWidget())
+            :FutureBuilder<ParcelsResponse>(
           future: _parcelsFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -127,7 +129,7 @@ class _ShipmentMenuScreenState extends State<ShipmentMenuScreen> {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  SecondaryAppBar(title: 'Pickup Point Parcels'),
+                  SecondaryAppBar(title: 'Expired Parcels'),
                   SizedBox(height: 28),
                   //search container
                   Container(
@@ -253,17 +255,17 @@ class _ShipmentMenuScreenState extends State<ShipmentMenuScreen> {
                                           width: 10,
                                           height: 10,
                                           decoration: const BoxDecoration(
-                                            color: Color(0xFF16A34A),
+                                            color: Color(0xFFFF0000),
                                             shape: BoxShape.circle,
                                           ),
                                         ),
                                         const SizedBox(width: 6),
                                         Text(
-                                          "Received",
+                                          "Expired",
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
-                                            color: Color(0xFF16A34A),
+                                            color: Color(0xFFFF0000),
                                           ),
                                         ),
                                       ],
