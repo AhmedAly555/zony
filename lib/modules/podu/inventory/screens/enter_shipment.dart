@@ -9,7 +9,8 @@ import '../../../../views/widgets/secondary_appbar.dart';
 import '../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../views/widgets/total_parcels_approved.widget.dart';
 import '../widgets/parcel_status_item.dart';
-import 'shipments_menu.dart';
+import 'shipment_expired_menu.dart';
+import 'shipments_ready_menu.dart';
 
 class EnterShipment extends StatefulWidget {
   const EnterShipment({super.key});
@@ -66,7 +67,7 @@ class _EnterShipmentState extends State<EnterShipment> {
       final responseExpiredReceived = await ParcelsService.instance
           .getParcelsByStatus(
             pudoId: pudoId,
-            status: ParcelStatusType.expiredReceived.apiValue,
+            status: ParcelStatusType.expired.apiValue,
           );
       //print('Parcels API call succeeded.');
 
@@ -101,7 +102,7 @@ class _EnterShipmentState extends State<EnterShipment> {
                       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
                       child: Column(
               children: [
-                const SecondaryAppBar(title: 'Parcel Approve'),
+                const SecondaryAppBar(title: 'Inventory'),
                 const SizedBox(height: 70),
                 TotalParcelsCounter(
                   title: 'Total Approved',
@@ -123,7 +124,7 @@ class _EnterShipmentState extends State<EnterShipment> {
                         isSelected: selectedIndex == 0,
                         onTap: () {
                           setState(() => selectedIndex = 0);
-                          AppNavigator.navigateTo(context, () => ShipmentMenuScreen());
+                          AppNavigator.navigateTo(context, () => ShipmentReadyMenuScreen());
                         },
                       ),
                       const SizedBox(height: 20),
@@ -140,7 +141,10 @@ class _EnterShipmentState extends State<EnterShipment> {
                         title: 'Expired',
                         count: totalExpiredParcels ?? 0,
                         isSelected: selectedIndex == 2,
-                        onTap: () => setState(() => selectedIndex = 2),
+                        onTap: () {
+                          setState(() => selectedIndex = 2);
+                          AppNavigator.navigateTo(context, () => ShipmentExpiredMenuScreen());
+                        },
                       ),
                     ],
                   ),
