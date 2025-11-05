@@ -1,4 +1,7 @@
  import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:zony/views/screens/splash_screen.dart';
 
 
@@ -12,6 +15,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      locale: const Locale('en'),
+      localizationsDelegates: [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
       title: 'Zony',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

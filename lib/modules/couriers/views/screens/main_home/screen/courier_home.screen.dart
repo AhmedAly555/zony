@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../controllers/courier_main_home_controller.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../../../models/profile_model.dart';
 import '../../../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../../../services/shered_preferences/profile_storage.dart';
@@ -13,12 +14,11 @@ import '../../../../../../views/widgets/custom_container_icon.widget.dart';
 import '../../../../../../views/widgets/custom_zony_logo.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../../../views/widgets/toasts.dart';
-import '../../../../../couriers/views/screens/main_home/screen/courier_delivering_screen.dart';
+import '../../../../podus&parcels/all_podus.dart';
+import '../../../../podus&parcels/podu_details_and_parcels/podu_details_and_parcels.screen.dart';
 import '../../../../recieve_expired/screens/expired_receiving.screen.dart';
 import '../../../widgets/custom_home_service_container.widget.dart';
 import '../../notification.screen.dart';
-import 'courier_main_home_screen.dart';
-import 'courier_receiving_screen.dart';
 
 class CourierHomeScreen extends StatefulWidget {
   const CourierHomeScreen({super.key});
@@ -115,7 +115,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
               //Account
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 14),
-                child: Text('Account', style: AppTextStyles.textStyle14),
+                child: Text(S.of(context).account, style: AppTextStyles.textStyle14),
               ),
               Container(
                 //margin: EdgeInsets.all(16.0),
@@ -228,18 +228,20 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                       );
                     },
                   ),
-                  /*CustomHomeServiceContainer(
+                  CustomHomeServiceContainer(
                     title: 'My Parcels',
                     svgIconPath: 'assets/svgs/my_parcels.svg',
-                    onTap: () {},
-                  ),*/
-                  /*CustomHomeServiceContainer(
+                    onTap: () {
+                      AppNavigator.navigateTo(context, () => PDOUDetailsAndParceis());
+                    },
+                  ),
+                  CustomHomeServiceContainer(
                     title: 'PODUs',
                     svgIconPath: 'assets/svgs/my_parcels.svg',
                     onTap: () {
                       AppNavigator.navigateTo(context, () => AllPODUsScreen());
                     },
-                  ),*/
+                  ),
                 ],
               ),
             ],
