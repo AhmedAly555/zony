@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../../../controllers/courier_main_home_controller.dart';
 import '../../../../../../models/profile_model.dart';
 import '../../../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../../../services/shered_preferences/profile_storage.dart';
@@ -13,8 +14,10 @@ import '../../../../../../views/widgets/custom_zony_logo.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../../../views/widgets/toasts.dart';
 import '../../../../../couriers/views/screens/main_home/screen/courier_delivering_screen.dart';
+import '../../../../recieve_expired/screens/expired_receiving.screen.dart';
 import '../../../widgets/custom_home_service_container.widget.dart';
 import '../../notification.screen.dart';
+import 'courier_main_home_screen.dart';
 import 'courier_receiving_screen.dart';
 
 class CourierHomeScreen extends StatefulWidget {
@@ -201,19 +204,27 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                     title: 'Receiving',
                     svgIconPath: 'assets/svgs/receiving.svg',
                     onTap: () {
-                      AppNavigator.navigateTo(
-                        context,
-                        () => CourierReceivingScreen(),
-                      );
+                      //AppNavigator.navigateTo(context, () => CourierMainHomeScreen(initialIndex: 1));
+                      CourierMainHomeController.instance.changeTab(1);
                     },
                   ),
                   CustomHomeServiceContainer(
                     title: 'Delivering',
                     svgIconPath: 'assets/svgs/delivering.svg',
                     onTap: () {
+                      //AppNavigator.navigateTo(context, () => CourierMainHomeScreen(initialIndex: 2));
+                      CourierMainHomeController.instance.changeTab(2);
+
+
+                    },
+                  ),
+                  CustomHomeServiceContainer(
+                    title: 'Expired',
+                    svgIconPath: 'assets/svgs/delivering.svg',
+                    onTap: () {
                       AppNavigator.navigateTo(
                         context,
-                        () => CourierDeliveringScreen(),
+                            () => ExpiredReceivingScreen(),
                       );
                     },
                   ),

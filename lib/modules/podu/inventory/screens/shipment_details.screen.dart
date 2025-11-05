@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../theme/app_text_styles.dart';
 import '../../../../../views/widgets/custom_parcel_details.dart';
-import '../../../../../views/widgets/secondary_appbar.dart';
+import '../../../../../views/widgets/default_appbar.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../models/parcel_model.dart';
 import '../../../../services/parcel_service.dart';
@@ -74,7 +74,7 @@ class _ShipmentDetailsScreenState extends State<ShipmentDetailsScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
         child: Column(
           children: [
-            SecondaryAppBar(title: 'Parcel Details'),
+            AppBarHaveArrow(title: 'Parcel Details'),
 
             const SizedBox(height: 24),
 

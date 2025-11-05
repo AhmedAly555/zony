@@ -4,7 +4,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:zony/modules/podu/inventory/screens/shipment_details.screen.dart';
 
 import '../../../../../theme/app_text_styles.dart';
-import '../../../../../views/widgets/secondary_appbar.dart';
+import '../../../../../views/widgets/default_appbar.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../models/get_parcels_response_model.dart';
 import '../../../../services/enums/parcel_status_type.dart';
@@ -129,7 +129,7 @@ class _ShipmentExpiredMenuScreenState extends State<ShipmentExpiredMenuScreen> {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  SecondaryAppBar(title: 'Expired Parcels'),
+                  AppBarHaveArrow(title: 'Expired Parcels'),
                   SizedBox(height: 28),
                   //search container
                   Container(

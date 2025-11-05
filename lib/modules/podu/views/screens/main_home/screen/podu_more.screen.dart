@@ -5,6 +5,7 @@ import '../../../../../../services/size_config.dart';
 import '../../../../../../theme/app_text_styles.dart';
 import '../../../../../../views/widgets/bottom_sheet/language_sheet.dart';
 import '../../../../../../views/widgets/bottom_sheet/log_out_bottom_sheet.dart';
+import '../../../../../../views/widgets/default_appbar.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../../couriers/views/widgets/coustome_row_more_screen.widget.dart';
 import '../../account_settings.screen.dart';
@@ -86,12 +87,7 @@ class _PoduMoreScreenState extends State<PoduMoreScreen> {
       body: Column(
         children: [
           const SizedBox(height: 24),
-          const Center(
-            child: Text(
-              'More Settings',
-              style: AppTextStyles.textStyle24black,
-            ),
-          ),
+          const HomeAppBar(title: 'More Settings'),
           //const SizedBox(height: 50),
           Spacer(),
           CoustomeRowMoreScreen(

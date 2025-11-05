@@ -4,11 +4,11 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import '../../../../../../services/size_config.dart';
 import '../../../../../../views/widgets/bottom_sheet/choose_way_bottom_sheet.dart';
 import '../../../../../../views/widgets/bottom_sheet/qr_scanner.dart';
-import '../../../../../../views/widgets/secondary_appbar.dart';
+import '../../../../../../views/widgets/default_appbar.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../../../views/widgets/toasts.dart';
 import '../../../../../recieve_parcel/widgets/custom_menu_recieve.widget.dart';
-import '../../../../recieve_expired/screens/parcel_details.screen.dart';
+import '../../../../recieve/screens/parcel_details.screen.dart';
 
 class CourierReceivingScreen extends StatelessWidget {
   const CourierReceivingScreen({super.key});
@@ -89,7 +89,7 @@ class CourierReceivingScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
         child: Column(
           children: [
-            const SecondaryAppBar(title: 'Enter Parcel'),
+            const HomeAppBar(title: 'Enter Parcel'),
             const Spacer(),
             CustomMenuRecieve(
               items: [

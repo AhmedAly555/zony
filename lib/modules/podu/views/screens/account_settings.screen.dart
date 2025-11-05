@@ -4,7 +4,7 @@ import '../../../../../../views/widgets/default_text_filed.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../models/profile_model.dart';
 import '../../../../services/shered_preferences/profile_storage.dart';
-import '../../../../views/widgets/secondary_appbar.dart';
+import '../../../../views/widgets/default_appbar.dart';
 
 
 class AccountSettingsScreen extends StatelessWidget {
@@ -23,7 +23,7 @@ class AccountSettingsScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
           child: Column(
             children: [
-              SecondaryAppBar(title: 'Account Settings',),
+              AppBarHaveArrow(title: 'Account Settings',),
 
               FutureBuilder<Profile?>(
                 future: ProfileStorage.getProfile(),

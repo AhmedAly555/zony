@@ -12,7 +12,7 @@ import '../../../views/widgets/circler_icon.dart';
 import '../../../views/widgets/custom_parcel_details.dart';
 import '../../../views/widgets/default_button.widget.dart';
 import '../../../views/widgets/loading.widget.dart';
-import '../../../views/widgets/secondary_appbar.dart';
+import '../../../views/widgets/default_appbar.dart';
 import '../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../couriers/delivering/widgets/parcel_row.widget.dart';
 import '../../../views/widgets/no_data_found.widget.dart';
@@ -179,11 +179,7 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
   Widget build(BuildContext context) {
     return TemplateAppScaffold(
       body:
-          isLoading
-              ? const Center(child: LoadingWidget())
-              : parcels.isEmpty
-              ? const Center(child: NoDataFoundWidget())
-              : RefreshIndicator(
+           RefreshIndicator(
                 onRefresh: fetchwaitingConfirmationParcels,
                 color: Color(0xFF49159B),
 
@@ -196,7 +192,7 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
                     ),
                     child: Column(
                       children: [
-                        const SecondaryAppBar(title: 'Parcel Approve'),
+                        const HomeAppBar(title: 'Parcel Approve'),
                         const SizedBox(height: 24),
                         TotalParcelsCounter(
                           //counterKey: _counterKey,
@@ -205,12 +201,27 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
                         ),
                         const SizedBox(height: 24),
 
+                        if (isLoading)
+
+                          LoadingWidget()
+                        else if (parcels.isEmpty)
+
+                          Padding(
+                            padding: const EdgeInsets.only(top: 100),
+                            child: NoDataFoundWidget(),
+                          )
+                        else
+
                         // show all parcels
                         //collection for
                         for (final parcel in parcels)
                           Padding(
                             padding: const EdgeInsets.only(bottom: 16.0),
-                            child: CustomParcelDetails(
+                            child: /*isLoading
+                                ? const Center(child: LoadingWidget())
+                                : parcels.isEmpty
+                                ? const Center(child: NoDataFoundWidget())
+                                :*/CustomParcelDetails(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

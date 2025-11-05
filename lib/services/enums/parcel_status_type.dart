@@ -4,6 +4,7 @@ enum ParcelStatusType {
   PUDOReceived,
   customerReceived,
   expired,
+  expiredReceived,
   pending,
 }
 
@@ -21,6 +22,8 @@ extension ParcelStatusTypeExtension on ParcelStatusType {
         return 'customer_received';
       case ParcelStatusType.expired:
         return 'expired';
+      case ParcelStatusType.expiredReceived:
+        return 'expired_received';
       case ParcelStatusType.pending:
         return 'pending';
     }
