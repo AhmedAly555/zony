@@ -12,19 +12,20 @@ import '../../../../services/parcel_service.dart';
 import '../../../../views/widgets/bottom_sheet/qr_scanner.dart';
 import '../../../../views/widgets/toasts.dart';
 import '../../../../views/widgets/no_data_found.widget.dart';
-import '../widgets/parcel_row.widget.dart';
-import '../widgets/search_button.widget.dart';
+import '../../delivering/widgets/parcel_row.widget.dart';
+import '../../delivering/widgets/search_button.widget.dart';
 
-class PudoParcelsScreen extends StatefulWidget {
+
+class PudoExpiredParcelsScreen extends StatefulWidget {
   final String pudoId;
 
-  const PudoParcelsScreen({super.key, required this.pudoId});
+  const PudoExpiredParcelsScreen({super.key, required this.pudoId});
 
   @override
-  State<PudoParcelsScreen> createState() => _PudoParcelsScreenState();
+  State<PudoExpiredParcelsScreen> createState() => _PudoExpiredParcelsScreenState();
 }
 
-class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
+class _PudoExpiredParcelsScreenState extends State<PudoExpiredParcelsScreen> {
   late Future<ParcelsResponse> future;
 
   @override
@@ -36,7 +37,7 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
 
   void _loadParcels() {
     future = ParcelsService.instance.getParcelsByStatus(
-      status: ParcelStatusType.courierReceived.apiValue,
+      status: ParcelStatusType.expired.apiValue,
       pudoId: '${widget.pudoId}',
     );
     //print('Loading parcels for Pudo ID: ${widget.pudoId}');
@@ -227,7 +228,7 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                           width: 10,
                                           height: 10,
                                           decoration: const BoxDecoration(
-                                            color: Color(0xFF16A34A),
+                                            color: Color(0xFFFF0000),
                                             shape: BoxShape.circle,
                                           ),
                                         ),
@@ -237,7 +238,7 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
-                                            color: Color(0xFF16A34A),
+                                            color: Color(0xFFFF0000),
                                           ),
                                         ),
                                       ],

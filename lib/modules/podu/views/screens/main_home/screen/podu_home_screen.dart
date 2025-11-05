@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:zony/modules/podu/views/screens/main_home/screen/podu_delivering_screen.dart';
 
+import '../../../../../../controllers/pudu_main_home_controller.dart';
 import '../../../../../../models/pudo_model.dart';
 import '../../../../../../services/get_pudos_service.dart';
 import '../../../../../../services/navigator.services/app_navigator.services.dart';
@@ -282,13 +283,15 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                     CustomHomeServiceContainer(
                       title: 'Receiving',
                       svgIconPath: 'assets/svgs/receiving.svg', onTap: () {
-                        AppNavigator.navigateTo(context, () => ParcelApproveScreen());
+                        //AppNavigator.navigateTo(context, () => ParcelApproveScreen());
+                      PuduMainHomeController.instance.changeTab(1);
                     },
                     ),
                     CustomHomeServiceContainer(
                       title: 'Delivering',
                       svgIconPath: 'assets/svgs/delivering.svg', onTap: () {
-                        AppNavigator.navigateTo(context, () => PoduDeliveringScreen());
+                        //AppNavigator.navigateTo(context, () => PoduDeliveringScreen());
+                      PuduMainHomeController.instance.changeTab(2);
                     },
                     ),
                     CustomHomeServiceContainer(

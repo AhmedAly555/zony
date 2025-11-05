@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../theme/app_text_styles.dart';
-import '../../../../../views/widgets/secondary_appbar.dart';
+import '../../../../../views/widgets/default_appbar.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../delivering/widgets/parcel_row.widget.dart';
 import '../../delivering/widgets/search_button.widget.dart';
@@ -19,7 +19,7 @@ class PudoParcelsScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SecondaryAppBar(title: 'Pickup Point Parcels'),
+              AppBarHaveArrow(title: 'Pickup Point Parcels'),
               SizedBox(height: 28),
               Container(
                 width: double.infinity,

@@ -5,7 +5,7 @@ import '../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../services/parcel_service.dart';
 import '../../../../services/shered_preferences/pudos_storage.dart';
 import '../../../../views/widgets/loading.widget.dart';
-import '../../../../views/widgets/secondary_appbar.dart';
+import '../../../../views/widgets/default_appbar.dart';
 import '../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../views/widgets/total_parcels_approved.widget.dart';
 import '../widgets/parcel_status_item.dart';
@@ -102,7 +102,7 @@ class _EnterShipmentState extends State<EnterShipment> {
                       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
                       child: Column(
               children: [
-                const SecondaryAppBar(title: 'Inventory'),
+                const AppBarHaveArrow(title: 'Inventory'),
                 const SizedBox(height: 70),
                 TotalParcelsCounter(
                   title: 'Total Approved',

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:zony/views/widgets/secondary_appbar.dart';
+import 'package:zony/views/widgets/default_appbar.dart';
 
 import '../../../../services/size_config.dart';
 import '../../../../views/widgets/bottom_sheet/pickup_point_bottom_sheet.dart';
@@ -20,7 +20,7 @@ class AllPODUsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SecondaryAppBar(title: 'My PODUs'),
+              AppBarHaveArrow(title: 'My PODUs'),
               SizedBox(height: 28,),
               // Search Row with TextField and Map Button
               Row(

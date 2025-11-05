@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SecondaryAppBar extends StatelessWidget {
+class AppBarHaveArrow extends StatelessWidget {
   final String title;
+  //final Widget? arrow;
 
-  const  SecondaryAppBar({
+  const  AppBarHaveArrow({
     super.key,
-    required this.title,
+    required this.title, //this.arrow,
   });
 
 
@@ -55,3 +56,27 @@ class SecondaryAppBar extends StatelessWidget {
     );
   }
 }
+
+class HomeAppBar extends StatelessWidget {
+  final String title;
+  //final Widget? arrow;
+
+  const  HomeAppBar({
+    super.key,
+    required this.title, //this.arrow,
+  });
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: const TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+      ),
+    );
+  }
+}
+

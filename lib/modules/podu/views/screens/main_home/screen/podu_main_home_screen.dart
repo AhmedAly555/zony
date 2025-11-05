@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:zony/modules/couriers/views/screens/main_home/screen/courier_receiving_screen.dart';
 
@@ -43,3 +44,44 @@ class _PoduMainHomeScreenState extends State<PoduMainHomeScreen> {
     );
   }
 }
+*/
+
+import 'package:flutter/material.dart';
+import '../../../../../../controllers/pudu_main_home_controller.dart';
+import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
+import '../../../../Recieve/parcel_approve_screen.dart';
+import 'podu_delivering_screen.dart';
+import 'podu_home_screen.dart';
+import 'podu_more.screen.dart';
+
+class PoduMainHomeScreen extends StatelessWidget {
+  const PoduMainHomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = PuduMainHomeController.instance;
+
+    final List<Widget> screens = const [
+      PoduHomeScreen(),
+      ParcelApproveScreen(),
+      PoduDeliveringScreen(),
+      PoduMoreScreen(),
+    ];
+
+    return ValueListenableBuilder<int>(
+      valueListenable: controller.currentTabIndex,
+      builder: (context, selectedIndex, _) {
+        return TemplateAppScaffold(
+          body: IndexedStack(
+            index: selectedIndex,
+            children: screens,
+          ),
+          showBottomNavBar: true,
+          currentIndex: selectedIndex,
+          onNavTap: controller.changeTab,
+        );
+      },
+    );
+  }
+}
+

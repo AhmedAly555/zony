@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:zony/modules/couriers/recieve_expired/screens/successful_recieve.screen.dart';
+import 'package:zony/modules/couriers/recieve_expired/screens/successful_expired_recieve.screen.dart';
 
 import '../../../../../theme/app_text_styles.dart';
 import '../../../../../views/widgets/custom_parcel_details.dart';
 import '../../../../../views/widgets/default_button.widget.dart';
-import '../../../../../views/widgets/secondary_appbar.dart';
+import '../../../../../views/widgets/default_appbar.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../models/parcel_model.dart';
 import '../../../../services/enums/parcel_image_type.dart';
@@ -244,7 +244,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       showCorrectToast(message: '✅ Parcel Recieve successfully!');
       AppNavigator.navigateAndRemoveUntil(
         context,
-        () => const SuccessfulRecieveScreen(),
+        () => const SuccessfulExpiredRecieveScreen(),
       );
     } catch (e, s) {
       Navigator.pop(context); // Closes the loading indicator in case of error
@@ -323,7 +323,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
         child: Column(
           children: [
-            SecondaryAppBar(title: 'Parcel Details'),
+            AppBarHaveArrow(title: 'Parcel Details'),
 
             const SizedBox(height: 24),
 
