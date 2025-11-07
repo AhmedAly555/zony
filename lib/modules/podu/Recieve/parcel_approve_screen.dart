@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zony/services/extensions/parcel_status_extension.dart';
 import 'package:zony/views/widgets/toasts.dart';
 import '../../../models/parcel_model.dart';
 import '../../../services/enums/parcel_status_type.dart';
@@ -120,7 +121,7 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
 
       await parcelStatusService.updateParcelStatus(
         parcelId: parcelId,
-        status: ParcelStatusType.PUDOReceived.apiValue,
+        status: ParcelStatusType.pudoReceived.apiValue,
         pudoId: pudoId,
       );
 

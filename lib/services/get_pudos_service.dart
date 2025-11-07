@@ -5,6 +5,7 @@ import 'api_service.dart';
 import 'shered_preferences/pudos_storage.dart';
 
 /// Service responsible for handling PUDO-related API calls
+/// and save them locally by using SharedPreferences
 class PudoService {
   static final PudoService instance = PudoService._internal(ApiService.instance);
 

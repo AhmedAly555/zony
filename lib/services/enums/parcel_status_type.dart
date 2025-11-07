@@ -1,3 +1,4 @@
+/*
 enum ParcelStatusType {
   courierReceived,
   waitingConfirmation,
@@ -29,3 +30,14 @@ extension ParcelStatusTypeExtension on ParcelStatusType {
     }
   }
 }
+*/
+enum ParcelStatusType {
+  courierReceived,
+  waitingConfirmation,
+  pudoReceived,
+  customerReceived,
+  expired,
+  expiredReceived,
+  pending,
+}
+

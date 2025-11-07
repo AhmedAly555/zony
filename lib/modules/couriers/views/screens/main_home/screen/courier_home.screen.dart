@@ -15,6 +15,7 @@ import '../../../../../../views/widgets/custom_zony_logo.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../../../views/widgets/toasts.dart';
 import '../../../../podus&parcels/all_podus.dart';
+import '../../../../podus&parcels/my_parcels.dart';
 import '../../../../podus&parcels/podu_details_and_parcels/podu_details_and_parcels.screen.dart';
 import '../../../../recieve_expired/screens/expired_receiving.screen.dart';
 import '../../../widgets/custom_home_service_container.widget.dart';
@@ -232,7 +233,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                     title: 'My Parcels',
                     svgIconPath: 'assets/svgs/my_parcels.svg',
                     onTap: () {
-                      AppNavigator.navigateTo(context, () => PDOUDetailsAndParceis());
+                      AppNavigator.navigateTo(context, () => MyParcelsScreen());
                     },
                   ),
                   CustomHomeServiceContainer(

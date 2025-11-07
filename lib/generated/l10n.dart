@@ -58,6 +58,46 @@ class S {
   String get account {
     return Intl.message('Account', name: 'account', desc: '', args: []);
   }
+
+  /// `My PODUs`
+  String get myPodus {
+    return Intl.message('My PODUs', name: 'myPodus', desc: '', args: []);
+  }
+
+  /// `All Parcels`
+  String get allParcels {
+    return Intl.message('All Parcels', name: 'allParcels', desc: '', args: []);
+  }
+
+  /// `Unread`
+  String get unread {
+    return Intl.message('Unread', name: 'unread', desc: '', args: []);
+  }
+
+  /// `Error: `
+  String get error {
+    return Intl.message('Error: ', name: 'error', desc: '', args: []);
+  }
+
+  /// `No PODUs found`
+  String get noPodusFound {
+    return Intl.message(
+      'No PODUs found',
+      name: 'noPodusFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No address available`
+  String get noAddressAvailable {
+    return Intl.message(
+      'No address available',
+      name: 'noAddressAvailable',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

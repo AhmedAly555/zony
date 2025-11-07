@@ -3,8 +3,10 @@ import 'package:zony/models/parcel_model.dart';
 
 import '../models/get_parcel_response_model.dart';
 import '../models/get_parcels_response_model.dart';
+import '../models/new_parcels_response_model.dart';
 import 'api_service.dart';
 
+// Singleton pattern
 class ParcelsService {
   static final ParcelsService instance = ParcelsService._internal();
 
@@ -20,6 +22,16 @@ class ParcelsService {
     }
   }
 
+  /// Fetch parcels for a specific PUDO ID (New)
+  Future<NewParcelsResponse> getNewParcelsByPudoId(String pudoId) async {
+    try {
+      final response = await ApiService.instance.get('/pudos/$pudoId/parcels');
+      return NewParcelsResponse.fromJson(response);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   /// Fetch parcels for a specific PUDO ID with a specific status
   Future<ParcelsResponse> getParcelsByStatus({
     required String pudoId,
@@ -30,7 +42,6 @@ class ParcelsService {
       final url = '/pudos/$pudoId/parcels?status=$status';
       //print('➡️ Calling URL: $url');
       //print('➡️ With params: pudoId=$pudoId, status=$status');
-
 
       final response = await ApiService.instance.get(url);
       return ParcelsResponse.fromJson(response);
@@ -56,13 +67,12 @@ class ParcelsService {
     }
   }
 
-
   /// Fetch parcel by receiving code
   // deliver from podu to customer
   Future<ParcelsResponse> getParcelByReceivingCode(
-      String pudoId,
-      String receivingCode,
-      ) async {
+    String pudoId,
+    String receivingCode,
+  ) async {
     try {
       final response = await ApiService.instance.get(
         '/pudos/$pudoId/parcels?receiving_code=$receivingCode',
@@ -94,17 +104,28 @@ class ParcelsService {
     required String barcode,
   }) async {
     try {
-
       // Build the URL with query parameters
       final url = '/parcels?barcode=$barcode';
 
       final response = await ApiService.instance.get(url);
       return ParcelsResponse.fromJson(response);
     } catch (e, s) {
-      debugPrint('❌ Error inside ParcelsService: $e');
+      //debugPrint('❌ Error inside ParcelsService: $e');
       debugPrintStack(stackTrace: s);
-      rethrow;    }
+      rethrow;
+    }
   }
 
+  /// Fetch All parcels
+  Future<ParcelsResponse> getGlobalAllParcel() async {
+    try {
+      final url = '/parcels';
+      final response = await ApiService.instance.get(url);
+      return ParcelsResponse.fromJson(response);
+    } catch (e, s) {
+      debugPrintStack(stackTrace: s);
+      rethrow;
+    }
+  }
 
 }
