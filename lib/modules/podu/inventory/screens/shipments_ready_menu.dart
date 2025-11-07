@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:zony/modules/podu/inventory/screens/shipment_details.screen.dart';
+import 'package:zony/services/extensions/parcel_status_extension.dart';
 
 import '../../../../../theme/app_text_styles.dart';
 import '../../../../../views/widgets/default_appbar.dart';
@@ -68,7 +69,7 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
 
     setState(() {
       _parcelsFuture = ParcelsService.instance.getParcelsByStatus(
-        status: ParcelStatusType.PUDOReceived.apiValue,
+        status: ParcelStatusType.pudoReceived.apiValue,
         pudoId: _pudoId!,
       );
     });

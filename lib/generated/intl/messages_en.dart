@@ -23,5 +23,13 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "account": MessageLookupByLibrary.simpleMessage("Account"),
+    "allParcels": MessageLookupByLibrary.simpleMessage("All Parcels"),
+    "error": MessageLookupByLibrary.simpleMessage("Error: "),
+    "myPodus": MessageLookupByLibrary.simpleMessage("My PODUs"),
+    "noAddressAvailable": MessageLookupByLibrary.simpleMessage(
+      "No address available",
+    ),
+    "noPodusFound": MessageLookupByLibrary.simpleMessage("No PODUs found"),
+    "unread": MessageLookupByLibrary.simpleMessage("Unread"),
   };
 }

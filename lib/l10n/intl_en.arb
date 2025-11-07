@@ -1,4 +1,10 @@
 {
     "@@locale": "en",
-    "account": "Account"
+    "account": "Account",
+    "myPodus": "My PODUs",
+    "allParcels": "All Parcels",
+    "unread": "Unread",
+    "error": "Error: ",
+    "noPodusFound": "No PODUs found",
+    "noAddressAvailable": "No address available"
 }

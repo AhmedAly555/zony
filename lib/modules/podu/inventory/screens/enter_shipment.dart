@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zony/services/extensions/parcel_status_extension.dart';
 
 import '../../../../services/enums/parcel_status_type.dart';
 import '../../../../services/navigator.services/app_navigator.services.dart';
@@ -60,7 +61,7 @@ class _EnterShipmentState extends State<EnterShipment> {
       final responsePUDOReceived = await ParcelsService.instance
           .getParcelsByStatus(
             pudoId: pudoId,
-            status: ParcelStatusType.PUDOReceived.apiValue,
+            status: ParcelStatusType.pudoReceived.apiValue,
           );
 
       // use the pudoId to get the parcels(expired_received)

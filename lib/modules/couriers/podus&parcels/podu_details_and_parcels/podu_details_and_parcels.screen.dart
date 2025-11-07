@@ -5,7 +5,8 @@ import 'podu_details.dart';
 import 'podu_parcels.dart';
 
 class PDOUDetailsAndParceis extends StatefulWidget {
-  const PDOUDetailsAndParceis({super.key});
+  final String pudoId;
+  const PDOUDetailsAndParceis({super.key, required this.pudoId});
 
   @override
   _PDOUDetailsAndParceisState createState() => _PDOUDetailsAndParceisState();
@@ -39,7 +40,7 @@ class _PDOUDetailsAndParceisState extends State<PDOUDetailsAndParceis> {
                         borderRadius: BorderRadius.circular(12),
                         color: selectedTabIndex == 0
                             ? Color(0xFF49159B)
-                            : Colors.transparent,
+                            : Colors.white,
                       ),
                       child: Center(
                         child: Text(
@@ -56,7 +57,7 @@ class _PDOUDetailsAndParceisState extends State<PDOUDetailsAndParceis> {
                     ),
                   ),
                 ),
-                SizedBox(width: 1),
+                SizedBox(width: 20),
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
@@ -70,7 +71,7 @@ class _PDOUDetailsAndParceisState extends State<PDOUDetailsAndParceis> {
                         borderRadius: BorderRadius.circular(12),
                         color: selectedTabIndex == 1
                             ? Color(0xFF49159B)
-                            : Colors.transparent,
+                            : Colors.white,
                       ),
                       child: Center(
                         child: Text(
@@ -94,8 +95,8 @@ class _PDOUDetailsAndParceisState extends State<PDOUDetailsAndParceis> {
           // Content Area
           Expanded(
             child: selectedTabIndex == 0
-                ? PODUDetails()
-                : PODOParcels(),
+                ? PODUDetails(pudoId: widget.pudoId)
+                : PudoParcels(pudoId: widget.pudoId),
           ),
         ],
       ),

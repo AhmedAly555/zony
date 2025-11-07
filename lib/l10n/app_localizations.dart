@@ -100,6 +100,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Account'**
   String get account;
+
+  /// No description provided for @myPodus.
+  ///
+  /// In en, this message translates to:
+  /// **'My PODUs'**
+  String get myPodus;
+
+  /// No description provided for @allParcels.
+  ///
+  /// In en, this message translates to:
+  /// **'All Parcels'**
+  String get allParcels;
+
+  /// No description provided for @unread.
+  ///
+  /// In en, this message translates to:
+  /// **'Unread'**
+  String get unread;
+
+  /// No description provided for @error.
+  ///
+  /// In en, this message translates to:
+  /// **'Error: '**
+  String get error;
+
+  /// No description provided for @noPodusFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No PODUs found'**
+  String get noPodusFound;
+
+  /// No description provided for @noAddressAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No address available'**
+  String get noAddressAvailable;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

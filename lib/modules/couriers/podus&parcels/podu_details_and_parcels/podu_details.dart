@@ -1,15 +1,18 @@
+/*
 import 'package:flutter/material.dart';
 
 import '../../delivering/widgets/parcel_row.widget.dart';
 
 class PODUDetails extends StatefulWidget {
-  const PODUDetails({super.key});
+  final String pudoId;
+  const PODUDetails({super.key, required this.pudoId});
 
   @override
   State<PODUDetails> createState() => _PODUDetailsState();
 }
 
 class _PODUDetailsState extends State<PODUDetails> {
+  //final String pudoId;
   int selectedImageIndex = 0;
 
   final List<String> liveLocationImages = [
@@ -44,6 +47,7 @@ class _PODUDetailsState extends State<PODUDetails> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
+
                 Text(
                   'Customer Info',
                   style: TextStyle(
@@ -190,6 +194,341 @@ class _PODUDetailsState extends State<PODUDetails> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}*/
+import 'package:flutter/material.dart';
+
+import '../../../../models/single_pudo_response_model.dart';
+import '../../../../services/get_my_pudos_service.dart';
+import '../../../../views/widgets/loading.widget.dart';
+import '../../delivering/widgets/parcel_row.widget.dart';
+
+class PODUDetails extends StatefulWidget {
+  final String pudoId;
+
+  const PODUDetails({
+    super.key,
+    required this.pudoId,
+  });
+
+  @override
+  State<PODUDetails> createState() => _PODUDetailsState();
+}
+
+class _PODUDetailsState extends State<PODUDetails> {
+  int selectedImageIndex = 0;
+  bool isLoading = true;
+  String? errorMessage;
+  SinglePudoResponse? pudoResponse;
+
+  final List<String> fallbackImages = [
+    'assets/images/warehouse1.jpg',
+    'assets/images/warehouse2.jpg',
+    'assets/images/warehouse3.jpg',
+    'assets/images/warehouse4.jpg',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchPudoDetails();
+  }
+
+  Future<void> fetchPudoDetails() async {
+    setState(() {
+      isLoading = true;
+      errorMessage = null;
+    });
+
+    try {
+      final response = await GetMyPudosService.instance.getSinglePudoById(widget.pudoId);
+
+      if (mounted) {
+        setState(() {
+          pudoResponse = response;
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          errorMessage = 'Failed to fetch pudo details: $e';
+          isLoading = false;
+        });
+      }
+    }
+  }
+
+  List<String> get displayImages {
+    if (pudoResponse?.pudo.gallery != null && pudoResponse!.pudo.gallery.isNotEmpty) {
+      return pudoResponse!.pudo.gallery.map((e) => e.toString()).toList();
+    }
+    return fallbackImages;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Loading State
+    if (isLoading) {
+      return const Center(
+        child: LoadingWidget(),
+      );
+    }
+
+    // Error State
+    if (errorMessage != null || pudoResponse == null) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.error_outline,
+              size: 64,
+              color: Colors.grey[400],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              errorMessage ?? 'Failed to fetch pudo details',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[600],
+              ),
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: fetchPudoDetails,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF49159B),
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text(
+                'Try Again',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    // Success State - Display Data
+    final pudo = pudoResponse!.pudo;
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 18),
+      child: Column(
+        children: [
+          // PUDO Info Container
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 1,
+                  blurRadius: 5,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'PUDO Info',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFF49159B),
+                  ),
+                ),
+                const SizedBox(height: 18),
+                InfoItem(
+                  svgPath: 'assets/svgs/profile_icon_with_background.svg',
+                  text: pudo.name,
+                ),
+                const SizedBox(height: 16),
+                InfoItem(
+                  svgPath: 'assets/svgs/location_icon_with_background.svg',
+                  text: pudo.districtName?? "No Address Found",
+                ),
+                const SizedBox(height: 16),
+                InfoItem(
+                  svgPath: 'assets/svgs/call_icon_with_background.svg',
+                  text: pudo.partnerName,
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 18),
+
+          // Gallery Container
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 1,
+                  blurRadius: 5,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Gallery',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black87,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const Divider(color: Color(0xFFF4F4F4), thickness: 1),
+                const SizedBox(height: 16),
+
+                // Main Image
+                Container(
+                  width: double.infinity,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    color: Colors.grey[200],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: displayImages[selectedImageIndex].startsWith('http')
+                        ? Image.network(
+                      displayImages[selectedImageIndex],
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return _buildImagePlaceholder();
+                      },
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
+                                : null,
+                            color: const Color(0xFF49159B),
+                          ),
+                        );
+                      },
+                    )
+                        : Image.asset(
+                      displayImages[selectedImageIndex],
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return _buildImagePlaceholder();
+                      },
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Thumbnail Images
+                if (displayImages.length > 1)
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(
+                        displayImages.length,
+                            (index) => Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selectedImageIndex = index;
+                              });
+                            },
+                            child: Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: selectedImageIndex == index
+                                      ? const Color(0xFF6B46C1)
+                                      : Colors.transparent,
+                                  width: 2,
+                                ),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(6),
+                                child: displayImages[index].startsWith('http')
+                                    ? Image.network(
+                                  displayImages[index],
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return _buildSmallImagePlaceholder();
+                                  },
+                                )
+                                    : Image.asset(
+                                  displayImages[index],
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return _buildSmallImagePlaceholder();
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildImagePlaceholder() {
+    return Container(
+      color: Colors.grey[300],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.warehouse, size: 50, color: Colors.grey[600]),
+          const SizedBox(height: 8),
+          Text(
+            'No Image',
+            style: TextStyle(
+              color: Colors.grey[600],
+              fontSize: 16,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSmallImagePlaceholder() {
+    return Container(
+      color: Colors.grey[300],
+      child: Icon(
+        Icons.warehouse,
+        color: Colors.grey[600],
+        size: 30,
       ),
     );
   }

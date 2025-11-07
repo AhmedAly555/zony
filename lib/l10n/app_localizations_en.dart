@@ -10,4 +10,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get account => 'Account';
+
+  @override
+  String get myPodus => 'My PODUs';
+
+  @override
+  String get allParcels => 'All Parcels';
+
+  @override
+  String get unread => 'Unread';
+
+  @override
+  String get error => 'Error: ';
+
+  @override
+  String get noPodusFound => 'No PODUs found';
+
+  @override
+  String get noAddressAvailable => 'No address available';
 }
