@@ -22,35 +22,6 @@ class NotificationItem extends StatelessWidget {
       children: [
         Row(
           children: [
-            // Green circle indicator
-            /*Container(
-              width: 10,
-              height: 10,
-              decoration: BoxDecoration(
-                color: Colors.green,
-                shape: BoxShape.circle,
-              ),
-            ),
-            SizedBox(width: 12),*/
-
-            // Grey circle with icon
-            /*Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                shape: BoxShape.circle,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SvgPicture.asset(
-                  'assets/svgs/delivering.svg',
-                  width: 4,
-                  height: 6,
-                  color: Color(0xFF49159B),
-                ),
-              ),
-            ),*/
             Container(
               padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 7.0),
               decoration: BoxDecoration(

@@ -34,7 +34,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
     await Clipboard.setData(ClipboardData(text: username));
 
     if (context.mounted) {
-      showCorrectToast(message: 'Username copied to clipboard');
+      showCorrectToast(message: S.of(context).usernameCopiedToClipboard);
     }
   }
 
@@ -133,7 +133,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                     }
 
                     if (!snapshot.hasData || snapshot.data == null) {
-                      return Center(child: Text("No Data"));
+                      return Center(child: Text(S.of(context).noData));
                     }
 
                     final profile = snapshot.data!;
@@ -197,12 +197,12 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
               // Services
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 14),
-                child: Text('Services', style: AppTextStyles.textStyle14),
+                child: Text(S.of(context).services, style: AppTextStyles.textStyle14),
               ),
               Column(
                 children: [
                   CustomHomeServiceContainer(
-                    title: 'Receiving',
+                    title: S.of(context).receiving,
                     svgIconPath: 'assets/svgs/receiving.svg',
                     onTap: () {
                       //AppNavigator.navigateTo(context, () => CourierMainHomeScreen(initialIndex: 1));
@@ -210,7 +210,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                     },
                   ),
                   CustomHomeServiceContainer(
-                    title: 'Delivering',
+                    title: S.of(context).delivering,
                     svgIconPath: 'assets/svgs/delivering.svg',
                     onTap: () {
                       //AppNavigator.navigateTo(context, () => CourierMainHomeScreen(initialIndex: 2));
@@ -220,7 +220,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                     },
                   ),
                   CustomHomeServiceContainer(
-                    title: 'Expired',
+                    title: S.of(context).expired,
                     svgIconPath: 'assets/svgs/delivering.svg',
                     onTap: () {
                       AppNavigator.navigateTo(
@@ -230,14 +230,14 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                     },
                   ),
                   CustomHomeServiceContainer(
-                    title: 'My Parcels',
+                    title: S.of(context).myParcels,
                     svgIconPath: 'assets/svgs/my_parcels.svg',
                     onTap: () {
                       AppNavigator.navigateTo(context, () => MyParcelsScreen());
                     },
                   ),
                   CustomHomeServiceContainer(
-                    title: 'PODUs',
+                    title: S.of(context).podus,
                     svgIconPath: 'assets/svgs/my_parcels.svg',
                     onTap: () {
                       AppNavigator.navigateTo(context, () => AllPODUsScreen());

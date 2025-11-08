@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zony/generated/l10n.dart';
 import '../../../models/get_parcels_response_model.dart';
 import '../../../models/parcel_model.dart';
 import '../../../services/extensions/parcel_status_extension.dart';
@@ -35,7 +36,7 @@ class _MyParcelsScreenState extends State<MyParcelsScreen> {
     final response = await ParcelsService.instance.getGlobalAllParcel();
 
     if (mounted) {
-      showCorrectToast(message: 'Parcels refreshed successfully');
+      showCorrectToast(message: S.of(context).parcelsRefreshedSuccessfully);
 
     }
 
@@ -57,12 +58,12 @@ class _MyParcelsScreenState extends State<MyParcelsScreen> {
             } else if (snapshot.hasError) {
               return Center(
                 child: Text(
-                  'Error: ${snapshot.error}',
+                  S.of(context).error + ': ${snapshot.error}',
                   style: const TextStyle(color: Colors.red),
                 ),
               );
             } else if (!snapshot.hasData || snapshot.data!.parcels.isEmpty) {
-              return const Center(child: Text('No parcels found.'));
+              return Center(child: Text(S.of(context).noParcelsFound));
             }
 
             final response = snapshot.data!;
@@ -74,7 +75,7 @@ class _MyParcelsScreenState extends State<MyParcelsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AppBarHaveArrow(title: 'My Parcels'),
+                  AppBarHaveArrow(title: S.of(context).myParcels),
                   const SizedBox(height: 28),
                   // ✅ خلي كل العناصر جوه الـ Scroll
                   ...parcels.map((parcel) {
@@ -123,7 +124,7 @@ class _MyParcelsScreenState extends State<MyParcelsScreen> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        parcel.clientName ?? 'Unknown Client',
+                                        parcel.clientName ?? S.of(context).unknownClient,
                                         style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w400,
@@ -168,8 +169,8 @@ class _MyParcelsScreenState extends State<MyParcelsScreen> {
                             const SizedBox(height: 8),
                             const Divider(color: Color(0xFFF4F4F4), thickness: 1),
                             const SizedBox(height: 24),
-                            const Text(
-                              'Product info',
+                            Text(
+                              S.of(context).productInfo,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -180,25 +181,25 @@ class _MyParcelsScreenState extends State<MyParcelsScreen> {
                             InfoItem(
                               svgPath:
                               'assets/svgs/profile_icon_with_background.svg',
-                              text: parcel.clientName ?? 'Unknown',
+                              text: parcel.clientName ?? S.of(context).unknown,
                             ),
                             const SizedBox(height: 12),
                             InfoItem(
                               svgPath:
                               'assets/svgs/profile_icon_with_background.svg',
-                              text: parcel.zoneName ?? 'Unknown Zone',
+                              text: parcel.zoneName ?? S.of(context).unknownZone,
                             ),
                             const SizedBox(height: 12),
                             InfoItem(
                               svgPath:
                               'assets/svgs/location_icon_with_background.svg',
-                              text: parcel.cityName ?? 'Unknown City',
+                              text: parcel.cityName ?? S.of(context).unknownCity,
                             ),
                             const SizedBox(height: 12),
                             InfoItem(
                               svgPath:
                               'assets/svgs/call_icon_with_background.svg',
-                              text: parcel.customerPhoneNumber ?? 'Unknown Phone',
+                              text: parcel.customerPhoneNumber ?? S.of(context).unknownPhone,
                             ),
                           ],
                         ),

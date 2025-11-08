@@ -90,6 +90,7 @@ class PudoParcels extends StatelessWidget {
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zony/generated/l10n.dart';
 import '../../../../models/new_parcels_response_model.dart';
 import '../../../../services/parcel_service.dart';
 import '../../../../views/widgets/circler_icon.dart';
@@ -113,13 +114,13 @@ class PudoParcels extends StatelessWidget {
 
         if (snapshot.hasError) {
           return Center(
-            child: Text(' Something went wrong: ${snapshot.error}'),
+            child: Text(S.of(context).somethingWentWrong + ': ${snapshot.error}'),
           );
         }
 
         if (!snapshot.hasData || snapshot.data!.parcels.isEmpty) {
-          return const Center(
-            child: Text('This pudo has no parcels yet'),
+          return Center(
+            child: Text(S.of(context).thisPudoHasNoParcelsYet),
           );
         }
 
@@ -196,8 +197,8 @@ class PudoParcels extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 6),
-                        const Text(
-                          'Received',
+                        Text(
+                          S.of(context).received,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
@@ -216,4 +217,3 @@ class PudoParcels extends StatelessWidget {
     );
   }
 }
-

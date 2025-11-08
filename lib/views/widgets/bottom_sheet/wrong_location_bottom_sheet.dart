@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 
 import '../../../modules/auth/screens/login_screen.dart';
 import '../../../theme/app_text_styles.dart';
@@ -29,8 +30,8 @@ class WrongLocationBottomSheet extends StatelessWidget {
           const SizedBox(height: 24),
 
           // Title
-          const Text(
-            'YOU ARE AT A WRONG LOCATION  ',
+          Text(
+            S.of(context).youAreAtWrongLocation,
             textAlign: TextAlign.center,
             style: AppTextStyles.bottomSheetTitle,
           ),
@@ -42,7 +43,7 @@ class WrongLocationBottomSheet extends StatelessWidget {
               Navigator.pop(context);
             },
             child: Text(
-              "My Pickup Points",
+              S.of(context).myPickupPoints,
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w600,

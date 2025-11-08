@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 
 class DefaultButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -33,8 +34,8 @@ class DefaultButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 14),
           child:
               child ??
-              const Text(
-                'Confirm',
+              Text(
+                S.of(context).confirm,
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,

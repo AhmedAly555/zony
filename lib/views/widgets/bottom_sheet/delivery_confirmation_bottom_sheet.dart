@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 
 import '../../../modules/auth/screens/login_screen.dart';
 import '../../../theme/app_text_styles.dart';
@@ -30,8 +31,8 @@ class DeliveryConfirmationBottomSheet extends StatelessWidget {
           const SizedBox(height: 16),
 
           // Title
-          const Text(
-            'Delivery Confirmation',
+          Text(
+            S.of(context).deliveryConfirmation,
             textAlign: TextAlign.center,
             style: AppTextStyles.bottomSheetTitle,
           ),
@@ -39,8 +40,8 @@ class DeliveryConfirmationBottomSheet extends StatelessWidget {
           const SizedBox(height: 8),
 
           // Description
-          const Text(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod',
+          Text(
+            S.of(context).deliveryConfirmationDescription,
             textAlign: TextAlign.center,
             style: AppTextStyles.bottomSheetDescription,
           ),
@@ -57,7 +58,7 @@ class DeliveryConfirmationBottomSheet extends StatelessWidget {
 
                       },
                   child: Text(
-                    'Confirm.',
+                    S.of(context).confirm,
                     textAlign: TextAlign.center,
 
                     style: TextStyle(
@@ -72,7 +73,7 @@ class DeliveryConfirmationBottomSheet extends StatelessWidget {
               Expanded(
                 child: CustomOutlineButton(
                   title: Text(
-                    'TRY AGAIN',
+                    S.of(context).tryAgain,
                     style: TextStyle(
                       color: Color(0xFF49159B),
                       fontWeight: FontWeight.w600,

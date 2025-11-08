@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:zony/generated/l10n.dart';
 import 'package:zony/views/widgets/template_app_scaffold.widget.dart';
 
 import '../../../../../../views/widgets/bottom_sheet/qr_scanner.dart';
@@ -56,7 +57,7 @@ class ExpiredReceivingScreen extends StatelessWidget {
     await controller.stop();
 
     if (pudoId != null && pudoId.isNotEmpty) {
-      showCorrectToast(message: 'PUDO parcels retrieved successfully');
+      showCorrectToast(message: S.of(context).pudoParcelsRetrievedSuccessfully);
 
       Navigator.push(
         context,
@@ -65,7 +66,7 @@ class ExpiredReceivingScreen extends StatelessWidget {
         ),
       );
     } else {
-      showErrorToast(message: '⚠️ No QR code detected');
+      showErrorToast(message: S.of(context).noQrCodeDetected);
     }
   }
 
@@ -77,13 +78,13 @@ class ExpiredReceivingScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
         child: Column(
           children: [
-            const AppBarHaveArrow(title: 'Pickup Point'),
+            AppBarHaveArrow(title: S.of(context).pickupPoint),
             const Spacer(),
             CustomMenuRecieve(
               items: [
                 MenuItemData(
                   svgPath: 'assets/svgs/small_qr.svg',
-                  title: "QR Scanner",
+                  title: S.of(context).qrScanner,
                   onTap: () async {
                     await _handlePudoQrScanning(
                       context: context,
@@ -94,7 +95,7 @@ class ExpiredReceivingScreen extends StatelessWidget {
                 ),
                 /*MenuItemData(
                   svgPath: 'assets/svgs/small_qr.svg',
-                  title: "Enter Username",
+                  title: S.of(context).enterUsername,
                   onTap: () {
                     showManuallyUsernameBottomSheet(context);
                   },

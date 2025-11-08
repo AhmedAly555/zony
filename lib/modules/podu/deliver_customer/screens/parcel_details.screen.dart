@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 import 'package:zony/modules/podu/deliver_customer/screens/successful_delivering.screen.dart';
 import 'package:zony/services/extensions/parcel_status_extension.dart';
 import 'package:zony/views/widgets/loading.widget.dart';
@@ -54,7 +55,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
       if (pudosList.isEmpty) {
         setState(() {
-          _parcelFuture = Future.error('No PUDO found in local storage');
+          _parcelFuture = Future.error(S.of(context).noPudoFoundInLocalStorage);
         });
         return;
       }
@@ -73,7 +74,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
     } catch (e) {
       //debugPrint('❌ Error while initializing parcel data: $e');
       setState(() {
-        _parcelFuture = Future.error('Failed to load parcel data');
+        _parcelFuture = Future.error(S.of(context).failedToLoadParcelData);
       });
     }
   }
@@ -101,11 +102,11 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
             minHeight: SizeConfig.heightPercent(0.90),
           ),
           child: IntrinsicHeight(
-            child: PhotoConfirmarionBottomSheet(
+            child: PhotoConfirmationBottomSheet(
               imageFile: imageFile,
               onConfirm: () async {
                 if (_currentParcel == null) {
-                  showErrorToast(message: '❗ Parcel data not loaded yet.');
+                  showErrorToast(message: S.of(context).parcelDataNotLoadedYet);
                   return;
                 }
                 await _uploadImageToCloudflare(
@@ -178,7 +179,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         context,
       ); // Closes the loading dialog (context here is for the dialog)
 
-      showCorrectToast(message: '✅ Image uploaded successfully!');
+      showCorrectToast(message: S.of(context).imageUploadedSuccessfully);
 
       // Finally, close the first bottom sheet and return true for success
       Navigator.pop(
@@ -192,7 +193,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       }
       //print('❌ Error uploading parcel image: $e');
       debugPrintStack(stackTrace: s);
-      showErrorToast(message: 'Failed to upload image: $e');
+      showErrorToast(message: S.of(context).failedToUploadImage + '$e');
 
       // In case of error, close the bottom sheet and return false
       Navigator.pop(context, false);
@@ -215,7 +216,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
       if (uploadedImagePublicUrl.isEmpty) {
         Navigator.pop(context);
-        showErrorToast(message: '❗ Please upload image first');
+        showErrorToast(message: S.of(context).pleaseUploadImageFirst);
         return;
       }
 
@@ -233,7 +234,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       // ✅ Update successful
       Navigator.pop(context); // Closes the loading indicator
       Navigator.pop(context); // Closes the bottom sheet
-      showCorrectToast(message: '✅ Parcel Delivered successfully!');
+      showCorrectToast(message: S.of(context).parcelDeliveredSuccessfully);
       AppNavigator.navigateAndRemoveUntil(context, () => SuccessfulPoduDelivering(
           //pudoId: _pudoId!
       ));
@@ -243,7 +244,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       //debugPrint('❌ Error updating parcel: $e');
       debugPrintStack(stackTrace: s);
 
-      showErrorToast(message: 'Failed to update parcel: $e');
+      showErrorToast(message: S.of(context).failedToUpdateParcel + '$e');
     }
   }
 
@@ -266,7 +267,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
             child: DeliveryConfirmationBottomSheet(
               onConfirm: () async {
                 if (_uploadedImagePublicUrl == null || _uploadedImagePublicUrl!.isEmpty) {
-                  showErrorToast(message: '❗ Please upload image first');
+                  showErrorToast(message: S.of(context).pleaseUploadImageFirst);
                   return;
                 }
 
@@ -310,7 +311,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
         child: Column(
           children: [
-            AppBarHaveArrow(title: 'Parcel Details'),
+            AppBarHaveArrow(title: S.of(context).parcelDetails),
 
             const SizedBox(height: 24),
 
@@ -359,8 +360,8 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                             const SizedBox(height: 12),
 
                             // Product info text
-                            const Text(
-                              'Product info',
+                            Text(
+                              S.of(context).productInfo,
                               style: AppTextStyles.textStyle16LightPurple,
                             ),
 
@@ -373,12 +374,12 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                             const SizedBox(height: 12),
                             InfoItem(
                               svgPath: 'assets/svgs/location_icon_with_background.svg',
-                              text: parcel.zoneName ?? 'Unknown Zone',
+                              text: parcel.zoneName ?? S.of(context).unknownZone,
                             ),
                             const SizedBox(height: 12),
                             InfoItem(
                               svgPath: 'assets/svgs/call_icon_with_background.svg',
-                              text: parcel.cityName ?? 'Unknown City',
+                              text: parcel.cityName ?? S.of(context).unknownCity,
                             ),
 
                           ],
@@ -397,8 +398,8 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                 _openCamera(context);
 
               },
-              child: const Text(
-                'Capture Parcel',
+              child: Text(
+                S.of(context).captureParcel,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,

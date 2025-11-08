@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 import 'package:zony/views/widgets/default_button.widget.dart';
 
 import '../../../../../theme/app_text_styles.dart';
@@ -23,13 +24,13 @@ class SuccessfulPoduDelivering extends StatelessWidget {
         children: [
           SuccessfulImage(),
           Text(
-            "Successful Delivering process",
+            S.of(context).successfulDeliveringProcess,
             textAlign: TextAlign.center,
             style: AppTextStyles.textStyle24,
           ),
           const SizedBox(height: 18),
           Text(
-            "The time and location of the pickup will be recorded automatically.",
+            S.of(context).pickupTimeAndLocationRecorded,
             textAlign: TextAlign.center,
             style: AppTextStyles.textStyle14Grey,
           ),
@@ -43,7 +44,7 @@ class SuccessfulPoduDelivering extends StatelessWidget {
                     () => PoduDeliveringScreen(),
               ),
               child: Text(
-                'Deliver New Parcel',
+                S.of(context).deliverNewParcel,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
@@ -61,7 +62,7 @@ class SuccessfulPoduDelivering extends StatelessWidget {
                         () => PoduDeliveringScreen(),
                   ),
                   child: Text(
-                    'Deliver New Parcel',
+                    S.of(context).deliverNewParcel,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -74,7 +75,7 @@ class SuccessfulPoduDelivering extends StatelessWidget {
                 CustomOutlineButton(
                   onTap: () => AppNavigator.navigateTo(context, () => PoduHomeScreen()),
                   title: Text(
-                    'Back To Home',
+                    S.of(context).backToHome,
                     style: AppTextStyles.textStyle16,
                   ),
                 ),

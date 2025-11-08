@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 import 'package:zony/services/extensions/parcel_status_extension.dart';
 
 import '../../../../services/enums/parcel_status_type.dart';
@@ -103,10 +104,10 @@ class _EnterShipmentState extends State<EnterShipment> {
                       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
                       child: Column(
               children: [
-                const AppBarHaveArrow(title: 'Inventory'),
+                AppBarHaveArrow(title: S.of(context).inventory),
                 const SizedBox(height: 70),
                 TotalParcelsCounter(
-                  title: 'Total Approved',
+                  title: S.of(context).totalApproved,
                   value: totalParcelsOverall.toString() ?? '0',
                 ),
                 const SizedBox(height: 24),
@@ -120,7 +121,7 @@ class _EnterShipmentState extends State<EnterShipment> {
                     children: [
                       ParcelStatusItem(
                         iconPath: 'assets/svgs/ready_to_deliver.svg',
-                        title: 'Ready to deliver',
+                        title: S.of(context).readyToDeliver,
                         count: totalPUDOReceivedParcels ?? 0,
                         isSelected: selectedIndex == 0,
                         onTap: () {
@@ -131,7 +132,7 @@ class _EnterShipmentState extends State<EnterShipment> {
                       const SizedBox(height: 20),
                       ParcelStatusItem(
                         iconPath: 'assets/svgs/transfer.svg',
-                        title: 'Transfer',
+                        title: S.of(context).transfer,
                         count: 0,
                         isSelected: selectedIndex == 1,
                         onTap: () {},
@@ -139,7 +140,7 @@ class _EnterShipmentState extends State<EnterShipment> {
                       const SizedBox(height: 20),
                       ParcelStatusItem(
                         iconPath: 'assets/svgs/expired.svg',
-                        title: 'Expired',
+                        title: S.of(context).expired,
                         count: totalExpiredParcels ?? 0,
                         isSelected: selectedIndex == 2,
                         onTap: () {

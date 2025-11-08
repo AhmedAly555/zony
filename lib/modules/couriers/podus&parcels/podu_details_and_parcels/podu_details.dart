@@ -199,6 +199,7 @@ class _PODUDetailsState extends State<PODUDetails> {
   }
 }*/
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 
 import '../../../../models/single_pudo_response_model.dart';
 import '../../../../services/get_my_pudos_service.dart';
@@ -254,7 +255,7 @@ class _PODUDetailsState extends State<PODUDetails> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          errorMessage = 'Failed to fetch pudo details: $e';
+          errorMessage = S.of(context).failedToFetchPudoDetails + '$e';
           isLoading = false;
         });
       }
@@ -290,7 +291,7 @@ class _PODUDetailsState extends State<PODUDetails> {
             ),
             const SizedBox(height: 16),
             Text(
-              errorMessage ?? 'Failed to fetch pudo details',
+              errorMessage ?? S.of(context).failedToFetchPudoDetails,
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey[600],
@@ -306,8 +307,8 @@ class _PODUDetailsState extends State<PODUDetails> {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              child: const Text(
-                'Try Again',
+              child: Text(
+                S.of(context).tryAgain,
                 style: TextStyle(color: Colors.white),
               ),
             ),
@@ -342,8 +343,8 @@ class _PODUDetailsState extends State<PODUDetails> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'PUDO Info',
+                Text(
+                  S.of(context).pudoInfo,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -358,7 +359,7 @@ class _PODUDetailsState extends State<PODUDetails> {
                 const SizedBox(height: 16),
                 InfoItem(
                   svgPath: 'assets/svgs/location_icon_with_background.svg',
-                  text: pudo.districtName?? "No Address Found",
+                  text: pudo.districtName?? S.of(context).noAddressFound,
                 ),
                 const SizedBox(height: 16),
                 InfoItem(
@@ -390,8 +391,8 @@ class _PODUDetailsState extends State<PODUDetails> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Gallery',
+                Text(
+                  S.of(context).gallery,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
@@ -511,7 +512,7 @@ class _PODUDetailsState extends State<PODUDetails> {
           Icon(Icons.warehouse, size: 50, color: Colors.grey[600]),
           const SizedBox(height: 8),
           Text(
-            'No Image',
+            S.of(context).noImage,
             style: TextStyle(
               color: Colors.grey[600],
               fontSize: 16,

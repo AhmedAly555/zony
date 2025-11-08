@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 
 
 import '../../../services/size_config.dart';
@@ -84,16 +85,16 @@ class _ManuallyUsernameBottomSheetState
           children: [
             HederBottomSheetLine(),
             const Spacer(),
-            const Text(
-              'Enter Manually',
+            Text(
+              S.of(context).enterManually,
               textAlign: TextAlign.center,
               style: AppTextStyles.bottomSheetTitle,
             ),
             const Spacer(),
             Align(
               alignment: Alignment.centerLeft,
-              child: const Text(
-                'Pickup Point Username',
+              child: Text(
+                S.of(context).pickupPointUsername,
                 style: TextStyle(
                   fontSize: 16,
                   color: Color(0xFF1E1E1E),
@@ -105,7 +106,7 @@ class _ManuallyUsernameBottomSheetState
             TextFormField(
               controller: _usernameController,
               decoration: InputDecoration(
-                hintText: 'Please Enter Username Here !',
+                hintText: S.of(context).pleaseEnterUsernameHere,
                 hintStyle: TextStyle(color: Colors.grey[500], fontSize: 14),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -150,12 +151,12 @@ class _ManuallyUsernameBottomSheetState
                     child: child,
                   );
                 },
-                child: const Align(
+                child: Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: EdgeInsets.only(top: 6),
                     child: Text(
-                      'The username You Entered Is Not Valid',
+                      S.of(context).usernameIsNotValid,
                       key: ValueKey('error-text'),
                       style: TextStyle(color: Colors.red, fontSize: 12),
                     ),
@@ -201,8 +202,8 @@ class _ManuallyUsernameBottomSheetState
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: const Text(
-                        "Confirm",
+                      child: Text(
+                        S.of(context).confirm,
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,

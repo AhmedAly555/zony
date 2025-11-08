@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:zony/generated/l10n.dart';
 import 'package:zony/modules/podu/views/screens/main_home/screen/podu_delivering_screen.dart';
 
 import '../../../../../../controllers/pudu_main_home_controller.dart';
@@ -61,7 +62,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
         setState(() {
           currentLanguage = selectedLang;
         });
-        print('Selected Language: $selectedLang');
+        print(S.of(context).selectedLanguage + '$selectedLang');
       }
     });
   }
@@ -127,7 +128,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 child: Text(
-                  'Account',
+                  S.of(context).account,
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 ),
               ),
@@ -176,13 +177,13 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
         
                             //if no data found
                             if (!snapshot.hasData || snapshot.data == null) {
-                              return Center(child: Text("No PUDO Data Found"));
+                              return Center(child: Text(S.of(context).noPudoDataFound));
                             }
         
                             //if list is empty
                             final pudosList = snapshot.data!;
                             if (pudosList.isEmpty) {
-                              return Center(child: Text("No PUDO Data Stored"));
+                              return Center(child: Text(S.of(context).noPudoDataStored));
                             }
         
                             final pudo = pudosList.first;
@@ -256,7 +257,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                           ),
                           SizedBox(width: 10),
                           Text(
-                            'QR Code',
+                            S.of(context).qrCode,
                             style: TextStyle(
                               color: Color(0xFF49159B),
                               fontWeight: FontWeight.w600,
@@ -273,7 +274,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 child: Text(
-                  'Services',
+                  S.of(context).services,
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 ),
               ),
@@ -281,21 +282,21 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                 Column(
                   children: [
                     CustomHomeServiceContainer(
-                      title: 'Receiving',
+                      title: S.of(context).receiving,
                       svgIconPath: 'assets/svgs/receiving.svg', onTap: () {
                         //AppNavigator.navigateTo(context, () => ParcelApproveScreen());
                       PuduMainHomeController.instance.changeTab(1);
                     },
                     ),
                     CustomHomeServiceContainer(
-                      title: 'Delivering',
+                      title: S.of(context).delivering,
                       svgIconPath: 'assets/svgs/delivering.svg', onTap: () {
                         //AppNavigator.navigateTo(context, () => PoduDeliveringScreen());
                       PuduMainHomeController.instance.changeTab(2);
                     },
                     ),
                     CustomHomeServiceContainer(
-                      title: 'Inventory',
+                      title: S.of(context).inventory,
                       svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {
                         AppNavigator.navigateTo(context, () => EnterShipment());
                     },

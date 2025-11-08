@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 import 'package:zony/modules/couriers/recieve_expired/screens/successful_expired_recieve.screen.dart';
 import 'package:zony/services/extensions/parcel_status_extension.dart';
 
@@ -81,7 +82,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       setState(() {
         _isLoading = false;
       });
-      showErrorToast(message: '❌ Failed to fetch parcel details: $e');
+      showErrorToast(message: S.of(context).failedToFetchParcelDetails + '$e');
       //print('❌ Failed to fetch parcel details: $e');
     }
   }
@@ -107,7 +108,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
             minHeight: SizeConfig.heightPercent(0.90),
           ),
           child: IntrinsicHeight(
-            child: PhotoConfirmarionBottomSheet(
+            child: PhotoConfirmationBottomSheet(
               imageFile: imageFile,
               onConfirm: () async {
                 await _uploadImageToCloudflare(
@@ -178,7 +179,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         context,
       ); // Closes the loading dialog (context here is for the dialog)
 
-      showCorrectToast(message: '✅ Image uploaded successfully!');
+      showCorrectToast(message: S.of(context).imageUploadedSuccessfully);
 
       // Finally, close the first bottom sheet and return true for success
       Navigator.pop(context, true); // pop the bottom sheet and return true
@@ -189,7 +190,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       }
       debugPrint('❌ Error uploading parcel image::::::::::: $e');
       debugPrintStack(stackTrace: s);
-      showErrorToast(message: 'Failed to upload image: $e');
+      showErrorToast(message: S.of(context).failedToUploadImage + '$e');
 
       // In case of error, close the bottom sheet and return false
       Navigator.pop(context, false);
@@ -212,7 +213,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
       if (uploadedImagePublicUrl.isEmpty) {
         Navigator.pop(context);
-        showErrorToast(message: '❗ Please upload image first');
+        showErrorToast(message: S.of(context).pleaseUploadImageFirst);
         return;
       }
 
@@ -220,7 +221,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
       if (profile == null) {
         Navigator.pop(context);
-        showErrorToast(message: '⚠️ Failed to retrieve courier ID');
+        showErrorToast(message: S.of(context).failedToRetrieveCourierId);
         return;
       }
 
@@ -242,7 +243,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       // ✅ Update successful
       Navigator.pop(context); // Closes the loading indicator
       Navigator.pop(context); // Closes the bottom sheet
-      showCorrectToast(message: '✅ Parcel Recieve successfully!');
+      showCorrectToast(message: S.of(context).parcelReceivedSuccessfully);
       AppNavigator.navigateAndRemoveUntil(
         context,
         () => const SuccessfulExpiredRecieveScreen(),
@@ -251,7 +252,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       Navigator.pop(context); // Closes the loading indicator in case of error
       //debugPrint('❌ Error updating parcel: $e');
       debugPrintStack(stackTrace: s);
-      showErrorToast(message: 'Failed to update parcel: $e');
+      showErrorToast(message: S.of(context).failedToUpdateParcel + '$e');
     }
   }
 
@@ -275,7 +276,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
               onConfirm: () async {
                 if (_uploadedImagePublicUrl == null ||
                     _uploadedImagePublicUrl!.isEmpty) {
-                  showErrorToast(message: '❗ Please upload image first');
+                  showErrorToast(message: S.of(context).pleaseUploadImageFirst);
                   return;
                 }
 
@@ -324,7 +325,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
         child: Column(
           children: [
-            AppBarHaveArrow(title: 'Parcel Details'),
+            AppBarHaveArrow(title: S.of(context).parcelDetails),
 
             const SizedBox(height: 24),
 
@@ -337,8 +338,8 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                   const SizedBox(height: 24),
 
                   // Product info text
-                  const Text(
-                    'Product info',
+                  Text(
+                    S.of(context).productInfo,
                     style: AppTextStyles.textStyle16LightPurple,
                   ),
                   const SizedBox(height: 18),
@@ -346,18 +347,18 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                   // Info items
                   InfoItem(
                     svgPath: 'assets/svgs/profile_icon_with_background.svg',
-                    text: _parcel?.clientName ?? 'Unknown Client',
+                    text: _parcel?.clientName ?? S.of(context).unknownClient,
                   ),
                   const SizedBox(height: 12),
                   InfoItem(
                     svgPath: 'assets/svgs/location_icon_with_background.svg',
                     text: _parcel?.cityName ??
-                        'Unknown address',                  ),
+                        S.of(context).unknownAddress,                  ),
                   const SizedBox(height: 12),
                   InfoItem(
                     svgPath: 'assets/svgs/call_icon_with_background.svg',
                     text: _parcel?.customerPhoneNumber ??
-                        'No phone number',                  ),
+                        S.of(context).noPhoneNumber,                  ),
                 ],
               ),
             ),
@@ -367,7 +368,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                 _openCamera(context);
               },
               child: Text(
-                'Capture Parcel',
+                S.of(context).captureParcel,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,

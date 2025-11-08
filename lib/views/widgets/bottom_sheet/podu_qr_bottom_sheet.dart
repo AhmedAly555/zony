@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:zony/generated/l10n.dart';
 
 import '../../../models/pudo_model.dart';
 import '../../../services/shered_preferences/pudos_storage.dart';
@@ -27,8 +28,8 @@ class PudoQRBottomSheet extends StatelessWidget {
           // Error handling and empty data check
           if (snapshot.hasError || pudosList == null || pudosList.isEmpty) {
             final String message = snapshot.hasError
-                ? 'Error fetching data: ${snapshot.error}'
-                : 'Have not stored PUDO data.';
+                ? S.of(context).errorFetchingData + '${snapshot.error}'
+                : S.of(context).noPudoDataStored;
             return SizedBox(
               height: 200,
               child: Center(
@@ -64,7 +65,7 @@ class PudoQRBottomSheet extends StatelessWidget {
                 width: 360,
                 height: 360,
                 child: qrData.isEmpty
-                    ? const Center(child: Text('No QR data'))
+                    ? Center(child: Text(S.of(context).noQrData))
                     : QrImageView(
                   data: qrData,
                   version: QrVersions.auto,
@@ -76,7 +77,7 @@ class PudoQRBottomSheet extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Could not generate QR\n${error.toString()}',
+                          S.of(context).couldNotGenerateQr + '${error.toString()}',
                           textAlign: TextAlign.center,
                         ),
                       ),

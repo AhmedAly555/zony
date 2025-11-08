@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:zony/generated/l10n.dart';
 
 import '../../../../../../views/widgets/default_text_filed.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
@@ -26,7 +27,7 @@ class AccountSettingsScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
           child: Column(
             children: [
-              AppBarHaveArrow(title: 'Account Settings',),
+              AppBarHaveArrow(title: S.of(context).accountSettings,),
 
               FutureBuilder<Profile?>(
                 future: ProfileStorage.getProfile(),
@@ -38,7 +39,7 @@ class AccountSettingsScreen extends StatelessWidget {
                   }
 
                   if (!snapshot.hasData || snapshot.data == null) {
-                    return Center(child: Text("No Data"));
+                    return Center(child: Text(S.of(context).noData));
                   }
 
                   final profile = snapshot.data!;
@@ -117,7 +118,7 @@ class AccountSettingsScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Personal Information'),
+                      Text(S.of(context).personalInformation),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: Divider(height: 1, color: Color(0xFFF4F4F4)),
@@ -165,7 +166,7 @@ class AccountSettingsScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Change Password'),
+                      Text(S.of(context).changePassword),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: Divider(height: 1, color: Color(0xFFF4F4F4)),
@@ -196,7 +197,7 @@ class AccountSettingsScreen extends StatelessWidget {
                           onPressed: () => {},
 
                           child: Text(
-                            'Change Password',
+                            S.of(context).changePassword,
                             style: TextStyle(
                               color: Color(0xFFFFFFFF),
                               fontSize: 14,

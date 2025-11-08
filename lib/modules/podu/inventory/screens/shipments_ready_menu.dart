@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:zony/generated/l10n.dart';
 import 'package:zony/modules/podu/inventory/screens/shipment_details.screen.dart';
 import 'package:zony/services/extensions/parcel_status_extension.dart';
 
@@ -43,7 +44,7 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
 
       if (pudosList.isEmpty) {
         setState(() {
-          _parcelsFuture = Future.error('No PUDO found in local storage');
+          _parcelsFuture = Future.error(S.of(context).noPudoFoundInLocalStorage);
         });
         return;
       }
@@ -54,7 +55,7 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
       _loadParcels();
     } catch (e) {
       setState(() {
-        _parcelsFuture = Future.error('Failed to load PUDO data: $e');
+        _parcelsFuture = Future.error(S.of(context).failedToLoadPudoData + '$e');
       });
     }
   }
@@ -62,7 +63,7 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
   void _loadParcels() {
     if (_pudoId == null) {
       setState(() {
-        _parcelsFuture = Future.error('PUDO ID not loaded yet');
+        _parcelsFuture = Future.error(S.of(context).pudoIdNotLoadedYet);
       });
       return;
     }
@@ -77,7 +78,7 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
 
   Future<void> _handleParcelQRScan(BuildContext context) async {
     if (_pudoId == null) {
-      showErrorToast(message: '❗ PUDO ID not loaded yet');
+      showErrorToast(message: S.of(context).pudoIdNotLoadedYet);
       return;
     }
 
@@ -106,7 +107,7 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
         ),
       );
     } else {
-      showErrorToast(message: '⚠️ No Parcel QR detected!');
+      showErrorToast(message: S.of(context).noParcelQrDetected);
     }
   }
 
@@ -131,7 +132,7 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  AppBarHaveArrow(title: 'Ready to Deliver'),
+                  AppBarHaveArrow(title: S.of(context).readyToDeliver),
                   SizedBox(height: 28),
                   //search container
                   Container(
@@ -152,14 +153,14 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Search By', style: AppTextStyles.textStyle16),
+                        Text(S.of(context).searchBy, style: AppTextStyles.textStyle16),
                         const SizedBox(height: 8),
                         Row(
                           children: [
                             Expanded(
                               child: SearchButton(
                                 svgPath: 'assets/svgs/small_qr.svg',
-                                text: 'Scan barCode',
+                                text: S.of(context).scanBarCode,
                                 onTap: () async {
                                   await _handleParcelQRScan(context);
                                 },
@@ -169,7 +170,7 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
                             Expanded(
                               child: SearchButton(
                                 svgPath: 'assets/svgs/small_qr.svg',
-                                text: 'code Number',
+                                text: S.of(context).codeNumber,
                                 onTap: () {},
                               ),
                             ),
@@ -263,7 +264,7 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
                                         ),
                                         const SizedBox(width: 6),
                                         Text(
-                                          "Received",
+                                          S.of(context).received,
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
@@ -281,8 +282,8 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
 
                                 const SizedBox(height: 24),
 
-                                const Text(
-                                  'Product info',
+                                Text(
+                                  S.of(context).productInfo,
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
@@ -299,17 +300,17 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
                                 const SizedBox(height: 12),
                                 InfoItem(
                                   svgPath: 'assets/svgs/profile_icon_with_background.svg',
-                                  text: parcel.zoneName ?? 'Unknown Zone',
+                                  text: parcel.zoneName ?? S.of(context).unknownZone,
                                 ),
                                 const SizedBox(height: 12),
                                 InfoItem(
                                   svgPath: 'assets/svgs/location_icon_with_background.svg',
-                                  text: parcel.cityName ?? 'Unknown Address',
+                                  text: parcel.cityName ?? S.of(context).unknownAddress,
                                 ),
                                 const SizedBox(height: 12),
                                 InfoItem(
                                   svgPath: 'assets/svgs/call_icon_with_background.svg',
-                                  text: parcel.cityName ?? 'Unknown Phone',
+                                  text: parcel.cityName ?? S.of(context).unknownPhone,
                                 ),
                               ],
                             ),

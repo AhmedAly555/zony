@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 
 import '../../../modules/auth/screens/login_screen.dart';
 import '../../../theme/app_text_styles.dart';
@@ -10,12 +11,12 @@ import '../../../services/navigator.services/app_navigator.services.dart';
 import '../custom_outline_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
-class PhotoConfirmarionBottomSheet extends StatelessWidget {
+class PhotoConfirmationBottomSheet extends StatelessWidget {
   final File imageFile;
 
   final VoidCallback onConfirm;
 
-  const PhotoConfirmarionBottomSheet({super.key, required this.imageFile, required this.onConfirm});
+  const PhotoConfirmationBottomSheet({super.key, required this.imageFile, required this.onConfirm});
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +39,8 @@ class PhotoConfirmarionBottomSheet extends StatelessWidget {
           const SizedBox(height: 16),
 
           // Title
-          const Text(
-            'PHOTO CONFIRMATION',
+          Text(
+            S.of(context).photoConfirmation,
             textAlign: TextAlign.center,
             style: AppTextStyles.bottomSheetTitle,
           ),
@@ -63,7 +64,7 @@ class PhotoConfirmarionBottomSheet extends StatelessWidget {
                     //Navigator.pop(context);
                     },
                   child: Text(
-                    'Confirm',
+                    S.of(context).confirm,
                     textAlign: TextAlign.center,
 
                     style: TextStyle(
@@ -78,7 +79,7 @@ class PhotoConfirmarionBottomSheet extends StatelessWidget {
               Expanded(
                 child: CustomOutlineButton(
                   title: Text(
-                    'TRY AGAIN',
+                    S.of(context).tryAgain,
                     style: TextStyle(
                       color: Color(0xFF49159B),
                       fontWeight: FontWeight.w600,
@@ -98,7 +99,7 @@ class PhotoConfirmarionBottomSheet extends StatelessWidget {
 
 //callback function to show bottom sheet
 /*
-void showPhotoConfirmarionBottomSheet() {
+void showPhotoConfirmationBottomSheet() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -113,7 +114,7 @@ void showPhotoConfirmarionBottomSheet() {
             minHeight: SizeConfig.heightPercent(0.45),
           ),
           child: IntrinsicHeight(
-            child: PhotoConfirmarionBottomSheet(),
+            child: PhotoConfirmationBottomSheet(),
           ),
         );
       },

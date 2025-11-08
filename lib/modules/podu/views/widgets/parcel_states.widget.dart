@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zony/generated/l10n.dart';
 
 import '../../../../theme/app_text_styles.dart';
 
@@ -19,7 +20,7 @@ class ApprovedWidget extends StatelessWidget {
         children: [
           SvgPicture.asset('assets/svgs/approved_icon.svg'),
           const SizedBox(width: 5.5),
-          const Text('Approved', style: TextStyle(
+          Text(S.of(context).approved, style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
             color: Color(0xFF008000),
@@ -47,7 +48,7 @@ class WaitingWidget extends StatelessWidget {
           children: [
             SvgPicture.asset('assets/svgs/waiting_approve_icon.svg'),
             const SizedBox(width: 5.5),
-            const Text('Waiting', style: AppTextStyles.textStyle16),
+            Text(S.of(context).waiting, style: AppTextStyles.textStyle16),
           ],
         ),
       ),
@@ -71,7 +72,7 @@ class PendingWidget extends StatelessWidget {
           children: [
             SvgPicture.asset('assets/svgs/pending_icon.svg'),
             const SizedBox(width: 5.5),
-            const Text('Pending', style: TextStyle(
+            Text(S.of(context).pending, style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,
               color: Color(0xFF929292),
@@ -82,4 +83,3 @@ class PendingWidget extends StatelessWidget {
     );
   }
 }
-

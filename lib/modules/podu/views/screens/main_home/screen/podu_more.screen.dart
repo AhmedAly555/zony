@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 import 'package:zony/services/navigator.services/app_navigator.services.dart';
 
 import '../../../../../../services/size_config.dart';
@@ -52,7 +53,7 @@ class _PoduMoreScreenState extends State<PoduMoreScreen> {
         setState(() {
           currentLanguage = selectedLang;
         });
-        print('Selected Language: $selectedLang');
+        print(S.of(context).selectedLanguage + '$selectedLang');
       }
     });
   }
@@ -87,12 +88,12 @@ class _PoduMoreScreenState extends State<PoduMoreScreen> {
       body: Column(
         children: [
           const SizedBox(height: 24),
-          const HomeAppBar(title: 'More Settings'),
+          HomeAppBar(title: S.of(context).moreSettings),
           //const SizedBox(height: 50),
           Spacer(),
           CoustomeRowMoreScreen(
             iconPath: 'assets/svgs/account.svg',
-            title: 'Account Settings',
+            title: S.of(context).accountSettings,
             onTap: () {
               AppNavigator.navigateTo(context, () =>  AccountSettingsScreen());
             },
@@ -100,7 +101,7 @@ class _PoduMoreScreenState extends State<PoduMoreScreen> {
           const SizedBox(height: 16),
           CoustomeRowMoreScreen(
             iconPath: 'assets/svgs/svg_language.svg',
-            title: 'Language',
+            title: S.of(context).language,
             onTap: () {
               showLanguageBottomSheet();
             },
@@ -114,7 +115,7 @@ class _PoduMoreScreenState extends State<PoduMoreScreen> {
           const SizedBox(height: 16),
           CoustomeRowMoreScreen(
             iconPath: 'assets/svgs/logout.svg',
-            title: 'Logout',
+            title: S.of(context).logout,
             onTap: () {
               showLogoutBottomSheet();
             },
@@ -125,4 +126,3 @@ class _PoduMoreScreenState extends State<PoduMoreScreen> {
     );
   }
 }
-
