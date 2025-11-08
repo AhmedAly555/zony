@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zony/generated/l10n.dart';
 
 import '../../../../../theme/app_text_styles.dart';
 import '../../../../../views/widgets/default_appbar.dart';
@@ -18,7 +19,7 @@ class PudoParcelsScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              AppBarHaveArrow(title: 'Pickup Point Parcels'),
+              AppBarHaveArrow(title: S.of(context).pickupPointParcels),
               SizedBox(height: 28),
               Container(
                 width: double.infinity,
@@ -38,8 +39,8 @@ class PudoParcelsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Search By',
+                    Text(
+                      S.of(context).searchBy,
                       style: AppTextStyles.textStyle18,
                     ),
                     const SizedBox(height: 8),
@@ -48,7 +49,7 @@ class PudoParcelsScreen extends StatelessWidget {
                         Expanded(
                           child: SearchButton(
                             svgPath: 'assets/svgs/small_qr.svg',
-                            text: 'Scan barCode',
+                            text: S.of(context).scanBarCode,
                             onTap: () {},
                           ),
                         ),
@@ -56,7 +57,7 @@ class PudoParcelsScreen extends StatelessWidget {
                         Expanded(
                           child: SearchButton(
                             svgPath: 'assets/svgs/small_qr.svg',
-                            text: 'code Number',
+                            text: S.of(context).codeNumber,
                             onTap: () {},
                           ),
                         ),
@@ -103,12 +104,12 @@ class PudoParcelsScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 12),
-                        const Expanded(
+                        Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '1 Bag',
+                                S.of(context).oneBag,
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w400,
@@ -116,7 +117,7 @@ class PudoParcelsScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                '# 123456',
+                                S.of(context).parcelId1,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
@@ -138,8 +139,8 @@ class PudoParcelsScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 6),
-                            const Text(
-                              'Recieved',
+                            Text(
+                              S.of(context).received,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
@@ -162,8 +163,8 @@ class PudoParcelsScreen extends StatelessWidget {
                     const SizedBox(height: 24),
           
                     // Product info text
-                    const Text(
-                      'Product info',
+                    Text(
+                      S.of(context).productInfo,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -176,22 +177,22 @@ class PudoParcelsScreen extends StatelessWidget {
                     // Info items
                     InfoItem(
                       svgPath: 'assets/svgs/profile_icon_with_background.svg',
-                      text: 'Cameron Williamson',
+                      text: S.of(context).cameronWilliamson,
                     ),
                     const SizedBox(height: 12),
                     InfoItem(
                       svgPath: 'assets/svgs/profile_icon_with_background.svg',
-                      text: 'PODU: Rahmah Pharmacy',
+                      text: S.of(context).podoRahmahPharmacy,
                     ),
                     const SizedBox(height: 12),
                     InfoItem(
                       svgPath: 'assets/svgs/location_icon_with_background.svg',
-                      text: '4140 Parker Rd, Allentown, New Mexico',
+                      text: S.of(context).parkerRoadAddress,
                     ),
                     const SizedBox(height: 12),
                     InfoItem(
                       svgPath: 'assets/svgs/call_icon_with_background.svg',
-                      text: '(205) 555-0100',
+                      text: S.of(context).dummyPhoneNumber,
                     ),
                   ],
                 ),
@@ -234,12 +235,12 @@ class PudoParcelsScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 12),
-                        const Expanded(
+                        Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '2 Bag',
+                                S.of(context).twoBag,
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w400,
@@ -247,7 +248,7 @@ class PudoParcelsScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                '# 568589',
+                                S.of(context).parcelId2,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
@@ -269,8 +270,8 @@ class PudoParcelsScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 6),
-                            const Text(
-                              'Recieved',
+                            Text(
+                              S.of(context).received,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
@@ -293,8 +294,8 @@ class PudoParcelsScreen extends StatelessWidget {
                     const SizedBox(height: 24),
 
                     // Product info text
-                    const Text(
-                      'Product info',
+                    Text(
+                      S.of(context).productInfo,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -307,22 +308,22 @@ class PudoParcelsScreen extends StatelessWidget {
                     // Info items
                     InfoItem(
                       svgPath: 'assets/svgs/profile_icon_with_background.svg',
-                      text: 'Cameron Williamson',
+                      text: S.of(context).cameronWilliamson,
                     ),
                     const SizedBox(height: 12),
                     InfoItem(
                       svgPath: 'assets/svgs/profile_icon_with_background.svg',
-                      text: 'PODU: Rahmah Pharmacy',
+                      text: S.of(context).podoRahmahPharmacy,
                     ),
                     const SizedBox(height: 12),
                     InfoItem(
                       svgPath: 'assets/svgs/location_icon_with_background.svg',
-                      text: '4140 Parker Rd, Allentown, New Mexico',
+                      text: S.of(context).parkerRoadAddress,
                     ),
                     const SizedBox(height: 12),
                     InfoItem(
                       svgPath: 'assets/svgs/call_icon_with_background.svg',
-                      text: '(205) 555-0100',
+                      text: S.of(context).dummyPhoneNumber,
                     ),
                   ],
                 ),

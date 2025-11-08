@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 import 'package:zony/services/extensions/parcel_status_extension.dart';
 import 'package:zony/views/widgets/toasts.dart';
 import '../../../models/parcel_model.dart';
@@ -133,10 +134,10 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
       Navigator.pop(context); // Closes the loading indicator
       Navigator.pop(context); // Closes the bottom sheet
 
-      showCorrectToast(message: 'Parcel confirmed successfully!');
+      showCorrectToast(message: S.of(context).parcelConfirmedSuccessfully);
     } catch (e) {
       //print('Error updating parcel status: $e');
-      showErrorToast(message: 'Failed to confirm parcel. Please try again.');
+      showErrorToast(message: S.of(context).failedToConfirmParcel);
     }
   }
 
@@ -193,11 +194,11 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
                     ),
                     child: Column(
                       children: [
-                        const HomeAppBar(title: 'Parcel Approve'),
+                        HomeAppBar(title: S.of(context).parcelApprove),
                         const SizedBox(height: 24),
                         TotalParcelsCounter(
                           //counterKey: _counterKey,
-                          title: 'Total Approved',
+                          title: S.of(context).totalApproved,
                           value: _approvedCount.toString(),
                         ),
                         const SizedBox(height: 24),
@@ -249,8 +250,8 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
                                   const ImageContainer(),
                                   const SizedBox(height: 24),
 
-                                  const Text(
-                                    'Product info',
+                                  Text(
+                                    S.of(context).productInfo,
                                     style: AppTextStyles.textStyle16LightPurple,
                                   ),
                                   const SizedBox(height: 18),
@@ -283,8 +284,8 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
                                           context,
                                           parcel.id,
                                         ),
-                                    child: const Text(
-                                      'Confirm Parcel',
+                                    child: Text(
+                                      S.of(context).confirmParcel,
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,

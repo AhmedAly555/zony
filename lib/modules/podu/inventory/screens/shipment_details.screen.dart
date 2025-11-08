@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 
 import '../../../../../theme/app_text_styles.dart';
 import '../../../../../views/widgets/custom_parcel_details.dart';
@@ -59,7 +60,7 @@ class _ShipmentDetailsScreenState extends State<ShipmentDetailsScreen> {
       setState(() {
         _isLoading = false;
       });
-      showErrorToast(message: '❌ Failed to fetch parcel details: $e');
+      showErrorToast(message: S.of(context).failedToFetchParcelDetails + '$e');
     }
   }
 
@@ -74,7 +75,7 @@ class _ShipmentDetailsScreenState extends State<ShipmentDetailsScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
         child: Column(
           children: [
-            AppBarHaveArrow(title: 'Parcel Details'),
+            AppBarHaveArrow(title: S.of(context).parcelDetails),
 
             const SizedBox(height: 24),
 
@@ -87,8 +88,8 @@ class _ShipmentDetailsScreenState extends State<ShipmentDetailsScreen> {
                   const SizedBox(height: 24),
 
                   // Product info text
-                  const Text(
-                    'Product info',
+                  Text(
+                    S.of(context).productInfo,
                     style: AppTextStyles.textStyle16LightPurple,
                   ),
                   const SizedBox(height: 18),
@@ -96,18 +97,18 @@ class _ShipmentDetailsScreenState extends State<ShipmentDetailsScreen> {
                   // Info items
                   InfoItem(
                     svgPath: 'assets/svgs/profile_icon_with_background.svg',
-                    text: _parcel?.clientName ?? 'Unknown Client',
+                    text: _parcel?.clientName ?? S.of(context).unknownClient,
                   ),
                   const SizedBox(height: 12),
                   InfoItem(
                     svgPath: 'assets/svgs/location_icon_with_background.svg',
                     text: _parcel?.cityName ??
-                        'Unknown address',                  ),
+                        S.of(context).unknownAddress,                  ),
                   const SizedBox(height: 12),
                   InfoItem(
                     svgPath: 'assets/svgs/call_icon_with_background.svg',
                     text: _parcel?.customerPhoneNumber ??
-                        'No phone number',                  ),
+                        S.of(context).noPhoneNumber,                  ),
                 ],
               ),
             ),

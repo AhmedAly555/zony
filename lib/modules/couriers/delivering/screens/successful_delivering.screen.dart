@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 import 'package:zony/modules/couriers/delivering/screens/pudo_parcels.screen.dart';
 import 'package:zony/views/widgets/default_button.widget.dart';
 
@@ -22,13 +23,13 @@ class SuccessfulDelivering extends StatelessWidget {
         children: [
           SuccessfulImage(),
           Text(
-            "Successful Delivering process",
+            S.of(context).successfulDeliveringProcess,
             textAlign: TextAlign.center,
             style: AppTextStyles.textStyle24,
           ),
           const SizedBox(height: 18),
           Text(
-            "The time and location of the pickup will be recorded automatically.",
+            S.of(context).pickupTimeAndLocationRecorded,
             textAlign: TextAlign.center,
             style: AppTextStyles.textStyle14Grey,
           ),
@@ -60,7 +61,7 @@ class SuccessfulDelivering extends StatelessWidget {
                         () => PudoParcelsScreen(pudoId: poduId!,),
                   ),
                   child: Text(
-                    'Deliver New Parcel',
+                    S.of(context).deliverNewParcel,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -73,7 +74,7 @@ class SuccessfulDelivering extends StatelessWidget {
                 CustomOutlineButton(
                   onTap: () => AppNavigator.navigateTo(context, () => CourierHomeScreen()),
                   title: Text(
-                    'Back To Home',
+                    S.of(context).backToHome,
                     style: AppTextStyles.textStyle16,
                   ),
                 ),

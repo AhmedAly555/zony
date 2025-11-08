@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:zony/generated/l10n.dart';
 
 import '../scanner_line.dart';
 import 'componants_bottom_sheet.widgets.dart';
@@ -79,7 +80,7 @@ class QRScannerBottomSheet extends StatelessWidget {
               padding: const EdgeInsets.only(top: 420, right: 18, left: 18),
               child: Center(
                 child: Text(
-                  "Scan QR code in front of the camera",
+                  S.of(context).scanQrCodeInFrontOfCamera,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFF49159B),
@@ -138,4 +139,3 @@ class _CornersPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
-

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:zony/generated/l10n.dart';
 import 'package:zony/views/widgets/template_app_scaffold.widget.dart';
 
 import '../../../../../../views/widgets/bottom_sheet/manually_username_bottom_sheet.dart';
@@ -64,7 +65,7 @@ class PoduDeliveringScreen extends StatelessWidget {
       );
     }
     else {
-      showErrorToast(message: '⚠️ No QR code detected');
+      showErrorToast(message: S.of(context).noQrCodeDetected);
     }
   }
 
@@ -75,13 +76,13 @@ class PoduDeliveringScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
         child: Column(
           children: [
-            const HomeAppBar(title: 'Pickup Point'),
+            HomeAppBar(title: S.of(context).pickupPoint),
             const Spacer(),
             CustomMenuRecieve(
               items: [
                 MenuItemData(
                   svgPath: 'assets/svgs/small_qr.svg',
-                  title: "QR Scanner",
+                  title: S.of(context).qrScanner,
                   onTap: () async {
                     await _handleQrScanning(
                       context: context,
@@ -91,7 +92,7 @@ class PoduDeliveringScreen extends StatelessWidget {
                 ),
                 /*MenuItemData(
                   svgPath: 'assets/svgs/small_qr.svg',
-                  title: "Enter Username",
+                  title: S.of(context).enterUsername,
                   onTap: () {
                     showManuallyUsernameBottomSheet(context);
                   },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:zony/generated/l10n.dart';
 
 import '../../../modules/auth/screens/login_screen.dart';
 import '../../../services/api_service.dart';
@@ -35,7 +36,7 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
       if (context.mounted) {
         AppNavigator.navigateAndRemoveUntil(context, () => const LoginScreen());
         Fluttertoast.showToast(
-          msg: 'Logged out successfully!',
+          msg: S.of(context).loggedOutSuccessfully,
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           backgroundColor: const Color(0xFF333333),
@@ -46,7 +47,7 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
     } catch (e) {
       if (context.mounted) {
         showErrorToast(
-          message: 'An error occurred: ${e.toString()}',
+          message: S.of(context).anErrorOccurred + '${e.toString()}',
         );
       }
     } finally {
@@ -74,8 +75,8 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
           const SizedBox(height: 16),
 
           // Title
-          const Text(
-            'Are you sure you want to log out?',
+          Text(
+            S.of(context).areYouSureYouWantToLogOut,
             textAlign: TextAlign.center,
             style: AppTextStyles.bottomSheetTitle,
           ),
@@ -83,8 +84,8 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
           const SizedBox(height: 8),
 
           // Description
-          const Text(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod',
+          Text(
+            S.of(context).logOutDescription,
             textAlign: TextAlign.center,
             style: AppTextStyles.bottomSheetDescription,
           ),
@@ -103,7 +104,7 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
                             size: 30,
                           )
                           : Text(
-                            'Yes, I\'m sure.',
+                            S.of(context).yesImSure,
                             textAlign: TextAlign.center,
 
                             style: TextStyle(
@@ -119,7 +120,7 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
                 child: CustomOutlineButton(
                   onTap: () => Navigator.pop(context),
                   title: Text(
-                    'No, cancel',
+                    S.of(context).noCancel,
                     style: TextStyle(
                       color: Color(0xFF49159B),
                       fontWeight: FontWeight.w600,

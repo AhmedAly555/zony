@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:zony/generated/l10n.dart';
 
 import '../../../../../../services/size_config.dart';
 import '../../../../../../views/widgets/bottom_sheet/choose_way_bottom_sheet.dart';
@@ -76,9 +77,9 @@ class CourierReceivingScreen extends StatelessWidget {
           builder: (_) => ParcelDetailsScreen(barcode: barcode),
         ),
       );
-      showCorrectToast(message: 'PUDO parcels retrieved successfully');
+      showCorrectToast(message: S.of(context).pudoParcelsRetrievedSuccessfully);
     } else {
-      showErrorToast(message: '⚠️ No QR code detected');
+      showErrorToast(message: S.of(context).noQrCodeDetected);
     }
   }
 
@@ -89,7 +90,7 @@ class CourierReceivingScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
         child: Column(
           children: [
-            const HomeAppBar(title: 'Enter Parcel'),
+            HomeAppBar(title: S.of(context).enterParcel),
             const Spacer(),
             CustomMenuRecieve(
               items: [
@@ -100,7 +101,7 @@ class CourierReceivingScreen extends StatelessWidget {
                   ),*/
                 MenuItemData(
                   svgPath: 'assets/svgs/small_qr.svg',
-                  title: "Individual Parcel",
+                  title: S.of(context).individualParcel,
                   onTap: () {
                     showChooseWayBottomSheet(context);
                   },

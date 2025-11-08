@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:zony/generated/l10n.dart';
 import 'package:zony/modules/couriers/delivering/screens/parcel_details.screen.dart';
 import 'package:zony/services/extensions/parcel_status_extension.dart';
 
@@ -76,7 +77,7 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
         ),
       );
     } else {
-      showErrorToast(message: '⚠️ No Parcel QR detected!');
+      showErrorToast(message: S.of(context).noParcelQrDetected);
     }
   }
 
@@ -100,7 +101,7 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  AppBarHaveArrow(title: 'Pickup Point Parcels'),
+                  AppBarHaveArrow(title: S.of(context).pickupPointParcels),
                   SizedBox(height: 28),
                   //search container
                   Container(
@@ -121,14 +122,14 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Search By', style: AppTextStyles.textStyle16),
+                        Text(S.of(context).searchBy, style: AppTextStyles.textStyle16),
                         const SizedBox(height: 8),
                         Row(
                           children: [
                             Expanded(
                               child: SearchButton(
                                 svgPath: 'assets/svgs/small_qr.svg',
-                                text: 'Scan barCode',
+                                text: S.of(context).scanBarCode,
                                 onTap: () async {
                                   await _handleParcelQRScan(context, widget.pudoId);
                                 },
@@ -138,7 +139,7 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                             Expanded(
                               child: SearchButton(
                                 svgPath: 'assets/svgs/small_qr.svg',
-                                text: 'code Number',
+                                text: S.of(context).codeNumber,
                                 onTap: () {},
                               ),
                             ),
@@ -234,7 +235,7 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                         ),
                                         const SizedBox(width: 6),
                                         Text(
-                                          /*'${parcel.status}'*/"Received",
+                                          /*'${parcel.status}'*/S.of(context).received,
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
@@ -254,8 +255,8 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                 const SizedBox(height: 24),
 
                                 // Product info text
-                                const Text(
-                                  'Product info',
+                                Text(
+                                  S.of(context).productInfo,
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
@@ -275,19 +276,19 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                 InfoItem(
                                   svgPath:
                                   'assets/svgs/profile_icon_with_background.svg',
-                                  text: parcel.zoneName ?? 'Unknown Zone',
+                                  text: parcel.zoneName ?? S.of(context).unknownZone,
                                 ),
                                 const SizedBox(height: 12),
                                 InfoItem(
                                   svgPath:
                                   'assets/svgs/location_icon_with_background.svg',
-                                  text: parcel.cityName ?? 'Unknown Address',
+                                  text: parcel.cityName ?? S.of(context).unknownAddress,
                                 ),
                                 const SizedBox(height: 12),
                                 InfoItem(
                                   svgPath:
                                   'assets/svgs/call_icon_with_background.svg',
-                                  text: parcel.cityName ?? 'Unknown Phone',
+                                  text: parcel.cityName ?? S.of(context).unknownPhone,
                                 ),
                               ],
                             ),

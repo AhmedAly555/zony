@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 import 'podu_details.dart';
@@ -44,7 +45,7 @@ class _PDOUDetailsAndParceisState extends State<PDOUDetailsAndParceis> {
                       ),
                       child: Center(
                         child: Text(
-                          'PDOU Details',
+                          S.of(context).poduDetails,
                           style: TextStyle(
                             color: selectedTabIndex == 0
                                 ? Color(0xFFFFFFFF)
@@ -75,7 +76,7 @@ class _PDOUDetailsAndParceisState extends State<PDOUDetailsAndParceis> {
                       ),
                       child: Center(
                         child: Text(
-                          'PDOU Parcels',
+                          S.of(context).poduParcels,
                           style: TextStyle(
                             color: selectedTabIndex == 1
                                 ? Color(0xFFFFFFFF)

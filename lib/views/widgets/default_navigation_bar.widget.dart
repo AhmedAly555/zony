@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:zony/generated/l10n.dart';
 
 class DefaultNavigationBar extends StatelessWidget {
   final int currentIndex;
@@ -18,15 +19,17 @@ class DefaultNavigationBar extends StatelessWidget {
     'assets/svgs/more.svg',
   ];
 
-  static const List<String> _labels = [
-    'Home',
-    'Receiving',
-    'Delivering',
-    'More',
-  ];
+
 
   @override
   Widget build(BuildContext context) {
+    final List<String> labels = [
+      S.of(context).home,
+      S.of(context).receiving,
+      S.of(context).delivering,
+      S.of(context).more,
+    ];
+
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
@@ -78,7 +81,7 @@ class DefaultNavigationBar extends StatelessWidget {
                   ),
                 ),
               ),
-              label: _labels[index],
+              label: labels[index],
             );
           }),
         ),

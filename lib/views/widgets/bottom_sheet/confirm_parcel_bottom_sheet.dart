@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zony/generated/l10n.dart';
 
 import '../../../modules/auth/screens/login_screen.dart';
 import '../../../theme/app_text_styles.dart';
@@ -26,8 +27,8 @@ class ConfirmParcelBottomSheet extends StatelessWidget {
           const Spacer(),
 
           // Title
-          const Text(
-            'Parcel Approve Confirmation',
+          Text(
+            S.of(context).parcelApproveConfirmation,
             textAlign: TextAlign.center,
             style: AppTextStyles.bottomSheetTitle,
           ),
@@ -36,7 +37,7 @@ class ConfirmParcelBottomSheet extends StatelessWidget {
 
           // Description
           Text(
-            'Are you sure you want to approve this parcel?(id: #${parcelId})',
+            S.of(context).areYouSureYouWantToApprove(parcelId),
             textAlign: TextAlign.center,
             style: AppTextStyles.bottomSheetDescription,
           ),
@@ -52,7 +53,7 @@ class ConfirmParcelBottomSheet extends StatelessWidget {
 
                   },
                   child: Text(
-                    'Confirm',
+                    S.of(context).confirmParcel,
                     textAlign: TextAlign.center,
 
                     style: TextStyle(
@@ -70,7 +71,7 @@ class ConfirmParcelBottomSheet extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   title: Text(
-                    'No, cancel',
+                    S.of(context).noCancel,
                     style: TextStyle(
                       color: Color(0xFF49159B),
                       fontWeight: FontWeight.w600,
