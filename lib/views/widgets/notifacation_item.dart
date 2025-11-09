@@ -29,7 +29,7 @@ class NotificationItem extends StatelessWidget {
                 color: Color(0xFFdbd0eb),
               ),
               child: SvgPicture.asset(
-                'assets/svgs/delivering.svg',
+                'assets/svgs/my_parcels.svg',
                 width: 22,
                 height: 24,
                 color: Color(0xFF49159B),
@@ -72,6 +72,7 @@ class NotificationItem extends StatelessWidget {
             ),
           ],
         ),
+        if (!isLast)
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: Divider(

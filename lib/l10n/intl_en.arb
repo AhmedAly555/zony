@@ -126,5 +126,20 @@
     "youAreAtWrongLocation": "YOU ARE AT A WRONG LOCATION",
     "myPickupPoints": "My Pickup Points",
     "home": "Home",
-    "more": "More"
+    "more": "More",
+    "chooseYourLanguage": "Choose your language",
+    "languageSelectionDescription": "Select your preferred language. This will update the text throughout the app.",
+    "english": "English",
+    "arabic": "Arabic",
+    "hindi": "Hindi",
+    "bengali": "Bengali",
+    "urdu": "Urdu",
+    "loginFailed": "Failed to login",
+    "logIn": "Log in",
+    "enterYourPersonalInfo": "Enter your personal information",
+    "usernameOrPhoneNumber": "username or phone number",
+    "enterUsernameOrPhoneNumber": "Enter Username Or Phone Number",
+    "password": "Password",
+    "enterPassword": "Enter Password",
+    "rememberMe": "Remember me"
 }

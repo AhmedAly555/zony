@@ -21,7 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'hi';
 
   static String m0(parcelId) =>
-      "क्या आप निश्चित रूप से इस पार्सल को स्वीकृत करना चाहते हैं? (आईडी: #${parcelId})";
+      "क्या आप निश्चित रूप से इस पार্সल को स्वीकृत करना चाहते हैं? (आईडी: #${parcelId})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -30,16 +30,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "allParcels": MessageLookupByLibrary.simpleMessage("सभी पार्सल"),
     "anErrorOccurred": MessageLookupByLibrary.simpleMessage("एक त्रुटि हुई: "),
     "approved": MessageLookupByLibrary.simpleMessage("स्वीकृत"),
+    "arabic": MessageLookupByLibrary.simpleMessage("अरबी"),
     "areYouSureYouWantToApprove": m0,
     "areYouSureYouWantToLogOut": MessageLookupByLibrary.simpleMessage(
       "क्या आप निश्चित रूप से लॉग आउट करना चाहते हैं?",
     ),
     "backToHome": MessageLookupByLibrary.simpleMessage("होम पर वापस जाएं"),
+    "bengali": MessageLookupByLibrary.simpleMessage("बंगाली"),
     "cameronWilliamson": MessageLookupByLibrary.simpleMessage(
       "कैमरून विलियमसन",
     ),
     "captureParcel": MessageLookupByLibrary.simpleMessage("पार्सल कैप्चर करें"),
     "changePassword": MessageLookupByLibrary.simpleMessage("पासवर्ड बदलें"),
+    "chooseYourLanguage": MessageLookupByLibrary.simpleMessage(
+      "अपनी भाषा चुनें",
+    ),
     "codeNumber": MessageLookupByLibrary.simpleMessage("कोड संख्या"),
     "confirm": MessageLookupByLibrary.simpleMessage("पुष्टि करें"),
     "confirmParcel": MessageLookupByLibrary.simpleMessage(
@@ -56,15 +61,23 @@ class MessageLookup extends MessageLookupByLibrary {
       "वितरण पुष्टि",
     ),
     "deliveryConfirmationDescription": MessageLookupByLibrary.simpleMessage(
-      "पुष्टि करके, आप स्वीकार करते हैं कि पार्सल सफलतापूर्वक वितरित किया गया है।",
+      "पुष्टि करके, आप स्वीकार करते हैं कि पार্সल सफलतापूर्वक वितरित किया गया है।",
     ),
     "dummyPhoneNumber": MessageLookupByLibrary.simpleMessage("(205) 555-0100"),
+    "english": MessageLookupByLibrary.simpleMessage("अंग्रेजी"),
     "enterManually": MessageLookupByLibrary.simpleMessage(
       "मैन्युअल रूप से दर्ज करें",
     ),
     "enterParcel": MessageLookupByLibrary.simpleMessage("पार्सल दर्ज करें"),
+    "enterPassword": MessageLookupByLibrary.simpleMessage("पासवर्ड दर्ज करें"),
     "enterUsername": MessageLookupByLibrary.simpleMessage(
       "उपयोगकर्ता नाम दर्ज करें",
+    ),
+    "enterUsernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "उपयोगकर्ता नाम या फोन नंबर दर्ज करें",
+    ),
+    "enterYourPersonalInfo": MessageLookupByLibrary.simpleMessage(
+      "अपनी व्यक्तिगत जानकारी दर्ज करें",
     ),
     "error": MessageLookupByLibrary.simpleMessage("त्रुटि: "),
     "errorFetchingData": MessageLookupByLibrary.simpleMessage(
@@ -97,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "छवि अपलोड करने में विफल: ",
     ),
     "gallery": MessageLookupByLibrary.simpleMessage("गैलरी"),
+    "hindi": MessageLookupByLibrary.simpleMessage("हिंदी"),
     "home": MessageLookupByLibrary.simpleMessage("होम"),
     "imageUploadedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "✅ छवि सफलतापूर्वक अपलोड की गई!",
@@ -106,12 +120,17 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "inventory": MessageLookupByLibrary.simpleMessage("सूची"),
     "language": MessageLookupByLibrary.simpleMessage("भाषा"),
+    "languageSelectionDescription": MessageLookupByLibrary.simpleMessage(
+      "अपनी पसंदीदा भाषा चुनें। यह ऐप में टेक्स्ट को अपडेट करेगा।",
+    ),
+    "logIn": MessageLookupByLibrary.simpleMessage("लॉग इन करें"),
     "logOutDescription": MessageLookupByLibrary.simpleMessage(
       "आपको लॉगिन स्क्रीन पर वापस भेजा जाएगा।",
     ),
     "loggedOutSuccessfully": MessageLookupByLibrary.simpleMessage(
       "सफलतापूर्वक लॉग आउट हो गए!",
     ),
+    "loginFailed": MessageLookupByLibrary.simpleMessage("लॉग इन करने में विफल"),
     "logout": MessageLookupByLibrary.simpleMessage("लॉग आउट"),
     "more": MessageLookupByLibrary.simpleMessage("अधिक"),
     "moreSettings": MessageLookupByLibrary.simpleMessage("अधिक सेटिंग्स"),
@@ -175,6 +194,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "parkerRoadAddress": MessageLookupByLibrary.simpleMessage(
       "4140 पार्कर रोड, एलेनटाउन, न्यू मैक्सिको",
     ),
+    "password": MessageLookupByLibrary.simpleMessage("पासवर्ड"),
     "pending": MessageLookupByLibrary.simpleMessage("लंबित"),
     "personalInformation": MessageLookupByLibrary.simpleMessage(
       "व्यक्तिगत जानकारी",
@@ -225,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "received": MessageLookupByLibrary.simpleMessage("प्राप्त"),
     "receiving": MessageLookupByLibrary.simpleMessage("प्राप्त करना"),
+    "rememberMe": MessageLookupByLibrary.simpleMessage("मुझे याद रखें"),
     "scanBarCode": MessageLookupByLibrary.simpleMessage("बार कोड स्कैन करें"),
     "scanQrCodeInFrontOfCamera": MessageLookupByLibrary.simpleMessage(
       "कैमरे के सामने क्यूआर कोड स्कैन करें",
@@ -259,11 +280,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "unknownPhone": MessageLookupByLibrary.simpleMessage("अज्ञात फोन"),
     "unknownZone": MessageLookupByLibrary.simpleMessage("अज्ञात क्षेत्र"),
     "unread": MessageLookupByLibrary.simpleMessage("अपठित"),
+    "urdu": MessageLookupByLibrary.simpleMessage("उर्दू"),
     "usernameCopiedToClipboard": MessageLookupByLibrary.simpleMessage(
       "उपयोगकर्ता नाम कॉपी किया गया",
     ),
     "usernameIsNotValid": MessageLookupByLibrary.simpleMessage(
       "आपके द्वारा दर्ज किया गया उपयोगकर्ता नाम मान्य नहीं है",
+    ),
+    "usernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "उपयोगकर्ता नाम या फोन नंबर",
     ),
     "waiting": MessageLookupByLibrary.simpleMessage("प्रतीक्षा में"),
     "yesImSure": MessageLookupByLibrary.simpleMessage("हां, मुझे यकीन है।"),

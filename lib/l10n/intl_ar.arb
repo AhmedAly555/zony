@@ -126,5 +126,20 @@
     "youAreAtWrongLocation": "أنت في الموقع الخطأ",
     "myPickupPoints": "نقاط الاستلام الخاصة بي",
     "home": "الرئيسية",
-    "more": "المزيد"
+    "more": "المزيد",
+    "chooseYourLanguage": "اختر لغتك",
+    "languageSelectionDescription": "اختر لغتك المفضلة. سيؤدي هذا إلى تحديث النص في جميع أنحاء التطبيق.",
+    "english": "الإنجليزية",
+    "arabic": "العربية",
+    "hindi": "الهندية",
+    "bengali": "البنغالية",
+    "urdu": "الأردية",
+    "loginFailed": "فشل تسجيل الدخول",
+    "logIn": "تسجيل الدخول",
+    "enterYourPersonalInfo": "أدخل معلوماتك الشخصية",
+    "usernameOrPhoneNumber": "اسم المستخدم أو رقم الهاتف",
+    "enterUsernameOrPhoneNumber": "أدخل اسم المستخدم أو رقم الهاتف",
+    "password": "كلمة المرور",
+    "enterPassword": "أدخل كلمة المرور",
+    "rememberMe": "تذكرني"
 }

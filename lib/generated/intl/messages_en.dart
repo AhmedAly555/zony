@@ -32,16 +32,21 @@ class MessageLookup extends MessageLookupByLibrary {
       "An error occurred: ",
     ),
     "approved": MessageLookupByLibrary.simpleMessage("Approved"),
+    "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
     "areYouSureYouWantToApprove": m0,
     "areYouSureYouWantToLogOut": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to log out?",
     ),
     "backToHome": MessageLookupByLibrary.simpleMessage("Back To Home"),
+    "bengali": MessageLookupByLibrary.simpleMessage("Bengali"),
     "cameronWilliamson": MessageLookupByLibrary.simpleMessage(
       "Cameron Williamson",
     ),
     "captureParcel": MessageLookupByLibrary.simpleMessage("Capture Parcel"),
     "changePassword": MessageLookupByLibrary.simpleMessage("Change Password"),
+    "chooseYourLanguage": MessageLookupByLibrary.simpleMessage(
+      "Choose your language",
+    ),
     "codeNumber": MessageLookupByLibrary.simpleMessage("code Number"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmParcel": MessageLookupByLibrary.simpleMessage("Confirm Parcel"),
@@ -59,9 +64,17 @@ class MessageLookup extends MessageLookupByLibrary {
       "By confirming, you acknowledge that the parcel has been successfully delivered.",
     ),
     "dummyPhoneNumber": MessageLookupByLibrary.simpleMessage("(205) 555-0100"),
+    "english": MessageLookupByLibrary.simpleMessage("English"),
     "enterManually": MessageLookupByLibrary.simpleMessage("Enter Manually"),
     "enterParcel": MessageLookupByLibrary.simpleMessage("Enter Parcel"),
+    "enterPassword": MessageLookupByLibrary.simpleMessage("Enter Password"),
     "enterUsername": MessageLookupByLibrary.simpleMessage("Enter Username"),
+    "enterUsernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "Enter Username Or Phone Number",
+    ),
+    "enterYourPersonalInfo": MessageLookupByLibrary.simpleMessage(
+      "Enter your personal information",
+    ),
     "error": MessageLookupByLibrary.simpleMessage("Error: "),
     "errorFetchingData": MessageLookupByLibrary.simpleMessage(
       "Error fetching data: ",
@@ -93,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Failed to upload image: ",
     ),
     "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
+    "hindi": MessageLookupByLibrary.simpleMessage("Hindi"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "imageUploadedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "✅ Image uploaded successfully!",
@@ -102,12 +116,17 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "inventory": MessageLookupByLibrary.simpleMessage("Inventory"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
+    "languageSelectionDescription": MessageLookupByLibrary.simpleMessage(
+      "Select your preferred language. This will update the text throughout the app.",
+    ),
+    "logIn": MessageLookupByLibrary.simpleMessage("Log in"),
     "logOutDescription": MessageLookupByLibrary.simpleMessage(
       "You will be returned to the login screen.",
     ),
     "loggedOutSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Logged out successfully!",
     ),
+    "loginFailed": MessageLookupByLibrary.simpleMessage("Failed to login"),
     "logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "more": MessageLookupByLibrary.simpleMessage("More"),
     "moreSettings": MessageLookupByLibrary.simpleMessage("More Settings"),
@@ -167,6 +186,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "parkerRoadAddress": MessageLookupByLibrary.simpleMessage(
       "4140 Parker Rd, Allentown, New Mexico",
     ),
+    "password": MessageLookupByLibrary.simpleMessage("Password"),
     "pending": MessageLookupByLibrary.simpleMessage("Pending"),
     "personalInformation": MessageLookupByLibrary.simpleMessage(
       "Personal Information",
@@ -215,6 +235,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "received": MessageLookupByLibrary.simpleMessage("Received"),
     "receiving": MessageLookupByLibrary.simpleMessage("Receiving"),
+    "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
     "scanBarCode": MessageLookupByLibrary.simpleMessage("Scan barCode"),
     "scanQrCodeInFrontOfCamera": MessageLookupByLibrary.simpleMessage(
       "Scan QR code in front of the camera",
@@ -251,11 +272,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "unknownPhone": MessageLookupByLibrary.simpleMessage("Unknown Phone"),
     "unknownZone": MessageLookupByLibrary.simpleMessage("Unknown Zone"),
     "unread": MessageLookupByLibrary.simpleMessage("Unread"),
+    "urdu": MessageLookupByLibrary.simpleMessage("Urdu"),
     "usernameCopiedToClipboard": MessageLookupByLibrary.simpleMessage(
       "Username copied to clipboard",
     ),
     "usernameIsNotValid": MessageLookupByLibrary.simpleMessage(
       "The username You Entered Is Not Valid",
+    ),
+    "usernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "username or phone number",
     ),
     "waiting": MessageLookupByLibrary.simpleMessage("Waiting"),
     "yesImSure": MessageLookupByLibrary.simpleMessage("Yes, I\'m sure."),

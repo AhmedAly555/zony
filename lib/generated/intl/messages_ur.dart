@@ -34,15 +34,20 @@ class MessageLookup extends MessageLookupByLibrary {
       "ایک خرابی رونما ہوئی: ",
     ),
     "approved": MessageLookupByLibrary.simpleMessage("منظور شدہ"),
+    "arabic": MessageLookupByLibrary.simpleMessage("عربی"),
     "areYouSureYouWantToApprove": m0,
     "areYouSureYouWantToLogOut": MessageLookupByLibrary.simpleMessage(
       "کیا آپ واقعی لاگ آؤٹ کرنا چاہتے ہیں؟",
     ),
     "backToHome": MessageLookupByLibrary.simpleMessage("ہوم پر واپس جائیں"),
+    "bengali": MessageLookupByLibrary.simpleMessage("بنگالی"),
     "cameronWilliamson": MessageLookupByLibrary.simpleMessage("کیمرون ولیمسن"),
     "captureParcel": MessageLookupByLibrary.simpleMessage("پارسل کی تصویر لیں"),
     "changePassword": MessageLookupByLibrary.simpleMessage(
       "پاس ورڈ تبدیل کریں",
+    ),
+    "chooseYourLanguage": MessageLookupByLibrary.simpleMessage(
+      "اپنی زبان منتخب کریں",
     ),
     "codeNumber": MessageLookupByLibrary.simpleMessage("کوڈ نمبر"),
     "confirm": MessageLookupByLibrary.simpleMessage("تصدیق کریں"),
@@ -63,11 +68,19 @@ class MessageLookup extends MessageLookupByLibrary {
       "تصدیق کرنے سے، آپ تسلیم کرتے ہیں کہ پارسل کامیابی سے پہنچا دیا گیا ہے۔",
     ),
     "dummyPhoneNumber": MessageLookupByLibrary.simpleMessage("(205) 555-0100"),
+    "english": MessageLookupByLibrary.simpleMessage("انگریزی"),
     "enterManually": MessageLookupByLibrary.simpleMessage(
       "دستی طور پر درج کریں",
     ),
     "enterParcel": MessageLookupByLibrary.simpleMessage("پارسل درج کریں"),
+    "enterPassword": MessageLookupByLibrary.simpleMessage("پاس ورڈ درج کریں"),
     "enterUsername": MessageLookupByLibrary.simpleMessage("صارف نام درج کریں"),
+    "enterUsernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "صارف نام یا فون نمبر درج کریں",
+    ),
+    "enterYourPersonalInfo": MessageLookupByLibrary.simpleMessage(
+      "اپنی ذاتی معلومات درج کریں",
+    ),
     "error": MessageLookupByLibrary.simpleMessage("خرابی: "),
     "errorFetchingData": MessageLookupByLibrary.simpleMessage(
       "ڈیٹا حاصل کرنے میں خرابی: ",
@@ -101,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "تصویر اپ لوڈ کرنے میں ناکامی: ",
     ),
     "gallery": MessageLookupByLibrary.simpleMessage("گیلری"),
+    "hindi": MessageLookupByLibrary.simpleMessage("ہندی"),
     "home": MessageLookupByLibrary.simpleMessage("ہوم"),
     "imageUploadedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "✅ تصویر کامیابی سے اپ لوڈ ہو گئی!",
@@ -108,11 +122,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "individualParcel": MessageLookupByLibrary.simpleMessage("انفرادی پارسل"),
     "inventory": MessageLookupByLibrary.simpleMessage("انوینٹری"),
     "language": MessageLookupByLibrary.simpleMessage("زبان"),
+    "languageSelectionDescription": MessageLookupByLibrary.simpleMessage(
+      "اپنی پسند کی زبان منتخب کریں۔ اس سے ایپ میں متن اپ ڈیٹ ہو جائے گا۔",
+    ),
+    "logIn": MessageLookupByLibrary.simpleMessage("لاگ ان کریں"),
     "logOutDescription": MessageLookupByLibrary.simpleMessage(
       "آپ کو لاگ ان اسکرین پر واپس بھیج دیا جائے گا۔",
     ),
     "loggedOutSuccessfully": MessageLookupByLibrary.simpleMessage(
       "کامیابی سے لاگ آؤٹ ہو گئے!",
+    ),
+    "loginFailed": MessageLookupByLibrary.simpleMessage(
+      "لاگ ان کرنے میں ناکام",
     ),
     "logout": MessageLookupByLibrary.simpleMessage("لاگ آؤٹ"),
     "more": MessageLookupByLibrary.simpleMessage("مزید"),
@@ -179,6 +200,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "parkerRoadAddress": MessageLookupByLibrary.simpleMessage(
       "4140 پارکر روڈ، ایلن ٹاؤن، نیو میکسیکو",
     ),
+    "password": MessageLookupByLibrary.simpleMessage("پاس ورڈ"),
     "pending": MessageLookupByLibrary.simpleMessage("زیر التواء"),
     "personalInformation": MessageLookupByLibrary.simpleMessage("ذاتی معلومات"),
     "photoConfirmation": MessageLookupByLibrary.simpleMessage("تصویر کی تصدیق"),
@@ -227,6 +249,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "received": MessageLookupByLibrary.simpleMessage("موصول ہوا"),
     "receiving": MessageLookupByLibrary.simpleMessage("وصولی"),
+    "rememberMe": MessageLookupByLibrary.simpleMessage("مجھے یاد رکھیں"),
     "scanBarCode": MessageLookupByLibrary.simpleMessage("بار کوڈ اسکین کریں"),
     "scanQrCodeInFrontOfCamera": MessageLookupByLibrary.simpleMessage(
       "کیمرے کے سامنے کیو آر کوڈ اسکین کریں",
@@ -261,11 +284,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "unknownPhone": MessageLookupByLibrary.simpleMessage("نامعلوم فون"),
     "unknownZone": MessageLookupByLibrary.simpleMessage("نامعلوم علاقہ"),
     "unread": MessageLookupByLibrary.simpleMessage("نامعلوم"),
+    "urdu": MessageLookupByLibrary.simpleMessage("اردو"),
     "usernameCopiedToClipboard": MessageLookupByLibrary.simpleMessage(
       "صارف نام کاپی کر لیا گیا",
     ),
     "usernameIsNotValid": MessageLookupByLibrary.simpleMessage(
       "آپ کا درج کردہ صارف نام درست نہیں ہے",
+    ),
+    "usernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "صارف نام یا فون نمبر",
     ),
     "waiting": MessageLookupByLibrary.simpleMessage("انتظار میں"),
     "yesImSure": MessageLookupByLibrary.simpleMessage("ہاں، مجھے یقین ہے۔"),

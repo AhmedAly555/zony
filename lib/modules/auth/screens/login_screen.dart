@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zony/generated/l10n.dart';
 
 import '../../../services/api_service.dart';
 import '../../../services/get_pudos_service.dart';
@@ -103,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     } catch (e) {
       // login failed: Show a red toast
-      showErrorToast(message: 'Failed to login');
+      showErrorToast(message: S.of(context).loginFailed);
     } finally {
       setState(() {
         isLoading = false;
@@ -129,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           const Spacer(flex: 1,),
           Text(
-            'Log in',
+            S.of(context).logIn,
             style: const TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.w600,
@@ -159,14 +160,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Enter your personal information',
+                      S.of(context).enterYourPersonalInfo,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                     ),
                     SizedBox(height: 10),
                     Divider(height: 1, color: Color(0xFFF4F4F4)),
                     SizedBox(height: 20),
-                    const Text(
-                      'username or phone number',
+                    Text(
+                      S.of(context).usernameOrPhoneNumber,
                       style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.w500,
@@ -175,14 +176,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 8.0),
                     DefaultTextField(
-                      hintText: 'Enter Username Or Phone Number',
+                      hintText: S.of(context).enterUsernameOrPhoneNumber,
                       controller: _emailController,
                       fieldType: DefaultTextFieldType.email,
                     ),
 
                     const SizedBox(height: 20.0),
-                    const Text(
-                      'Password',
+                    Text(
+                      S.of(context).password,
                       style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.w500,
@@ -192,7 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 8.0),
                     DefaultTextField(
                       controller: _passwordController,
-                      hintText: "Enter Password",
+                      hintText: S.of(context).enterPassword,
                       fieldType: DefaultTextFieldType.password,
                     ),
                     SizedBox(height: 20),
@@ -217,8 +218,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
 
-                        const Text(
-                          'Remember me',
+                        Text(
+                          S.of(context).rememberMe,
                           style: TextStyle(
                             fontSize: 14.0,
                             color: Color(0xFF92929D),
@@ -310,8 +311,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: Colors.white,
                         size: 30,
                       )
-                          : const Text(
-                        'Confirm',
+                          : Text(
+                        S.of(context).confirm,
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,

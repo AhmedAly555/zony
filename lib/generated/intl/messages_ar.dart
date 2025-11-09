@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "allParcels": MessageLookupByLibrary.simpleMessage("جميع الطرود"),
     "anErrorOccurred": MessageLookupByLibrary.simpleMessage("حدث خطأ: "),
     "approved": MessageLookupByLibrary.simpleMessage("موافق عليه"),
+    "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
     "areYouSureYouWantToApprove": m0,
     "areYouSureYouWantToLogOut": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد من تسجيل الخروج؟",
@@ -37,11 +38,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "backToHome": MessageLookupByLibrary.simpleMessage(
       "العودة إلى الصفحة الرئيسية",
     ),
+    "bengali": MessageLookupByLibrary.simpleMessage("البنغالية"),
     "cameronWilliamson": MessageLookupByLibrary.simpleMessage(
       "كاميرون ويليامسون",
     ),
     "captureParcel": MessageLookupByLibrary.simpleMessage("التقاط الطرد"),
     "changePassword": MessageLookupByLibrary.simpleMessage("تغيير كلمة المرور"),
+    "chooseYourLanguage": MessageLookupByLibrary.simpleMessage("اختر لغتك"),
     "codeNumber": MessageLookupByLibrary.simpleMessage("رقم الرمز"),
     "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
     "confirmParcel": MessageLookupByLibrary.simpleMessage("تأكيد الطرد"),
@@ -57,9 +60,17 @@ class MessageLookup extends MessageLookupByLibrary {
       "من خلال التأكيد، فإنك تقر بأنه تم تسليم الطرد بنجاح.",
     ),
     "dummyPhoneNumber": MessageLookupByLibrary.simpleMessage("(205) 555-0100"),
+    "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
     "enterManually": MessageLookupByLibrary.simpleMessage("الإدخال يدوياً"),
     "enterParcel": MessageLookupByLibrary.simpleMessage("إدخال الطرد"),
+    "enterPassword": MessageLookupByLibrary.simpleMessage("أدخل كلمة المرور"),
     "enterUsername": MessageLookupByLibrary.simpleMessage("إدخال اسم المستخدم"),
+    "enterUsernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "أدخل اسم المستخدم أو رقم الهاتف",
+    ),
+    "enterYourPersonalInfo": MessageLookupByLibrary.simpleMessage(
+      "أدخل معلوماتك الشخصية",
+    ),
     "error": MessageLookupByLibrary.simpleMessage("خطأ: "),
     "errorFetchingData": MessageLookupByLibrary.simpleMessage(
       "خطأ في جلب البيانات: ",
@@ -93,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "فشل في رفع الصورة: ",
     ),
     "gallery": MessageLookupByLibrary.simpleMessage("المعرض"),
+    "hindi": MessageLookupByLibrary.simpleMessage("الهندية"),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "imageUploadedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "✅ تم رفع الصورة بنجاح!",
@@ -100,12 +112,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "individualParcel": MessageLookupByLibrary.simpleMessage("طرد فردي"),
     "inventory": MessageLookupByLibrary.simpleMessage("المخزون"),
     "language": MessageLookupByLibrary.simpleMessage("اللغة"),
+    "languageSelectionDescription": MessageLookupByLibrary.simpleMessage(
+      "اختر لغتك المفضلة. سيؤدي هذا إلى تحديث النص في جميع أنحاء التطبيق.",
+    ),
+    "logIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logOutDescription": MessageLookupByLibrary.simpleMessage(
       "سيتم إرجاعك إلى شاشة تسجيل الدخول.",
     ),
     "loggedOutSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم تسجيل الخروج بنجاح!",
     ),
+    "loginFailed": MessageLookupByLibrary.simpleMessage("فشل تسجيل الدخول"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "more": MessageLookupByLibrary.simpleMessage("المزيد"),
     "moreSettings": MessageLookupByLibrary.simpleMessage("المزيد من الإعدادات"),
@@ -175,6 +192,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "parkerRoadAddress": MessageLookupByLibrary.simpleMessage(
       "4140 طريق باركر، ألينتاون، نيو مكسيكو",
     ),
+    "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "pending": MessageLookupByLibrary.simpleMessage("قيد الانتظار"),
     "personalInformation": MessageLookupByLibrary.simpleMessage(
       "المعلومات الشخصية",
@@ -221,6 +239,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "receiveNewParcel": MessageLookupByLibrary.simpleMessage("استلام طرد جديد"),
     "received": MessageLookupByLibrary.simpleMessage("مستلم"),
     "receiving": MessageLookupByLibrary.simpleMessage("الاستلام"),
+    "rememberMe": MessageLookupByLibrary.simpleMessage("تذكرني"),
     "scanBarCode": MessageLookupByLibrary.simpleMessage("مسح الرمز الشريطي"),
     "scanQrCodeInFrontOfCamera": MessageLookupByLibrary.simpleMessage(
       "امسح رمز الاستجابة السريعة أمام الكاميرا",
@@ -255,11 +274,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "unknownPhone": MessageLookupByLibrary.simpleMessage("هاتف غير معروف"),
     "unknownZone": MessageLookupByLibrary.simpleMessage("منطقة غير معروفة"),
     "unread": MessageLookupByLibrary.simpleMessage("غير مقروء"),
+    "urdu": MessageLookupByLibrary.simpleMessage("الأردية"),
     "usernameCopiedToClipboard": MessageLookupByLibrary.simpleMessage(
       "تم نسخ اسم المستخدم",
     ),
     "usernameIsNotValid": MessageLookupByLibrary.simpleMessage(
       "اسم المستخدم الذي أدخلته غير صحيح",
+    ),
+    "usernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "اسم المستخدم أو رقم الهاتف",
     ),
     "waiting": MessageLookupByLibrary.simpleMessage("في الانتظار"),
     "yesImSure": MessageLookupByLibrary.simpleMessage("نعم، أنا متأكد."),
