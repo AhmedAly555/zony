@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:zony/generated/l10n.dart';
+import 'package:zony/services/locale_service.dart';
 
 import '../../../theme/app_text_styles.dart';
 import '../bottom_sheet_container.dart';
@@ -14,134 +16,130 @@ class LanguageBottomSheet extends StatefulWidget {
 }
 
 class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
-  String selectedLanguage = 'English';
+  late Locale _selectedLocale;
 
-  final List<String> languages = ['Arabic', 'English', 'Chinese', 'Arduo'];
+  @override
+  void initState() {
+    super.initState();
+    _selectedLocale = LocaleService.instance.localeNotifier.value;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, Locale> _supportedLanguages = {
+      S.of(context).english: const Locale('en'),
+      S.of(context).arabic: const Locale('ar'),
+      S.of(context).hindi: const Locale('hi'),
+      S.of(context).bengali: const Locale('bn'),
+      S.of(context).urdu: const Locale('ur'),
+    };
+
     return BottomSheetContainer(
       child: Column(
-        //mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           // Handle bar line
-          HederBottomSheetLine(),
+          const HederBottomSheetLine(),
 
-          //const SizedBox(height: 60),
-          Spacer(),
+          const Spacer(),
           // Language icon
-          BottomSheetIcon(svgPath: 'assets/svgs/svg_language.svg'),
+          const BottomSheetIcon(svgPath: 'assets/svgs/svg_language.svg'),
 
           const SizedBox(height: 16),
 
           // Title
-          const Text(
-            'Choose your language',
+          Text(
+            S.of(context).chooseYourLanguage,
             style: AppTextStyles.bottomSheetTitle,
           ),
 
           const SizedBox(height: 8),
 
           // Description
-          const Text(
-            'Lorem ipsum dolor sit amet, consectetur nadipiscing elit, sed do eiusmod',
+          Text(
+            S.of(context).languageSelectionDescription,
             textAlign: TextAlign.center,
-
             style: AppTextStyles.bottomSheetDescription,
           ),
 
-          Spacer(),
+          const Spacer(),
 
           // Language options
-          ...languages
-              .map(
-                (language) => Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 4,
+          ..._supportedLanguages.entries.map((entry) {
+            final languageName = entry.key;
+            final locale = entry.value;
+            final isSelected = _selectedLocale == locale;
+
+            return Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 4,
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedLocale = locale;
+                    });
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: isSelected ? const Color(0xFFE8EAF6) : Colors.transparent,
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedLanguage = language;
-                        });
-                      },
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color:
-                              selectedLanguage == language
-                                  ? const Color(0xFFE8EAF6)
-                                  : Colors.transparent,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Row(
-                          children: [
-                            AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              width: 20,
-                              height: 20,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color:
-                                      selectedLanguage == language
-                                          ? const Color(0xFF6366F1)
-                                          : Colors.grey[400]!,
-                                  width: 2,
-                                ),
-                                color:
-                                    selectedLanguage == language
-                                        ? const Color(0xFF6366F1)
-                                        : Colors.transparent,
-                              ),
-                              child:
-                                  selectedLanguage == language
-                                      ? const Icon(
-                                        Icons.check,
-                                        size: 12,
-                                        color: Colors.white,
-                                      )
-                                      : null,
+                    child: Row(
+                      children: [
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: isSelected ? const Color(0xFF6366F1) : Colors.grey[400]!,
+                              width: 2,
                             ),
-                            const SizedBox(width: 16),
-                            Text(
-                              language,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight:
-                                    selectedLanguage == language
-                                        ? FontWeight.w600
-                                        : FontWeight.w400,
-                                color:
-                                    selectedLanguage == language
-                                        ? const Color(0xFF6366F1)
-                                        : Colors.black87,
-                              ),
-                            ),
-                          ],
+                            color: isSelected ? const Color(0xFF6366F1) : Colors.transparent,
+                          ),
+                          child: isSelected
+                              ? const Icon(
+                                  Icons.check,
+                                  size: 12,
+                                  color: Colors.white,
+                                )
+                              : null,
                         ),
-                      ),
+                        const SizedBox(width: 16),
+                        Text(
+                          languageName,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                            color: isSelected ? const Color(0xFF6366F1) : Colors.black87,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              )
-              .toList(),
+              ),
+            );
+          }).toList(),
 
-          Spacer(),
+          const Spacer(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: DefaultButton(onTap: () {
+              LocaleService.instance.setLocale(_selectedLocale);
               Navigator.pop(context);
             }),
           ),
-          Padding(padding: const EdgeInsets.only(bottom: 16)),
+          const Padding(padding: EdgeInsets.only(bottom: 16)),
         ],
       ),
     );

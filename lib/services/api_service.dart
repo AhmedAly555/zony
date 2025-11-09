@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:zony/modules/auth/screens/login_screen.dart';
 
 import 'base_api_service.dart';
+import 'navigation_service.dart';
 import 'shered_preferences/profile_storage.dart';
 import 'shered_preferences/token_storage.dart';
 
@@ -69,6 +72,7 @@ class ApiService extends BaseApiService {
     }
   }
 
+  // ---------------- Logout API ----------------
   Future<void> logout() async {
     final url = Uri.parse('$baseUrl/auth/logout');
     final response = await http.post(url, headers: _authorizedHeaders());
@@ -80,7 +84,7 @@ class ApiService extends BaseApiService {
     }
   }
 
-  Future<void> refreshAccessToken() async {
+  /*Future<void> refreshAccessToken() async {
     if (_refreshToken == null) {
       throw Exception("No refresh token found, user must login again.");
     }
@@ -106,7 +110,62 @@ class ApiService extends BaseApiService {
     } else {
       throw Exception("Refresh failed: ${response.body}");
     }
+  }*/
+
+  // ---------------- Refresh Token API ----------------
+  Future<void> refreshAccessToken() async {
+    if (_refreshToken == null) {
+      // إذا لم يكن هناك Refresh Token، نطلب من المستخدم إعادة تسجيل الدخول
+      await clearUserData();
+      throw Exception("No refresh token found, user must login again.");
+    }
+
+    // endpoint (post)
+    final url = Uri.parse('$baseUrl/auth/refresh');
+
+    final response = await http.post(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $_refreshToken",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+
+      final newAccessToken = data['access_token'];
+      if (newAccessToken != null) {
+        // 1. استبدال Access Token القديم بالجديد
+        _accessToken = newAccessToken;
+        setAuthToken(_accessToken!); // تحديث التوكن في الـ Base Service
+
+        // 2. تحديث التخزين
+        // نستخدم Access Token الجديد ونبقي على الـ Refresh Token القديم
+        await TokenStorage.saveTokens(
+          accessToken: _accessToken!,
+          refreshToken: _refreshToken!,
+        );
+      } else {
+        throw Exception("Refresh failed: Access Token missing in response.");
+      }
+    } else {
+      final responseBody = jsonDecode(response.body);
+      if (responseBody['msg'] == 'Token has expired') {
+        await clearUserData();
+        // Navigate to login screen
+        NavigationService.navigatorKey.currentState?.pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+              (route) => false,
+        );
+        throw Exception("Refresh token expired. Please log in again.");
+      }
+      // إذا فشل التحديث (ربما انتهت صلاحية الريفريش توكين)، نسجل الخروج
+      await clearTokens();
+      throw Exception("Refresh failed: ${response.body}. Please log in again.");
+    }
   }
+
 
   // ---------------- Helpers ----------------
   Map<String, String> _authorizedHeaders() {
@@ -130,16 +189,18 @@ class ApiService extends BaseApiService {
       queryParameters: queryParameters?.map((k, v) => MapEntry(k, v.toString())),
     );
 
-    final headers = {
+    http.Response response = await _makeRequest(method, uri, body, {
       ..._authorizedHeaders(),
       if (extraHeaders != null) ...extraHeaders,
-    };
-
-    http.Response response = await _makeRequest(method, uri, body, headers);
+    });
 
     if (response.statusCode == 401) {
       await refreshAccessToken();
-      response = await _makeRequest(method, uri, body, headers);
+      // Re-run the request with the new token
+      response = await _makeRequest(method, uri, body, {
+        ..._authorizedHeaders(), // This will now use the new token
+        if (extraHeaders != null) ...extraHeaders,
+      });
     }
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
@@ -230,220 +291,3 @@ class ApiService extends BaseApiService {
     await ProfileStorage.clearProfile();
   }
 }
-
-/*
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-
-import 'base_api_service.dart';
-import 'shered_preferences/profile_storage.dart';
-import 'shered_preferences/token_storage.dart';
-
-class ApiService extends BaseApiService {
-  // ---------------- Singleton ----------------
-  static final ApiService _instance = ApiService._internal();
-  factory ApiService() => _instance;
-  ApiService._internal() : super(baseUrl: "http://149.104.71.115:8000");
-
-  static ApiService get instance => _instance;
-
-  // ---------------- Tokens ----------------
-  String? _accessToken;
-  String? _refreshToken;
-
-  Future<void> setTokens(String accessToken, String refreshToken) async {
-    _accessToken = accessToken;
-    _refreshToken = refreshToken;
-    await TokenStorage.saveTokens(
-      accessToken: accessToken,
-      refreshToken: refreshToken,
-    );
-  }
-
-  Future<void> loadTokens() async {
-    _accessToken = await TokenStorage.getAccessToken();
-    _refreshToken = await TokenStorage.getRefreshToken();
-  }
-
-  Future<void> clearTokens() async {
-    _accessToken = null;
-    _refreshToken = null;
-    await TokenStorage.clearTokens();
-  }
-
-  // ---------------- Auth APIs ----------------
-  Future<Map<String, dynamic>> login(String email, String password) async {
-    final url = Uri.parse('$baseUrl/auth/login');
-
-    final response = await http.post(
-      url,
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode({
-        "email": email,
-        "password": password,
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      await setTokens(data['access_token'], data['refresh_token']);
-      return data;
-    } else {
-      throw Exception("Login failed: ${response.body}");
-    }
-  }
-
-  Future<void> logout() async {
-    final url = Uri.parse('$baseUrl/auth/logout');
-    final response = await http.post(url, headers: _authorizedHeaders());
-
-    if (response.statusCode == 200) {
-      await clearTokens();
-    } else {
-      throw Exception("Logout failed: ${response.body}");
-    }
-  }
-
-  Future<void> refreshAccessToken() async {
-    if (_refreshToken == null) {
-      throw Exception("No refresh token found, user must login again.");
-    }
-
-    final url = Uri.parse('$baseUrl/auth/refresh');
-
-    final response = await http.get(
-      url,
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $_refreshToken",
-      },
-    );
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      _accessToken = data['access_token'];
-
-      await TokenStorage.saveTokens(
-        accessToken: _accessToken!,
-        refreshToken: _refreshToken!,
-      );
-    } else {
-      throw Exception("Refresh failed: ${response.body}");
-    }
-  }
-
-  // ---------------- Helpers ----------------
-  Map<String, String> _authorizedHeaders() {
-    if (_accessToken == null) {
-      throw Exception("No access token set, please login first.");
-    }
-    return {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer $_accessToken",
-    };
-  }
-
-  Future<Map<String, dynamic>> _sendRequest(
-      String method,
-      String endpoint, {
-        Map<String, dynamic>? body,
-        Map<String, String>? extraHeaders,
-        Map<String, dynamic>? queryParameters,
-      }) async {
-    final uri = Uri.parse('$baseUrl/$endpoint').replace(
-      queryParameters: queryParameters?.map((k, v) => MapEntry(k, v.toString())),
-    );
-
-    final headers = {
-      ..._authorizedHeaders(),
-      if (extraHeaders != null) ...extraHeaders,
-    };
-
-    http.Response response = await _makeRequest(method, uri, body, headers);
-
-    if (response.statusCode == 401) {
-      await refreshAccessToken();
-      response = await _makeRequest(method, uri, body, headers);
-    }
-
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception("Request failed [${response.statusCode}]: ${response.body}");
-    }
-  }
-
-  Future<http.Response> _makeRequest(
-      String method,
-      Uri url,
-      Map<String, dynamic>? body,
-      Map<String, String> headers,
-      ) {
-    switch (method.toUpperCase()) {
-      case 'GET':
-        return http.get(url, headers: headers);
-      case 'POST':
-        return http.post(url, headers: headers, body: jsonEncode(body));
-      case 'PUT':
-        return http.put(url, headers: headers, body: jsonEncode(body));
-      case 'PATCH':
-        return http.patch(url, headers: headers, body: jsonEncode(body));
-      case 'DELETE':
-        return http.delete(url, headers: headers);
-      default:
-        throw Exception("Unsupported HTTP method: $method");
-    }
-  }
-
-  // ---------- Overrides from BaseApiService ----------
-  @override
-  Future<dynamic> get(
-      String path, {
-        Map<String, String>? extraHeaders,
-        Map<String, dynamic>? queryParameters,
-      }) {
-    return _sendRequest(
-      "GET",
-      path,
-      extraHeaders: extraHeaders,
-      queryParameters: queryParameters,
-    );
-  }
-
-  @override
-  Future<dynamic> postJson(
-      String path,
-      Map<String, dynamic> jsonBody, {
-        Map<String, String>? extraHeaders,
-      }) {
-    return _sendRequest(
-      "POST",
-      path,
-      body: jsonBody,
-      extraHeaders: extraHeaders,
-    );
-  }
-
-
-  @override
-  Future<dynamic> patchJson(
-      String path,
-      Map<String, dynamic> jsonBody, {
-        Map<String, String>? extraHeaders,
-      }) {
-    return _sendRequest(
-      "PATCH",
-      path,
-      body: jsonBody,
-      extraHeaders: extraHeaders,
-    );
-  }
-
-  //clear tokens + profile data => logout
-  static Future<void> clearUserData() async {
-    await TokenStorage.clearTokens();
-    await ProfileStorage.clearProfile();
-
-  }
-}
-*/

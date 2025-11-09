@@ -34,11 +34,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "একটি ত্রুটি ঘটেছে: ",
     ),
     "approved": MessageLookupByLibrary.simpleMessage("অনুমোদিত"),
+    "arabic": MessageLookupByLibrary.simpleMessage("আরবি"),
     "areYouSureYouWantToApprove": m0,
     "areYouSureYouWantToLogOut": MessageLookupByLibrary.simpleMessage(
       "আপনি কি নিশ্চিত লগআউট করতে চান?",
     ),
     "backToHome": MessageLookupByLibrary.simpleMessage("হোমে ফিরে যান"),
+    "bengali": MessageLookupByLibrary.simpleMessage("বাংলা"),
     "cameronWilliamson": MessageLookupByLibrary.simpleMessage(
       "ক্যামেরন উইলিয়ামসন",
     ),
@@ -47,6 +49,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "changePassword": MessageLookupByLibrary.simpleMessage(
       "পাসওয়ার্ড পরিবর্তন করুন",
+    ),
+    "chooseYourLanguage": MessageLookupByLibrary.simpleMessage(
+      "আপনার ভাষা পছন্দ করুন",
     ),
     "codeNumber": MessageLookupByLibrary.simpleMessage("কোড নম্বর"),
     "confirm": MessageLookupByLibrary.simpleMessage("নিশ্চিত করুন"),
@@ -67,10 +72,18 @@ class MessageLookup extends MessageLookupByLibrary {
       "নিশ্চিত করার মাধ্যমে, আপনি স্বীকার করছেন যে পার্সেলটি সফলভাবে বিতরণ করা হয়েছে।",
     ),
     "dummyPhoneNumber": MessageLookupByLibrary.simpleMessage("(205) 555-0100"),
+    "english": MessageLookupByLibrary.simpleMessage("ইংরেজি"),
     "enterManually": MessageLookupByLibrary.simpleMessage("ম্যানুয়ালি লিখুন"),
     "enterParcel": MessageLookupByLibrary.simpleMessage("পার্সেল লিখুন"),
+    "enterPassword": MessageLookupByLibrary.simpleMessage("পাসওয়ার্ড লিখুন"),
     "enterUsername": MessageLookupByLibrary.simpleMessage(
       "ব্যবহারকারীর নাম লিখুন",
+    ),
+    "enterUsernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "ব্যবহারকারীর নাম বা ফোন নম্বর লিখুন",
+    ),
+    "enterYourPersonalInfo": MessageLookupByLibrary.simpleMessage(
+      "আপনার ব্যক্তিগত তথ্য লিখুন",
     ),
     "error": MessageLookupByLibrary.simpleMessage("ত্রুটি: "),
     "errorFetchingData": MessageLookupByLibrary.simpleMessage(
@@ -105,6 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "ছবি আপলোড করতে ব্যর্থ: ",
     ),
     "gallery": MessageLookupByLibrary.simpleMessage("গ্যালারি"),
+    "hindi": MessageLookupByLibrary.simpleMessage("হিন্দি"),
     "home": MessageLookupByLibrary.simpleMessage("হোম"),
     "imageUploadedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "✅ ছবি সফলভাবে আপলোড হয়েছে!",
@@ -114,12 +128,17 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "inventory": MessageLookupByLibrary.simpleMessage("তালিকা"),
     "language": MessageLookupByLibrary.simpleMessage("ভাষা"),
+    "languageSelectionDescription": MessageLookupByLibrary.simpleMessage(
+      "আপনার পছন্দের ভাষা নির্বাচন করুন। এটি অ্যাপ জুড়ে পাঠ্য আপডেট করবে।",
+    ),
+    "logIn": MessageLookupByLibrary.simpleMessage("লগইন"),
     "logOutDescription": MessageLookupByLibrary.simpleMessage(
       "আপনাকে লগইন স্ক্রিনে ফিরিয়ে দেওয়া হবে।",
     ),
     "loggedOutSuccessfully": MessageLookupByLibrary.simpleMessage(
       "সফলভাবে লগআউট হয়েছে!",
     ),
+    "loginFailed": MessageLookupByLibrary.simpleMessage("লগইন করতে ব্যর্থ"),
     "logout": MessageLookupByLibrary.simpleMessage("লগআউট"),
     "more": MessageLookupByLibrary.simpleMessage("আরো"),
     "moreSettings": MessageLookupByLibrary.simpleMessage("আরো সেটিংস"),
@@ -187,6 +206,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "parkerRoadAddress": MessageLookupByLibrary.simpleMessage(
       "৪১৪০ পার্কার রোড, অ্যালেনটাউন, নিউ মেক্সিকো",
     ),
+    "password": MessageLookupByLibrary.simpleMessage("পাসওয়ার্ড"),
     "pending": MessageLookupByLibrary.simpleMessage("অমীমাংসিত"),
     "personalInformation": MessageLookupByLibrary.simpleMessage(
       "ব্যক্তিগত তথ্য",
@@ -237,6 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "received": MessageLookupByLibrary.simpleMessage("প্রাপ্ত"),
     "receiving": MessageLookupByLibrary.simpleMessage("গ্রহণ"),
+    "rememberMe": MessageLookupByLibrary.simpleMessage("আমাকে মনে রাখুন"),
     "scanBarCode": MessageLookupByLibrary.simpleMessage("বার কোড স্ক্যান করুন"),
     "scanQrCodeInFrontOfCamera": MessageLookupByLibrary.simpleMessage(
       "ক্যামেরার সামনে QR কোড স্ক্যান করুন",
@@ -273,11 +294,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "unknownPhone": MessageLookupByLibrary.simpleMessage("অজানা ফোন"),
     "unknownZone": MessageLookupByLibrary.simpleMessage("অজানা এলাকা"),
     "unread": MessageLookupByLibrary.simpleMessage("অপঠিত"),
+    "urdu": MessageLookupByLibrary.simpleMessage("উর্দু"),
     "usernameCopiedToClipboard": MessageLookupByLibrary.simpleMessage(
       "ব্যবহারকারীর নাম কপি করা হয়েছে",
     ),
     "usernameIsNotValid": MessageLookupByLibrary.simpleMessage(
       "আপনার লেখা ব্যবহারকারীর নাম বৈধ নয়",
+    ),
+    "usernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
+      "ব্যবহারকারীর নাম বা ফোন নম্বর",
     ),
     "waiting": MessageLookupByLibrary.simpleMessage("অপেক্ষমান"),
     "yesImSure": MessageLookupByLibrary.simpleMessage("হ্যাঁ, আমি নিশ্চিত।"),

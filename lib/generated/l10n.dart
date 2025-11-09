@@ -1123,6 +1123,116 @@ class S {
   String get more {
     return Intl.message('More', name: 'more', desc: '', args: []);
   }
+
+  /// `Choose your language`
+  String get chooseYourLanguage {
+    return Intl.message(
+      'Choose your language',
+      name: 'chooseYourLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select your preferred language. This will update the text throughout the app.`
+  String get languageSelectionDescription {
+    return Intl.message(
+      'Select your preferred language. This will update the text throughout the app.',
+      name: 'languageSelectionDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get english {
+    return Intl.message('English', name: 'english', desc: '', args: []);
+  }
+
+  /// `Arabic`
+  String get arabic {
+    return Intl.message('Arabic', name: 'arabic', desc: '', args: []);
+  }
+
+  /// `Hindi`
+  String get hindi {
+    return Intl.message('Hindi', name: 'hindi', desc: '', args: []);
+  }
+
+  /// `Bengali`
+  String get bengali {
+    return Intl.message('Bengali', name: 'bengali', desc: '', args: []);
+  }
+
+  /// `Urdu`
+  String get urdu {
+    return Intl.message('Urdu', name: 'urdu', desc: '', args: []);
+  }
+
+  /// `Failed to login`
+  String get loginFailed {
+    return Intl.message(
+      'Failed to login',
+      name: 'loginFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in`
+  String get logIn {
+    return Intl.message('Log in', name: 'logIn', desc: '', args: []);
+  }
+
+  /// `Enter your personal information`
+  String get enterYourPersonalInfo {
+    return Intl.message(
+      'Enter your personal information',
+      name: 'enterYourPersonalInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `username or phone number`
+  String get usernameOrPhoneNumber {
+    return Intl.message(
+      'username or phone number',
+      name: 'usernameOrPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Username Or Phone Number`
+  String get enterUsernameOrPhoneNumber {
+    return Intl.message(
+      'Enter Username Or Phone Number',
+      name: 'enterUsernameOrPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message('Password', name: 'password', desc: '', args: []);
+  }
+
+  /// `Enter Password`
+  String get enterPassword {
+    return Intl.message(
+      'Enter Password',
+      name: 'enterPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remember me`
+  String get rememberMe {
+    return Intl.message('Remember me', name: 'rememberMe', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

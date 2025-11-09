@@ -126,5 +126,20 @@
     "youAreAtWrongLocation": "আপনি ভুল স্থানে আছেন",
     "myPickupPoints": "আমার পিকআপ পয়েন্ট",
     "home": "হোম",
-    "more": "আরো"
+    "more": "আরো",
+    "chooseYourLanguage": "আপনার ভাষা পছন্দ করুন",
+    "languageSelectionDescription": "আপনার পছন্দের ভাষা নির্বাচন করুন। এটি অ্যাপ জুড়ে পাঠ্য আপডেট করবে।",
+    "english": "ইংরেজি",
+    "arabic": "আরবি",
+    "hindi": "হিন্দি",
+    "bengali": "বাংলা",
+    "urdu": "উর্দু",
+    "loginFailed": "লগইন করতে ব্যর্থ",
+    "logIn": "লগইন",
+    "enterYourPersonalInfo": "আপনার ব্যক্তিগত তথ্য লিখুন",
+    "usernameOrPhoneNumber": "ব্যবহারকারীর নাম বা ফোন নম্বর",
+    "enterUsernameOrPhoneNumber": "ব্যবহারকারীর নাম বা ফোন নম্বর লিখুন",
+    "password": "পাসওয়ার্ড",
+    "enterPassword": "পাসওয়ার্ড লিখুন",
+    "rememberMe": "আমাকে মনে রাখুন"
 }

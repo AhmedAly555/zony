@@ -126,5 +126,20 @@
     "youAreAtWrongLocation": "آپ غلط مقام پر ہیں",
     "myPickupPoints": "میرے پک اپ پوائنٹس",
     "home": "ہوم",
-    "more": "مزید"
+    "more": "مزید",
+    "chooseYourLanguage": "اپنی زبان منتخب کریں",
+    "languageSelectionDescription": "اپنی پسند کی زبان منتخب کریں۔ اس سے ایپ میں متن اپ ڈیٹ ہو جائے گا۔",
+    "english": "انگریزی",
+    "arabic": "عربی",
+    "hindi": "ہندی",
+    "bengali": "بنگالی",
+    "urdu": "اردو",
+    "loginFailed": "لاگ ان کرنے میں ناکام",
+    "logIn": "لاگ ان کریں",
+    "enterYourPersonalInfo": "اپنی ذاتی معلومات درج کریں",
+    "usernameOrPhoneNumber": "صارف نام یا فون نمبر",
+    "enterUsernameOrPhoneNumber": "صارف نام یا فون نمبر درج کریں",
+    "password": "پاس ورڈ",
+    "enterPassword": "پاس ورڈ درج کریں",
+    "rememberMe": "مجھے یاد رکھیں"
 }
