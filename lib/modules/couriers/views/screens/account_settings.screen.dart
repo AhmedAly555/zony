@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:zony/generated/l10n.dart';
+import 'package:zony/views/widgets/loading.widget.dart';
 
 import '../../../../../../views/widgets/default_text_filed.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
@@ -34,8 +35,8 @@ class AccountSettingsScreen extends StatelessWidget {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
-                      child: CircularProgressIndicator(),
-                    ); // لودينج
+                      child: LoadingWidget(),
+                    );
                   }
 
                   if (!snapshot.hasData || snapshot.data == null) {
