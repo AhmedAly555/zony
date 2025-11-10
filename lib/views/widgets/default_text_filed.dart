@@ -136,7 +136,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
       );
     }
 
-    // Edit icon أ
+    // Edit icon
     if (widget.showEditIcon) {
       suffixWidgets.add(
         GestureDetector(

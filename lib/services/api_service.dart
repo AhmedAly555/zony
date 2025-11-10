@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:zony/modules/auth/screens/login_screen.dart';
 
 import 'base_api_service.dart';
-import 'navigation_service.dart';
+import 'navigator.services/navigation_service.dart';
 import 'shered_preferences/profile_storage.dart';
 import 'shered_preferences/token_storage.dart';
 

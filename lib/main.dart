@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:zony/services/locale_service.dart';
-import 'package:zony/services/navigation_service.dart';
+import 'package:zony/services/navigator.services/navigation_service.dart';
 
 import 'package:zony/views/screens/splash_screen.dart';
 
