@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:zony/services/locale_service.dart';
+import 'package:zony/services/locale_language_service.dart';
 import 'package:zony/services/navigator.services/navigation_service.dart';
 
 import 'package:zony/views/screens/splash_screen.dart';
@@ -10,7 +10,7 @@ import 'generated/l10n.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await LocaleService.instance.loadLocale();
+  await LocaleLanguageService.instance.loadLocale();
   runApp(const MyApp());
 }
 
@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    LocaleService.instance.localeNotifier.addListener(() {
+    LocaleLanguageService.instance.localeNotifier.addListener(() {
       if (mounted) {
         setState(() {});
       }
@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Locale>(
-      valueListenable: LocaleService.instance.localeNotifier,
+      valueListenable: LocaleLanguageService.instance.localeNotifier,
       builder: (context, locale, child) {
         return MaterialApp(
           navigatorKey: NavigationService.navigatorKey,

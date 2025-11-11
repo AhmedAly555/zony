@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:zony/generated/l10n.dart';
-import 'package:zony/services/locale_service.dart';
+import 'package:zony/services/locale_language_service.dart';
 
 import '../../../theme/app_text_styles.dart';
 import '../bottom_sheet_container.dart';
@@ -21,7 +21,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
   @override
   void initState() {
     super.initState();
-    _selectedLocale = LocaleService.instance.localeNotifier.value;
+    _selectedLocale = LocaleLanguageService.instance.localeNotifier.value;
   }
 
   @override
@@ -135,7 +135,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: DefaultButton(onTap: () {
-              LocaleService.instance.setLocale(_selectedLocale);
+              LocaleLanguageService.instance.setLocale(_selectedLocale);
               Navigator.pop(context);
             }),
           ),

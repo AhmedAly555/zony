@@ -202,7 +202,7 @@ import 'package:flutter/material.dart';
 import 'package:zony/generated/l10n.dart';
 
 import '../../../../models/single_pudo_response_model.dart';
-import '../../../../services/get_my_pudos_service.dart';
+import '../../../../services/get_courier_pudos_service.dart';
 import '../../../../views/widgets/loading.widget.dart';
 import '../../delivering/widgets/parcel_row.widget.dart';
 
@@ -244,7 +244,7 @@ class _PODUDetailsState extends State<PODUDetails> {
     });
 
     try {
-      final response = await GetMyPudosService.instance.getSinglePudoById(widget.pudoId);
+      final response = await GetCourierPudosService.instance.getSinglePudoById(widget.pudoId);
 
       if (mounted) {
         setState(() {

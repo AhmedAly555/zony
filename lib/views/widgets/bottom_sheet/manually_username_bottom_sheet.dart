@@ -10,7 +10,9 @@ import '../bottom_sheet_container.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
 class ManuallyUsernameBottomSheet extends StatefulWidget {
-  const ManuallyUsernameBottomSheet({super.key});
+  final Function(String) onConfirm;
+
+  const ManuallyUsernameBottomSheet({super.key, required this.onConfirm});
 
   @override
   State<ManuallyUsernameBottomSheet> createState() =>
@@ -22,54 +24,23 @@ class _ManuallyUsernameBottomSheetState
     with SingleTickerProviderStateMixin {
   final TextEditingController _usernameController = TextEditingController();
 
-  final String _correctUsername = "ahmaly555";
-
   bool _isButtonEnabled = false;
-  bool _hasError = false;
-
-  late AnimationController _animationController;
-  late Animation<double> _shakeAnimation;
 
   @override
   void initState() {
     super.initState();
     _usernameController.addListener(_onTextChanged);
-
-    // Animation controller
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-
-    _shakeAnimation = Tween<double>(
-      begin: 0,
-      end: 10,
-    ).chain(CurveTween(curve: Curves.elasticIn)).animate(_animationController);
   }
 
   void _onTextChanged() {
     setState(() {
       _isButtonEnabled = _usernameController.text.isNotEmpty;
-      if (_hasError) _hasError = false;
     });
-  }
-
-  void _confirmUsername() {
-    if (_usernameController.text == _correctUsername) {
-      Navigator.pop(context);
-    } else {
-      setState(() {
-        _hasError = true;
-      });
-      // vibration
-      _animationController.forward(from: 0);
-    }
   }
 
   @override
   void dispose() {
     _usernameController.dispose();
-    _animationController.dispose();
     super.dispose();
   }
 
@@ -111,19 +82,19 @@ class _ManuallyUsernameBottomSheetState
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
-                    color: _hasError ? Colors.red : Colors.grey[300]!,
+                    color: Colors.grey[300]!,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
-                    color: _hasError ? Colors.red : Colors.grey[300]!,
+                    color: Colors.grey[300]!,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
-                    color: _hasError ? Colors.red : Color(0xFF49159B),
+                    color: Color(0xFF49159B),
                   ),
                 ),
                 contentPadding: const EdgeInsets.symmetric(
@@ -132,37 +103,6 @@ class _ManuallyUsernameBottomSheetState
                 ),
               ),
             ),
-            //Animated button
-            if (_hasError)
-              AnimatedBuilder(
-                animation: _shakeAnimation,
-                builder: (context, child) {
-                  final t = _shakeAnimation.value;
-
-                  final cycles = 1;
-                  final maxOffset = 2.0;     //right & left distance
-                  final angle = t * 2 * math.pi * cycles;
-
-                  // Smooth
-                  final dx = math.sin(angle) * maxOffset * (1 - t);
-
-                  return Transform.translate(
-                    offset: Offset(dx, 0),
-                    child: child,
-                  );
-                },
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 6),
-                    child: Text(
-                      S.of(context).usernameIsNotValid,
-                      key: ValueKey('error-text'),
-                      style: TextStyle(color: Colors.red, fontSize: 12),
-                    ),
-                  ),
-                ),
-              ),
             const SizedBox(height: 20),
             const Spacer(),
             TweenAnimationBuilder<double>(
@@ -194,7 +134,12 @@ class _ManuallyUsernameBottomSheetState
                   child: SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: _isButtonEnabled ? _confirmUsername : null,
+                      onPressed: _isButtonEnabled
+                          ? () {
+                              widget.onConfirm(_usernameController.text);
+                              Navigator.pop(context);
+                            }
+                          : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
@@ -224,7 +169,7 @@ class _ManuallyUsernameBottomSheetState
 }
 
 //Show manually username bottom sheet(callback)
-void showManuallyUsernameBottomSheet(BuildContext context) {
+void showManuallyUsernameBottomSheet(BuildContext context, {required Function(String) onConfirm}) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -239,7 +184,7 @@ void showManuallyUsernameBottomSheet(BuildContext context) {
           maxHeight: SizeConfig.heightPercent(0.75),
           minHeight: SizeConfig.heightPercent(0.45),
         ),
-        child: IntrinsicHeight(child: ManuallyUsernameBottomSheet()),
+        child: IntrinsicHeight(child: ManuallyUsernameBottomSheet(onConfirm: onConfirm)),
       );
     },
 
