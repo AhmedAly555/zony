@@ -5,15 +5,15 @@ import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 import 'podu_details.dart';
 import 'podu_parcels.dart';
 
-class PDOUDetailsAndParceis extends StatefulWidget {
+class PudoDetailsAndParceis extends StatefulWidget {
   final String pudoId;
-  const PDOUDetailsAndParceis({super.key, required this.pudoId});
+  const PudoDetailsAndParceis({super.key, required this.pudoId});
 
   @override
-  _PDOUDetailsAndParceisState createState() => _PDOUDetailsAndParceisState();
+  _PudoDetailsAndParceisState createState() => _PudoDetailsAndParceisState();
 }
 
-class _PDOUDetailsAndParceisState extends State<PDOUDetailsAndParceis> {
+class _PudoDetailsAndParceisState extends State<PudoDetailsAndParceis> {
   int selectedTabIndex = 0;
 
 

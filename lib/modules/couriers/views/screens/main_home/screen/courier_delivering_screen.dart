@@ -1,45 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:zony/generated/l10n.dart';
+import 'package:zony/services/get_courier_pudos_service.dart';
 import 'package:zony/views/widgets/template_app_scaffold.widget.dart';
 
+import '../../../../../../views/widgets/bottom_sheet/manually_username_bottom_sheet.dart';
 import '../../../../../../views/widgets/bottom_sheet/qr_scanner.dart';
 import '../../../../../../views/widgets/default_appbar.dart';
 import '../../../../../../views/widgets/toasts.dart';
 import '../../../../../recieve_parcel/widgets/custom_menu_recieve.widget.dart';
 import '../../../../delivering/screens/pudo_parcels.screen.dart';
-//
 
 class CourierDeliveringScreen extends StatelessWidget {
   const CourierDeliveringScreen({super.key});
 
-  //Open the scanner bottom sheet
-  Future<String?> openScannerBottomSheet(BuildContext context) {
-    return showModalBottomSheet<String>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        //bool popped = false;
-        final sheetHeight = MediaQuery.of(context).size.height * 0.9;
-
-        final controller = MobileScannerController(
-          facing: CameraFacing.back,
-          detectionSpeed: DetectionSpeed.noDuplicates,
-          // formats: const [BarcodeFormat.qrCode],
-        );
-
-        return QRScannerBottomSheet(sheetHeight: sheetHeight, controller: controller,);
-      },
-    );
-  }
-
   //Handle Pudo QR Scanning
-  Future<void> _handlePudoQrScanning({
-    required BuildContext context,
-    required Function showCorrectToast,
-    required Function showErrorToast,
-  }) async {
+  Future<void> _handlePudoQrScanning(BuildContext context) async {
     final controller = MobileScannerController();
 
     final pudoId = await showModalBottomSheet<String>(
@@ -52,7 +28,6 @@ class CourierDeliveringScreen extends StatelessWidget {
       ),
     );
 
-    // after returning stop the camera
     await controller.stop();
 
     if (pudoId != null && pudoId.isNotEmpty) {
@@ -69,6 +44,28 @@ class CourierDeliveringScreen extends StatelessWidget {
     }
   }
 
+  //Handle Pudo Username Input
+  Future<void> _handlePudoUsernameInput(BuildContext context) async {
+    showManuallyUsernameBottomSheet(context, onConfirm: (username) async {
+      try {
+        final response = await GetCourierPudosService.instance.getPudosByUsername(username);
+        if (response.pudos.isNotEmpty) {
+          final pudoId = response.pudos.first.id.toString();
+          showCorrectToast(message: S.of(context).pudoParcelsRetrievedSuccessfully);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => PudoParcelsScreen(pudoId: pudoId),
+            ),
+          );
+        } else {
+          showErrorToast(message: S.of(context).noPodusFound);
+        }
+      } catch (e) {
+        showErrorToast(message: e.toString());
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,21 +81,13 @@ class CourierDeliveringScreen extends StatelessWidget {
                 MenuItemData(
                   svgPath: 'assets/svgs/small_qr.svg',
                   title: S.of(context).qrScanner,
-                  onTap: () async {
-                    await _handlePudoQrScanning(
-                      context: context,
-                      showCorrectToast: showCorrectToast ,
-                      showErrorToast: showErrorToast,
-                    );
-                  },
+                  onTap: () => _handlePudoQrScanning(context),
                 ),
-                /*MenuItemData(
+                MenuItemData(
                   svgPath: 'assets/svgs/small_qr.svg',
                   title: S.of(context).enterUsername,
-                  onTap: () {
-                    showManuallyUsernameBottomSheet(context);
-                  },
-                ),*/
+                  onTap: () => _handlePudoUsernameInput(context),
+                ),
               ],
             ),
             const Spacer(),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:zony/modules/couriers/podus&parcels/podu_details_and_parcels/podu_details_and_parcels.screen.dart';
 import 'package:zony/views/widgets/default_appbar.dart';
 import 'package:zony/generated/l10n.dart';
 
 
 import '../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../models/my_pudos_response.dart';
-import '../../../services/get_my_pudos_service.dart';
+import '../../../services/get_courier_pudos_service.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../views/widgets/notifacation_item.dart';
+import 'podu_details_and_parcels/podu_details_and_parcels.screen.dart';
 
 class AllPODUsScreen extends StatefulWidget {
   const AllPODUsScreen({super.key});
@@ -24,7 +24,7 @@ class _AllPODUsScreenState extends State<AllPODUsScreen> {
 
   void initState() {
     super.initState();
-    _MypudosFuture = GetMyPudosService.instance.getAllPudos();
+    _MypudosFuture = GetCourierPudosService.instance.getAllPudos();
   }
 
   @override
@@ -137,7 +137,7 @@ class _AllPODUsScreenState extends State<AllPODUsScreen> {
                         onTap: (){
                           AppNavigator.navigateTo(
                             context,
-                                () => PDOUDetailsAndParceis(pudoId: pudo.id.toString()),
+                                () => PudoDetailsAndParceis(pudoId: pudo.id.toString()),
                           );
                         },
                         child: NotificationItem(

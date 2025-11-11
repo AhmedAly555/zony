@@ -14,9 +14,9 @@ import '../../../../../../views/widgets/custom_container_icon.widget.dart';
 import '../../../../../../views/widgets/custom_zony_logo.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../../../views/widgets/toasts.dart';
-import '../../../../podus&parcels/all_podus.dart';
-import '../../../../podus&parcels/my_parcels.dart';
-import '../../../../podus&parcels/podu_details_and_parcels/podu_details_and_parcels.screen.dart';
+
+import '../../../../pudos&parcels/all_podus.dart';
+import '../../../../pudos&parcels/my_parcels.dart';
 import '../../../../recieve_expired/screens/expired_receiving.screen.dart';
 import '../../../widgets/custom_home_service_container.widget.dart';
 import '../../notification.screen.dart';

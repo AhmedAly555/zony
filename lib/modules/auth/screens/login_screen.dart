@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zony/generated/l10n.dart';
 
 import '../../../services/api_service.dart';
-import '../../../services/get_pudos_service.dart';
+import '../../../services/get_res_pudos_service.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
 import '../../../services/user_profile_service.dart';
@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       //get pudo information
       try {
-        final pudoResponse = await PudoService.instance.getPudos();
+        final pudoResponse = await ResponsiblePudoService.instance.getResPudos();
         //debugPrint('Total PUDOs: ${pudoResponse.message}');
 
       } catch (err, stack) {

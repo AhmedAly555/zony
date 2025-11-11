@@ -4,6 +4,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:zony/generated/l10n.dart';
 import 'package:zony/modules/couriers/delivering/screens/parcel_details.screen.dart';
 import 'package:zony/services/extensions/parcel_status_extension.dart';
+import 'package:zony/views/widgets/loading.widget.dart';
 
 import '../../../../../theme/app_text_styles.dart';
 import '../../../../../views/widgets/default_appbar.dart';
@@ -90,10 +91,15 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
           future: future,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: LoadingWidget());
             }
             if (snapshot.hasError) {
-              return Center(child: NoDataFoundWidget());
+              return Column(
+                children: [
+                  AppBarHaveArrow(title: S.of(context).pickupPointParcels),
+                  Expanded(child: Center(child: NoDataFoundWidget())),
+                ],
+              );
               //print(snapshot.error);
             }
 

@@ -5,7 +5,7 @@ import 'package:zony/modules/podu/views/screens/main_home/screen/podu_delivering
 
 import '../../../../../../controllers/pudu_main_home_controller.dart';
 import '../../../../../../models/pudo_model.dart';
-import '../../../../../../services/get_pudos_service.dart';
+import '../../../../../../services/get_res_pudos_service.dart';
 import '../../../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../../../services/shered_preferences/pudos_storage.dart';
 import '../../../../../../services/size_config.dart';

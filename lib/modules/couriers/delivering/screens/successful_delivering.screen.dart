@@ -5,6 +5,7 @@ import 'package:zony/views/widgets/default_button.widget.dart';
 
 import '../../../../../theme/app_text_styles.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
+import '../../../../controllers/courier_main_home_controller.dart';
 import '../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../views/widgets/custom_outline_button.widget.dart';
 import '../../../../views/widgets/successful_screen.widget.dart';
@@ -72,7 +73,7 @@ class SuccessfulDelivering extends StatelessWidget {
                 ),
                 SizedBox(height: 18),
                 CustomOutlineButton(
-                  onTap: () => AppNavigator.navigateTo(context, () => CourierHomeScreen()),
+                  onTap: () => CourierMainHomeController.instance.changeTab(0),
                   title: Text(
                     S.of(context).backToHome,
                     style: AppTextStyles.textStyle16,

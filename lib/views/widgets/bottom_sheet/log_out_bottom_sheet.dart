@@ -4,7 +4,7 @@ import 'package:zony/generated/l10n.dart';
 
 import '../../../modules/auth/screens/login_screen.dart';
 import '../../../services/api_service.dart';
-import '../../../services/get_pudos_service.dart';
+import '../../../services/get_res_pudos_service.dart';
 import '../../../theme/app_text_styles.dart';
 import '../bottom_sheet_container.dart';
 import '../default_button.widget.dart';
@@ -31,7 +31,7 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
 
     try {
       await ApiService.clearUserData();
-      await PudoService.instance.clearPudos();
+      await ResponsiblePudoService.instance.clearPudos();
 
       if (context.mounted) {
         AppNavigator.navigateAndRemoveUntil(context, () => const LoginScreen());

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LocaleService {
+class LocaleLanguageService {
   // Singleton setup
-  LocaleService._privateConstructor();
-  static final LocaleService instance = LocaleService._privateConstructor();
+  LocaleLanguageService._privateConstructor();
+  static final LocaleLanguageService instance = LocaleLanguageService._privateConstructor();
 
   // ValueNotifier to hold the locale
   final ValueNotifier<Locale> localeNotifier = ValueNotifier(const Locale('en'));

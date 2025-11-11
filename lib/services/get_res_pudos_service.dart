@@ -6,15 +6,15 @@ import 'shered_preferences/pudos_storage.dart';
 
 /// Service responsible for handling PUDO-related API calls
 /// and save them locally by using SharedPreferences
-class PudoService {
-  static final PudoService instance = PudoService._internal(ApiService.instance);
+class ResponsiblePudoService {
+  static final ResponsiblePudoService instance = ResponsiblePudoService._internal(ApiService.instance);
 
   final BaseApiService _api;
 
-  PudoService._internal(this._api);
+  ResponsiblePudoService._internal(this._api);
 
   /// Fetch PUDOs from API and save them locally
-  Future<PudoResponse> getPudos() async {
+  Future<PudoResponse> getResPudos() async {
     final data = await _api.get('/pudos');
     final response = PudoResponse.fromJson(data);
 
