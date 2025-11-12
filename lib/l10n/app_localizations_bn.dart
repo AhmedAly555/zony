@@ -435,4 +435,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get rememberMe => 'আমাকে মনে রাখুন';
+
+  @override
+  String get pressBackAgainToExit => 'Press back again to exit';
 }

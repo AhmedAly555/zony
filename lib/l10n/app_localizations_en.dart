@@ -422,10 +422,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enterYourPersonalInfo => 'Enter your personal information';
 
   @override
-  String get usernameOrPhoneNumber => 'username or phone number';
+  String get usernameOrPhoneNumber => 'username or e-mail';
 
   @override
-  String get enterUsernameOrPhoneNumber => 'Enter Username Or Phone Number';
+  String get enterUsernameOrPhoneNumber => 'Enter Username Or e-mail';
 
   @override
   String get password => 'Password';
@@ -435,4 +435,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rememberMe => 'Remember me';
+
+  @override
+  String get pressBackAgainToExit => 'Press back again to exit';
 }

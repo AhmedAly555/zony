@@ -435,4 +435,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get rememberMe => 'मुझे याद रखें';
+
+  @override
+  String get pressBackAgainToExit => 'Press back again to exit';
 }

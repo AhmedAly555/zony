@@ -56,6 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
       final response = await _apiService.login(
         _emailController.text.trim(),
         _passwordController.text.trim(),
+        _rememberMe == 1,
       );
 
       // Extract tokens and role from response
@@ -98,9 +99,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (!mounted) return;
       if (role == "courier") {
-        AppNavigator.navigateTo(context, () => const CourierMainHomeScreen());
+        AppNavigator.replaceWith(context, () => const CourierMainHomeScreen());
       } else if (role == "responsible") {
-        AppNavigator.navigateTo(context, () => const PoduMainHomeScreen());
+        AppNavigator.replaceWith(context, () => const PoduMainHomeScreen());
       }
     } catch (e) {
       // login failed: Show a red toast

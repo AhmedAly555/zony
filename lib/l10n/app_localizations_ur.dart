@@ -435,4 +435,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get rememberMe => 'مجھے یاد رکھیں';
+
+  @override
+  String get pressBackAgainToExit => 'Press back again to exit';
 }

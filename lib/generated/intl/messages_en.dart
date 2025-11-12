@@ -70,7 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "enterPassword": MessageLookupByLibrary.simpleMessage("Enter Password"),
     "enterUsername": MessageLookupByLibrary.simpleMessage("Enter Username"),
     "enterUsernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
-      "Enter Username Or Phone Number",
+      "Enter Username Or e-mail",
     ),
     "enterYourPersonalInfo": MessageLookupByLibrary.simpleMessage(
       "Enter your personal information",
@@ -216,6 +216,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "poduDetails": MessageLookupByLibrary.simpleMessage("PODU Details"),
     "poduParcels": MessageLookupByLibrary.simpleMessage("PODU Parcels"),
     "podus": MessageLookupByLibrary.simpleMessage("PODUs"),
+    "pressBackAgainToExit": MessageLookupByLibrary.simpleMessage(
+      "Press back again to exit",
+    ),
     "productInfo": MessageLookupByLibrary.simpleMessage("Product info"),
     "pudoIdNotLoadedYet": MessageLookupByLibrary.simpleMessage(
       "PUDO ID not loaded yet",
@@ -280,7 +283,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "The username You Entered Is Not Valid",
     ),
     "usernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
-      "username or phone number",
+      "username or e-mail",
     ),
     "waiting": MessageLookupByLibrary.simpleMessage("Waiting"),
     "yesImSure": MessageLookupByLibrary.simpleMessage("Yes, I\'m sure."),

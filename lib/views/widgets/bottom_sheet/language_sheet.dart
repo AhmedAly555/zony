@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:zony/generated/l10n.dart';
 import 'package:zony/services/locale_language_service.dart';
 
@@ -27,11 +26,11 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final Map<String, Locale> _supportedLanguages = {
-      S.of(context).english: const Locale('en'),
-      S.of(context).arabic: const Locale('ar'),
-      S.of(context).hindi: const Locale('hi'),
-      S.of(context).bengali: const Locale('bn'),
-      S.of(context).urdu: const Locale('ur'),
+      "English": const Locale('en'),
+      "العربية": const Locale('ar'),
+      "भारतीय": const Locale('hi'),
+      "ਬੰਗਾਲੀ": const Locale('bn'),
+      "اردو": const Locale('ur'),
     };
 
     return BottomSheetContainer(
