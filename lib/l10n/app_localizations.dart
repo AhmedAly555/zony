@@ -926,13 +926,13 @@ abstract class AppLocalizations {
   /// No description provided for @usernameOrPhoneNumber.
   ///
   /// In en, this message translates to:
-  /// **'username or phone number'**
+  /// **'username or e-mail'**
   String get usernameOrPhoneNumber;
 
   /// No description provided for @enterUsernameOrPhoneNumber.
   ///
   /// In en, this message translates to:
-  /// **'Enter Username Or Phone Number'**
+  /// **'Enter Username Or e-mail'**
   String get enterUsernameOrPhoneNumber;
 
   /// No description provided for @password.
@@ -952,6 +952,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Remember me'**
   String get rememberMe;
+
+  /// No description provided for @pressBackAgainToExit.
+  ///
+  /// In en, this message translates to:
+  /// **'Press back again to exit'**
+  String get pressBackAgainToExit;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

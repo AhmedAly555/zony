@@ -1,7 +1,8 @@
-/*
 import 'package:flutter/material.dart';
-import 'package:zony/modules/couriers/views/screens/main_home/screen/courier_receiving_screen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:zony/generated/l10n.dart';
 
+import '../../../../../../controllers/pudu_main_home_controller.dart';
 import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../Recieve/parcel_approve_screen.dart';
 import 'podu_delivering_screen.dart';
@@ -16,72 +17,57 @@ class PoduMainHomeScreen extends StatefulWidget {
 }
 
 class _PoduMainHomeScreenState extends State<PoduMainHomeScreen> {
-  int _selectedIndex = 0;
+  DateTime? _lastPressedAt;
 
-  final List<Widget> _screens = const [
-    PoduHomeScreen(),
-    ParcelApproveScreen(),
-    PoduDeliveringScreen(),
-    PoduMoreScreen(),
+  final List<Widget> _screens = [
+    const PoduHomeScreen(),
+    const ParcelApproveScreen(),
+    const PoduDeliveringScreen(),
+    const PoduMoreScreen(),
   ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return TemplateAppScaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _screens,
-      ),
-      showBottomNavBar: true,
-      currentIndex: _selectedIndex,
-      onNavTap: _onItemTapped,
-    );
-  }
-}
-*/
-
-import 'package:flutter/material.dart';
-import '../../../../../../controllers/pudu_main_home_controller.dart';
-import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
-import '../../../../Recieve/parcel_approve_screen.dart';
-import 'podu_delivering_screen.dart';
-import 'podu_home_screen.dart';
-import 'podu_more.screen.dart';
-
-class PoduMainHomeScreen extends StatelessWidget {
-  const PoduMainHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final controller = PuduMainHomeController.instance;
 
-    final List<Widget> screens = const [
-      PoduHomeScreen(),
-      ParcelApproveScreen(),
-      PoduDeliveringScreen(),
-      PoduMoreScreen(),
-    ];
-
     return ValueListenableBuilder<int>(
       valueListenable: controller.currentTabIndex,
       builder: (context, selectedIndex, _) {
-        return TemplateAppScaffold(
-          body: IndexedStack(
-            index: selectedIndex,
-            children: screens,
+        return WillPopScope(
+          onWillPop: () async {
+            if (selectedIndex != 0) {
+              controller.changeTab(0);
+              return false; // Prevent default back behavior
+            }
+
+            final now = DateTime.now();
+            final didPop = _lastPressedAt == null ||
+                now.difference(_lastPressedAt!) > const Duration(seconds: 2);
+
+            if (didPop) {
+              _lastPressedAt = now;
+              Fluttertoast.showToast(
+                msg: S.of(context).pressBackAgainToExit,
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                backgroundColor: Colors.black54,
+                textColor: Colors.white,
+              );
+              return false; // Prevent app from exiting
+            }
+            return true; // Allow app to exit
+          },
+          child: TemplateAppScaffold(
+            body: IndexedStack(
+              index: selectedIndex,
+              children: _screens,
+            ),
+            showBottomNavBar: true,
+            currentIndex: selectedIndex,
+            onNavTap: controller.changeTab,
           ),
-          showBottomNavBar: true,
-          currentIndex: selectedIndex,
-          onNavTap: controller.changeTab,
         );
       },
     );
   }
 }
-

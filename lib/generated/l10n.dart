@@ -1194,20 +1194,20 @@ class S {
     );
   }
 
-  /// `username or phone number`
+  /// `username or e-mail`
   String get usernameOrPhoneNumber {
     return Intl.message(
-      'username or phone number',
+      'username or e-mail',
       name: 'usernameOrPhoneNumber',
       desc: '',
       args: [],
     );
   }
 
-  /// `Enter Username Or Phone Number`
+  /// `Enter Username Or e-mail`
   String get enterUsernameOrPhoneNumber {
     return Intl.message(
-      'Enter Username Or Phone Number',
+      'Enter Username Or e-mail',
       name: 'enterUsernameOrPhoneNumber',
       desc: '',
       args: [],
@@ -1232,6 +1232,16 @@ class S {
   /// `Remember me`
   String get rememberMe {
     return Intl.message('Remember me', name: 'rememberMe', desc: '', args: []);
+  }
+
+  /// `Press back again to exit`
+  String get pressBackAgainToExit {
+    return Intl.message(
+      'Press back again to exit',
+      name: 'pressBackAgainToExit',
+      desc: '',
+      args: [],
+    );
   }
 }
 

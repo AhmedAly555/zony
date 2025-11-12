@@ -435,4 +435,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get rememberMe => 'تذكرني';
+
+  @override
+  String get pressBackAgainToExit => 'Press back again to exit';
 }

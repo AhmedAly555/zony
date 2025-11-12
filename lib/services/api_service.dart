@@ -51,7 +51,7 @@ class ApiService extends BaseApiService {
   }
 
   // ---------------- Auth APIs ----------------
-  Future<Map<String, dynamic>> login(String email, String password) async {
+  Future<Map<String, dynamic>> login(String email, String password, bool rememberMe) async {
     final url = Uri.parse('$baseUrl/auth/login');
 
     final response = await http.post(
@@ -60,6 +60,7 @@ class ApiService extends BaseApiService {
       body: jsonEncode({
         "email": email,
         "password": password,
+        "remember_me": rememberMe ? 1 : 0,
       }),
     );
 
@@ -115,7 +116,7 @@ class ApiService extends BaseApiService {
   // ---------------- Refresh Token API ----------------
   Future<void> refreshAccessToken() async {
     if (_refreshToken == null) {
-      // إذا لم يكن هناك Refresh Token، نطلب من المستخدم إعادة تسجيل الدخول
+      // If there is no Refresh Token, we ask the user to log in again
       await clearUserData();
       throw Exception("No refresh token found, user must login again.");
     }
@@ -136,12 +137,12 @@ class ApiService extends BaseApiService {
 
       final newAccessToken = data['access_token'];
       if (newAccessToken != null) {
-        // 1. استبدال Access Token القديم بالجديد
+        // 1. Replace the old Access Token with the new one
         _accessToken = newAccessToken;
-        setAuthToken(_accessToken!); // تحديث التوكن في الـ Base Service
+        setAuthToken(_accessToken!); // Update the token in the Base Service
 
-        // 2. تحديث التخزين
-        // نستخدم Access Token الجديد ونبقي على الـ Refresh Token القديم
+        // 2. Update the storage
+        // We use the new Access Token and keep the old Refresh Token
         await TokenStorage.saveTokens(
           accessToken: _accessToken!,
           refreshToken: _refreshToken!,
@@ -160,7 +161,7 @@ class ApiService extends BaseApiService {
         );
         throw Exception("Refresh token expired. Please log in again.");
       }
-      // إذا فشل التحديث (ربما انتهت صلاحية الريفريش توكين)، نسجل الخروج
+      // If the update fails (perhaps the refresh token has expired), we log out
       await clearTokens();
       throw Exception("Refresh failed: ${response.body}. Please log in again.");
     }
