@@ -51,13 +51,14 @@ class CustomHomeServiceContainer extends StatelessWidget {
             ),
             Spacer(),
             SizedBox(width: 20),
-            /*Icon(Icons.arrow_forward_ios, color: Colors.grey),*/
-            SvgPicture.asset(
+            Icon(Icons.arrow_forward_ios, size: 16, ),
+
+            /*SvgPicture.asset(
               'assets/svgs/right_arrow_ios.svg',
               width: 7,
               height: 12,
               color: Color(0xFF1E1E1E),
-            ),
+            ),*/
           ],
         ),
       ),

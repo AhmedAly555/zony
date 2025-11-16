@@ -39,7 +39,9 @@ class ParcelDetailsScreen extends StatefulWidget {
 
 class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
-  late Future<ParcelsResponse> _parcelFuture;
+  //late Future<ParcelsResponse> _parcelFuture;
+  Future<ParcelsResponse>? _parcelFuture;
+
   Parcel? _currentParcel;
   String? _pudoId;
   @override
@@ -61,8 +63,8 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       }
 
       _pudoId = pudosList.first.id.toString();
-      //print('PUDO ID: $pudoId');
-      //print('Receiving Code: ${widget.receivingCode}');
+      print('PUDO ID: $_pudoId');
+      print('Receiving Code: ${widget.receivingCode}');
 
       // get parcel by receiving code
       setState(() {
@@ -70,9 +72,10 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
           _pudoId!,
           widget.receivingCode,
         );
+        print('Parcel Future: $_parcelFuture');
       });
     } catch (e) {
-      //debugPrint('❌ Error while initializing parcel data: $e');
+      debugPrint('❌ Error while initializing parcel data: $e');
       setState(() {
         _parcelFuture = Future.error(S.of(context).failedToLoadParcelData);
       });
@@ -306,6 +309,13 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    if (_parcelFuture == null) {
+      return const Scaffold(
+        body: Center(child: LoadingWidget()),
+      );
+    }
+
     return TemplateAppScaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
