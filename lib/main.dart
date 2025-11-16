@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:zony/services/locale_language_service.dart';
 import 'package:zony/services/navigator.services/navigation_service.dart';
+import 'package:zony/theme/app_languages_theme.dart';
+
 
 import 'package:zony/views/screens/splash_screen.dart';
 
@@ -49,11 +51,15 @@ class _MyAppState extends State<MyApp> {
           supportedLocales: S.delegate.supportedLocales,
           title: 'Zony',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
+          theme: locale.languageCode == 'ar'
+              ? AppTheme.arabicTheme
+              : AppTheme.englishTheme,
+
+          /*theme: ThemeData(
             fontFamily: 'Poppins',
             colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF49159B)),
             scaffoldBackgroundColor: Color(0xFFF4F4F4),
-          ),
+          ),*/
           home: const SplashScreen(),
         );
       },

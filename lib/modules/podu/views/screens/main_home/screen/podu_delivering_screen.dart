@@ -3,7 +3,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:zony/generated/l10n.dart';
 import 'package:zony/views/widgets/template_app_scaffold.widget.dart';
 
-import '../../../../../../views/widgets/bottom_sheet/manually_username_bottom_sheet.dart';
+import '../../../../../../views/widgets/bottom_sheet/manually_input_bottom_sheet.dart';
 import '../../../../../../views/widgets/bottom_sheet/qr_scanner.dart';
 import '../../../../../../views/widgets/default_appbar.dart';
 import '../../../../../../views/widgets/toasts.dart';
@@ -14,32 +14,7 @@ import '../../../../deliver_customer/screens/parcel_details.screen.dart';
 class PoduDeliveringScreen extends StatelessWidget {
   const PoduDeliveringScreen({super.key});
 
-  //Open the scanner bottom sheet
-  /*Future<String?> openScannerBottomSheet(BuildContext context) {
-    return showModalBottomSheet<String>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        //bool popped = false;
-        final sheetHeight = MediaQuery.of(context).size.height * 0.9;
-
-        final controller = MobileScannerController(
-          facing: CameraFacing.back,
-          detectionSpeed: DetectionSpeed.noDuplicates,
-          // formats: const [BarcodeFormat.qrCode],
-        );
-
-        return QRScannerBottomSheet(sheetHeight: sheetHeight, controller: controller,);
-      },
-    );
-  }*/
-
-  Future<void> _handleQrScanning({
-    required BuildContext context,
-    required Function showErrorToast,
-  }) async {
-
+  Future<void> _handleQrScanning(BuildContext context) async {
     final controller = MobileScannerController();
 
     final receivingCode = await showModalBottomSheet<String>(
@@ -55,6 +30,20 @@ class PoduDeliveringScreen extends StatelessWidget {
     await controller.stop();
     controller.dispose();
 
+    if (receivingCode != null && receivingCode.isNotEmpty) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ParcelDetailsScreen(receivingCode: receivingCode),
+        ),
+      );
+    } else {
+      showErrorToast(message: S.of(context).noQrCodeDetected);
+    }
+  }
+
+  Future<void> _handleManualInput(BuildContext context) async {
+    final receivingCode = await showManuallyInputBottomSheet(context);
 
     if (receivingCode != null && receivingCode.isNotEmpty) {
       Navigator.push(
@@ -63,9 +52,6 @@ class PoduDeliveringScreen extends StatelessWidget {
           builder: (_) => ParcelDetailsScreen(receivingCode: receivingCode),
         ),
       );
-    }
-    else {
-      showErrorToast(message: S.of(context).noQrCodeDetected);
     }
   }
 
@@ -83,20 +69,13 @@ class PoduDeliveringScreen extends StatelessWidget {
                 MenuItemData(
                   svgPath: 'assets/svgs/small_qr.svg',
                   title: S.of(context).qrScanner,
-                  onTap: () async {
-                    await _handleQrScanning(
-                      context: context,
-                      showErrorToast: showErrorToast,
-                    );
-                  },
+                  onTap: () => _handleQrScanning(context),
                 ),
-                /*MenuItemData(
+                MenuItemData(
                   svgPath: 'assets/svgs/small_qr.svg',
-                  title: S.of(context).enterUsername,
-                  onTap: () {
-                    showManuallyUsernameBottomSheet(context);
-                  },
-                ),*/
+                  title: S.of(context).enterUsername, // You might want to change this key to something like 'enterCode'
+                  onTap: () => _handleManualInput(context),
+                ),
               ],
             ),
             const Spacer(),

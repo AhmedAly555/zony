@@ -4,7 +4,7 @@ import 'package:zony/generated/l10n.dart';
 import 'package:zony/services/get_courier_pudos_service.dart';
 import 'package:zony/views/widgets/template_app_scaffold.widget.dart';
 
-import '../../../../../../views/widgets/bottom_sheet/manually_username_bottom_sheet.dart';
+import '../../../../../../views/widgets/bottom_sheet/manually_input_bottom_sheet.dart';
 import '../../../../../../views/widgets/bottom_sheet/qr_scanner.dart';
 import '../../../../../../views/widgets/default_appbar.dart';
 import '../../../../../../views/widgets/toasts.dart';
@@ -46,7 +46,9 @@ class CourierDeliveringScreen extends StatelessWidget {
 
   //Handle Pudo Username Input
   Future<void> _handlePudoUsernameInput(BuildContext context) async {
-    showManuallyUsernameBottomSheet(context, onConfirm: (username) async {
+    final username = await showManuallyInputBottomSheet(context);
+
+    if (username != null && username.isNotEmpty) {
       try {
         final response = await GetCourierPudosService.instance.getPudosByUsername(username);
         if (response.pudos.isNotEmpty) {
@@ -64,7 +66,7 @@ class CourierDeliveringScreen extends StatelessWidget {
       } catch (e) {
         showErrorToast(message: e.toString());
       }
-    });
+    }
   }
 
   @override
