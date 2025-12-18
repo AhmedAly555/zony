@@ -1,3 +1,4 @@
+
 {
     "@@locale": "ar",
     "account": "الحساب",
@@ -141,5 +142,6 @@
     "enterUsernameOrPhoneNumber": "أدخل اسم المستخدم أو رقم الهاتف",
     "password": "كلمة المرور",
     "enterPassword": "أدخل كلمة المرور",
-    "rememberMe": "تذكرني"
+    "rememberMe": "تذكرني",
+    "pressBackAgainToExit": "اضغط مرة أخرى للخروج"
 }

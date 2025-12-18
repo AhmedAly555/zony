@@ -1,3 +1,4 @@
+
 {
     "@@locale": "ur",
     "account": "اکاؤنٹ",
@@ -141,5 +142,6 @@
     "enterUsernameOrPhoneNumber": "صارف نام یا فون نمبر درج کریں",
     "password": "پاس ورڈ",
     "enterPassword": "پاس ورڈ درج کریں",
-    "rememberMe": "مجھے یاد رکھیں"
+    "rememberMe": "مجھے یاد رکھیں",
+    "pressBackAgainToExit": "باہر نکلنے کے لیے دوبارہ دبائیں"
 }

@@ -54,7 +54,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get podus => 'পিকআপ পয়েন্ট';
 
   @override
-  String get pudoParcelsRetrievedSuccessfully => 'পার্সেল সফলভাবে উদ্ধার করা হয়েছে';
+  String get pudoParcelsRetrievedSuccessfully =>
+      'পার্সেল সফলভাবে উদ্ধার করা হয়েছে';
 
   @override
   String get noQrCodeDetected => '⚠️ কোন QR কোড সনাক্ত করা যায়নি';
@@ -108,7 +109,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get pleaseUploadImageFirst => '❗ দয়া করে প্রথমে ছবি আপলোড করুন';
 
   @override
-  String get parcelDeliveredSuccessfully => '✅ পার্সেল সফলভাবে বিতরণ করা হয়েছে!';
+  String get parcelDeliveredSuccessfully =>
+      '✅ পার্সেল সফলভাবে বিতরণ করা হয়েছে!';
 
   @override
   String get failedToUpdateParcel => 'পার্সেল আপডেট করতে ব্যর্থ: ';
@@ -159,7 +161,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get successfulDeliveringProcess => 'সফল বিতরণ প্রক্রিয়া';
 
   @override
-  String get pickupTimeAndLocationRecorded => 'পিকআপের সময় এবং অবস্থান স্বয়ংক্রিয়ভাবে রেকর্ড করা হবে।';
+  String get pickupTimeAndLocationRecorded =>
+      'পিকআপের সময় এবং অবস্থান স্বয়ংক্রিয়ভাবে রেকর্ড করা হবে।';
 
   @override
   String get deliverNewParcel => 'নতুন পার্সেল বিতরণ করুন';
@@ -195,10 +198,12 @@ class AppLocalizationsBn extends AppLocalizations {
   String get somethingWentWrong => ' কিছু ভুল হয়েছে: ';
 
   @override
-  String get thisPudoHasNoParcelsYet => 'এই পিকআপ পয়েন্টে এখনো কোন পার্সেল নেই';
+  String get thisPudoHasNoParcelsYet =>
+      'এই পিকআপ পয়েন্টে এখনো কোন পার্সেল নেই';
 
   @override
-  String get parcelsRefreshedSuccessfully => 'পার্সেল সফলভাবে রিফ্রেশ করা হয়েছে';
+  String get parcelsRefreshedSuccessfully =>
+      'পার্সেল সফলভাবে রিফ্রেশ করা হয়েছে';
 
   @override
   String get noParcelsFound => 'কোন পার্সেল পাওয়া যায়নি।';
@@ -237,13 +242,16 @@ class AppLocalizationsBn extends AppLocalizations {
   String get twoBag => '২ ব্যাগ';
 
   @override
-  String get successfulExpiredReceivingProcess => 'মেয়াদ উত্তীর্ণ পার্সেল সফল গ্রহণ প্রক্রিয়া';
+  String get successfulExpiredReceivingProcess =>
+      'মেয়াদ উত্তীর্ণ পার্সেল সফল গ্রহণ প্রক্রিয়া';
 
   @override
-  String get receiveNewExpiredParcel => 'নতুন মেয়াদ উত্তীর্ণ পার্সেল গ্রহণ করুন';
+  String get receiveNewExpiredParcel =>
+      'নতুন মেয়াদ উত্তীর্ণ পার্সেল গ্রহণ করুন';
 
   @override
-  String get noPudoFoundInLocalStorage => 'স্থানীয় স্টোরেজে কোন পিকআপ পয়েন্ট পাওয়া যায়নি';
+  String get noPudoFoundInLocalStorage =>
+      'স্থানীয় স্টোরেজে কোন পিকআপ পয়েন্ট পাওয়া যায়নি';
 
   @override
   String get failedToLoadParcelData => 'পার্সেল ডেটা লোড করতে ব্যর্থ';
@@ -294,7 +302,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get parcelConfirmedSuccessfully => 'পার্সেল সফলভাবে নিশ্চিত হয়েছে!';
 
   @override
-  String get failedToConfirmParcel => 'পার্সেল নিশ্চিত করতে ব্যর্থ। দয়া করে আবার চেষ্টা করুন।';
+  String get failedToConfirmParcel =>
+      'পার্সেল নিশ্চিত করতে ব্যর্থ। দয়া করে আবার চেষ্টা করুন।';
 
   @override
   String get confirmParcel => 'পার্সেল নিশ্চিত করুন';
@@ -332,7 +341,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get deliveryConfirmation => 'বিতরণ নিশ্চিতকরণ';
 
   @override
-  String get deliveryConfirmationDescription => 'নিশ্চিত করার মাধ্যমে, আপনি স্বীকার করছেন যে পার্সেলটি সফলভাবে বিতরণ করা হয়েছে।';
+  String get deliveryConfirmationDescription =>
+      'নিশ্চিত করার মাধ্যমে, আপনি স্বীকার করছেন যে পার্সেলটি সফলভাবে বিতরণ করা হয়েছে।';
 
   @override
   String get confirm => 'নিশ্চিত করুন';
@@ -359,7 +369,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get pickupPointUsername => 'পিকআপ পয়েন্ট ব্যবহারকারীর নাম';
 
   @override
-  String get pleaseEnterUsernameHere => 'দয়া করে এখানে ব্যবহারকারীর নাম লিখুন!';
+  String get pleaseEnterUsernameHere =>
+      'দয়া করে এখানে ব্যবহারকারীর নাম লিখুন!';
 
   @override
   String get usernameIsNotValid => 'আপনার লেখা ব্যবহারকারীর নাম বৈধ নয়';
@@ -395,7 +406,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get chooseYourLanguage => 'আপনার ভাষা পছন্দ করুন';
 
   @override
-  String get languageSelectionDescription => 'আপনার পছন্দের ভাষা নির্বাচন করুন। এটি অ্যাপ জুড়ে পাঠ্য আপডেট করবে।';
+  String get languageSelectionDescription =>
+      'আপনার পছন্দের ভাষা নির্বাচন করুন। এটি অ্যাপ জুড়ে পাঠ্য আপডেট করবে।';
 
   @override
   String get english => 'ইংরেজি';
@@ -425,7 +437,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get usernameOrPhoneNumber => 'ব্যবহারকারীর নাম বা ফোন নম্বর';
 
   @override
-  String get enterUsernameOrPhoneNumber => 'ব্যবহারকারীর নাম বা ফোন নম্বর লিখুন';
+  String get enterUsernameOrPhoneNumber =>
+      'ব্যবহারকারীর নাম বা ফোন নম্বর লিখুন';
 
   @override
   String get password => 'পাসওয়ার্ড';
@@ -437,5 +450,5 @@ class AppLocalizationsBn extends AppLocalizations {
   String get rememberMe => 'আমাকে মনে রাখুন';
 
   @override
-  String get pressBackAgainToExit => 'Press back again to exit';
+  String get pressBackAgainToExit => 'প্রস্থান করতে আবার চাপুন';
 }

@@ -236,6 +236,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "পিকআপ পয়েন্ট পার্সেল",
     ),
     "podus": MessageLookupByLibrary.simpleMessage("পিকআপ পয়েন্ট"),
+    "pressBackAgainToExit": MessageLookupByLibrary.simpleMessage(
+      "প্রস্থান করতে আবার চাপুন",
+    ),
     "productInfo": MessageLookupByLibrary.simpleMessage("পণ্য তথ্য"),
     "pudoIdNotLoadedYet": MessageLookupByLibrary.simpleMessage(
       "পিকআপ পয়েন্ট আইডি এখনও লোড হয়নি",

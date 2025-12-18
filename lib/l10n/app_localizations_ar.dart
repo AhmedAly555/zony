@@ -159,7 +159,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get successfulDeliveringProcess => 'عملية تسليم ناجحة';
 
   @override
-  String get pickupTimeAndLocationRecorded => 'سيتم تسجيل وقت وموقع الاستلام تلقائياً.';
+  String get pickupTimeAndLocationRecorded =>
+      'سيتم تسجيل وقت وموقع الاستلام تلقائياً.';
 
   @override
   String get deliverNewParcel => 'تسليم طرد جديد';
@@ -195,7 +196,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get somethingWentWrong => ' حدث خطأ ما: ';
 
   @override
-  String get thisPudoHasNoParcelsYet => 'لا توجد طرود في نقطة الاستلام هذه حتى الآن';
+  String get thisPudoHasNoParcelsYet =>
+      'لا توجد طرود في نقطة الاستلام هذه حتى الآن';
 
   @override
   String get parcelsRefreshedSuccessfully => 'تم تحديث الطرود بنجاح';
@@ -237,13 +239,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get twoBag => 'حقيبتان';
 
   @override
-  String get successfulExpiredReceivingProcess => 'عملية استلام منتهي الصلاحية ناجحة';
+  String get successfulExpiredReceivingProcess =>
+      'عملية استلام منتهي الصلاحية ناجحة';
 
   @override
   String get receiveNewExpiredParcel => 'استلام طرد منتهي الصلاحية جديد';
 
   @override
-  String get noPudoFoundInLocalStorage => 'لم يتم العثور على نقطة استلام في التخزين المحلي';
+  String get noPudoFoundInLocalStorage =>
+      'لم يتم العثور على نقطة استلام في التخزين المحلي';
 
   @override
   String get failedToLoadParcelData => 'فشل في تحميل بيانات الطرد';
@@ -294,7 +298,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get parcelConfirmedSuccessfully => 'تم تأكيد الطرد بنجاح!';
 
   @override
-  String get failedToConfirmParcel => 'فشل في تأكيد الطرد. يرجى المحاولة مرة أخرى.';
+  String get failedToConfirmParcel =>
+      'فشل في تأكيد الطرد. يرجى المحاولة مرة أخرى.';
 
   @override
   String get confirmParcel => 'تأكيد الطرد';
@@ -332,7 +337,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get deliveryConfirmation => 'تأكيد التسليم';
 
   @override
-  String get deliveryConfirmationDescription => 'من خلال التأكيد، فإنك تقر بأنه تم تسليم الطرد بنجاح.';
+  String get deliveryConfirmationDescription =>
+      'من خلال التأكيد، فإنك تقر بأنه تم تسليم الطرد بنجاح.';
 
   @override
   String get confirm => 'تأكيد';
@@ -377,7 +383,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get couldNotGenerateQr => 'تعذر إنشاء رمز الاستجابة السريعة\n';
 
   @override
-  String get scanQrCodeInFrontOfCamera => 'امسح رمز الاستجابة السريعة أمام الكاميرا';
+  String get scanQrCodeInFrontOfCamera =>
+      'امسح رمز الاستجابة السريعة أمام الكاميرا';
 
   @override
   String get youAreAtWrongLocation => 'أنت في الموقع الخطأ';
@@ -395,7 +402,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get chooseYourLanguage => 'اختر لغتك';
 
   @override
-  String get languageSelectionDescription => 'اختر لغتك المفضلة. سيؤدي هذا إلى تحديث النص في جميع أنحاء التطبيق.';
+  String get languageSelectionDescription =>
+      'اختر لغتك المفضلة. سيؤدي هذا إلى تحديث النص في جميع أنحاء التطبيق.';
 
   @override
   String get english => 'الإنجليزية';
@@ -437,5 +445,5 @@ class AppLocalizationsAr extends AppLocalizations {
   String get rememberMe => 'تذكرني';
 
   @override
-  String get pressBackAgainToExit => 'Press back again to exit';
+  String get pressBackAgainToExit => 'اضغط مرة أخرى للخروج';
 }

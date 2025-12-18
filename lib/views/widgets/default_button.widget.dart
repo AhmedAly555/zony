@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zony/generated/l10n.dart';
+import 'package:zony/theme/app_colors.theme.dart';
 
 class DefaultButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -25,7 +26,7 @@ class DefaultButton extends StatelessWidget {
                               }
                               : null, */
         style: ElevatedButton.styleFrom(
-          backgroundColor: buttonColor ?? Color(0xFF49159B),
+          backgroundColor: buttonColor ?? AppColors.zonyPrimary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
