@@ -220,6 +220,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "poduDetails": MessageLookupByLibrary.simpleMessage("تفاصيل نقطة الاستلام"),
     "poduParcels": MessageLookupByLibrary.simpleMessage("طرود نقطة الاستلام"),
     "podus": MessageLookupByLibrary.simpleMessage("نقاط الاستلام"),
+    "pressBackAgainToExit": MessageLookupByLibrary.simpleMessage(
+      "اضغط مرة أخرى للخروج",
+    ),
     "productInfo": MessageLookupByLibrary.simpleMessage("معلومات المنتج"),
     "pudoIdNotLoadedYet": MessageLookupByLibrary.simpleMessage(
       "لم يتم تحميل معرف نقطة الاستلام بعد",

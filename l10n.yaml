@@ -1,5 +1,4 @@
-synthetic-package: false
-
+# synthetic-package: false
 # حدد اسم ملف القالب الخاص بك
 template-arb-file: intl_en.arb
 # حدد المجلد الذي توجد به كل ملفات ARB

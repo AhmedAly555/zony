@@ -54,7 +54,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get podus => 'पिकअप बिंदु';
 
   @override
-  String get pudoParcelsRetrievedSuccessfully => 'पार्सल सफलतापूर्वक प्राप्त किए गए';
+  String get pudoParcelsRetrievedSuccessfully =>
+      'पार्सल सफलतापूर्वक प्राप्त किए गए';
 
   @override
   String get noQrCodeDetected => '⚠️ कोई क्यूआर कोड नहीं मिला';
@@ -96,7 +97,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get changePassword => 'पासवर्ड बदलें';
 
   @override
-  String get failedToFetchParcelDetails => '❌ पार्सल विवरण प्राप्त करने में विफल: ';
+  String get failedToFetchParcelDetails =>
+      '❌ पार्सल विवरण प्राप्त करने में विफल: ';
 
   @override
   String get imageUploadedSuccessfully => '✅ छवि सफलतापूर्वक अपलोड की गई!';
@@ -108,7 +110,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get pleaseUploadImageFirst => '❗ कृपया पहले छवि अपलोड करें';
 
   @override
-  String get parcelDeliveredSuccessfully => '✅ पार्सल सफलतापूर्वक वितरित किया गया!';
+  String get parcelDeliveredSuccessfully =>
+      '✅ पार्सल सफलतापूर्वक वितरित किया गया!';
 
   @override
   String get failedToUpdateParcel => 'पार्सल अपडेट करने में विफल: ';
@@ -159,7 +162,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get successfulDeliveringProcess => 'सफल वितरण प्रक्रिया';
 
   @override
-  String get pickupTimeAndLocationRecorded => 'पिकअप का समय और स्थान स्वचालित रूप से रिकॉर्ड किया जाएगा।';
+  String get pickupTimeAndLocationRecorded =>
+      'पिकअप का समय और स्थान स्वचालित रूप से रिकॉर्ड किया जाएगा।';
 
   @override
   String get deliverNewParcel => 'नया पार्सल वितरित करें';
@@ -168,7 +172,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get backToHome => 'होम पर वापस जाएं';
 
   @override
-  String get failedToFetchPudoDetails => 'पिकअप बिंदु विवरण प्राप्त करने में विफल: ';
+  String get failedToFetchPudoDetails =>
+      'पिकअप बिंदु विवरण प्राप्त करने में विफल: ';
 
   @override
   String get tryAgain => 'पुनः प्रयास करें';
@@ -189,16 +194,18 @@ class AppLocalizationsHi extends AppLocalizations {
   String get poduDetails => 'पिकअप बिंदु विवरण';
 
   @override
-  String get poduParcels => 'पिकअप बिंदु के पार्सल';
+  String get poduParcels => 'पिकअप बिंदु के पार্সल';
 
   @override
   String get somethingWentWrong => ' कुछ गलत हो गया: ';
 
   @override
-  String get thisPudoHasNoParcelsYet => 'इस पिकअप बिंदु में अभी तक कोई पार्सल नहीं है';
+  String get thisPudoHasNoParcelsYet =>
+      'इस पिकअप बिंदु में अभी तक कोई पार্সल नहीं है';
 
   @override
-  String get parcelsRefreshedSuccessfully => 'पार्सल सफलतापूर्वक रीफ्रेश किए गए';
+  String get parcelsRefreshedSuccessfully =>
+      'पार्सल सफलतापूर्वक रीफ्रेश किए गए';
 
   @override
   String get noParcelsFound => 'कोई पार्सल नहीं मिला।';
@@ -213,7 +220,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get unknownCity => 'अज्ञात शहर';
 
   @override
-  String get failedToRetrieveCourierId => '⚠️ कूरियर आईडी प्राप्त करने में विफल';
+  String get failedToRetrieveCourierId =>
+      '⚠️ कूरियर आईडी प्राप्त करने में विफल';
 
   @override
   String get parcelReceivedSuccessfully => '✅ पार्सल सफलतापूर्वक प्राप्त हुआ!';
@@ -237,19 +245,21 @@ class AppLocalizationsHi extends AppLocalizations {
   String get twoBag => 'दो बैग';
 
   @override
-  String get successfulExpiredReceivingProcess => 'समाप्त पार्सल की सफल प्राप्ति प्रक्रिया';
+  String get successfulExpiredReceivingProcess =>
+      'समाप्त पार্সल की सफल प्राप्ति प्रक्रिया';
 
   @override
-  String get receiveNewExpiredParcel => 'नया समाप्त पार्सल प्राप्त करें';
+  String get receiveNewExpiredParcel => 'नया समाप्त पार্সल प्राप्त करें';
 
   @override
-  String get noPudoFoundInLocalStorage => 'स्थानीय स्टोरेज में कोई पिकअप बिंदु नहीं मिला';
+  String get noPudoFoundInLocalStorage =>
+      'स्थानीय स्टोरेज में कोई पिकअप बिंदु नहीं मिला';
 
   @override
   String get failedToLoadParcelData => 'पार्सल डेटा लोड करने में विफल';
 
   @override
-  String get parcelDataNotLoadedYet => '❗ पार्सल डेटा अभी तक लोड नहीं हुआ।';
+  String get parcelDataNotLoadedYet => '❗ पार্সल डेटा अभी तक लोड नहीं हुआ।';
 
   @override
   String get cameronWilliamson => 'कैमरून विलियमसन';
@@ -285,19 +295,20 @@ class AppLocalizationsHi extends AppLocalizations {
   String get pudoIdNotLoadedYet => 'पिकअप बिंदु आईडी अभी तक लोड नहीं हुई';
 
   @override
-  String get expiredParcels => 'समाप्त पार्सल';
+  String get expiredParcels => 'समाप्त पार্সल';
 
   @override
-  String get parcelApprove => 'पार्सल स्वीकृति';
+  String get parcelApprove => 'पार্সल स्वीकृति';
 
   @override
-  String get parcelConfirmedSuccessfully => 'पार्सल सफलतापूर्वक पुष्टि हो गया!';
+  String get parcelConfirmedSuccessfully => 'पार্সल सफलतापूर्वक पुष्टि हो गया!';
 
   @override
-  String get failedToConfirmParcel => 'पार्सल की पुष्टि करने में विफल। कृपया पुनः प्रयास करें।';
+  String get failedToConfirmParcel =>
+      'पार্সल की पुष्टि करने में विफल। कृपया पुनः प्रयास करें।';
 
   @override
-  String get confirmParcel => 'पार्सल की पुष्टि करें';
+  String get confirmParcel => 'पार্সल की पुष्टि करें';
 
   @override
   String get noPudoDataFound => 'कोई पिकअप बिंदु डेटा नहीं मिला';
@@ -318,7 +329,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get pending => 'लंबित';
 
   @override
-  String get parcelApproveConfirmation => 'पार्सल स्वीकृति पुष्टि';
+  String get parcelApproveConfirmation => 'पार্সल स्वीकृति पुष्टि';
 
   @override
   String areYouSureYouWantToApprove(Object parcelId) {
@@ -332,7 +343,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get deliveryConfirmation => 'वितरण पुष्टि';
 
   @override
-  String get deliveryConfirmationDescription => 'पुष्टि करके, आप स्वीकार करते हैं कि पार্সल सफलतापूर्वक वितरित किया गया है।';
+  String get deliveryConfirmationDescription =>
+      'पुष्टि करके, आप स्वीकार करते हैं कि पार্সल सफलतापूर्वक वितरित किया गया है।';
 
   @override
   String get confirm => 'पुष्टि करें';
@@ -344,7 +356,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get anErrorOccurred => 'एक त्रुटि हुई: ';
 
   @override
-  String get areYouSureYouWantToLogOut => 'क्या आप निश्चित रूप से लॉग आउट करना चाहते हैं?';
+  String get areYouSureYouWantToLogOut =>
+      'क्या आप निश्चित रूप से लॉग आउट करना चाहते हैं?';
 
   @override
   String get logOutDescription => 'आपको लॉगिन स्क्रीन पर वापस भेजा जाएगा।';
@@ -362,7 +375,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get pleaseEnterUsernameHere => 'कृपया यहां उपयोगकर्ता नाम दर्ज करें!';
 
   @override
-  String get usernameIsNotValid => 'आपके द्वारा दर्ज किया गया उपयोगकर्ता नाम मान्य नहीं है';
+  String get usernameIsNotValid =>
+      'आपके द्वारा दर्ज किया गया उपयोगकर्ता नाम मान्य नहीं है';
 
   @override
   String get photoConfirmation => 'फोटो पुष्टि';
@@ -377,7 +391,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get couldNotGenerateQr => 'क्यूआर जेनरेट नहीं किया जा सका\n';
 
   @override
-  String get scanQrCodeInFrontOfCamera => 'कैमरे के सामने क्यूआर कोड स्कैन करें';
+  String get scanQrCodeInFrontOfCamera =>
+      'कैमरे के सामने क्यूआर कोड स्कैन करें';
 
   @override
   String get youAreAtWrongLocation => 'आप गलत स्थान पर हैं';
@@ -395,7 +410,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get chooseYourLanguage => 'अपनी भाषा चुनें';
 
   @override
-  String get languageSelectionDescription => 'अपनी पसंदीदा भाषा चुनें। यह ऐप में टेक्स्ट को अपडेट करेगा।';
+  String get languageSelectionDescription =>
+      'अपनी पसंदीदा भाषा चुनें। यह ऐप में टेक्स्ट को अपडेट करेगा।';
 
   @override
   String get english => 'अंग्रेजी';
@@ -425,7 +441,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get usernameOrPhoneNumber => 'उपयोगकर्ता नाम या फोन नंबर';
 
   @override
-  String get enterUsernameOrPhoneNumber => 'उपयोगकर्ता नाम या फोन नंबर दर्ज करें';
+  String get enterUsernameOrPhoneNumber =>
+      'उपयोगकर्ता नाम या फोन नंबर दर्ज करें';
 
   @override
   String get password => 'पासवर्ड';
@@ -437,5 +454,5 @@ class AppLocalizationsHi extends AppLocalizations {
   String get rememberMe => 'मुझे याद रखें';
 
   @override
-  String get pressBackAgainToExit => 'Press back again to exit';
+  String get pressBackAgainToExit => 'बाहर निकलने के लिए फिर से दबाएं';
 }

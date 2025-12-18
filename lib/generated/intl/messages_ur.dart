@@ -230,6 +230,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "پک اپ پوائنٹ کے پارسل",
     ),
     "podus": MessageLookupByLibrary.simpleMessage("پک اپ پوائنٹس"),
+    "pressBackAgainToExit": MessageLookupByLibrary.simpleMessage(
+      "باہر نکلنے کے لیے دوبارہ دبائیں",
+    ),
     "productInfo": MessageLookupByLibrary.simpleMessage("مصنوع کی معلومات"),
     "pudoIdNotLoadedYet": MessageLookupByLibrary.simpleMessage(
       "پک اپ پوائنٹ کی شناخت ابھی لوڈ نہیں ہوئی",

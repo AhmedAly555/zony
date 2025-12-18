@@ -54,7 +54,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get podus => 'PODUs';
 
   @override
-  String get pudoParcelsRetrievedSuccessfully => 'PUDO parcels retrieved successfully';
+  String get pudoParcelsRetrievedSuccessfully =>
+      'PUDO parcels retrieved successfully';
 
   @override
   String get noQrCodeDetected => '⚠️ No QR code detected';
@@ -159,7 +160,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get successfulDeliveringProcess => 'Successful Delivering process';
 
   @override
-  String get pickupTimeAndLocationRecorded => 'The time and location of the pickup will be recorded automatically.';
+  String get pickupTimeAndLocationRecorded =>
+      'The time and location of the pickup will be recorded automatically.';
 
   @override
   String get deliverNewParcel => 'Deliver New Parcel';
@@ -237,7 +239,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get twoBag => '2 Bag';
 
   @override
-  String get successfulExpiredReceivingProcess => 'Successful Expired Receiving process';
+  String get successfulExpiredReceivingProcess =>
+      'Successful Expired Receiving process';
 
   @override
   String get receiveNewExpiredParcel => 'Receive New Expired Parcel';
@@ -294,7 +297,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get parcelConfirmedSuccessfully => 'Parcel confirmed successfully!';
 
   @override
-  String get failedToConfirmParcel => 'Failed to confirm parcel. Please try again.';
+  String get failedToConfirmParcel =>
+      'Failed to confirm parcel. Please try again.';
 
   @override
   String get confirmParcel => 'Confirm Parcel';
@@ -332,7 +336,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deliveryConfirmation => 'Delivery Confirmation';
 
   @override
-  String get deliveryConfirmationDescription => 'By confirming, you acknowledge that the parcel has been successfully delivered.';
+  String get deliveryConfirmationDescription =>
+      'By confirming, you acknowledge that the parcel has been successfully delivered.';
 
   @override
   String get confirm => 'Confirm';
@@ -395,7 +400,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chooseYourLanguage => 'Choose your language';
 
   @override
-  String get languageSelectionDescription => 'Select your preferred language. This will update the text throughout the app.';
+  String get languageSelectionDescription =>
+      'Select your preferred language. This will update the text throughout the app.';
 
   @override
   String get english => 'English';

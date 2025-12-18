@@ -1,3 +1,4 @@
+
 {
     "@@locale": "bn",
     "account": "অ্যাকাউন্ট",
@@ -141,5 +142,6 @@
     "enterUsernameOrPhoneNumber": "ব্যবহারকারীর নাম বা ফোন নম্বর লিখুন",
     "password": "পাসওয়ার্ড",
     "enterPassword": "পাসওয়ার্ড লিখুন",
-    "rememberMe": "আমাকে মনে রাখুন"
+    "rememberMe": "আমাকে মনে রাখুন",
+    "pressBackAgainToExit": "প্রস্থান করতে আবার চাপুন"
 }

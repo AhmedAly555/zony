@@ -54,7 +54,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get podus => 'پک اپ پوائنٹس';
 
   @override
-  String get pudoParcelsRetrievedSuccessfully => 'پارسل کامیابی سے حاصل کیے گئے';
+  String get pudoParcelsRetrievedSuccessfully =>
+      'پارسل کامیابی سے حاصل کیے گئے';
 
   @override
   String get noQrCodeDetected => '⚠️ کیو آر کوڈ کا پتہ نہیں چلا';
@@ -96,7 +97,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get changePassword => 'پاس ورڈ تبدیل کریں';
 
   @override
-  String get failedToFetchParcelDetails => '❌ پارسل کی تفصیلات حاصل کرنے میں ناکامی: ';
+  String get failedToFetchParcelDetails =>
+      '❌ پارسل کی تفصیلات حاصل کرنے میں ناکامی: ';
 
   @override
   String get imageUploadedSuccessfully => '✅ تصویر کامیابی سے اپ لوڈ ہو گئی!';
@@ -159,7 +161,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get successfulDeliveringProcess => 'کامیاب ترسیل کا عمل';
 
   @override
-  String get pickupTimeAndLocationRecorded => 'پک اپ کا وقت اور مقام خودکار طریقے سے محفوظ ہو جائے گا۔';
+  String get pickupTimeAndLocationRecorded =>
+      'پک اپ کا وقت اور مقام خودکار طریقے سے محفوظ ہو جائے گا۔';
 
   @override
   String get deliverNewParcel => 'نیا پارسل پہنچائیں';
@@ -168,7 +171,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get backToHome => 'ہوم پر واپس جائیں';
 
   @override
-  String get failedToFetchPudoDetails => 'پک اپ پوائنٹ کی تفصیلات حاصل کرنے میں ناکامی: ';
+  String get failedToFetchPudoDetails =>
+      'پک اپ پوائنٹ کی تفصیلات حاصل کرنے میں ناکامی: ';
 
   @override
   String get tryAgain => 'دوبارہ کوشش کریں';
@@ -195,7 +199,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get somethingWentWrong => ' کچھ غلط ہو گیا: ';
 
   @override
-  String get thisPudoHasNoParcelsYet => 'اس پک اپ پوائنٹ میں ابھی تک کوئی پارسل نہیں ہے';
+  String get thisPudoHasNoParcelsYet =>
+      'اس پک اپ پوائنٹ میں ابھی تک کوئی پارسل نہیں ہے';
 
   @override
   String get parcelsRefreshedSuccessfully => 'پارسل کامیابی سے تازہ کیے گئے';
@@ -213,7 +218,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get unknownCity => 'نامعلوم شہر';
 
   @override
-  String get failedToRetrieveCourierId => '⚠️ کورئیر کی شناخت حاصل کرنے میں ناکامی';
+  String get failedToRetrieveCourierId =>
+      '⚠️ کورئیر کی شناخت حاصل کرنے میں ناکامی';
 
   @override
   String get parcelReceivedSuccessfully => '✅ پارسل کامیابی سے موصول ہوا!';
@@ -237,13 +243,15 @@ class AppLocalizationsUr extends AppLocalizations {
   String get twoBag => 'دو بیگ';
 
   @override
-  String get successfulExpiredReceivingProcess => 'میعاد ختم شدہ وصولی کا کامیاب عمل';
+  String get successfulExpiredReceivingProcess =>
+      'میعاد ختم شدہ وصولی کا کامیاب عمل';
 
   @override
   String get receiveNewExpiredParcel => 'نیا میعاد ختم شدہ پارسل وصول کریں';
 
   @override
-  String get noPudoFoundInLocalStorage => 'مقامی اسٹوریج میں کوئی پک اپ پوائنٹ نہیں ملا';
+  String get noPudoFoundInLocalStorage =>
+      'مقامی اسٹوریج میں کوئی پک اپ پوائنٹ نہیں ملا';
 
   @override
   String get failedToLoadParcelData => 'پارسل کا ڈیٹا لوڈ کرنے میں ناکامی';
@@ -279,7 +287,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get transfer => 'منتقلی';
 
   @override
-  String get failedToLoadPudoData => 'پک اپ پوائنٹ کا ڈیٹا لوڈ کرنے میں ناکامی: ';
+  String get failedToLoadPudoData =>
+      'پک اپ پوائنٹ کا ڈیٹا لوڈ کرنے میں ناکامی: ';
 
   @override
   String get pudoIdNotLoadedYet => 'پک اپ پوائنٹ کی شناخت ابھی لوڈ نہیں ہوئی';
@@ -294,7 +303,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get parcelConfirmedSuccessfully => 'پارسل کامیابی سے تصدیق ہو گیا!';
 
   @override
-  String get failedToConfirmParcel => 'پارسل کی تصدیق میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔';
+  String get failedToConfirmParcel =>
+      'پارسل کی تصدیق میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔';
 
   @override
   String get confirmParcel => 'پارسل کی تصدیق کریں';
@@ -332,7 +342,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get deliveryConfirmation => 'ترسیل کی تصدیق';
 
   @override
-  String get deliveryConfirmationDescription => 'تصدیق کرنے سے، آپ تسلیم کرتے ہیں کہ پارسل کامیابی سے پہنچا دیا گیا ہے۔';
+  String get deliveryConfirmationDescription =>
+      'تصدیق کرنے سے، آپ تسلیم کرتے ہیں کہ پارسل کامیابی سے پہنچا دیا گیا ہے۔';
 
   @override
   String get confirm => 'تصدیق کریں';
@@ -344,10 +355,12 @@ class AppLocalizationsUr extends AppLocalizations {
   String get anErrorOccurred => 'ایک خرابی رونما ہوئی: ';
 
   @override
-  String get areYouSureYouWantToLogOut => 'کیا آپ واقعی لاگ آؤٹ کرنا چاہتے ہیں؟';
+  String get areYouSureYouWantToLogOut =>
+      'کیا آپ واقعی لاگ آؤٹ کرنا چاہتے ہیں؟';
 
   @override
-  String get logOutDescription => 'آپ کو لاگ ان اسکرین پر واپس بھیج دیا جائے گا۔';
+  String get logOutDescription =>
+      'آپ کو لاگ ان اسکرین پر واپس بھیج دیا جائے گا۔';
 
   @override
   String get yesImSure => 'ہاں، مجھے یقین ہے۔';
@@ -377,7 +390,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get couldNotGenerateQr => 'کیو آر بنایا نہیں جا سکا\n';
 
   @override
-  String get scanQrCodeInFrontOfCamera => 'کیمرے کے سامنے کیو آر کوڈ اسکین کریں';
+  String get scanQrCodeInFrontOfCamera =>
+      'کیمرے کے سامنے کیو آر کوڈ اسکین کریں';
 
   @override
   String get youAreAtWrongLocation => 'آپ غلط مقام پر ہیں';
@@ -395,7 +409,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get chooseYourLanguage => 'اپنی زبان منتخب کریں';
 
   @override
-  String get languageSelectionDescription => 'اپنی پسند کی زبان منتخب کریں۔ اس سے ایپ میں متن اپ ڈیٹ ہو جائے گا۔';
+  String get languageSelectionDescription =>
+      'اپنی پسند کی زبان منتخب کریں۔ اس سے ایپ میں متن اپ ڈیٹ ہو جائے گا۔';
 
   @override
   String get english => 'انگریزی';
@@ -437,5 +452,5 @@ class AppLocalizationsUr extends AppLocalizations {
   String get rememberMe => 'مجھے یاد رکھیں';
 
   @override
-  String get pressBackAgainToExit => 'Press back again to exit';
+  String get pressBackAgainToExit => 'باہر نکلنے کے لیے دوبارہ دبائیں';
 }

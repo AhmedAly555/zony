@@ -48,7 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "codeNumber": MessageLookupByLibrary.simpleMessage("कोड संख्या"),
     "confirm": MessageLookupByLibrary.simpleMessage("पुष्टि करें"),
     "confirmParcel": MessageLookupByLibrary.simpleMessage(
-      "पार्सल की पुष्टि करें",
+      "पार্সल की पुष्टि करें",
     ),
     "couldNotGenerateQr": MessageLookupByLibrary.simpleMessage(
       "क्यूआर जेनरेट नहीं किया जा सका\n",
@@ -84,9 +84,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "डेटा प्राप्त करने में त्रुटि: ",
     ),
     "expired": MessageLookupByLibrary.simpleMessage("समाप्त"),
-    "expiredParcels": MessageLookupByLibrary.simpleMessage("समाप्त पार्सल"),
+    "expiredParcels": MessageLookupByLibrary.simpleMessage("समाप्त पार্সल"),
     "failedToConfirmParcel": MessageLookupByLibrary.simpleMessage(
-      "पार्सल की पुष्टि करने में विफल। कृपया पुनः प्रयास करें।",
+      "पार্সल की पुष्टि करने में विफल। कृपया पुनः प्रयास करें।",
     ),
     "failedToFetchParcelDetails": MessageLookupByLibrary.simpleMessage(
       "❌ पार्सल विवरण प्राप्त करने में विफल: ",
@@ -168,15 +168,15 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noQrData": MessageLookupByLibrary.simpleMessage("कोई क्यूआर डेटा नहीं"),
     "oneBag": MessageLookupByLibrary.simpleMessage("एक बैग"),
-    "parcelApprove": MessageLookupByLibrary.simpleMessage("पार्सल स्वीकृति"),
+    "parcelApprove": MessageLookupByLibrary.simpleMessage("पार্সल स्वीकृति"),
     "parcelApproveConfirmation": MessageLookupByLibrary.simpleMessage(
-      "पार्सल स्वीकृति पुष्टि",
+      "पार্সल स्वीकृति पुष्टि",
     ),
     "parcelConfirmedSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "पार्सल सफलतापूर्वक पुष्टि हो गया!",
+      "पार্সल सफलतापूर्वक पुष्टि हो गया!",
     ),
     "parcelDataNotLoadedYet": MessageLookupByLibrary.simpleMessage(
-      "❗ पार्सल डेटा अभी तक लोड नहीं हुआ।",
+      "❗ पार্সल डेटा अभी तक लोड नहीं हुआ।",
     ),
     "parcelDeliveredSuccessfully": MessageLookupByLibrary.simpleMessage(
       "✅ पार्सल सफलतापूर्वक वितरित किया गया!",
@@ -221,9 +221,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "poduDetails": MessageLookupByLibrary.simpleMessage("पिकअप बिंदु विवरण"),
     "poduParcels": MessageLookupByLibrary.simpleMessage(
-      "पिकअप बिंदु के पार्सल",
+      "पिकअप बिंदु के पार্সल",
     ),
     "podus": MessageLookupByLibrary.simpleMessage("पिकअप बिंदु"),
+    "pressBackAgainToExit": MessageLookupByLibrary.simpleMessage(
+      "बाहर निकलने के लिए फिर से दबाएं",
+    ),
     "productInfo": MessageLookupByLibrary.simpleMessage("उत्पाद जानकारी"),
     "pudoIdNotLoadedYet": MessageLookupByLibrary.simpleMessage(
       "पिकअप बिंदु आईडी अभी तक लोड नहीं हुई",
@@ -238,7 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "वितरण के लिए तैयार",
     ),
     "receiveNewExpiredParcel": MessageLookupByLibrary.simpleMessage(
-      "नया समाप्त पार्सल प्राप्त करें",
+      "नया समाप्त पार্সल प्राप्त करें",
     ),
     "receiveNewParcel": MessageLookupByLibrary.simpleMessage(
       "नया पार्सल प्राप्त करें",
@@ -260,13 +263,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "सफल वितरण प्रक्रिया",
     ),
     "successfulExpiredReceivingProcess": MessageLookupByLibrary.simpleMessage(
-      "समाप्त पार्सल की सफल प्राप्ति प्रक्रिया",
+      "समाप्त पार্সल की सफल प्राप्ति प्रक्रिया",
     ),
     "successfulReceivingProcess": MessageLookupByLibrary.simpleMessage(
       "सफल प्राप्ति प्रक्रिया",
     ),
     "thisPudoHasNoParcelsYet": MessageLookupByLibrary.simpleMessage(
-      "इस पिकअप बिंदु में अभी तक कोई पार्सल नहीं है",
+      "इस पिकअप बिंदु में अभी तक कोई पार্সल नहीं है",
     ),
     "totalApproved": MessageLookupByLibrary.simpleMessage("कुल स्वीकृत"),
     "transfer": MessageLookupByLibrary.simpleMessage("स्थानांतरण"),
