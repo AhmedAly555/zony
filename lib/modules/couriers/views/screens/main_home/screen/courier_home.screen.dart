@@ -58,20 +58,13 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
           child: IntrinsicHeight(child: LanguageBottomSheet()),
         );
       },
-      /*=> DraggableScrollableSheet(
-        initialChildSize: 0.7,
-        minChildSize: 0.7,
-        maxChildSize: 0.9,
-        expand: false,
-        builder: (context, scrollController) => LanguageBottomSheet(),
-      ),*/
     ).then((selectedLang) {
       // selectedLang contains the selected language
       if (selectedLang != null) {
         setState(() {
           currentLanguage = selectedLang;
         });
-        print('Selected Language: $selectedLang');
+        //print('Selected Language: $selectedLang');
       }
     });
   }
