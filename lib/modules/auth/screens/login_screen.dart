@@ -15,6 +15,7 @@ import '../../couriers/views/screens/main_home/screen/courier_main_home_screen.d
 
 import '../../podu/views/screens/main_home/screen/podu_main_home_screen.dart';
 import '../../../views/widgets/default_button.widget.dart';
+import '../widgets/language_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -130,11 +131,22 @@ class _LoginScreenState extends State<LoginScreen> {
 
         children: [
           const Spacer(flex: 1,),
-          Text(
-            S.of(context).logIn,
-            style: const TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.w600,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            child: Row(
+              children: [
+                LanguageWidget(),
+                Spacer(),
+
+                Text(
+                  S.of(context).logIn,
+                  style: const TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Spacer(flex: 2,),
+              ],
             ),
           ),
           const Spacer(flex: 2,),
