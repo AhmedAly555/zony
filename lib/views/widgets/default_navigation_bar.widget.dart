@@ -71,6 +71,7 @@ class DefaultNavigationBar extends StatelessWidget {
                     opacity: isSelected ? 1.0 : 0.7,
                     child: SvgPicture.asset(
                       _icons[index],
+
                       colorFilter: ColorFilter.mode(
                         isSelected ? const Color(0xFF49159B) : const Color(0xFF929292),
                         BlendMode.srcIn,

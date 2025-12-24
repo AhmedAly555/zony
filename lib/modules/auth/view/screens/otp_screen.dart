@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:zony/modules/couriers/views/screens/main_home/screen/courier_main_home_screen.dart';
 
-import '../../../services/navigator.services/app_navigator.services.dart';
-import '../../../services/size_config.dart';
+import '../../../../services/navigator.services/app_navigator.services.dart';
+import '../../../../services/size_config.dart';
+import '../../../../views/widgets/default_button.widget.dart';
 import '../widgets/custom_appbar.dart';
-import '../../../views/widgets/default_button.widget.dart';
 import 'generic_login_screen.dart';
 
 class OTPScreen extends StatefulWidget {

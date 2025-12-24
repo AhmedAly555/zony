@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
         return MaterialApp(
           navigatorKey: NavigationService.navigatorKey,
           locale: locale,
-          localizationsDelegates: [
+          localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

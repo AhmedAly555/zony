@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:zony/generated/l10n.dart';
 
-import '../../../modules/auth/screens/login_screen.dart';
+import '../../../modules/auth/view/screens/login_screen.dart';
 import '../../../theme/app_text_styles.dart';
 import '../bottom_sheet_container.dart';
 import '../default_button.widget.dart';

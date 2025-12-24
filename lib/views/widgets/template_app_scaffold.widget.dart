@@ -21,7 +21,7 @@ class TemplateAppScaffold extends StatelessWidget {
     // SizeConfig.init(context);
 
     return Scaffold(
-      backgroundColor: Color(0xFFF4F4F4),
+      backgroundColor: const Color(0xFFF4F4F4),
 
       body: SafeArea(child: body),
       bottomNavigationBar: showBottomNavBar && currentIndex != null && onNavTap != null

@@ -36,7 +36,7 @@ class _CourierMoreScreenState extends State<CourierMoreScreen> {
             maxHeight: SizeConfig.heightPercent(0.90),
             minHeight: SizeConfig.heightPercent(0.80),
           ),
-          child: IntrinsicHeight(child: LanguageBottomSheet()),
+          child: const IntrinsicHeight(child: LanguageBottomSheet()),
         );
       },
       /*=> DraggableScrollableSheet(
@@ -72,7 +72,7 @@ class _CourierMoreScreenState extends State<CourierMoreScreen> {
             maxHeight: SizeConfig.heightPercent(0.75),
             minHeight: SizeConfig.heightPercent(0.45),
           ),
-          child: IntrinsicHeight(child: LogOutBottomSheet()),
+          child: const IntrinsicHeight(child: LogOutBottomSheet()),
         );
       },
     );
@@ -86,7 +86,7 @@ class _CourierMoreScreenState extends State<CourierMoreScreen> {
           const SizedBox(height: 24),
           HomeAppBar(title: S.of(context).moreSettings),
           //const SizedBox(height: 50),
-          Spacer(),
+          const Spacer(),
           CoustomeRowMoreScreen(
             iconPath: 'assets/svgs/account.svg',
             title: S.of(context).accountSettings,
@@ -110,7 +110,7 @@ class _CourierMoreScreenState extends State<CourierMoreScreen> {
               showLogoutBottomSheet();
             },
           ),
-          Spacer(),
+          const Spacer(),
         ],
       ),
     );

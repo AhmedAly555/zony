@@ -875,7 +875,7 @@ abstract class AppLocalizations {
   /// No description provided for @languageSelectionDescription.
   ///
   /// In en, this message translates to:
-  /// **'Select your preferred language. This will update the text throughout the app.'**
+  /// **'Select your preferred language.'**
   String get languageSelectionDescription;
 
   /// No description provided for @english.

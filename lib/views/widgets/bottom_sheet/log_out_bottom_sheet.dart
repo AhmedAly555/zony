@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:zony/generated/l10n.dart';
 
-import '../../../modules/auth/screens/login_screen.dart';
+import '../../../controllers/courier_main_home_controller.dart';
+import '../../../controllers/pudu_main_home_controller.dart';
+import '../../../modules/auth/view/widgets/login_cubit_route.dart';
 import '../../../services/api_service.dart';
 import '../../../services/get_res_pudos_service.dart';
 import '../../../theme/app_text_styles.dart';
@@ -32,9 +34,11 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
     try {
       await ApiService.clearUserData();
       await ResponsiblePudoService.instance.clearPudos();
+      PuduMainHomeController.instance.reset();
+      CourierMainHomeController.instance.reset();
 
       if (context.mounted) {
-        AppNavigator.navigateAndRemoveUntil(context, () => const LoginScreen());
+        AppNavigator.navigateAndRemoveUntil(context, () => const LoginCubitRoute());
         Fluttertoast.showToast(
           msg: S.of(context).loggedOutSuccessfully,
           toastLength: Toast.LENGTH_SHORT,
@@ -66,11 +70,11 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
         mainAxisSize: MainAxisSize.min,
         children: [
           // Handle bar line
-          HederBottomSheetLine(),
+          const HederBottomSheetLine(),
 
-          Spacer(),
+          const Spacer(),
           // Language icon
-          BottomSheetIcon(svgPath: 'assets/svgs/logout.svg'),
+          const BottomSheetIcon(svgPath: 'assets/svgs/logout.svg'),
 
           const SizedBox(height: 16),
 
@@ -90,7 +94,7 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
             style: AppTextStyles.bottomSheetDescription,
           ),
 
-          Spacer(),
+          const Spacer(),
 
           Row(
             children: [
@@ -107,7 +111,7 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
                             S.of(context).yesImSure,
                             textAlign: TextAlign.center,
 
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
                               fontSize: 16,
@@ -115,13 +119,13 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
                           ),
                 ),
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Expanded(
                 child: CustomOutlineButton(
                   onTap: () => Navigator.pop(context),
                   title: Text(
                     S.of(context).noCancel,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF49159B),
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
@@ -131,7 +135,7 @@ class _LogOutBottomSheetState extends State<LogOutBottomSheet> {
               ),
             ],
           ),
-          Padding(padding: const EdgeInsets.only(bottom: 16)),
+          const Padding(padding: EdgeInsets.only(bottom: 16)),
         ],
       ),
     );

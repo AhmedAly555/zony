@@ -38,7 +38,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
     }
   }
 
-  String currentLanguage = 'English';
+  /*String currentLanguage = 'English';
 
   // Language bottom sheet
   void showLanguageBottomSheet(BuildContext context) {
@@ -55,7 +55,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
             maxHeight: SizeConfig.heightPercent(0.90),
             minHeight: SizeConfig.heightPercent(0.80),
           ),
-          child: IntrinsicHeight(child: LanguageBottomSheet()),
+          child: const IntrinsicHeight(child: LanguageBottomSheet()),
         );
       },
     ).then((selectedLang) {
@@ -67,7 +67,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
         //print('Selected Language: $selectedLang');
       }
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -79,22 +79,22 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
             //mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   CustomZonyLogo(),
                   Spacer(),
                   CustomContainerIcon(
                     svgPath: 'assets/svgs/svg_language.svg',
-                    onTap: () {
+                    /*onTap: () {
                       showLanguageBottomSheet(context);
-                    },
+                    },*/
                   ),
                   SizedBox(width: 10),
                   /*CustomContainerIcon(
                     svgPath: 'assets/svgs/technical_support.svg',
                   ),*/
                   SizedBox(width: 10),
-                  CustomContainerIcon(
+                  /*CustomContainerIcon(
                     svgPath: 'assets/svgs/notification.svg',
                     onTap: () {
                       AppNavigator.navigateTo(
@@ -102,10 +102,10 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                         () => NotificationScreen(),
                       );
                     },
-                  ),
+                  ),*/
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               //Account
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 14),
@@ -113,7 +113,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
               ),
               Container(
                 //margin: EdgeInsets.all(16.0),
-                padding: EdgeInsets.all(18.0),
+                padding: const EdgeInsets.all(18.0),
                 decoration: BoxDecoration(
                   color: const Color(0xFFFFFFFF),
                   borderRadius: BorderRadius.circular(18.0),
@@ -122,7 +122,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                   future: ProfileStorage.getProfile(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     }
 
                     if (!snapshot.hasData || snapshot.data == null) {
@@ -133,15 +133,15 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                     return Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 20.0,
                             vertical: 14.0,
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12.0),
-                            color: Color(0xFFF4F4F4),
+                            color: const Color(0xFFF4F4F4),
                           ),
-                          child: Text(
+                          child: const Text(
                             'A',
                             style: TextStyle(
                               color: Color(0xFF929292),
@@ -150,13 +150,13 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 15),
+                        const SizedBox(width: 15),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               '${profile.firstName} ${profile.lastName}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16,
                                 color: Color(0xFF49159B),
@@ -164,7 +164,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                             ),
                             Text(
                               profile.username,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xFF929292),
                                 fontSize: 12,
                                 fontWeight: FontWeight.w300,
@@ -172,7 +172,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                             ),
                           ],
                         ),
-                        Spacer(),
+                        const Spacer(),
                         GestureDetector(
                           onTap: () {
                             _copyToClipboard(context, profile.username);
@@ -218,7 +218,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                     onTap: () {
                       AppNavigator.navigateTo(
                         context,
-                            () => ExpiredReceivingScreen(),
+                            () => const ExpiredReceivingScreen(),
                       );
                     },
                   ),
@@ -226,14 +226,14 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                     title: S.of(context).myParcels,
                     svgIconPath: 'assets/svgs/my_parcels.svg',
                     onTap: () {
-                      AppNavigator.navigateTo(context, () => MyParcelsScreen());
+                      AppNavigator.navigateTo(context, () => const MyParcelsScreen());
                     },
                   ),
                   CustomHomeServiceContainer(
                     title: S.of(context).podus,
                     svgIconPath: 'assets/svgs/my_parcels.svg',
                     onTap: () {
-                      AppNavigator.navigateTo(context, () => AllPODUsScreen());
+                      AppNavigator.navigateTo(context, () => const AllPODUsScreen());
                     },
                   ),
                 ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../services/size_config.dart';
-import '../widgets/custom_appbar.dart';
+
+import '../../../../services/size_config.dart';
 import 'login_screen.dart';
 
 class GenericLoginScreen extends StatefulWidget {

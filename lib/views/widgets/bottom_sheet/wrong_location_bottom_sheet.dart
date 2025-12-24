@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:zony/generated/l10n.dart';
 
-import '../../../modules/auth/screens/login_screen.dart';
 import '../../../theme/app_text_styles.dart';
 import '../bottom_sheet_container.dart';
 import '../default_button.widget.dart';
-import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../services/size_config.dart';
-import '../custom_outline_button.widget.dart';
 import 'componants_bottom_sheet.widgets.dart';
 
 class WrongLocationBottomSheet extends StatelessWidget {

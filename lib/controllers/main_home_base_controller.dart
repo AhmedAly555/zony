@@ -6,4 +6,8 @@ class MainHomeBaseController {
   void changeTab(int index) {
     currentTabIndex.value = index;
   }
+
+  void reset() {
+    currentTabIndex.value = 0;
+  }
 }

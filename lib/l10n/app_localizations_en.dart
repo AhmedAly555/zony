@@ -400,8 +400,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chooseYourLanguage => 'Choose your language';
 
   @override
-  String get languageSelectionDescription =>
-      'Select your preferred language. This will update the text throughout the app.';
+  String get languageSelectionDescription => 'Select your preferred language.';
 
   @override
   String get english => 'English';

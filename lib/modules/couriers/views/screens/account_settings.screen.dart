@@ -9,7 +9,7 @@ import '../../../../models/profile_model.dart';
 import '../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../services/shered_preferences/profile_storage.dart';
 import '../../../../views/widgets/default_appbar.dart';
-import '../../../auth/screens/login_screen.dart';
+import '../../../auth/view/screens/login_screen.dart';
 
 
 class AccountSettingsScreen extends StatelessWidget {

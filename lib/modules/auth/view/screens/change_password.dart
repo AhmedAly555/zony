@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../services/size_config.dart';
+
+import '../../../../services/size_config.dart';
+import '../../../../views/widgets/default_button.widget.dart';
 import '../widgets/custom_appbar.dart';
-import '../../../views/widgets/default_button.widget.dart';
 import '../widgets/password_text_field.widget.dart';
 import 'generic_login_screen.dart';
+
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});

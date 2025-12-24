@@ -117,7 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "inventory": MessageLookupByLibrary.simpleMessage("Inventory"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "languageSelectionDescription": MessageLookupByLibrary.simpleMessage(
-      "Select your preferred language. This will update the text throughout the app.",
+      "Select your preferred language.",
     ),
     "logIn": MessageLookupByLibrary.simpleMessage("Log in"),
     "logOutDescription": MessageLookupByLibrary.simpleMessage(

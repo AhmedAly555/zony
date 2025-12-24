@@ -1134,10 +1134,10 @@ class S {
     );
   }
 
-  /// `Select your preferred language. This will update the text throughout the app.`
+  /// `Select your preferred language.`
   String get languageSelectionDescription {
     return Intl.message(
-      'Select your preferred language. This will update the text throughout the app.',
+      'Select your preferred language.',
       name: 'languageSelectionDescription',
       desc: '',
       args: [],

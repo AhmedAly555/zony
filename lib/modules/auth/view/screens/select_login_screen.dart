@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../services/navigator.services/app_navigator.services.dart';
-import '../../../services/size_config.dart';
+import '../../../../services/navigator.services/app_navigator.services.dart';
+import '../../../../services/size_config.dart';
 import '../widgets/box.widget.dart';
 import '../widgets/language_widget.dart';
 import 'login_screen.dart';
