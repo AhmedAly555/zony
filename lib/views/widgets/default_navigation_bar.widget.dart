@@ -12,14 +12,28 @@ class DefaultNavigationBar extends StatelessWidget {
     required this.onTap,
   });
 
-  static const List<String> _icons = [
-    'assets/svgs/home.svg',
-    'assets/svgs/receiving.svg',
-    'assets/svgs/delivering.svg',
-    'assets/svgs/more.svg',
+  static const List<Map<String, dynamic>> _icons = [
+    {
+      'path': 'assets/svgs/home.svg',
+      'width': 24.0,
+      'height': 24.0,
+    },
+    {
+      'path': 'assets/svgs/receiving.svg',
+      'width': 24.0,
+      'height': 24.0,
+    },
+    {
+      'path': 'assets/svgs/delivering.svg',
+      'width': 22.0,
+      'height': 22.0,
+    },
+    {
+      'path': 'assets/svgs/more.svg',
+      'width': 18.0,
+      'height': 18.0,
+    },
   ];
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,13 +69,13 @@ class DefaultNavigationBar extends StatelessWidget {
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
           items: List.generate(_icons.length, (index) {
             final bool isSelected = currentIndex == index;
+            final iconData = _icons[index];
             return BottomNavigationBarItem(
               icon: Padding(
                 padding: const EdgeInsets.only(top: 5.0),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   curve: Curves.easeOut,
-
                   transform: Matrix4.translationValues(
                     0.0,
                     isSelected ? -4.0 : 0.0,
@@ -70,14 +84,13 @@ class DefaultNavigationBar extends StatelessWidget {
                   child: Opacity(
                     opacity: isSelected ? 1.0 : 0.7,
                     child: SvgPicture.asset(
-                      _icons[index],
-
+                      iconData['path'] as String,
                       colorFilter: ColorFilter.mode(
                         isSelected ? const Color(0xFF49159B) : const Color(0xFF929292),
                         BlendMode.srcIn,
                       ),
-                      width: 24,
-                      height: 24,
+                      width: iconData['width'] as double,
+                      height: iconData['height'] as double,
                     ),
                   ),
                 ),
