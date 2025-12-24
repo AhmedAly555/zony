@@ -68,9 +68,9 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
 
           children: [
-            const Spacer(flex: 1),
+            //const Spacer(flex: 1),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              padding: const EdgeInsets.symmetric(horizontal: 18.0,vertical: 16),
               child: Row(
                 children: [
                   const CustomContainerIcon(svgPath: 'assets/svgs/svg_language.svg',),
