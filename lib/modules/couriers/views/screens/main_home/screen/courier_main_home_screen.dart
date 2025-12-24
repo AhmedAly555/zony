@@ -20,7 +20,7 @@ class _CourierMainHomeScreenState extends State<CourierMainHomeScreen> {
   DateTime? _lastPressedAt;
 
   final List<Widget> _screens = [
-    CourierHomeScreen(),
+    const CourierHomeScreen(),
     const CourierReceivingScreen(),
     const CourierDeliveringScreen(),
     const CourierMoreScreen(),

@@ -28,7 +28,7 @@ class PoduHomeScreen extends StatefulWidget {
 }
 
 class _PoduHomeScreenState extends State<PoduHomeScreen> {
-  String currentLanguage = 'English';
+  /*String currentLanguage = 'English';
 
   void showLanguageBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -49,13 +49,13 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
           ),
         );
       },
-      /*=> DraggableScrollableSheet(
+      *//*=> DraggableScrollableSheet(
         initialChildSize: 0.7,
         minChildSize: 0.7,
         maxChildSize: 0.9,
         expand: false,
         builder: (context, scrollController) => LanguageBottomSheet(),
-      ),*/
+      ),*//*
     ).then((selectedLang) {
       // selectedLang contains the selected language
       if (selectedLang != null) {
@@ -65,7 +65,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
         print(S.of(context).selectedLanguage + '$selectedLang');
       }
     });
-  }
+  }*/
 
   void showPoduQRBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -81,7 +81,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
             maxHeight: SizeConfig.heightPercent(0.85),
             minHeight: SizeConfig.heightPercent(0.75),
           ),
-          child: IntrinsicHeight(child: PudoQRBottomSheet()),
+          child: const IntrinsicHeight(child: PudoQRBottomSheet()),
         );
       },
     );
@@ -97,21 +97,21 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
             //mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   CustomZonyLogo(),
                   Spacer(),
                   CustomContainerIcon(
                       svgPath: 'assets/svgs/svg_language.svg',
-                      onTap: () {
+                      /*onTap: () {
                         showLanguageBottomSheet(context);
-                      }),
+                      }*/),
                   SizedBox(width: 10),
                   /*CustomContainerIcon(
                     svgPath: 'assets/svgs/technical_support.svg',
                   ),*/
                   SizedBox(width: 10),
-                  CustomContainerIcon(
+                  /*CustomContainerIcon(
                     svgPath: 'assets/svgs/notification.svg',
                     onTap: () {
                       AppNavigator.navigateTo(
@@ -119,22 +119,22 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                         () => NotificationScreen(),
                       );
                     },
-                  ),
+                  ),*/
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
         
               //Account
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 child: Text(
                   S.of(context).account,
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 ),
               ),
               Container(
                 //margin: EdgeInsets.all(16.0),
-                padding: EdgeInsets.all(18.0),
+                padding: const EdgeInsets.all(18.0),
                 decoration: BoxDecoration(
                   color: const Color(0xFFFFFFFF),
                   borderRadius: BorderRadius.circular(18.0),
@@ -144,15 +144,15 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                     Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 20.0,
                             vertical: 14.0,
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12.0),
-                            color: Color(0xFFF4F4F4),
+                            color: const Color(0xFFF4F4F4),
                           ),
-                          child: Text(
+                          child: const Text(
                             'A',
                             style: TextStyle(
                               color: Color(0xFF929292),
@@ -161,7 +161,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 15),
+                        const SizedBox(width: 15),
                         FutureBuilder<List<Pudo>>(
         
                           future: PudosStorage.loadPudos(),
@@ -170,7 +170,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
         
                             //loading when data is being fetched
                             if (snapshot.connectionState == ConnectionState.waiting) {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(),
                               );
                             }
@@ -194,7 +194,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                               children: [
                                 Text(
                                   pudo.name,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16,
                                     color: Color(0xFF49159B),
@@ -202,7 +202,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                                 ),
                                 Text(
                                   "${pudo.id}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Color(0xFF929292),
                                     fontSize: 12,
                                     fontWeight: FontWeight.w300,
@@ -233,7 +233,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                             ),
                           ],
                         ),*/
-                        Spacer(),
+                        const Spacer(),
                         /*Icon(Icons.arrow_forward_ios, color: Colors.grey),*/
                         SvgPicture.asset(
                           'assets/svgs/copy.svg',
@@ -241,7 +241,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                     CustomOutlineButton(
                       onTap: () {
                         showPoduQRBottomSheet(context);
@@ -251,14 +251,14 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                         children: [
                           SvgPicture.asset(
                             'assets/svgs/qr_icon.svg',
-                            color: Color(0xFF49159B),
+                            color: const Color(0xFF49159B),
                             width: 20,
                             height: 20,
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           Text(
                             S.of(context).qrCode,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xFF49159B),
                               fontWeight: FontWeight.w600,
                               fontSize: 16,
@@ -275,7 +275,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 child: Text(
                   S.of(context).services,
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 ),
               ),
 
@@ -298,7 +298,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                     CustomHomeServiceContainer(
                       title: S.of(context).inventory,
                       svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {
-                        AppNavigator.navigateTo(context, () => EnterShipment());
+                        AppNavigator.navigateTo(context, () => const EnterShipment());
                     },
                     ),
                   ],

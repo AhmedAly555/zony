@@ -12,7 +12,8 @@ class ManuallyInputBottomSheet extends StatefulWidget {
   const ManuallyInputBottomSheet({super.key, required this.onConfirm});
 
   @override
-  State<ManuallyInputBottomSheet> createState() => _ManuallyInputBottomSheetState();
+  State<ManuallyInputBottomSheet> createState() =>
+      _ManuallyInputBottomSheetState();
 }
 
 class _ManuallyInputBottomSheetState extends State<ManuallyInputBottomSheet> {
@@ -70,7 +71,8 @@ class _ManuallyInputBottomSheetState extends State<ManuallyInputBottomSheet> {
             TextFormField(
               controller: _inputController,
               decoration: InputDecoration(
-                hintText: S.of(context).pleaseEnterUsernameHere, // Re-using for now
+                hintText: S.of(context).pleaseEnterUsernameHere,
+                // Re-using for now
                 hintStyle: TextStyle(color: Colors.grey[500], fontSize: 14),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -92,12 +94,67 @@ class _ManuallyInputBottomSheetState extends State<ManuallyInputBottomSheet> {
             ),
             const SizedBox(height: 20),
             const Spacer(),
-            ElevatedButton(
-              onPressed: _isButtonEnabled
-                  ? () {
+            TweenAnimationBuilder<double>(
+              tween: Tween<double>(
+                begin: 0.0,
+                end: _isButtonEnabled ? 1.0 : 0.0,
+              ),
+              duration: const Duration(milliseconds: 600),
+              curve: Curves.easeInOut,
+              builder: (context, value, child) {
+                return Container(
+                  width: double.infinity,
+                  height: 52,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                        const Color(0xFF49159B),
+                        Color.lerp(
+                          const Color(0xFF49159B),
+                          const Color(0xFFF4F4F4),
+                          1 - value,
+                        )!,
+                      ],
+                      stops: [0.0, value.clamp(0.0, 1.0)],
+                    ),
+                  ),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(12),
+                    onTap:
+                    _isButtonEnabled
+                        ? () {
                       widget.onConfirm(_inputController.text.trim());
                     }
-                  : null,
+                        : null,
+                    child: Center(
+                      child: Text(
+                        S.of(context).confirm,
+                        style: TextStyle(
+                          color:
+                          value > 0.5
+                              ? Colors.white
+                              : Colors.grey.shade600,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+
+
+            /*ElevatedButton(
+              onPressed:
+                  _isButtonEnabled
+                      ? () {
+                        widget.onConfirm(_inputController.text.trim());
+                      }
+                      : null,
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 52),
                 backgroundColor: const Color(0xFF49159B),
@@ -105,14 +162,16 @@ class _ManuallyInputBottomSheetState extends State<ManuallyInputBottomSheet> {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ).copyWith(
-                backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                  (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.disabled)) {
-                      return Colors.grey;
-                    }
-                    return const Color(0xFF49159B); // Use the component's default color
-                  },
-                ),
+                backgroundColor: MaterialStateProperty.resolveWith<Color?>((
+                  Set<MaterialState> states,
+                ) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return Colors.grey;
+                  }
+                  return const Color(
+                    0xFF49159B,
+                  ); // Use the component's default color
+                }),
               ),
               child: Text(
                 S.of(context).confirm,
@@ -122,8 +181,8 @@ class _ManuallyInputBottomSheetState extends State<ManuallyInputBottomSheet> {
                   fontSize: 16,
                 ),
               ),
-            ),
-            const Padding(padding: EdgeInsets.only(bottom: 16)),
+            ),*/
+            const Padding(padding: EdgeInsets.symmetric(vertical: 22)),
           ],
         ),
       ),
@@ -140,9 +199,20 @@ Future<String?> showManuallyInputBottomSheet(BuildContext context) {
     enableDrag: true,
     backgroundColor: Colors.transparent,
     builder: (context) {
-      return ManuallyInputBottomSheet(onConfirm: (String value) {
-        Navigator.of(context).pop(value);
-      });
+      SizeConfig.init(context);
+      return Container(
+        constraints: BoxConstraints(
+          maxHeight: SizeConfig.heightPercent(0.70),
+          minHeight: SizeConfig.heightPercent(0.50),
+        ),
+        child: IntrinsicHeight(
+          child: ManuallyInputBottomSheet(
+            onConfirm: (String value) {
+              Navigator.of(context).pop(value);
+            },
+          ),
+        ),
+      );
     },
   );
 }

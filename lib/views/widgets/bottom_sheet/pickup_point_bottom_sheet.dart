@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../modules/auth/screens/login_screen.dart';
+import '../../../modules/auth/view/screens/login_screen.dart';
 import '../../../modules/couriers/delivering/widgets/parcel_row.widget.dart';
 import '../bottom_sheet_container.dart';
 import '../default_button.widget.dart';
@@ -96,7 +96,7 @@ class PickupPointBottomSheet extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           DefaultButton(
-            onTap: () => AppNavigator.navigateAndRemoveUntil(context, () => const LoginScreen()),
+            onTap: () {},
             child: Text(
               'Show Details',
               textAlign: TextAlign.center,

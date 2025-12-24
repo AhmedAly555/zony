@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:zony/modules/auth/screens/login_screen.dart';
+import 'package:zony/modules/auth/view/screens/login_screen.dart';
 
 import 'base_api_service.dart';
 import 'navigator.services/navigation_service.dart';
@@ -13,31 +13,37 @@ class ApiService extends BaseApiService {
   static final ApiService _instance = ApiService._internal();
   factory ApiService() => _instance;
   ApiService._internal() : super(baseUrl: "https://api.zony.sa") {
-    // Load tokens automatically on instance creation
+    // Load tokens and role automatically on instance creation
     loadTokens();
   }
 
   static ApiService get instance => _instance;
 
-  // ---------------- Tokens ----------------
+  // ---------------- Tokens & Role ----------------
   String? _accessToken;
   String? _refreshToken;
+  String? _role;
 
-  Future<void> setTokens(String accessToken, String refreshToken) async {
+  String? get role => _role;
+
+  Future<void> setTokens(String accessToken, String refreshToken, String role) async {
     _accessToken = accessToken;
     _refreshToken = refreshToken;
-    // Link to base for headers to benefit
+    _role = role;
+
     setAuthToken(accessToken);
     await TokenStorage.saveTokens(
       accessToken: accessToken,
       refreshToken: refreshToken,
+      role: role,
     );
   }
 
   Future<void> loadTokens() async {
     _accessToken = await TokenStorage.getAccessToken();
     _refreshToken = await TokenStorage.getRefreshToken();
-    // Link to base
+    _role = await TokenStorage.getRole();
+
     if (_accessToken != null) {
       setAuthToken(_accessToken!);
     }
@@ -46,6 +52,7 @@ class ApiService extends BaseApiService {
   Future<void> clearTokens() async {
     _accessToken = null;
     _refreshToken = null;
+    _role = null;
     clearAuthToken();
     await TokenStorage.clearTokens();
   }
@@ -66,7 +73,8 @@ class ApiService extends BaseApiService {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      await setTokens(data['access_token'], data['refresh_token']);
+      final role = data['user']['role'] as String;
+      await setTokens(data['access_token'], data['refresh_token'], role);
       return data;
     } else {
       throw Exception("Login failed: ${response.body}");
@@ -84,35 +92,7 @@ class ApiService extends BaseApiService {
       throw Exception("Logout failed: ${response.body}");
     }
   }
-
-  /*Future<void> refreshAccessToken() async {
-    if (_refreshToken == null) {
-      throw Exception("No refresh token found, user must login again.");
-    }
-
-    final url = Uri.parse('$baseUrl/auth/refresh');
-
-    final response = await http.get(
-      url,
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $_refreshToken",
-      },
-    );
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      _accessToken = data['access_token'];
-
-      await TokenStorage.saveTokens(
-        accessToken: _accessToken!,
-        refreshToken: _refreshToken!,
-      );
-    } else {
-      throw Exception("Refresh failed: ${response.body}");
-    }
-  }*/
-
+  
   // ---------------- Refresh Token API ----------------
   Future<void> refreshAccessToken() async {
     if (_refreshToken == null) {
@@ -137,15 +117,13 @@ class ApiService extends BaseApiService {
 
       final newAccessToken = data['access_token'];
       if (newAccessToken != null) {
-        // 1. Replace the old Access Token with the new one
         _accessToken = newAccessToken;
         setAuthToken(_accessToken!); // Update the token in the Base Service
 
-        // 2. Update the storage
-        // We use the new Access Token and keep the old Refresh Token
         await TokenStorage.saveTokens(
           accessToken: _accessToken!,
           refreshToken: _refreshToken!,
+          role: _role!, // Keep the old role
         );
       } else {
         throw Exception("Refresh failed: Access Token missing in response.");

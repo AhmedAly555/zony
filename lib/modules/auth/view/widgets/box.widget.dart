@@ -65,7 +65,7 @@ class BoxChoice extends StatelessWidget {
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../services/size_config.dart';
+import '../../../../../services/size_config.dart';
 
 class BoxChoice extends StatelessWidget {
   final String svgPath;

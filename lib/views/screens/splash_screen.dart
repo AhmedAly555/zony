@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../modules/auth/cubit/login_cubit.dart';
+import '../../modules/auth/view/screens/login_screen.dart';
+import '../../modules/auth/view/widgets/login_cubit_route.dart';
+import '../../services/api_service.dart';
 import '../../services/get_res_pudos_service.dart';
 import '../../services/navigator.services/app_navigator.services.dart';
 import '../../modules/couriers/views/screens/main_home/screen/courier_main_home_screen.dart';
 import '../../modules/podu/views/screens/main_home/screen/podu_main_home_screen.dart';
-import '../../modules/auth/screens/login_screen.dart';
 import '../../services/user_profile_service.dart';
 import '../widgets/loading.widget.dart';
 
@@ -23,33 +27,12 @@ class _SplashScreenState extends State<SplashScreen> {
     _checkLogin();
   }
 
-  /*Future<void> _checkLogin() async {
-    final prefs = await SharedPreferences.getInstance();
-    final accessToken = prefs.getString('access_token');
-    final role = prefs.getString('role');
-
-    await Future.delayed(const Duration(seconds: 2));
-
-    if (!mounted) return;
-
-    if (accessToken != null && role != null) {
-      // if have tokens go to main screen depends on role
-      if (role == "courier") {
-        AppNavigator.navigateAndRemoveUntil(context, () => const CourierMainHomeScreen());
-      } else if (role == "podu") {
-        AppNavigator.navigateAndRemoveUntil(context, () => const PoduMainHomeScreen());
-      }
-    } else {
-      // if don't have tokens go to login screen
-      AppNavigator.navigateAndRemoveUntil(context, () => const LoginScreen());
-    }
-  }*/
   Future<void> _checkLogin() async {
     final prefs = await SharedPreferences.getInstance();
     final accessToken = prefs.getString('access_token');
     final role = prefs.getString('role');
 
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 4));
 
     if (!mounted) return;
 
@@ -59,29 +42,40 @@ class _SplashScreenState extends State<SplashScreen> {
       //debugPrint("Cached user: ${cachedProfile?.firstName}");
 
       // try to get pudos from cache
-      final cachedPudos = await ResponsiblePudoService.instance.getCachedPudos();
+      final cachedPudos =
+          await ResponsiblePudoService.instance.getCachedPudos();
       //debugPrint('Cached PUDOs: ${cachedPudos.length}');
-
 
       //go to main screen depends on role
       if (role == "courier") {
         AppNavigator.navigateAndRemoveUntil(
-            context, () => const CourierMainHomeScreen());
+          context,
+          () => const CourierMainHomeScreen(),
+        );
       } else if (role == "responsible") {
-        AppNavigator.navigateAndRemoveUntil(context, () => const PoduMainHomeScreen());
+        AppNavigator.navigateAndRemoveUntil(
+          context,
+          () => const PoduMainHomeScreen(),
+        );
       }
     } else {
       // go to login screen
-      AppNavigator.navigateAndRemoveUntil(context, () => const LoginScreen());
+      AppNavigator.navigateAndRemoveUntil(
+        context,
+        () => const LoginCubitRoute(),
+      );
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: LoadingWidget(),
+        child: Image.asset(
+          'assets/images/splash_logo.gif',
+          height: 290,
+          width: double.infinity,
+        ),
       ),
     );
   }

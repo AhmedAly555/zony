@@ -35,7 +35,7 @@ class _PoduMoreScreenState extends State<PoduMoreScreen> {
             maxHeight: SizeConfig.heightPercent(0.90),
             minHeight: SizeConfig.heightPercent(0.80),
           ),
-          child: IntrinsicHeight(
+          child: const IntrinsicHeight(
             child: LanguageBottomSheet(),
           ),
         );
@@ -72,7 +72,7 @@ class _PoduMoreScreenState extends State<PoduMoreScreen> {
             maxHeight: SizeConfig.heightPercent(0.75),
             minHeight: SizeConfig.heightPercent(0.45),
           ),
-          child: IntrinsicHeight(
+          child: const IntrinsicHeight(
             child: LogOutBottomSheet(),
           ),
         );
@@ -90,7 +90,7 @@ class _PoduMoreScreenState extends State<PoduMoreScreen> {
           const SizedBox(height: 24),
           HomeAppBar(title: S.of(context).moreSettings),
           //const SizedBox(height: 50),
-          Spacer(),
+          const Spacer(),
           CoustomeRowMoreScreen(
             iconPath: 'assets/svgs/account.svg',
             title: S.of(context).accountSettings,
@@ -111,7 +111,7 @@ class _PoduMoreScreenState extends State<PoduMoreScreen> {
             iconPath: 'assets/svgs/revenue.svg',
             title: 'Revenue',
             onTap: () {
-              AppNavigator.navigateTo(context, () =>  Revenue());
+              AppNavigator.navigateTo(context, () =>  const Revenue());
             },
           ),
           const SizedBox(height: 16),
@@ -122,7 +122,7 @@ class _PoduMoreScreenState extends State<PoduMoreScreen> {
               showLogoutBottomSheet();
             },
           ),
-          Spacer(),
+          const Spacer(),
         ],
       ),
     );

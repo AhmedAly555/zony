@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../services/size_config.dart';
-import '../../../views/widgets/bottom_sheet/language_sheet.dart';
+import '../../../../../services/size_config.dart';
+import '../../../../../views/widgets/bottom_sheet/language_sheet.dart';
 
 class LanguageWidget extends StatefulWidget {
    LanguageWidget({super.key});
@@ -29,7 +29,7 @@ class _LanguageWidgetState extends State<LanguageWidget> {
             maxHeight: SizeConfig.heightPercent(0.90),
             minHeight: SizeConfig.heightPercent(0.80),
           ),
-          child: IntrinsicHeight(child: LanguageBottomSheet()),
+          child: const IntrinsicHeight(child: LanguageBottomSheet()),
         );
       },
     ).then((selectedLang) {
@@ -57,7 +57,7 @@ class _LanguageWidgetState extends State<LanguageWidget> {
             height: 4.59,
           ),
           const SizedBox(width: 14.0),
-          Text(
+          const Text(
             'EN',
             style: TextStyle(
               fontSize: 16.0,
