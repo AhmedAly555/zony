@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:zony/modules/auth/view/screens/login_screen.dart';
+import 'package:zony/modules/auth/view/widgets/login_cubit_route.dart';
 
 import 'base_api_service.dart';
 import 'navigator.services/navigation_service.dart';
@@ -154,7 +154,7 @@ class ApiService extends BaseApiService {
       
       // Using NavigationService here is pragmatic to force logout.
       NavigationService.navigatorKey.currentState?.pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
+        MaterialPageRoute(builder: (context) => const LoginCubitRoute()),
             (route) => false,
       );
       

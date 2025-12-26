@@ -4,7 +4,7 @@ import '../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../services/size_config.dart';
 import '../widgets/box.widget.dart';
 import '../widgets/language_widget.dart';
-import 'login_screen.dart';
+import '../widgets/login_cubit_route.dart';
 
 class SelectLoginScreen extends StatefulWidget {
   const SelectLoginScreen({super.key});
@@ -127,7 +127,7 @@ class _SelectLoginScreenState extends State<SelectLoginScreen> {
                         onPressed:
                             (_selectedIndex == 0 || _selectedIndex == 1)
                                 ? () {
-                              AppNavigator.navigateTo(context, () => const LoginScreen());
+                              AppNavigator.navigateTo(context, () => const LoginCubitRoute());
                                 }
                                 : null,
                         style: ElevatedButton.styleFrom(
