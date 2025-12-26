@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../services/size_config.dart';
 import 'default_navigation_bar.widget.dart';
 class TemplateAppScaffold extends StatelessWidget {
   final Widget body;

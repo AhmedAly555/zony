@@ -1,7 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:zony/modules/auth/view/screens/login_screen.dart';
+import 'package:zony/modules/auth/view/widgets/login_cubit_route.dart';
 
 import 'base_api_service.dart';
 import 'navigator.services/navigation_service.dart';
@@ -19,13 +20,17 @@ class ApiService extends BaseApiService {
 
   static ApiService get instance => _instance;
 
-  // ---------------- Tokens & Role ----------------
+  // ---------------- State Variables (Tokens & Role) ----------------
   String? _accessToken;
   String? _refreshToken;
   String? _role;
 
   String? get role => _role;
+  
+  // Locking mechanism for refresh token to prevent multiple refreshes at once
+  Completer<void>? _refreshCompleter;
 
+  // ---------------- Token Management ----------------
   Future<void> setTokens(String accessToken, String refreshToken, String role) async {
     _accessToken = accessToken;
     _refreshToken = refreshToken;
@@ -57,7 +62,7 @@ class ApiService extends BaseApiService {
     await TokenStorage.clearTokens();
   }
 
-  // ---------------- Auth APIs ----------------
+  // ---------------- Auth APIs (Login) ----------------
   Future<Map<String, dynamic>> login(String email, String password, bool rememberMe) async {
     final url = Uri.parse('$baseUrl/auth/login');
 
@@ -84,24 +89,27 @@ class ApiService extends BaseApiService {
   // ---------------- Logout API ----------------
   Future<void> logout() async {
     final url = Uri.parse('$baseUrl/auth/logout');
-    final response = await http.post(url, headers: _authorizedHeaders());
-
-    if (response.statusCode == 200) {
+    try {
+       final response = await http.post(url, headers: _authorizedHeaders());
+       if (response.statusCode != 200) {
+         debugPrint("Logout API warning: ${response.body}");
+       }
+    } catch (e) {
+      debugPrint("Logout API error: $e");
+    } finally {
+      // Clear tokens locally regardless of API success
       await clearTokens();
-    } else {
-      throw Exception("Logout failed: ${response.body}");
     }
   }
   
-  // ---------------- Refresh Token API ----------------
+  // ---------------- Refresh Token Logic ----------------
   Future<void> refreshAccessToken() async {
     if (_refreshToken == null) {
-      // If there is no Refresh Token, we ask the user to log in again
       await clearUserData();
       throw Exception("No refresh token found, user must login again.");
     }
 
-    // endpoint (post)
+    // Endpoint for refreshing token
     final url = Uri.parse('$baseUrl/auth/refresh');
 
     final response = await http.post(
@@ -116,47 +124,61 @@ class ApiService extends BaseApiService {
       final data = jsonDecode(response.body);
 
       final newAccessToken = data['access_token'];
+      // Check if server returned a new refresh token (Token Rotation)
+      final newRefreshToken = data['refresh_token']; 
+
       if (newAccessToken != null) {
         _accessToken = newAccessToken;
+        if (newRefreshToken != null) {
+          _refreshToken = newRefreshToken;
+        }
+        
         setAuthToken(_accessToken!); // Update the token in the Base Service
 
         await TokenStorage.saveTokens(
           accessToken: _accessToken!,
           refreshToken: _refreshToken!,
-          role: _role!, // Keep the old role
+          role: _role!, 
         );
       } else {
         throw Exception("Refresh failed: Access Token missing in response.");
       }
     } else {
-      final responseBody = jsonDecode(response.body);
-      if (responseBody['msg'] == 'Token has expired') {
-        await clearUserData();
-        // Navigate to login screen
-        NavigationService.navigatorKey.currentState?.pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const LoginScreen()),
-              (route) => false,
-        );
-        throw Exception("Refresh token expired. Please log in again.");
-      }
-      // If the update fails (perhaps the refresh token has expired), we log out
-      await clearTokens();
-      throw Exception("Refresh failed: ${response.body}. Please log in again.");
+      // Any error on REFRESH endpoint (401, 403, 400) usually means the refresh token itself is invalid.
+      // So we should logout immediately.
+      
+      // We check if it's NOT a server error (5xx). If it's a server error, maybe we shouldn't logout yet?
+      // But typically, if refresh fails, user experience is better if they just login again.
+      
+      await clearUserData();
+      
+      // Using NavigationService here is pragmatic to force logout.
+      NavigationService.navigatorKey.currentState?.pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const LoginCubitRoute()),
+            (route) => false,
+      );
+      
+      throw Exception("Session expired. Please log in again.");
     }
   }
 
 
-  // ---------------- Helpers ----------------
+  // ---------------- API Request Helpers ----------------
+  
+  // Helper to generate headers with Bearer token if available
   Map<String, String> _authorizedHeaders() {
-    if (_accessToken == null) {
-      throw Exception("No access token set, please login first.");
-    }
-    return {
+    final headers = <String, String>{
       "Content-Type": "application/json",
-      "Authorization": "Bearer $_accessToken",
     };
+    // If accessToken is null, we do not send Authorization header, 
+    // expecting server to return 401 which triggers refresh logic.
+    if (_accessToken != null) {
+      headers["Authorization"] = "Bearer $_accessToken";
+    }
+    return headers;
   }
 
+  // Wrapper for HTTP requests that handles 401 Unauthorized (Refresh Token)
   Future<Map<String, dynamic>> _sendRequest(
       String method,
       String endpoint, {
@@ -168,13 +190,35 @@ class ApiService extends BaseApiService {
       queryParameters: queryParameters?.map((k, v) => MapEntry(k, v.toString())),
     );
 
-    http.Response response = await _makeRequest(method, uri, body, {
+    // Initial Headers
+    var headers = {
       ..._authorizedHeaders(),
       if (extraHeaders != null) ...extraHeaders,
-    });
+    };
+
+    http.Response response = await _makeRequest(method, uri, body, headers);
 
     if (response.statusCode == 401) {
-      await refreshAccessToken();
+      // --- Handle Refresh Concurrency ---
+      if (_refreshCompleter == null) {
+        // Start a new refresh process
+        _refreshCompleter = Completer<void>();
+        try {
+          await refreshAccessToken();
+          _refreshCompleter!.complete();
+        } catch (e) {
+          _refreshCompleter!.completeError(e);
+          // If refresh failed, we can't retry. Throw the error.
+          rethrow;
+        } finally {
+          // Reset the completer so next time we start fresh.
+          _refreshCompleter = null;
+        }
+      } else {
+        // If a refresh is already happening, wait for it to finish
+        await _refreshCompleter!.future;
+      }
+
       // Re-run the request with the new token
       response = await _makeRequest(method, uri, body, {
         ..._authorizedHeaders(), // This will now use the new token
@@ -189,6 +233,7 @@ class ApiService extends BaseApiService {
     }
   }
 
+  // Low-level request executor
   Future<http.Response> _makeRequest(
       String method,
       Uri url,
@@ -218,7 +263,6 @@ class ApiService extends BaseApiService {
         Map<String, String>? extraHeaders,
         Map<String, dynamic>? queryParameters,
       }) async {
-    // Before request, if token not loaded, load it (fallback)
     if (_accessToken == null) {
       await loadTokens();
     }
@@ -264,7 +308,7 @@ class ApiService extends BaseApiService {
     );
   }
 
-  //clear tokens + profile data => logout
+  // ---------------- Global Logout Helper ----------------
   static Future<void> clearUserData() async {
     await TokenStorage.clearTokens();
     await ProfileStorage.clearProfile();
