@@ -24,7 +24,10 @@ class DefaultButton extends StatelessWidget {
                               ? () {
                                 //
                               }
-                              : null, */
+
+                              shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),: null, */
         style: ElevatedButton.styleFrom(
           backgroundColor: buttonColor ?? AppColors.zonyPrimary,
           shape: RoundedRectangleBorder(
@@ -37,7 +40,7 @@ class DefaultButton extends StatelessWidget {
               child ??
               Text(
                 S.of(context).confirm,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
