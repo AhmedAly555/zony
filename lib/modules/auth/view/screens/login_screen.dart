@@ -213,7 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               context.read<LoginCubit>().login(
                                 email: _emailController.text,
                                 password: _passwordController.text,
-                                rememberMe: _rememberMe,
+                                rememberMe: 1,
                               );
                             },
                             child:
