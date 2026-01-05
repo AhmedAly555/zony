@@ -63,7 +63,7 @@ class ApiService extends BaseApiService {
   }
 
   // ---------------- Auth APIs (Login) ----------------
-  Future<Map<String, dynamic>> login(String email, String password, bool rememberMe) async {
+  Future<Map<String, dynamic>> login(String email, String password, int rememberMe) async {
     final url = Uri.parse('$baseUrl/auth/login');
 
     final response = await http.post(
@@ -72,7 +72,7 @@ class ApiService extends BaseApiService {
       body: jsonEncode({
         "email": email,
         "password": password,
-        "remember_me": rememberMe ? 1 : 0,
+        "remember_me": 1,
       }),
     );
 

@@ -12,7 +12,7 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> login({
     required String email,
     required String password,
-    required bool rememberMe,
+    required int rememberMe,
   }) async {
     emit(LoginLoading());
 
