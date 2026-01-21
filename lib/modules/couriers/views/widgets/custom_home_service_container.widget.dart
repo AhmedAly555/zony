@@ -20,7 +20,7 @@ class CustomHomeServiceContainer extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.only(bottom: 16.0),
-        padding: EdgeInsets.all(18.0),
+        padding: const EdgeInsets.all(18.0),
         decoration: BoxDecoration(
           color: color ?? const Color(0xFFFFFFFF),
           borderRadius: BorderRadius.circular(12.0),
@@ -28,30 +28,30 @@ class CustomHomeServiceContainer extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4.0),
-                color: Color(0xFFdbd0eb),
+                color: const Color(0xFFdbd0eb),
               ),
               child: SvgPicture.asset(
                 svgIconPath,
                 width: 24,
                 height: 26,
-                color: Color(0xFF49159B),
+                color: const Color(0xFF49159B),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 14,
                 color: Color(0xFF1E1E1E),
               ),
             ),
-            Spacer(),
-            SizedBox(width: 20),
-            Icon(Icons.arrow_forward_ios, size: 16, ),
+            const Spacer(),
+            const SizedBox(width: 20),
+            const Icon(Icons.arrow_forward_ios, size: 16, ),
 
             /*SvgPicture.asset(
               'assets/svgs/right_arrow_ios.svg',

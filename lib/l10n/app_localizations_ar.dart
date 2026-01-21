@@ -446,4 +446,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get pressBackAgainToExit => 'اضغط مرة أخرى للخروج';
+
+  @override
+  String get whatsAppNotInstalled => 'الواتساب غير مثبت على جهازك';
 }

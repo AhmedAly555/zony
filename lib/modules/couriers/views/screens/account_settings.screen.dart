@@ -9,6 +9,7 @@ import '../../../../models/profile_model.dart';
 import '../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../services/shered_preferences/profile_storage.dart';
 import '../../../../views/widgets/default_appbar.dart';
+import '../../../../views/widgets/default_button.widget.dart';
 import '../../../auth/view/screens/login_screen.dart';
 
 
@@ -34,7 +35,7 @@ class AccountSettingsScreen extends StatelessWidget {
                 future: ProfileStorage.getProfile(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
+                    return const Center(
                       child: LoadingWidget(),
                     );
                   }
@@ -89,7 +90,7 @@ class AccountSettingsScreen extends StatelessWidget {
                     // ==== Name ====
                      Text(
                       '${profile.firstName} ${profile.lastName}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
@@ -111,7 +112,7 @@ class AccountSettingsScreen extends StatelessWidget {
                 width: double.infinity,
                 //height: widget.height,
                 decoration: BoxDecoration(
-                  color: Color(0xFFFFFFFF),
+                  color: const Color(0xFFFFFFFF),
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: Padding(
@@ -120,8 +121,8 @@ class AccountSettingsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(S.of(context).personalInformation),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.0),
                         child: Divider(height: 1, color: Color(0xFFF4F4F4)),
                       ),
                       DefaultTextField(
@@ -129,10 +130,19 @@ class AccountSettingsScreen extends StatelessWidget {
                         fieldType: DefaultTextFieldType.name,
                         showEditIcon: true,
                         isReadOnly: true,
-                        hintText: '${profile.firstName} ${profile.lastName}',
+                        hintText: '${profile.firstName}',
                         onEditPressed: () {},
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
+                      DefaultTextField(
+                        controller: _nameController,
+                        fieldType: DefaultTextFieldType.name,
+                        showEditIcon: true,
+                        isReadOnly: true,
+                        hintText: '${profile.lastName}',
+                        onEditPressed: () {},
+                      ),
+                      const SizedBox(height: 20),
                       DefaultTextField(
                         controller: _emailController,
                         fieldType: DefaultTextFieldType.email,
@@ -141,7 +151,7 @@ class AccountSettingsScreen extends StatelessWidget {
                         hintText: profile.email,
                         onEditPressed: () {},
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       DefaultTextField(
                         controller: _phoneController,
                         fieldType: DefaultTextFieldType.phone,
@@ -154,12 +164,12 @@ class AccountSettingsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 18),
-              Container(
+              const SizedBox(height: 18),
+              /*Container(
                 width: double.infinity,
                 //height: widget.height,
                 decoration: BoxDecoration(
-                  color: Color(0xFFFFFFFF),
+                  color: const Color(0xFFFFFFFF),
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: Padding(
@@ -168,8 +178,8 @@ class AccountSettingsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(S.of(context).changePassword),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.0),
                         child: Divider(height: 1, color: Color(0xFFF4F4F4)),
                       ),
                       DefaultTextField(
@@ -180,8 +190,26 @@ class AccountSettingsScreen extends StatelessWidget {
                         hintText: '*******************',
                         onEditPressed: () {},
                       ),
-                      SizedBox(height: 20),
-                      /*SizedBox(
+                      const SizedBox(height: 20),
+
+                    ],
+                  ),
+                ),
+              ),*/
+                      DefaultButton(
+                        onTap: () {
+
+                        },
+                        child:
+                        Text(
+                          S.of(context).changePassword,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                      )    /*SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -207,10 +235,6 @@ class AccountSettingsScreen extends StatelessWidget {
                           ),
                         ),
                       ),*/
-                    ],
-                  ),
-                ),
-              ),
                     ],
                   );
                 },

@@ -143,5 +143,6 @@
     "password": "پاس ورڈ",
     "enterPassword": "پاس ورڈ درج کریں",
     "rememberMe": "مجھے یاد رکھیں",
-    "pressBackAgainToExit": "باہر نکلنے کے لیے دوبارہ دبائیں"
+    "pressBackAgainToExit": "باہر نکلنے کے لیے دوبارہ دبائیں",
+    "whatsAppNotInstalled": "واٹس ایپ آپ کے آلے پر انسٹال نہیں ہے"
 }

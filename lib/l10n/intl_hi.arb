@@ -142,5 +142,6 @@
     "password": "पासवर्ड",
     "enterPassword": "पासवर्ड दर्ज करें",
     "rememberMe": "मुझे याद रखें",
-    "pressBackAgainToExit": "बाहर निकलने के लिए फिर से दबाएं"
+    "pressBackAgainToExit": "बाहर निकलने के लिए फिर से दबाएं",
+    "whatsAppNotInstalled": "आपके डिवाइस पर व्हाट्सएप इंस्टॉल नहीं है"
 }

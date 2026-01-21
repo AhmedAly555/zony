@@ -12,6 +12,10 @@ import '../../../../../views/widgets/default_button.widget.dart';
 import '../../../../../views/widgets/default_appbar.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../models/get_parcels_response_model.dart';
+import '../../../../models/new_parcel_model.dart';
+import '../../../../models/new_parcels_response_model.dart';
+import '../../../../models/parcel_barcode_model.dart';
+import '../../../../models/parcel_barcode_response_model.dart';
 import '../../../../models/parcel_model.dart';
 import '../../../../services/enums/parcel_image_type.dart';
 import '../../../../services/enums/parcel_status_type.dart';
@@ -40,9 +44,11 @@ class ParcelDetailsScreen extends StatefulWidget {
 class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
   //late Future<ParcelsResponse> _parcelFuture;
-  Future<ParcelsResponse>? _parcelFuture;
+  //Future<ParcelsResponse>? _parcelFuture;
+  Future<NewParcelsResponse>? _parcelFuture;
 
-  Parcel? _currentParcel;
+  //Parcel? _currentParcel;
+  NewParcelPudoModel? _currentParcel;
   String? _pudoId;
   @override
   void initState() {
@@ -114,7 +120,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                 }
                 await _uploadImageToCloudflare(
                   context: context,
-                  parcelId: _currentParcel!.id,
+                  parcelId: "${_currentParcel!.id}",
                   imageFile: imageFile,
                   onPublicUrlSet: (publicUrl) {
                     setState(() {
@@ -276,7 +282,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
                 await _handleParcelConfirmation(
                   context: context,
-                  parcelId: _currentParcel!.id,
+                  parcelId: "${_currentParcel!.id}",
                   uploadedImagePublicUrl: _uploadedImagePublicUrl!,
                 );
               },),
@@ -326,7 +332,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
             const SizedBox(height: 24),
 
             Expanded(
-              child: FutureBuilder<ParcelsResponse>(
+              child: FutureBuilder<NewParcelsResponse>(
                 future: _parcelFuture,
                 builder: (context, snapshot) {
                   //Loading state
@@ -379,17 +385,17 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
                             InfoItem(
                               svgPath: 'assets/svgs/profile_icon_with_background.svg',
-                              text: parcel.id,
+                              text: "${parcel.id}",
                             ),
                             const SizedBox(height: 12),
                             InfoItem(
                               svgPath: 'assets/svgs/location_icon_with_background.svg',
-                              text: parcel.zoneName ?? S.of(context).unknownZone,
+                              text: parcel.pudoAddress ?? S.of(context).unknownZone,
                             ),
                             const SizedBox(height: 12),
                             InfoItem(
                               svgPath: 'assets/svgs/call_icon_with_background.svg',
-                              text: parcel.cityName ?? S.of(context).unknownCity,
+                              text: parcel.responsiblePhoneNumber ?? S.of(context).unknownCity,
                             ),
 
                           ],

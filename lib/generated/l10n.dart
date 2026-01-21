@@ -1243,6 +1243,16 @@ class S {
       args: [],
     );
   }
+
+  /// `WhatsApp is not installed on your device`
+  String get whatsAppNotInstalled {
+    return Intl.message(
+      'WhatsApp is not installed on your device',
+      name: 'whatsAppNotInstalled',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

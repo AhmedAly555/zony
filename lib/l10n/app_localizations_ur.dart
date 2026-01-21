@@ -453,4 +453,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get pressBackAgainToExit => 'باہر نکلنے کے لیے دوبارہ دبائیں';
+
+  @override
+  String get whatsAppNotInstalled => 'واٹس ایپ آپ کے آلے پر انسٹال نہیں ہے';
 }

@@ -142,5 +142,6 @@
   "password": "Password",
   "enterPassword": "Enter Password",
   "rememberMe": "Remember me",
-  "pressBackAgainToExit": "Press back again to exit"
+  "pressBackAgainToExit": "Press back again to exit",
+  "whatsAppNotInstalled": "WhatsApp is not installed on your device"
 }

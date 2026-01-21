@@ -22,7 +22,7 @@ class SuccessfulRecieveScreen extends StatelessWidget {
     return TemplateAppScaffold(
       body: Column(
         children: [
-          SuccessfulImage(),
+          const SuccessfulImage(),
           Text(
             S.of(context).successfulReceivingProcess,
             textAlign: TextAlign.center,
@@ -61,23 +61,23 @@ class SuccessfulRecieveScreen extends StatelessWidget {
                   onTap:
                       () => AppNavigator.navigateTo(
                     context,
-                        () => CourierReceivingScreen(
+                        () => const CourierReceivingScreen(
                       //pudoId: poduId!,
                     ),
                   ),
                   child: Text(
                     S.of(context).receiveNewParcel,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
                     ),
                   ),
                 ),
-                SizedBox(height: 18),
+                const SizedBox(height: 18),
                 CustomOutlineButton(
-                  onTap: () => AppNavigator.navigateTo(context, () => CourierHomeScreen()),
+                  onTap: () => AppNavigator.navigateAndRemoveUntil(context, () => const CourierHomeScreen()),
                   title: Text(
                     S.of(context).backToHome,
                     style: AppTextStyles.textStyle16,

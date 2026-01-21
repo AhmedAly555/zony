@@ -95,7 +95,7 @@ class ParcelImageService {
     required String pudoId,
     required String status, // e.g. "courier_received" — decided by UI/flow
     required String imageFieldName,
-    required String imageUrl, // public_url from step 1
+    String? imageUrl, // public_url from step 1
     double? latitude,
     double? longitude,
   }) async {
@@ -105,7 +105,7 @@ class ParcelImageService {
     final formattedTimestamp = timestampFormatter.format(now);
 
     final imageField = ParcelImageFieldModel(
-      url: imageUrl,
+      url: imageUrl ?? "",
       timestamp: formattedTimestamp,
       location: (latitude != null && longitude != null)
           ? LocationModel(latitude: latitude, longitude: longitude)

@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../../../controllers/courier_main_home_controller.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../../models/profile_model.dart';
+import '../../../../../../services/external/technical_support.service.dart';
 import '../../../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../../../services/shered_preferences/profile_storage.dart';
 import '../../../../../../services/size_config.dart';
@@ -38,7 +39,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
     }
   }
 
-  /*String currentLanguage = 'English';
+  String currentLanguage = 'English';
 
   // Language bottom sheet
   void showLanguageBottomSheet(BuildContext context) {
@@ -67,7 +68,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
         //print('Selected Language: $selectedLang');
       }
     });
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,21 +80,33 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
             //mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 children: [
-                  CustomZonyLogo(),
-                  Spacer(),
+                  const CustomZonyLogo(),
+                  const Spacer(),
                   CustomContainerIcon(
                     svgPath: 'assets/svgs/svg_language.svg',
-                    /*onTap: () {
+                    onTap: () {
                       showLanguageBottomSheet(context);
-                    },*/
+                    },
                   ),
-                  SizedBox(width: 10),
-                  /*CustomContainerIcon(
+                  const SizedBox(width: 10),
+                  CustomContainerIcon(
                     svgPath: 'assets/svgs/technical_support.svg',
-                  ),*/
-                  SizedBox(width: 10),
+                    onTap: ()  async {
+                      final success = await TechnicalSupportService.openChat(
+                        phoneNumber: '966509942690',
+                        message: '',
+                      );
+
+                      if (!success) {
+                        showErrorToast(
+                          message: S.of(context).whatsAppNotInstalled,
+                        );
+                      }
+                    },
+                  ),
+                  const SizedBox(width: 10),
                   /*CustomContainerIcon(
                     svgPath: 'assets/svgs/notification.svg',
                     onTap: () {

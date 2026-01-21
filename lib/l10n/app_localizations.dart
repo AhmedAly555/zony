@@ -961,6 +961,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Press back again to exit'**
   String get pressBackAgainToExit;
+
+  /// No description provided for @whatsAppNotInstalled.
+  ///
+  /// In en, this message translates to:
+  /// **'WhatsApp is not installed on your device'**
+  String get whatsAppNotInstalled;
 }
 
 class _AppLocalizationsDelegate

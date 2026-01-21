@@ -3,6 +3,7 @@ import 'package:zony/models/parcel_model.dart';
 
 import '../models/get_parcel_response_model.dart';
 import '../models/get_parcels_response_model.dart';
+import '../models/parcel_barcode_response_model.dart';
 import '../models/new_parcels_response_model.dart';
 import 'api_service.dart';
 
@@ -45,6 +46,26 @@ class ParcelsService {
 
       final response = await ApiService.instance.get(url);
       return ParcelsResponse.fromJson(response);
+
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Fetch parcels for a specific PUDO ID with a specific status (New)
+  Future<NewParcelsResponse> getNewParcelsByStatus({
+    required String pudoId,
+    required String status,
+  }) async {
+    try {
+      // Build the URL with query parameters
+      final url = '/pudos/$pudoId/parcels?status=$status';
+      //print('➡️ Calling URL: $url');
+      //print('➡️ With params: pudoId=$pudoId, status=$status');
+
+      final response = await ApiService.instance.get(url);
+      return NewParcelsResponse.fromJson(response);
+
     } catch (e) {
       rethrow;
     }
@@ -67,9 +88,24 @@ class ParcelsService {
     }
   }
 
+  Future<ParcelByBarcodeResponse> getNewParcelByBarcode({
+    required String pudoId,
+    required String barcode,
+  }) async {
+    try {
+      // Build the URL with query parameters
+      final url = '/pudos/$pudoId/parcels?barcode=$barcode';
+
+      final response = await ApiService.instance.get(url);
+      return ParcelByBarcodeResponse.fromJson(response);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   /// Fetch parcel by receiving code
   // deliver from podu to customer
-  Future<ParcelsResponse> getParcelByReceivingCode(
+  Future<NewParcelsResponse> getParcelByReceivingCode(
     String pudoId,
     String receivingCode,
   ) async {
@@ -77,7 +113,7 @@ class ParcelsService {
       final response = await ApiService.instance.get(
         '/pudos/$pudoId/parcels?receiving_code=$receivingCode',
       );
-      return ParcelsResponse.fromJson(response);
+      return NewParcelsResponse.fromJson(response);
     } catch (e) {
       rethrow;
     }

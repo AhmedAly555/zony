@@ -6,6 +6,7 @@ import 'package:zony/generated/l10n.dart';
 
 import '../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../services/size_config.dart';
+import '../../../../views/widgets/bottom_sheet/language_sheet.dart';
 import '../../../../views/widgets/custom_container_icon.widget.dart';
 import '../../../../views/widgets/default_text_filed.dart';
 import '../../../../views/widgets/template_app_scaffold.widget.dart';
@@ -34,6 +35,37 @@ class _LoginScreenState extends State<LoginScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  String currentLanguage = 'English';
+
+  // Language bottom sheet
+  void showLanguageBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: true,
+      enableDrag: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        SizeConfig.init(context);
+        return Container(
+          constraints: BoxConstraints(
+            maxHeight: SizeConfig.heightPercent(0.90),
+            minHeight: SizeConfig.heightPercent(0.80),
+          ),
+          child: const IntrinsicHeight(child: LanguageBottomSheet()),
+        );
+      },
+    ).then((selectedLang) {
+      // selectedLang contains the selected language
+      if (selectedLang != null) {
+        setState(() {
+          currentLanguage = selectedLang;
+        });
+        //print('Selected Language: $selectedLang');
+      }
+    });
   }
 
   @override
@@ -73,7 +105,12 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 18.0,vertical: 16),
               child: Row(
                 children: [
-                  const CustomContainerIcon(svgPath: 'assets/svgs/svg_language.svg',),
+                  CustomContainerIcon(
+                    svgPath: 'assets/svgs/svg_language.svg',
+                    onTap: () {
+                      showLanguageBottomSheet(context);
+                    },
+                  ),
                   const Spacer(),
 
                   Text(
