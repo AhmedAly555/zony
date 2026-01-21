@@ -11,9 +11,11 @@ import '../../../../../views/widgets/custom_parcel_details.dart';
 import '../../../../../views/widgets/default_button.widget.dart';
 import '../../../../../views/widgets/default_appbar.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
+import '../../../../models/parcel_barcode_model.dart';
 import '../../../../models/parcel_model.dart';
 import '../../../../services/enums/parcel_image_type.dart';
 import '../../../../services/enums/parcel_status_type.dart';
+import '../../../../services/helpers/dummy_image_provider.dart';
 import '../../../../services/parcel_service.dart';
 import '../../../../services/size_config.dart';
 import '../../../../services/upload_parsel_image_service.dart';
@@ -43,7 +45,8 @@ class ParcelDetailsScreen extends StatefulWidget {
 
 class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
   bool _isLoading = true;
-  Parcel? _parcel;
+  //Parcel? _parcel;
+
   //parcel id from response getParcelByBarcode
   String? _parcelId;
 
@@ -55,7 +58,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
     _fetchParcelDetails();
   }
 
-  Future<void> _fetchParcelDetails() async {
+  /*Future<void> _fetchParcelDetails() async {
     try {
       final response = await ParcelsService.instance.getParcelByBarcode(
         pudoId: widget.pudoId,
@@ -63,7 +66,10 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       );
 
       setState(() {
-        _parcel = response.parcels.isNotEmpty ? response.parcels.first : null;
+        _parcel = response.parcels.isNotEmpty
+            ? response.parcels.first
+            : null;
+
         _parcelId = _parcel?.id.toString();
         _isLoading = false;
       });
@@ -71,7 +77,34 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       setState(() {
         _isLoading = false;
       });
-      showErrorToast(message: S.of(context).failedToFetchParcelDetails + '$e');
+      showErrorToast(message: S.of(context).failedToFetchParcelDetails);
+    }
+  }*/
+  ParcelByBarcodeModel? _parcel;
+
+  Future<void> _fetchParcelDetails() async {
+    try {
+      final response =
+      await ParcelsService.instance.getNewParcelByBarcode(
+        pudoId: widget.pudoId,
+        barcode: widget.barcode,
+      );
+
+      setState(() {
+        _parcel = response.parcels.isNotEmpty
+            ? response.parcels.first
+            : null;
+
+        _parcelId = _parcel?.id.toString();
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      showErrorToast(
+        message: S.of(context).failedToFetchParcelDetails,
+      );
     }
   }
 
@@ -150,7 +183,10 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       //print('✅ Step 1 Done -> publicUrl: ${uploadResponse.publicUrl}',);
 
       // 2️⃣ Upload the image to Cloudflare using the uploadUrl
-      final bytes = await imageFile.readAsBytes();
+      //final bytes = await imageFile.readAsBytes();
+
+      final bytes = await DummyImageProvider.loadParcelPlaceholder();
+
 
       await ParcelImageService.instance.uploadToSignedUrl(
         uploadUrl: uploadResponse.uploadUrl,
@@ -179,7 +215,8 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       }
       //debugPrint('❌ Error uploading parcel image: $e');
       debugPrintStack(stackTrace: s);
-      showErrorToast(message: S.of(context).failedToUploadImage + '$e');
+      showErrorToast(message: S.of(context).failedToUploadImage);
+      print('❌ Error uploading parcel image: $e');
 
       // In case of error, close the bottom sheet and return false
       Navigator.pop(context, false);
@@ -187,10 +224,10 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
   }
 
   // helper function to handle parcel confirmation
-  Future<void> _handleParcelConfirmation({
+  /*Future<void> _handleParcelConfirmation({
     required BuildContext context,
     required String parcelId,
-    required String uploadedImagePublicUrl,
+    //required String uploadedImagePublicUrl,
   }) async {
     try {
       // Show a simple loading indicator
@@ -200,11 +237,11 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         builder: (_) => const Center(child: LoadingWidget()),
       );
 
-      if (uploadedImagePublicUrl.isEmpty) {
+      /*if (uploadedImagePublicUrl.isEmpty) {
         Navigator.pop(context);
         showErrorToast(message: S.of(context).pleaseUploadImageFirst);
         return;
-      }
+      }*/
 
       // 1️⃣ Call the PATCH request to update the Parcel status
       await ParcelImageService.instance.updateParcelWithPudoidAfterUpload(
@@ -213,10 +250,11 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         // This changes based on the flow
         imageFieldName: ParcelImageType.pudoImage.apiValue,
         // This also changes based on the flow
-        imageUrl: uploadedImagePublicUrl,
+        //imageUrl: uploadedImagePublicUrl,
+        //imageUrl: null,
         latitude: 24.7136,
         longitude: 46.6753,
-        pudoId:  widget.pudoId,
+        pudoId: widget.pudoId,
       );
 
       // ✅ Update successful
@@ -231,9 +269,71 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       Navigator.pop(context); // Closes the loading indicator in case of error
       //debugPrint('❌ Error updating parcel: $e');
       debugPrintStack(stackTrace: s);
-      showErrorToast(message: S.of(context).failedToUpdateParcel + '$e');
+      showErrorToast(message: S.of(context).failedToUpdateParcel);
+    }
+  }*/
+  Future<void> _handleParcelConfirmation({
+    required BuildContext context,
+    required String parcelId,
+  }) async {
+    print('ParcelId::::::::::::::::::: => $parcelId');
+
+    if (parcelId.isEmpty) {
+      showErrorToast(message: 'Parcel ID is missing');
+      return;
+    }
+
+    try {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => const Center(child: LoadingWidget()),
+      );
+
+      // 1️⃣ نطلب signed url
+      final uploadResponse =
+      await ParcelImageService.instance.createSignedUrl(
+        parcelId: parcelId,
+        imageType: ParcelImageType.pudoImage.apiValue,
+      );
+
+      // 2️⃣ نجيب صورة وهمية من assets
+      final bytes = await DummyImageProvider.loadParcelPlaceholder();
+
+      // 3️⃣ نعمل upload
+      await ParcelImageService.instance.uploadToSignedUrl(
+        uploadUrl: uploadResponse.uploadUrl,
+        fileBytes: bytes,
+        contentType: 'image/jpeg',
+      );
+
+      // 4️⃣ نكمل الفلو الطبيعي
+      await ParcelImageService.instance.updateParcelWithPudoidAfterUpload(
+        parcelId: parcelId,
+        status: ParcelStatusType.waitingConfirmation.apiValue,
+        imageFieldName: ParcelImageType.pudoImage.apiValue,
+        imageUrl: uploadResponse.publicUrl, // ✅ المتغير معروف هنا
+        latitude: 24.7136,
+        longitude: 46.6753,
+        pudoId: widget.pudoId,
+      );
+
+      Navigator.pop(context);
+      Navigator.pop(context);
+
+      showCorrectToast(message: S.of(context).parcelDeliveredSuccessfully);
+
+      AppNavigator.navigateAndRemoveUntil(
+        context,
+            () => SuccessfulDelivering(poduId: widget.pudoId),
+      );
+    } catch (e, s) {
+      Navigator.pop(context);
+      debugPrintStack(stackTrace: s);
+      showErrorToast(message: S.of(context).failedToUpdateParcel);
     }
   }
+
 
   // Delivery Confirmation Bottom Sheet
   void _showDeliveryConfirmationBottomSheet() {
@@ -253,17 +353,21 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
           child: IntrinsicHeight(
             child: DeliveryConfirmationBottomSheet(
               onConfirm: () async {
-                if (_uploadedImagePublicUrl == null ||
+                /*if (_uploadedImagePublicUrl == null ||
                     _uploadedImagePublicUrl!.isEmpty) {
                   showErrorToast(message: S.of(context).pleaseUploadImageFirst);
+                  print(_uploadedImagePublicUrl);
                   return;
-                }
+                }*/
 
                 await _handleParcelConfirmation(
                   context: context,
                   parcelId: _parcelId ?? '',
-                  uploadedImagePublicUrl: _uploadedImagePublicUrl!,
+                  //uploadedImagePublicUrl: _uploadedImagePublicUrl!,
+                  //uploadedImagePublicUrl: "",
+
                 );
+
               },
             ),
           ),
@@ -296,13 +400,16 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return TemplateAppScaffold(
-      body: _isLoading
+      body:
+      _isLoading
           ? const Center(child: LoadingWidget())
           : _parcel == null
           ? const Center(child: NoDataFoundWidget())
           : Padding(
-        padding:
-        const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20.0,
+          vertical: 30,
+        ),
         child: Column(
           children: [
             AppBarHaveArrow(title: S.of(context).parcelDetails),
@@ -313,7 +420,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ImageContainer(),
+                  const ImageContainer(),
 
                   const SizedBox(height: 24),
 
@@ -327,21 +434,24 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                   InfoItem(
                     svgPath:
                     'assets/svgs/profile_icon_with_background.svg',
-                    text: _parcel?.clientName ??
+                    text:
+                    _parcel?.pudoName ??
                         S.of(context).unknownName,
                   ),
                   const SizedBox(height: 12),
                   InfoItem(
                     svgPath:
                     'assets/svgs/location_icon_with_background.svg',
-                    text: _parcel?.cityName ??
+                    text:
+                    _parcel?.pudoAddress ??
                         S.of(context).unknownAddress,
                   ),
                   const SizedBox(height: 12),
                   InfoItem(
                     svgPath:
                     'assets/svgs/call_icon_with_background.svg',
-                    text: _parcel?.customerPhoneNumber ??
+                    text:
+                    _parcel?.responsiblePhoneNumber ??
                         S.of(context).noPhoneNumber,
                   ),
                 ],
@@ -352,11 +462,12 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
             DefaultButton(
               onTap: () {
-                _openCamera(context);
+                //_openCamera(context);
+                _showDeliveryConfirmationBottomSheet();
               },
               child: Text(
                 S.of(context).captureParcel,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: Color(0xFFFFFFFF),
@@ -368,5 +479,4 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
       ),
     );
   }
-
 }

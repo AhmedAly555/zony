@@ -63,7 +63,9 @@ class _ExpiredParcelDetailsScreenState extends State<ExpiredParcelDetailsScreen>
       );
 
       setState(() {
+        //_parcel = response.parcels.isNotEmpty ? response.parcels.first : null;
         _parcel = response.parcels.isNotEmpty ? response.parcels.first : null;
+
         _parcelId = _parcel?.id.toString();
         _isLoading = false;
       });

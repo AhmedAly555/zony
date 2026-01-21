@@ -451,4 +451,8 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get pressBackAgainToExit => 'প্রস্থান করতে আবার চাপুন';
+
+  @override
+  String get whatsAppNotInstalled =>
+      'আপনার ডিভাইসে হোয়াটসঅ্যাপ ইনস্টল করা নেই';
 }

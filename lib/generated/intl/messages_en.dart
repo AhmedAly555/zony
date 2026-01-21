@@ -286,6 +286,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "username or e-mail",
     ),
     "waiting": MessageLookupByLibrary.simpleMessage("Waiting"),
+    "whatsAppNotInstalled": MessageLookupByLibrary.simpleMessage(
+      "WhatsApp is not installed on your device",
+    ),
     "yesImSure": MessageLookupByLibrary.simpleMessage("Yes, I\'m sure."),
     "youAreAtWrongLocation": MessageLookupByLibrary.simpleMessage(
       "YOU ARE AT A WRONG LOCATION",

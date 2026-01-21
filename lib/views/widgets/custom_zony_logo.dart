@@ -6,18 +6,17 @@ class CustomZonyLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
+    return /*SvgPicture.asset(
       'assets/svgs/zony-logo.svg',
       //color: Theme.of(context).primaryColor,
       width: 50,
       height: 50,
-    );
-      /*SvgPicture.asset(
-                  'assets/svgs/image 13.svg',
-                  color: Theme.of(context).primaryColor,
-                  width: 24,
-                  height: 24,
-                ),*/
+    );*/
+      Image.asset(
+        'assets/images/image 13.png',
+        width: 120,
+        //height: 50,
+      );
 
   }
 }

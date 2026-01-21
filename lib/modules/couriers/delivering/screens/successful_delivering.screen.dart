@@ -22,7 +22,7 @@ class SuccessfulDelivering extends StatelessWidget {
     return TemplateAppScaffold(
       body: Column(
         children: [
-          SuccessfulImage(),
+          const SuccessfulImage(),
           Text(
             S.of(context).successfulDeliveringProcess,
             textAlign: TextAlign.center,
@@ -64,16 +64,21 @@ class SuccessfulDelivering extends StatelessWidget {
                   child: Text(
                     S.of(context).deliverNewParcel,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
                     ),
                   ),
                 ),
-                SizedBox(height: 18),
+                const SizedBox(height: 18),
                 CustomOutlineButton(
-                  onTap: () => CourierMainHomeController.instance.changeTab(0),
+                  onTap: () {
+                    CourierMainHomeController.instance.changeTab(0);
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+
+
+                  },
                   title: Text(
                     S.of(context).backToHome,
                     style: AppTextStyles.textStyle16,

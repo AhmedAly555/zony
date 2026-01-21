@@ -455,4 +455,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get pressBackAgainToExit => 'बाहर निकलने के लिए फिर से दबाएं';
+
+  @override
+  String get whatsAppNotInstalled => 'आपके डिवाइस पर व्हाट्सएप इंस्टॉल नहीं है';
 }

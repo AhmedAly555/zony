@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:zony/generated/l10n.dart';
 import 'package:zony/modules/podu/views/screens/main_home/screen/podu_delivering_screen.dart';
+import 'package:zony/views/widgets/toasts.dart';
 
 import '../../../../../../controllers/pudu_main_home_controller.dart';
 import '../../../../../../models/pudo_model.dart';
+import '../../../../../../services/external/technical_support.service.dart';
 import '../../../../../../services/get_res_pudos_service.dart';
 import '../../../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../../../services/shered_preferences/pudos_storage.dart';
@@ -28,7 +30,7 @@ class PoduHomeScreen extends StatefulWidget {
 }
 
 class _PoduHomeScreenState extends State<PoduHomeScreen> {
-  /*String currentLanguage = 'English';
+  String currentLanguage = 'English';
 
   void showLanguageBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -44,18 +46,16 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
             maxHeight: SizeConfig.heightPercent(0.90),
             minHeight: SizeConfig.heightPercent(0.80),
           ),
-          child: IntrinsicHeight(
-            child: LanguageBottomSheet(),
-          ),
+          child: IntrinsicHeight(child: LanguageBottomSheet()),
         );
       },
-      *//*=> DraggableScrollableSheet(
+      /*=> DraggableScrollableSheet(
         initialChildSize: 0.7,
         minChildSize: 0.7,
         maxChildSize: 0.9,
         expand: false,
         builder: (context, scrollController) => LanguageBottomSheet(),
-      ),*//*
+      ),*/
     ).then((selectedLang) {
       // selectedLang contains the selected language
       if (selectedLang != null) {
@@ -65,7 +65,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
         print(S.of(context).selectedLanguage + '$selectedLang');
       }
     });
-  }*/
+  }
 
   void showPoduQRBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -97,20 +97,33 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
             //mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 children: [
-                  CustomZonyLogo(),
-                  Spacer(),
+                  const CustomZonyLogo(),
+                  const Spacer(),
                   CustomContainerIcon(
-                      svgPath: 'assets/svgs/svg_language.svg',
-                      /*onTap: () {
-                        showLanguageBottomSheet(context);
-                      }*/),
-                  SizedBox(width: 10),
-                  /*CustomContainerIcon(
+                    svgPath: 'assets/svgs/svg_language.svg',
+                    onTap: () {
+                      showLanguageBottomSheet(context);
+                    },
+                  ),
+                  const SizedBox(width: 10),
+                  CustomContainerIcon(
                     svgPath: 'assets/svgs/technical_support.svg',
-                  ),*/
-                  SizedBox(width: 10),
+                    onTap: ()  async {
+                      final success = await TechnicalSupportService.openChat(
+                        phoneNumber: '966509942690',
+                        message: ' ',
+                      );
+
+                      if (!success) {
+                        showErrorToast(
+                          message: 'WhatsApp is not installed on your device',
+                        );
+                      }
+                    },
+                  ),
+                  const SizedBox(width: 10),
                   /*CustomContainerIcon(
                     svgPath: 'assets/svgs/notification.svg',
                     onTap: () {
@@ -123,13 +136,16 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                 ],
               ),
               const SizedBox(height: 20),
-        
+
               //Account
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 child: Text(
                   S.of(context).account,
-                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
               Container(
@@ -163,31 +179,34 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                         ),
                         const SizedBox(width: 15),
                         FutureBuilder<List<Pudo>>(
-        
                           future: PudosStorage.loadPudos(),
-        
+
                           builder: (context, snapshot) {
-        
                             //loading when data is being fetched
-                            if (snapshot.connectionState == ConnectionState.waiting) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
                               return const Center(
                                 child: CircularProgressIndicator(),
                               );
                             }
-        
+
                             //if no data found
                             if (!snapshot.hasData || snapshot.data == null) {
-                              return Center(child: Text(S.of(context).noPudoDataFound));
+                              return Center(
+                                child: Text(S.of(context).noPudoDataFound),
+                              );
                             }
-        
+
                             //if list is empty
                             final pudosList = snapshot.data!;
                             if (pudosList.isEmpty) {
-                              return Center(child: Text(S.of(context).noPudoDataStored));
+                              return Center(
+                                child: Text(S.of(context).noPudoDataStored),
+                              );
                             }
-        
+
                             final pudo = pudosList.first;
-        
+
                             //UI
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -275,35 +294,43 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 child: Text(
                   S.of(context).services,
-                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
 
-                Column(
-                  children: [
-                    CustomHomeServiceContainer(
-                      title: S.of(context).receiving,
-                      svgIconPath: 'assets/svgs/receiving.svg', onTap: () {
-                        //AppNavigator.navigateTo(context, () => ParcelApproveScreen());
+              Column(
+                children: [
+                  CustomHomeServiceContainer(
+                    title: S.of(context).receiving,
+                    svgIconPath: 'assets/svgs/receiving.svg',
+                    onTap: () {
+                      //AppNavigator.navigateTo(context, () => ParcelApproveScreen());
                       PuduMainHomeController.instance.changeTab(1);
                     },
-                    ),
-                    CustomHomeServiceContainer(
-                      title: S.of(context).delivering,
-                      svgIconPath: 'assets/svgs/delivering.svg', onTap: () {
-                        //AppNavigator.navigateTo(context, () => PoduDeliveringScreen());
+                  ),
+                  CustomHomeServiceContainer(
+                    title: S.of(context).delivering,
+                    svgIconPath: 'assets/svgs/delivering.svg',
+                    onTap: () {
+                      //AppNavigator.navigateTo(context, () => PoduDeliveringScreen());
                       PuduMainHomeController.instance.changeTab(2);
                     },
-                    ),
-                    CustomHomeServiceContainer(
-                      title: S.of(context).inventory,
-                      svgIconPath: 'assets/svgs/my_parcels.svg', onTap: () {
-                        AppNavigator.navigateTo(context, () => const EnterShipment());
+                  ),
+                  CustomHomeServiceContainer(
+                    title: S.of(context).inventory,
+                    svgIconPath: 'assets/svgs/my_parcels.svg',
+                    onTap: () {
+                      AppNavigator.navigateTo(
+                        context,
+                        () => const EnterShipment(),
+                      );
                     },
-                    ),
-                  ],
-                ),
-
+                  ),
+                ],
+              ),
             ],
           ),
         ),

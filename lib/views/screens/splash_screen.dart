@@ -70,11 +70,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFEB1B),
+      backgroundColor: const Color(0xFFfee901),
       body: Center(
         child: Image.asset(
-          "assets/images/zony-logo.png",
-          height: 180,
+          "assets/images/splash_logo.jpg",
+          height: 280,
           width: double.infinity,
         ),
       ),

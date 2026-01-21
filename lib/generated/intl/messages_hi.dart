@@ -294,6 +294,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "उपयोगकर्ता नाम या फोन नंबर",
     ),
     "waiting": MessageLookupByLibrary.simpleMessage("प्रतीक्षा में"),
+    "whatsAppNotInstalled": MessageLookupByLibrary.simpleMessage(
+      "आपके डिवाइस पर व्हाट्सएप इंस्टॉल नहीं है",
+    ),
     "yesImSure": MessageLookupByLibrary.simpleMessage("हां, मुझे यकीन है।"),
     "youAreAtWrongLocation": MessageLookupByLibrary.simpleMessage(
       "आप गलत स्थान पर हैं",

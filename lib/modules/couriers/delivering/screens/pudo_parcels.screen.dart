@@ -10,6 +10,7 @@ import '../../../../../theme/app_text_styles.dart';
 import '../../../../../views/widgets/default_appbar.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../models/get_parcels_response_model.dart';
+import '../../../../models/new_parcels_response_model.dart';
 import '../../../../services/enums/parcel_status_type.dart';
 import '../../../../services/parcel_service.dart';
 import '../../../../views/widgets/bottom_sheet/qr_scanner.dart';
@@ -28,7 +29,7 @@ class PudoParcelsScreen extends StatefulWidget {
 }
 
 class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
-  late Future<ParcelsResponse> future;
+  late Future<NewParcelsResponse> future;
 
   @override
   void initState() {
@@ -38,11 +39,13 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
   }
 
   void _loadParcels() {
-    future = ParcelsService.instance.getParcelsByStatus(
+    future = ParcelsService.instance.getNewParcelsByStatus(
       status: ParcelStatusType.courierReceived.apiValue,
       pudoId: '${widget.pudoId}',
     );
     //print('Loading parcels for Pudo ID: ${widget.pudoId}');
+    //print('Loading parcels for Pudo ID: ${ParcelStatusType.courierReceived.apiValue}');
+
   }
 
   Future<void> _handleParcelQRScan(BuildContext context, String pudoId) async {
@@ -87,7 +90,7 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
     return TemplateAppScaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
-        child: FutureBuilder<ParcelsResponse>(
+        child: FutureBuilder<NewParcelsResponse>(
           future: future,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -97,18 +100,20 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
               return Column(
                 children: [
                   AppBarHaveArrow(title: S.of(context).pickupPointParcels),
-                  Expanded(child: Center(child: NoDataFoundWidget())),
+                  const Expanded(child: Center(child: NoDataFoundWidget())),
                 ],
               );
               //print(snapshot.error);
             }
 
             final response = snapshot.data!;
+            final parcels = response.parcels;
+
             return SingleChildScrollView(
               child: Column(
                 children: [
                   AppBarHaveArrow(title: S.of(context).pickupPointParcels),
-                  SizedBox(height: 28),
+                  const SizedBox(height: 28),
                   //search container
                   Container(
                     width: double.infinity,
@@ -154,10 +159,10 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   //podu parcels
                   if (response.parcels.isEmpty)
-                    Center(
+                    const Center(
                       child: NoDataFoundWidget(),
                     )
                   else
@@ -191,8 +196,8 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                   children: [
                                     Container(
                                       padding: const EdgeInsets.all(12),
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFFF3F4F6),
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xFFF3F4F6),
                                         shape: BoxShape.circle,
                                         //borderRadius: BorderRadius.circular(8),
                                       ),
@@ -210,7 +215,8 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                         CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            parcel.clientName,
+                                            //parcel.clientName,
+                                            parcel.pudoName,
                                             style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w400,
@@ -218,8 +224,9 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                             ),
                                           ),
                                           Text(
-                                            '${parcel.id}',
-                                            style: TextStyle(
+                                            //'${parcel.id}',
+                                            '${parcel.pudoAddress}',
+                                            style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w400,
                                               color: Color(0xFF929292),
@@ -242,7 +249,7 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                         const SizedBox(width: 6),
                                         Text(
                                           /*'${parcel.status}'*/S.of(context).received,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             color: Color(0xFF16A34A),
@@ -256,14 +263,14 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                 const SizedBox(height: 8),
 
                                 // Divider
-                                Divider(color: Color(0xFFF4F4F4), thickness: 1),
+                                const Divider(color: Color(0xFFF4F4F4), thickness: 1),
 
                                 const SizedBox(height: 24),
 
                                 // Product info text
                                 Text(
                                   S.of(context).productInfo,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                     color: Color(0xFF6B46C1),
@@ -276,25 +283,33 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                 InfoItem(
                                   svgPath:
                                   'assets/svgs/profile_icon_with_background.svg',
-                                  text: parcel.clientName,
+                                  //text: parcel.clientName,
+                                  text: parcel.pudoName,
+
                                 ),
                                 const SizedBox(height: 12),
                                 InfoItem(
                                   svgPath:
                                   'assets/svgs/profile_icon_with_background.svg',
-                                  text: parcel.zoneName ?? S.of(context).unknownZone,
+                                  //text: parcel.zoneName ?? S.of(context).unknownZone,
+                                  text: parcel.pudoAddress ?? S.of(context).unknownZone,
+
                                 ),
                                 const SizedBox(height: 12),
                                 InfoItem(
                                   svgPath:
                                   'assets/svgs/location_icon_with_background.svg',
-                                  text: parcel.cityName ?? S.of(context).unknownAddress,
+                                  //text: parcel.cityName ?? S.of(context).unknownAddress,
+                                  text: parcel.responsibleName ?? S.of(context).unknownAddress,
+
                                 ),
                                 const SizedBox(height: 12),
                                 InfoItem(
                                   svgPath:
                                   'assets/svgs/call_icon_with_background.svg',
-                                  text: parcel.cityName ?? S.of(context).unknownPhone,
+                                  //text: parcel.cityName ?? S.of(context).unknownPhone,
+                                  text: parcel.responsiblePhoneNumber ?? S.of(context).unknownPhone,
+
                                 ),
                               ],
                             ),

@@ -143,5 +143,6 @@
     "password": "كلمة المرور",
     "enterPassword": "أدخل كلمة المرور",
     "rememberMe": "تذكرني",
-    "pressBackAgainToExit": "اضغط مرة أخرى للخروج"
+    "pressBackAgainToExit": "اضغط مرة أخرى للخروج",
+    "whatsAppNotInstalled": "الواتساب غير مثبت على جهازك"
 }

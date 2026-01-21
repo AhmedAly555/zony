@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:zony/generated/l10n.dart';
 import 'package:zony/services/extensions/parcel_status_extension.dart';
 import 'package:zony/views/widgets/toasts.dart';
+import '../../../models/new_parcel_model.dart';
+import '../../../models/parcel_barcode_model.dart';
 import '../../../models/parcel_model.dart';
 import '../../../services/enums/parcel_status_type.dart';
 import '../../../services/parcel_service.dart';
@@ -32,7 +34,9 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
   //final GlobalKey<TotalParcelsApprovedState> _counterKey = GlobalKey();
   int _approvedCount = 0;
   bool isLoading = true;
-  List<Parcel> parcels = [];
+  //List<Parcel> parcels = [];
+  List<NewParcelPudoModel> parcels = [];
+
 
   @override
   void initState() {
@@ -61,7 +65,7 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
       }
 
       // use the pudoId to get the parcels(waiting_confirmation)
-      final response = await ParcelsService.instance.getParcelsByStatus(
+      final response = await ParcelsService.instance.getNewParcelsByStatus(
         pudoId: pudoId,
         status: ParcelStatusType.waitingConfirmation.apiValue,
       );
@@ -69,6 +73,7 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
       //print('Parcels API call succeeded.');
 
       setState(() {
+        //parcels = response.parcels ?? [];
         parcels = response.parcels ?? [];
         isLoading = false;
       });
@@ -183,7 +188,7 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
       body:
            RefreshIndicator(
                 onRefresh: fetchwaitingConfirmationParcels,
-                color: Color(0xFF49159B),
+                color: const Color(0xFF49159B),
 
                 child: SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
@@ -205,11 +210,11 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
 
                         if (isLoading)
 
-                          LoadingWidget()
+                          const LoadingWidget()
                         else if (parcels.isEmpty)
 
-                          Padding(
-                            padding: const EdgeInsets.only(top: 100),
+                          const Padding(
+                            padding: EdgeInsets.only(top: 100),
                             child: NoDataFoundWidget(),
                           )
                         else
@@ -238,7 +243,7 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
                                         style: AppTextStyles.textStyle16,
                                       ),
                                       const Spacer(),
-                                      _getStatusWidget(parcel.status),
+                                      //_getStatusWidget(parcel.status),
                                     ],
                                   ),
                                   const SizedBox(height: 8),
@@ -266,14 +271,14 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
                                   InfoItem(
                                     svgPath:
                                         'assets/svgs/calender_with_background.svg',
-                                    text: parcel.receivingDate ?? '-',
+                                    text: parcel.pudoName ?? '-',
                                   ),
                                   const SizedBox(height: 12),
 
                                   InfoItem(
                                     svgPath:
                                         'assets/svgs/call_icon_with_background.svg',
-                                    text: parcel.clientName ?? '-',
+                                    text: parcel.responsibleName ?? '-',
                                   ),
 
                                   const SizedBox(height: 30),
@@ -282,11 +287,11 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
                                     onTap:
                                         () => showConfirmParcelBottomSheet(
                                           context,
-                                          parcel.id,
+                                          "${parcel.id}",
                                         ),
                                     child: Text(
                                       S.of(context).confirmParcel,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                         color: Color(0xFFFFFFFF),

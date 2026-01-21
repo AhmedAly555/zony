@@ -1,17 +1,16 @@
+import 'package:zony/models/parcel_barcode_model.dart';
 
-import 'new_parcel_model.dart';
-
-class NewParcelsResponse {
+class ParcelByBarcodeResponse {
   final int currentPage;
   final String message;
   final String? nextPage;
-  final List<NewParcelPudoModel> parcels;
+  final List<ParcelByBarcodeModel> parcels;
   final String? prevPage;
   final String status;
   final int totalPages;
   final int totalParcels;
 
-  NewParcelsResponse({
+  ParcelByBarcodeResponse({
     required this.currentPage,
     required this.message,
     required this.nextPage,
@@ -22,31 +21,18 @@ class NewParcelsResponse {
     required this.totalParcels,
   });
 
-  factory NewParcelsResponse.fromJson(Map<String, dynamic> json) {
-    return NewParcelsResponse(
+  factory ParcelByBarcodeResponse.fromJson(Map<String, dynamic> json) {
+    return ParcelByBarcodeResponse(
       currentPage: json['current_page'] ?? 1,
       message: json['message'] ?? '',
       nextPage: json['next_page'],
       parcels: (json['parcels'] as List<dynamic>? ?? [])
-          .map((e) => NewParcelPudoModel.fromJson(e))
+          .map((e) => ParcelByBarcodeModel.fromJson(e))
           .toList(),
       prevPage: json['prev_page'],
       status: json['status'] ?? '',
       totalPages: json['total_pages'] ?? 1,
       totalParcels: json['total_parcels'] ?? 0,
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'current_page': currentPage,
-      'message': message,
-      'next_page': nextPage,
-      'parcels': parcels.map((e) => e.toJson()).toList(),
-      'prev_page': prevPage,
-      'status': status,
-      'total_pages': totalPages,
-      'total_parcels': totalParcels,
-    };
   }
 }

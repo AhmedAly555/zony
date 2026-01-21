@@ -31,7 +31,7 @@ class BottomSheetIcon extends StatelessWidget {
       height: 60,
       padding: const EdgeInsets.all(18),
       decoration: const BoxDecoration(
-        color: Color(0xFFFFEB66),
+        color: Color(0xFFFFEB1B),
         shape: BoxShape.circle,
       ),
       child: SvgPicture.asset(

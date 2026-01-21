@@ -81,7 +81,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: BorderSide(
-            color: _isEditable ? Color(0xFFAFAFAF) : Color(0xFFC4C3C3),
+            color: _isEditable ? const Color(0xFFAFAFAF) : const Color(0xFFC4C3C3),
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -142,13 +142,13 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
         GestureDetector(
           child:
               _isEditable
-                  ? Icon(Icons.check)
-                  : SvgPicture.asset(
+                  ? const Icon(Icons.check)
+                  : const Icon(Icons.edit, size: 16),/*SvgPicture.asset(
                     'assets/svgs/editing_pen.svg',
                     width: 17,
                     height: 16.5,
                     color: const Color(0xFF49159B),
-                  ),
+                  ),*/
           onTap: () {
             if (_isEditable) {
               if (widget.onEditPressed != null) {
