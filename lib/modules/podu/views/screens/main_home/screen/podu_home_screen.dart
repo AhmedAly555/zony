@@ -46,7 +46,7 @@ class _PoduHomeScreenState extends State<PoduHomeScreen> {
             maxHeight: SizeConfig.heightPercent(0.90),
             minHeight: SizeConfig.heightPercent(0.80),
           ),
-          child: IntrinsicHeight(child: LanguageBottomSheet()),
+          child: const IntrinsicHeight(child: LanguageBottomSheet()),
         );
       },
       /*=> DraggableScrollableSheet(
