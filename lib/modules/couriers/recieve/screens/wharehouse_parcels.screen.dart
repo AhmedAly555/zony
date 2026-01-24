@@ -21,7 +21,7 @@ class WharehouseParcelsScreen extends StatelessWidget {
           child: Column(
             children: [
               AppBarHaveArrow(title: S.of(context).pickupPointParcels),
-              SizedBox(height: 28),
+              const SizedBox(height: 28),
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
@@ -67,7 +67,7 @@ class WharehouseParcelsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               //Parcel one
               Container(
                 width: double.infinity,
@@ -91,8 +91,8 @@ class WharehouseParcelsScreen extends StatelessWidget {
                       children: [
                         Container(
                           padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF3F4F6),
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFF3F4F6),
                             shape: BoxShape.circle,
                             //borderRadius: BorderRadius.circular(8),
                           ),
@@ -111,13 +111,13 @@ class WharehouseParcelsScreen extends StatelessWidget {
                             children: [
                               Text(
                                 S.of(context).oneBag,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w400,
                                   color: Color(0xFF49159B),
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 '# 123456',
                                 style: TextStyle(
                                   fontSize: 16,
@@ -142,7 +142,7 @@ class WharehouseParcelsScreen extends StatelessWidget {
                             const SizedBox(width: 6),
                             Text(
                               S.of(context).received,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xFF16A34A),
@@ -156,7 +156,7 @@ class WharehouseParcelsScreen extends StatelessWidget {
                     const SizedBox(height: 8),
           
                     // Divider
-                    Divider(
+                    const Divider(
                       color: Color(0xFFF4F4F4),
                       thickness: 1,
                     ),
@@ -166,7 +166,7 @@ class WharehouseParcelsScreen extends StatelessWidget {
                     // Product info text
                     Text(
                       S.of(context).productInfo,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         color: Color(0xFF6B46C1),
@@ -198,7 +198,7 @@ class WharehouseParcelsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               //Parcel two
               Container(
                 width: double.infinity,
@@ -222,8 +222,8 @@ class WharehouseParcelsScreen extends StatelessWidget {
                       children: [
                         Container(
                           padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF3F4F6),
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFF3F4F6),
                             shape: BoxShape.circle,
                             //borderRadius: BorderRadius.circular(8),
                           ),
@@ -242,13 +242,13 @@ class WharehouseParcelsScreen extends StatelessWidget {
                             children: [
                               Text(
                                 S.of(context).twoBag,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w400,
                                   color: Color(0xFF49159B),
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 '# 568589',
                                 style: TextStyle(
                                   fontSize: 16,
@@ -273,7 +273,7 @@ class WharehouseParcelsScreen extends StatelessWidget {
                             const SizedBox(width: 6),
                             Text(
                               S.of(context).received,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xFF16A34A),
@@ -287,7 +287,7 @@ class WharehouseParcelsScreen extends StatelessWidget {
                     const SizedBox(height: 8),
 
                     // Divider
-                    Divider(
+                    const Divider(
                       color: Color(0xFFF4F4F4),
                       thickness: 1,
                     ),
@@ -297,7 +297,7 @@ class WharehouseParcelsScreen extends StatelessWidget {
                     // Product info text
                     Text(
                       S.of(context).productInfo,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         color: Color(0xFF6B46C1),

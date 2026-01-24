@@ -157,8 +157,8 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                 .warehouseImage
                 .apiValue, // This changes based on the flow
       );
-      print('✅ Step 1 Done -> uploadUrl: ${uploadResponse.uploadUrl}',);
-      print('✅ Step 1 Done -> publicUrl: ${uploadResponse.publicUrl}',);
+      //print('✅ Step 1 Done -> uploadUrl: ${uploadResponse.uploadUrl}',);
+      //print('✅ Step 1 Done -> publicUrl: ${uploadResponse.publicUrl}',);
 
       // 2️⃣ Upload the image to Cloudflare using the uploadUrl
       final bytes = await imageFile.readAsBytes();
@@ -188,7 +188,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
         // Ensure the loading dialog is open before closing
         Navigator.pop(context); // Close the loading indicator in case of error
       }
-      debugPrint('❌ Error uploading parcel image::::::::::: $e');
+      //debugPrint('❌ Error uploading parcel image::::::::::: $e');
       debugPrintStack(stackTrace: s);
       showErrorToast(message: S.of(context).failedToUploadImage + '$e');
 
@@ -333,7 +333,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ImageContainer(),
+                  const ImageContainer(),
 
                   const SizedBox(height: 24),
 
@@ -362,14 +362,14 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
             DefaultButton(
               onTap: () {
                 _openCamera(context);
               },
               child: Text(
                 S.of(context).captureParcel,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: Color(0xFFFFFFFF),
