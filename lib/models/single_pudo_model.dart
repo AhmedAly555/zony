@@ -1,4 +1,5 @@
 import 'coordinates_model.dart';
+import 'responsible_model.dart';
 
 class SinglePudo {
   final int id;
@@ -18,6 +19,8 @@ class SinglePudo {
   final List<String> gallery;
   final Map<String, dynamic> operatingHours;
   final List<String> supervisorNames;
+  final ResponsibleModel? responsible;
+
 
   SinglePudo({
     required this.id,
@@ -37,6 +40,8 @@ class SinglePudo {
     required this.gallery,
     required this.operatingHours,
     required this.supervisorNames,
+    this.responsible,
+
   });
 
   factory SinglePudo.fromJson(Map<String, dynamic> json) {
@@ -64,6 +69,10 @@ class SinglePudo {
           ?.map((e) => e.toString())
           .toList() ??
           [],
+      responsible: json['responsible'] != null
+          ? ResponsibleModel.fromJson(json['responsible'])
+          : null,
+
     );
   }
 
@@ -85,5 +94,7 @@ class SinglePudo {
     'gallery': gallery,
     'oprating_hours': operatingHours,
     'supervisor_names': supervisorNames,
+    'responsible': responsible?.toJson(),
+
   };
 }
