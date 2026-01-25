@@ -301,7 +301,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Failed to confirm parcel. Please try again.';
 
   @override
-  String get confirmParcel => 'Confirm Parcel';
+  String get confirmParcel => 'Confirm';
 
   @override
   String get noPudoDataFound => 'No PUDO Data Found';
@@ -325,8 +325,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get parcelApproveConfirmation => 'Parcel Approve Confirmation';
 
   @override
-  String areYouSureYouWantToApprove(Object parcelId) {
-    return 'Are you sure you want to approve this parcel?(id: #$parcelId)';
+  String areYouSureYouWantToApprove(Object parcelBarcode, Object parcelId) {
+    return 'Are you sure you want to approve this parcel?(Barcode: $parcelBarcode)';
   }
 
   @override

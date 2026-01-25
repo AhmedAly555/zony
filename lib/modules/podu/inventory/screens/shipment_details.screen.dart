@@ -83,7 +83,7 @@ class _ShipmentDetailsScreenState extends State<ShipmentDetailsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ImageContainer(),
+                  const ImageContainer(),
 
                   const SizedBox(height: 24),
 
@@ -105,10 +105,10 @@ class _ShipmentDetailsScreenState extends State<ShipmentDetailsScreen> {
                     text: _parcel?.cityName ??
                         S.of(context).unknownAddress,                  ),
                   const SizedBox(height: 12),
-                  InfoItem(
+                  /*InfoItem(
                     svgPath: 'assets/svgs/call_icon_with_background.svg',
                     text: _parcel?.customerPhoneNumber ??
-                        S.of(context).noPhoneNumber,                  ),
+                        S.of(context).noPhoneNumber,                  ),*/
                 ],
               ),
             ),

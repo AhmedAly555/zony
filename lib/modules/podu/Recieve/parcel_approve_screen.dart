@@ -239,7 +239,7 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
                                       ),
                                       const SizedBox(width: 10),
                                       Text(
-                                        '#${parcel.id}',
+                                        parcel.parcelBarcode,
                                         style: AppTextStyles.textStyle16,
                                       ),
                                       const Spacer(),
@@ -263,23 +263,23 @@ class _ParcelApproveScreenState extends State<ParcelApproveScreen> {
 
                                   InfoItem(
                                     svgPath:
-                                        'assets/svgs/barcode_with_background.svg',
-                                    text: '#${parcel.id}',
+                                        'assets/svgs/profile_icon_with_background.svg',
+                                    text: parcel.customerName,
                                   ),
                                   const SizedBox(height: 12),
 
                                   InfoItem(
                                     svgPath:
-                                        'assets/svgs/calender_with_background.svg',
-                                    text: parcel.pudoName ?? '-',
+                                        'assets/svgs/profile_icon_with_background.svg',
+                                    text: "Company: ${parcel.clientName}" ?? '-',
                                   ),
-                                  const SizedBox(height: 12),
+                                  /*const SizedBox(height: 12),
 
                                   InfoItem(
                                     svgPath:
                                         'assets/svgs/call_icon_with_background.svg',
-                                    text: parcel.responsibleName ?? '-',
-                                  ),
+                                    text: parcel.customerPhoneNumber ?? '-',
+                                  ),*/
 
                                   const SizedBox(height: 30),
 

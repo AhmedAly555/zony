@@ -859,14 +859,9 @@ class S {
     );
   }
 
-  /// `Confirm Parcel`
+  /// `Confirm`
   String get confirmParcel {
-    return Intl.message(
-      'Confirm Parcel',
-      name: 'confirmParcel',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Confirm', name: 'confirmParcel', desc: '', args: []);
   }
 
   /// `No PUDO Data Found`
@@ -919,13 +914,13 @@ class S {
     );
   }
 
-  /// `Are you sure you want to approve this parcel?(id: #{parcelId})`
-  String areYouSureYouWantToApprove(Object parcelId) {
+  /// `Are you sure you want to approve this parcel?(Barcode: {parcelBarcode})`
+  String areYouSureYouWantToApprove(Object parcelBarcode) {
     return Intl.message(
-      'Are you sure you want to approve this parcel?(id: #$parcelId)',
+      'Are you sure you want to approve this parcel?(Barcode: $parcelBarcode)',
       name: 'areYouSureYouWantToApprove',
       desc: '',
-      args: [parcelId],
+      args: [parcelBarcode],
     );
   }
 

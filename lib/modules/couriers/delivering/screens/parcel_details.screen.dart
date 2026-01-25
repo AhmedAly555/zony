@@ -435,7 +435,15 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                     svgPath:
                     'assets/svgs/profile_icon_with_background.svg',
                     text:
-                    _parcel?.pudoName ??
+                    _parcel?.customerName ??
+                        S.of(context).unknownName,
+                  ),
+                  const SizedBox(height: 12),
+                  InfoItem(
+                    svgPath:
+                    'assets/svgs/barcode_with_background.svg',
+                    text:
+                    _parcel?.parcelBarcode ??
                         S.of(context).unknownName,
                   ),
                   const SizedBox(height: 12),
@@ -446,14 +454,14 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                     _parcel?.pudoAddress ??
                         S.of(context).unknownAddress,
                   ),
-                  const SizedBox(height: 12),
+                  /*const SizedBox(height: 12),
                   InfoItem(
                     svgPath:
                     'assets/svgs/call_icon_with_background.svg',
                     text:
                     _parcel?.responsiblePhoneNumber ??
                         S.of(context).noPhoneNumber,
-                  ),
+                  ),*/
                 ],
               ),
             ),
@@ -465,9 +473,10 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                 //_openCamera(context);
                 _showDeliveryConfirmationBottomSheet();
               },
-              child: Text(
-                S.of(context).captureParcel,
-                style: const TextStyle(
+              child: const Text(
+                //S.of(context).captureParcel,
+                "Confarm",
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: Color(0xFFFFFFFF),

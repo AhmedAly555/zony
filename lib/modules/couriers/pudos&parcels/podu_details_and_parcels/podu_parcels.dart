@@ -153,14 +153,14 @@ class PudoParcels extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    CirclerIcon(svgPath: 'assets/svgs/bag_icon.svg'),
+                    const CirclerIcon(svgPath: 'assets/svgs/bag_icon.svg'),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            parcel.pudoName,
+                            parcel.responsibleName,
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
@@ -168,20 +168,20 @@ class PudoParcels extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            parcel.responsibleName,
+                            parcel.pudoName,
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
                               color: Color(0xFF929292),
                             ),
                           ),
-                          Text(
+                          /*Text(
                             parcel.responsiblePhoneNumber,
                             style: const TextStyle(
                               fontSize: 15,
                               color: Colors.grey,
                             ),
-                          ),
+                          ),*/
                         ],
                       ),
                     ),
@@ -199,7 +199,7 @@ class PudoParcels extends StatelessWidget {
                         const SizedBox(width: 6),
                         Text(
                           S.of(context).received,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
                             color: Color(0xFF16A34A),

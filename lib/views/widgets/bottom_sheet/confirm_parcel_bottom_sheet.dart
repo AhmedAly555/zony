@@ -56,7 +56,7 @@ class ConfirmParcelBottomSheet extends StatelessWidget {
                     S.of(context).confirmParcel,
                     textAlign: TextAlign.center,
 
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
