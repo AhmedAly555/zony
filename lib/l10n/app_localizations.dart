@@ -683,7 +683,7 @@ abstract class AppLocalizations {
   /// No description provided for @confirmParcel.
   ///
   /// In en, this message translates to:
-  /// **'Confirm Parcel'**
+  /// **'Confirm'**
   String get confirmParcel;
 
   /// No description provided for @noPudoDataFound.
@@ -731,8 +731,8 @@ abstract class AppLocalizations {
   /// No description provided for @areYouSureYouWantToApprove.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to approve this parcel?(id: #{parcelId})'**
-  String areYouSureYouWantToApprove(Object parcelId);
+  /// **'Are you sure you want to approve this parcel?(Barcode: {parcelBarcode})'**
+  String areYouSureYouWantToApprove(Object parcelBarcode, Object parcelId);
 
   /// No description provided for @noCancel.
   ///

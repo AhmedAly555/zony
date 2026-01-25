@@ -11,6 +11,7 @@ import '../../../../views/widgets/custom_outline_button.widget.dart';
 import '../../../../views/widgets/successful_screen.widget.dart';
 import '../../views/screens/main_home/screen/courier_delivering_screen.dart';
 import '../../views/screens/main_home/screen/courier_home.screen.dart';
+import '../../views/screens/main_home/screen/courier_main_home_screen.dart';
 
 
 class SuccessfulDelivering extends StatelessWidget {
@@ -73,11 +74,18 @@ class SuccessfulDelivering extends StatelessWidget {
                 ),
                 const SizedBox(height: 18),
                 CustomOutlineButton(
-                  onTap: () {
+                  /*onTap: () {
                     CourierMainHomeController.instance.changeTab(0);
                     Navigator.of(context).popUntil((route) => route.isFirst);
 
 
+                  },*/
+                  onTap: () {
+                    AppNavigator.navigateAndRemoveUntil(
+                        context,
+                            () => const CourierMainHomeScreen()
+                    );
+                    CourierMainHomeController.instance.changeTab(0);
                   },
                   title: Text(
                     S.of(context).backToHome,

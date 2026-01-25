@@ -77,7 +77,6 @@ class _MyParcelsScreenState extends State<MyParcelsScreen> {
                 children: [
                   AppBarHaveArrow(title: S.of(context).myParcels),
                   const SizedBox(height: 28),
-                  // ✅ خلي كل العناصر جوه الـ Scroll
                   ...parcels.map((parcel) {
                     final status = ParcelStatusTypeExtension.fromApiValue(
                       parcel.status ?? 'pending',
@@ -132,7 +131,7 @@ class _MyParcelsScreenState extends State<MyParcelsScreen> {
                                         ),
                                       ),
                                       Text(
-                                        '#${parcel.id ?? '-'}',
+                                        '#${parcel.parcelBarcode ?? '-'}',
                                         style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
@@ -171,7 +170,7 @@ class _MyParcelsScreenState extends State<MyParcelsScreen> {
                             const SizedBox(height: 24),
                             Text(
                               S.of(context).productInfo,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                                 color: Color(0xFF6B46C1),
@@ -187,19 +186,19 @@ class _MyParcelsScreenState extends State<MyParcelsScreen> {
                             InfoItem(
                               svgPath:
                               'assets/svgs/profile_icon_with_background.svg',
-                              text: parcel.zoneName ?? S.of(context).unknownZone,
+                              text: parcel.customerName ?? S.of(context).unknownZone,
                             ),
                             const SizedBox(height: 12),
-                            InfoItem(
+                            /*InfoItem(
                               svgPath:
                               'assets/svgs/location_icon_with_background.svg',
-                              text: parcel.cityName ?? S.of(context).unknownCity,
-                            ),
+                              text: parcel.zoneName ?? S.of(context).unknownCity,
+                            ),*/
                             const SizedBox(height: 12),
                             InfoItem(
                               svgPath:
                               'assets/svgs/call_icon_with_background.svg',
-                              text: parcel.customerPhoneNumber ?? S.of(context).unknownPhone,
+                              text: parcel.customerName ?? S.of(context).unknownPhone,
                             ),
                           ],
                         ),

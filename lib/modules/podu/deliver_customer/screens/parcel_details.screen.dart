@@ -342,7 +342,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
                   // Error state
                   if (snapshot.hasError) {
-                    return Center(child: NoDataFoundWidget());
+                    return const Center(child: NoDataFoundWidget());
                     //print(snapshot.error);
                   }
 
@@ -365,7 +365,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ImageContainer(),
+                            const ImageContainer(),
 
                             const SizedBox(height: 24),
                             // Divider
@@ -385,17 +385,17 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
 
                             InfoItem(
                               svgPath: 'assets/svgs/profile_icon_with_background.svg',
-                              text: "${parcel.id}",
+                              text: parcel.customerName,
                             ),
                             const SizedBox(height: 12),
                             InfoItem(
-                              svgPath: 'assets/svgs/location_icon_with_background.svg',
-                              text: parcel.pudoAddress ?? S.of(context).unknownZone,
+                              svgPath: 'assets/svgs/barcode_with_background.svg',
+                              text: parcel.parcelBarcode ?? S.of(context).unknownZone,
                             ),
                             const SizedBox(height: 12),
                             InfoItem(
                               svgPath: 'assets/svgs/call_icon_with_background.svg',
-                              text: parcel.responsiblePhoneNumber ?? S.of(context).unknownCity,
+                              text: parcel.customerPhoneNumber ?? S.of(context).unknownCity,
                             ),
 
                           ],
@@ -416,7 +416,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
               },
               child: Text(
                 S.of(context).captureParcel,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: Color(0xFFFFFFFF),

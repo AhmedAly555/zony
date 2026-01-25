@@ -332,7 +332,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get parcelApproveConfirmation => 'पार্সल स्वीकृति पुष्टि';
 
   @override
-  String areYouSureYouWantToApprove(Object parcelId) {
+  String areYouSureYouWantToApprove(Object parcelBarcode, Object parcelId) {
     return 'क्या आप निश्चित रूप से इस पार্সल को स्वीकृत करना चाहते हैं? (आईडी: #$parcelId)';
   }
 

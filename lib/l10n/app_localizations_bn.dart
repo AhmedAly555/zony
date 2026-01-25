@@ -330,7 +330,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get parcelApproveConfirmation => 'পার্সেল অনুমোদন নিশ্চিতকরণ';
 
   @override
-  String areYouSureYouWantToApprove(Object parcelId) {
+  String areYouSureYouWantToApprove(Object parcelBarcode, Object parcelId) {
     return 'আপনি কি নিশ্চিত এই পার্সেলটি অনুমোদন করতে চান? (আইডি: #$parcelId)';
   }
 

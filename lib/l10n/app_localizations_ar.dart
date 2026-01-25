@@ -326,7 +326,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get parcelApproveConfirmation => 'تأكيد الموافقة على الطرد';
 
   @override
-  String areYouSureYouWantToApprove(Object parcelId) {
+  String areYouSureYouWantToApprove(Object parcelBarcode, Object parcelId) {
     return 'هل أنت متأكد من الموافقة على هذا الطرد؟ (المعرف: #$parcelId)';
   }
 

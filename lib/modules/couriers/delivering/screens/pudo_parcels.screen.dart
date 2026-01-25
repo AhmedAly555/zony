@@ -216,7 +216,7 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                         children: [
                                           Text(
                                             //parcel.clientName,
-                                            parcel.pudoName,
+                                            parcel.responsibleName,
                                             style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w400,
@@ -225,7 +225,7 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                           ),
                                           Text(
                                             //'${parcel.id}',
-                                            '${parcel.pudoAddress}',
+                                            '# ${parcel.parcelBarcode}',
                                             style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w400,
@@ -292,7 +292,7 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                   svgPath:
                                   'assets/svgs/profile_icon_with_background.svg',
                                   //text: parcel.zoneName ?? S.of(context).unknownZone,
-                                  text: parcel.pudoAddress ?? S.of(context).unknownZone,
+                                  text: parcel.customerName ?? S.of(context).unknownZone,
 
                                 ),
                                 const SizedBox(height: 12),
@@ -300,7 +300,7 @@ class _PudoParcelsScreenState extends State<PudoParcelsScreen> {
                                   svgPath:
                                   'assets/svgs/location_icon_with_background.svg',
                                   //text: parcel.cityName ?? S.of(context).unknownAddress,
-                                  text: parcel.responsibleName ?? S.of(context).unknownAddress,
+                                  text: parcel.pudoAddress ?? S.of(context).unknownAddress,
 
                                 ),
                                 const SizedBox(height: 12),

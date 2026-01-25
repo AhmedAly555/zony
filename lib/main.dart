@@ -13,18 +13,18 @@ import 'generated/l10n.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocaleLanguageService.instance.loadLocale();
-  runApp(const MyApp());
+  runApp(const ZonyApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class ZonyApp extends StatefulWidget {
+  const ZonyApp({super.key});
 
   
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<ZonyApp> createState() => _ZonyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _ZonyAppState extends State<ZonyApp> {
   @override
   void initState() {
     super.initState();

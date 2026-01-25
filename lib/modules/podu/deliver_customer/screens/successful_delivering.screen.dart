@@ -4,11 +4,13 @@ import 'package:zony/views/widgets/default_button.widget.dart';
 
 import '../../../../../theme/app_text_styles.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
+import '../../../../controllers/pudu_main_home_controller.dart';
 import '../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../views/widgets/custom_outline_button.widget.dart';
 import '../../../../views/widgets/successful_screen.widget.dart';
 import '../../views/screens/main_home/screen/podu_delivering_screen.dart';
 import '../../views/screens/main_home/screen/podu_home_screen.dart';
+import '../../views/screens/main_home/screen/podu_main_home_screen.dart';
 
 
 class SuccessfulPoduDelivering extends StatelessWidget {
@@ -22,7 +24,7 @@ class SuccessfulPoduDelivering extends StatelessWidget {
     return TemplateAppScaffold(
       body: Column(
         children: [
-          SuccessfulImage(),
+          const SuccessfulImage(),
           Text(
             S.of(context).successfulDeliveringProcess,
             textAlign: TextAlign.center,
@@ -59,21 +61,28 @@ class SuccessfulPoduDelivering extends StatelessWidget {
                   onTap:
                       () => AppNavigator.navigateTo(
                     context,
-                        () => PoduDeliveringScreen(),
+                        () => const PoduDeliveringScreen(),
                   ),
                   child: Text(
                     S.of(context).deliverNewParcel,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
                     ),
                   ),
                 ),
-                SizedBox(height: 18),
+                const SizedBox(height: 18),
                 CustomOutlineButton(
-                  onTap: () => AppNavigator.navigateTo(context, () => PoduHomeScreen()),
+                  //onTap: () => AppNavigator.navigateTo(context, () => const PoduHomeScreen()),
+                  onTap: () {
+                    AppNavigator.navigateAndRemoveUntil(
+                        context,
+                            () => const PoduMainHomeScreen()
+                    );
+                    PuduMainHomeController.instance.changeTab(0);
+                  },
                   title: Text(
                     S.of(context).backToHome,
                     style: AppTextStyles.textStyle16,

@@ -340,12 +340,12 @@ class _ExpiredParcelDetailsScreenState extends State<ExpiredParcelDetailsScreen>
                         S.of(context).unknownAddress,
                   ),
                   const SizedBox(height: 12),
-                  InfoItem(
+                  /*InfoItem(
                     svgPath:
                     'assets/svgs/call_icon_with_background.svg',
                     text: _parcel?.customerPhoneNumber ??
                         S.of(context).noPhoneNumber,
-                  ),
+                  ),*/
                 ],
               ),
             ),

@@ -50,7 +50,7 @@ extension ParcelStatusTypeExtension on ParcelStatusType {
       case ParcelStatusType.courierReceived:
         return 'Received';
       case ParcelStatusType.waitingConfirmation:
-        return 'Waiting Confirmation';
+        return 'Waiting';
       case ParcelStatusType.pudoReceived:
         return 'PUDO Received';
       case ParcelStatusType.customerReceived:

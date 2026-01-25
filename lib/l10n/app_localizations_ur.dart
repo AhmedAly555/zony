@@ -331,7 +331,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get parcelApproveConfirmation => 'پارسل کی منظوری کی تصدیق';
 
   @override
-  String areYouSureYouWantToApprove(Object parcelId) {
+  String areYouSureYouWantToApprove(Object parcelBarcode, Object parcelId) {
     return 'کیا آپ واقعی اس پارسل کی منظوری دینا چاہتے ہیں؟ (شناخت: #$parcelId)';
   }
 
