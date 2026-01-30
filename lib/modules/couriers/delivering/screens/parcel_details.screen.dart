@@ -12,7 +12,6 @@ import '../../../../../views/widgets/default_button.widget.dart';
 import '../../../../../views/widgets/default_appbar.dart';
 import '../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../models/parcel_barcode_model.dart';
-import '../../../../models/parcel_model.dart';
 import '../../../../services/enums/parcel_image_type.dart';
 import '../../../../services/enums/parcel_status_type.dart';
 import '../../../../services/helpers/dummy_image_provider.dart';
@@ -276,7 +275,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
     required BuildContext context,
     required String parcelId,
   }) async {
-    print('ParcelId::::::::::::::::::: => $parcelId');
+    //print('ParcelId::::::::::::::::::: => $parcelId');
 
     if (parcelId.isEmpty) {
       showErrorToast(message: 'Parcel ID is missing');
@@ -473,10 +472,10 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                 //_openCamera(context);
                 _showDeliveryConfirmationBottomSheet();
               },
-              child: const Text(
-                //S.of(context).captureParcel,
-                "Confarm",
-                style: TextStyle(
+              child: Text(
+                S.of(context).confirm,
+                //"Confarm",
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: Color(0xFFFFFFFF),

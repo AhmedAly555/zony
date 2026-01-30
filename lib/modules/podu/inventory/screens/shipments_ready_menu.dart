@@ -125,7 +125,7 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
               return const Center(child: LoadingWidget());
             }
             if (snapshot.hasError) {
-              return Center(child: NoDataFoundWidget());
+              return const Center(child: NoDataFoundWidget());
             }
 
             final response = snapshot.data!;
@@ -133,7 +133,7 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
               child: Column(
                 children: [
                   AppBarHaveArrow(title: S.of(context).readyToDeliver),
-                  SizedBox(height: 28),
+                  const SizedBox(height: 28),
                   //search container
                   Container(
                     width: double.infinity,
@@ -179,10 +179,10 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   //podu parcels
                   if (response.parcels.isEmpty)
-                    Center(
+                    const Center(
                       child: NoDataFoundWidget(),
                     )
                   else
@@ -216,8 +216,8 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
                                   children: [
                                     Container(
                                       padding: const EdgeInsets.all(12),
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFFF3F4F6),
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xFFF3F4F6),
                                         shape: BoxShape.circle,
                                       ),
                                       child: SvgPicture.asset(
@@ -242,7 +242,7 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
                                           ),
                                           Text(
                                             '${parcel.id}',
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w400,
                                               color: Color(0xFF929292),
@@ -265,7 +265,7 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
                                         const SizedBox(width: 6),
                                         Text(
                                           S.of(context).received,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             color: Color(0xFF16A34A),
@@ -278,13 +278,13 @@ class _ShipmentReadyMenuScreenState extends State<ShipmentReadyMenuScreen> {
 
                                 const SizedBox(height: 8),
 
-                                Divider(color: Color(0xFFF4F4F4), thickness: 1),
+                                const Divider(color: Color(0xFFF4F4F4), thickness: 1),
 
                                 const SizedBox(height: 24),
 
                                 Text(
                                   S.of(context).productInfo,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                     color: Color(0xFF6B46C1),

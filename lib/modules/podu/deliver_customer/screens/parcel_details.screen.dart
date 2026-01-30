@@ -19,6 +19,7 @@ import '../../../../models/parcel_barcode_response_model.dart';
 import '../../../../models/parcel_model.dart';
 import '../../../../services/enums/parcel_image_type.dart';
 import '../../../../services/enums/parcel_status_type.dart';
+import '../../../../services/helpers/get_phone_number.dart';
 import '../../../../services/navigator.services/app_navigator.services.dart';
 import '../../../../services/parcel_service.dart';
 import '../../../../services/shered_preferences/pudos_storage.dart';
@@ -393,9 +394,12 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                               text: parcel.parcelBarcode ?? S.of(context).unknownZone,
                             ),
                             const SizedBox(height: 12),
-                            InfoItem(
-                              svgPath: 'assets/svgs/call_icon_with_background.svg',
-                              text: parcel.customerPhoneNumber ?? S.of(context).unknownCity,
+                            GestureDetector(
+                              onTap: () => GetPhoneNumber.makePhoneCall(context, parcel.customerPhoneNumber),
+                              child: InfoItem(
+                                svgPath: 'assets/svgs/call_icon_with_background.svg',
+                                text: parcel.customerPhoneNumber ?? S.of(context).unknownCity,
+                              ),
                             ),
 
                           ],
