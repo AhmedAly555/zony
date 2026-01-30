@@ -3,6 +3,7 @@ import 'package:zony/generated/l10n.dart';
 
 import '../../../../models/single_pudo_response_model.dart';
 import '../../../../services/get_courier_pudos_service.dart';
+import '../../../../services/helpers/get_phone_number.dart';
 import '../../../../services/helpers/open_in_google_maps.dart';
 import '../../../../views/widgets/loading.widget.dart';
 import '../../../../views/widgets/toasts.dart';
@@ -185,9 +186,12 @@ class _PODUDetailsState extends State<PODUDetails> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                InfoItem(
-                  svgPath: 'assets/svgs/call_icon_with_background.svg',
-                  text: pudo.responsible?.phoneNumber ?? "No phone number found",
+                GestureDetector(
+                  onTap: () => GetPhoneNumber.makePhoneCall(context, pudo.responsible?.phoneNumber),
+                  child: InfoItem(
+                    svgPath: 'assets/svgs/call_icon_with_background.svg',
+                    text: pudo.responsible?.phoneNumber ?? "No phone number found",
+                  ),
                 ),
               ],
             ),

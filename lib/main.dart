@@ -4,7 +4,6 @@ import 'package:zony/services/locale_language_service.dart';
 import 'package:zony/services/navigator.services/navigation_service.dart';
 import 'package:zony/theme/app_languages_theme.dart';
 
-
 import 'package:zony/views/screens/splash_screen.dart';
 
 import 'generated/l10n.dart';
