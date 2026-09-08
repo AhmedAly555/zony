@@ -18,11 +18,11 @@ class WrongLocationBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           // Handle bar line
-          HederBottomSheetLine(),
+          const HederBottomSheetLine(),
 
-          Spacer(),
+          const Spacer(),
           // Language icon
-          BottomSheetIcon(svgPath: 'assets/svgs/wrong_location.svg'),
+          const BottomSheetIcon(svgPath: 'assets/svgs/wrong_location.svg'),
 
           const SizedBox(height: 24),
 
@@ -32,7 +32,7 @@ class WrongLocationBottomSheet extends StatelessWidget {
             textAlign: TextAlign.center,
             style: AppTextStyles.bottomSheetTitle,
           ),
-          Spacer(
+          const Spacer(
             flex: 2,
           ),
           DefaultButton(
@@ -41,14 +41,14 @@ class WrongLocationBottomSheet extends StatelessWidget {
             },
             child: Text(
               S.of(context).myPickupPoints,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w600,
                 fontSize: 16,
               ),
             ),
           ),
-          Padding(padding: const EdgeInsets.only(bottom: 16)),
+          const Padding(padding: EdgeInsets.only(bottom: 16)),
         ],
       ),
     );
@@ -71,7 +71,7 @@ void showWrongLocationBottomSheet(BuildContext context) {
           maxHeight: SizeConfig.heightPercent(0.45),
           minHeight: SizeConfig.heightPercent(0.35),
         ),
-        child: WrongLocationBottomSheet(),
+        child: const WrongLocationBottomSheet(),
       );
     },
 

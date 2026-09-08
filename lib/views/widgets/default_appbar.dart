@@ -43,7 +43,7 @@ class AppBarHaveArrow extends StatelessWidget {
           ),
         ),
         const Spacer(),
-         SizedBox(width: 16),
+         const SizedBox(width: 16),
          Text(
           title,
           style: const TextStyle(

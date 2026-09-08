@@ -17,7 +17,7 @@ import '../../../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../../../../views/widgets/toasts.dart';
 
 import '../../../../pudos&parcels/all_podus.dart';
-import '../../../../pudos&parcels/my_parcels.dart';
+import '../../../../pudos&parcels/delivery_points.dart';
 import '../../../../recieve_expired/screens/expired_receiving.screen.dart';
 import '../../../widgets/custom_home_service_container.widget.dart';
 import '../../notification.screen.dart';
@@ -239,7 +239,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                     title: S.of(context).myParcels,
                     svgIconPath: 'assets/svgs/my_parcels.svg',
                     onTap: () {
-                      AppNavigator.navigateTo(context, () => const MyParcelsScreen());
+                      AppNavigator.navigateTo(context, () => const DeliveryPointsScreen());
                     },
                   ),
                   CustomHomeServiceContainer(

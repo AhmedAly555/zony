@@ -50,11 +50,11 @@ class QRScannerBottomSheet extends StatelessWidget {
             ),
 
             // dash
-            Positioned(
+            const Positioned(
               top: 10,
               left: 0,
               right: 0,
-              child: Center(child: const HederBottomSheetLine()),
+              child: Center(child: HederBottomSheetLine()),
             ),
 
             // Corners
@@ -66,7 +66,7 @@ class QRScannerBottomSheet extends StatelessWidget {
               ),
             ),
 
-            Center(
+            const Center(
               child: ScannerLine(
                 width: 260,
                 height: 260,
@@ -82,7 +82,7 @@ class QRScannerBottomSheet extends StatelessWidget {
                 child: Text(
                   S.of(context).scanQrCodeInFrontOfCamera,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color(0xFF49159B),
                     fontSize: 18,
                     fontWeight: FontWeight.w500,

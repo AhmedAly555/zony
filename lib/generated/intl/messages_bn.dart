@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "আপনি কি নিশ্চিত লগআউট করতে চান?",
     ),
     "backToHome": MessageLookupByLibrary.simpleMessage("হোমে ফিরে যান"),
+    "barcodeScanner": MessageLookupByLibrary.simpleMessage("বারকোড স্ক্যানার"),
     "bengali": MessageLookupByLibrary.simpleMessage("বাংলা"),
     "cameronWilliamson": MessageLookupByLibrary.simpleMessage(
       "ক্যামেরন উইলিয়ামসন",
@@ -49,6 +50,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "changePassword": MessageLookupByLibrary.simpleMessage(
       "পাসওয়ার্ড পরিবর্তন করুন",
+    ),
+    "chooseWayOfSearching": MessageLookupByLibrary.simpleMessage(
+      "অনুসন্ধানের পথ বেছে নিন",
     ),
     "chooseYourLanguage": MessageLookupByLibrary.simpleMessage(
       "আপনার ভাষা পছন্দ করুন",
@@ -142,7 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout": MessageLookupByLibrary.simpleMessage("লগআউট"),
     "more": MessageLookupByLibrary.simpleMessage("আরো"),
     "moreSettings": MessageLookupByLibrary.simpleMessage("আরো সেটিংস"),
-    "myParcels": MessageLookupByLibrary.simpleMessage("আমার পার্সেল"),
+    "myParcels": MessageLookupByLibrary.simpleMessage("ডেলিভারি পয়েন্ট"),
     "myPickupPoints": MessageLookupByLibrary.simpleMessage(
       "আমার পিকআপ পয়েন্ট",
     ),

@@ -7,7 +7,7 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LoadingAnimationWidget.threeArchedCircle(
-      color: Color(0xFF49159B),
+      color: const Color(0xFF49159B),
       size: 50,
     );
   }

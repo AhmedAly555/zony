@@ -38,12 +38,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "backToHome": MessageLookupByLibrary.simpleMessage(
       "العودة إلى الصفحة الرئيسية",
     ),
+    "barcodeScanner": MessageLookupByLibrary.simpleMessage("ماسح الباركود"),
     "bengali": MessageLookupByLibrary.simpleMessage("البنغالية"),
     "cameronWilliamson": MessageLookupByLibrary.simpleMessage(
       "كاميرون ويليامسون",
     ),
     "captureParcel": MessageLookupByLibrary.simpleMessage("التقاط الطرد"),
     "changePassword": MessageLookupByLibrary.simpleMessage("تغيير كلمة المرور"),
+    "chooseWayOfSearching": MessageLookupByLibrary.simpleMessage(
+      "اختر طريقة البحث",
+    ),
     "chooseYourLanguage": MessageLookupByLibrary.simpleMessage("اختر لغتك"),
     "codeNumber": MessageLookupByLibrary.simpleMessage("رقم الرمز"),
     "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
@@ -126,7 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "more": MessageLookupByLibrary.simpleMessage("المزيد"),
     "moreSettings": MessageLookupByLibrary.simpleMessage("المزيد من الإعدادات"),
-    "myParcels": MessageLookupByLibrary.simpleMessage("طرودي"),
+    "myParcels": MessageLookupByLibrary.simpleMessage("نقاط التوصيل"),
     "myPickupPoints": MessageLookupByLibrary.simpleMessage(
       "نقاط الاستلام الخاصة بي",
     ),

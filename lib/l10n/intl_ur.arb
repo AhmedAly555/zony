@@ -14,7 +14,7 @@
     "receiving": "وصولی",
     "delivering": "ترسیل",
     "expired": "میعاد ختم",
-    "myParcels": "میرے پارسل",
+    "myParcels": "ترسیل کے مقامات",
     "podus": "پک اپ پوائنٹس",
     "pudoParcelsRetrievedSuccessfully": "پارسل کامیابی سے حاصل کیے گئے",
     "noQrCodeDetected": "⚠️ کیو آر کوڈ کا پتہ نہیں چلا",
@@ -144,5 +144,7 @@
     "enterPassword": "پاس ورڈ درج کریں",
     "rememberMe": "مجھے یاد رکھیں",
     "pressBackAgainToExit": "باہر نکلنے کے لیے دوبارہ دبائیں",
-    "whatsAppNotInstalled": "واٹس ایپ آپ کے آلے پر انسٹال نہیں ہے"
+    "whatsAppNotInstalled": "واٹس ایپ آپ کے آلے پر انسٹال نہیں ہے",
+    "chooseWayOfSearching": "تلاش کا طریقہ منتخب کریں",
+    "barcodeScanner": "بارکوڈ اسکینر"
 }

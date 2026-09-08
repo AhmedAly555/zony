@@ -48,7 +48,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get expired => 'समाप्त';
 
   @override
-  String get myParcels => 'मेरे पार्सल';
+  String get myParcels => 'डिलीवरी पॉइंट्स';
 
   @override
   String get podus => 'पिकअप बिंदु';
@@ -194,14 +194,14 @@ class AppLocalizationsHi extends AppLocalizations {
   String get poduDetails => 'पिकअप बिंदु विवरण';
 
   @override
-  String get poduParcels => 'पिकअप बिंदु के पार্সल';
+  String get poduParcels => 'पिकअप बिंदु के पार्सल';
 
   @override
   String get somethingWentWrong => ' कुछ गलत हो गया: ';
 
   @override
   String get thisPudoHasNoParcelsYet =>
-      'इस पिकअप बिंदु में अभी तक कोई पार্সल नहीं है';
+      'इस पिकअप बिंदु में अभी तक कोई पार्सल नहीं है';
 
   @override
   String get parcelsRefreshedSuccessfully =>
@@ -246,10 +246,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get successfulExpiredReceivingProcess =>
-      'समाप्त पार্সल की सफल प्राप्ति प्रक्रिया';
+      'समाप्त पार्सल की सफल प्राप्ति प्रक्रिया';
 
   @override
-  String get receiveNewExpiredParcel => 'नया समाप्त पार্সल प्राप्त करें';
+  String get receiveNewExpiredParcel => 'नया समाप्त पार्सल प्राप्त करें';
 
   @override
   String get noPudoFoundInLocalStorage =>
@@ -259,7 +259,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get failedToLoadParcelData => 'पार्सल डेटा लोड करने में विफल';
 
   @override
-  String get parcelDataNotLoadedYet => '❗ पार্সल डेटा अभी तक लोड नहीं हुआ।';
+  String get parcelDataNotLoadedYet => '❗ पार्सल डेटा अभी तक लोड नहीं हुआ।';
 
   @override
   String get cameronWilliamson => 'कैमरून विलियमसन';
@@ -295,20 +295,20 @@ class AppLocalizationsHi extends AppLocalizations {
   String get pudoIdNotLoadedYet => 'पिकअप बिंदु आईडी अभी तक लोड नहीं हुई';
 
   @override
-  String get expiredParcels => 'समाप्त पार্সल';
+  String get expiredParcels => 'समाप्त पार्सल';
 
   @override
-  String get parcelApprove => 'पार্সल स्वीकृति';
+  String get parcelApprove => 'पार्सल स्वीकृति';
 
   @override
-  String get parcelConfirmedSuccessfully => 'पार্সल सफलतापूर्वक पुष्टि हो गया!';
+  String get parcelConfirmedSuccessfully => 'पार्सल सफलतापूर्वक पुष्टि हो गया!';
 
   @override
   String get failedToConfirmParcel =>
-      'पार্সल की पुष्टि करने में विफल। कृपया पुनः प्रयास करें।';
+      'पार्सल की पुष्टि करने में विफल। कृपया पुनः प्रयास करें।';
 
   @override
-  String get confirmParcel => 'पार্সल की पुष्टि करें';
+  String get confirmParcel => 'पार्सल की पुष्टि करें';
 
   @override
   String get noPudoDataFound => 'कोई पिकअप बिंदु डेटा नहीं मिला';
@@ -329,11 +329,11 @@ class AppLocalizationsHi extends AppLocalizations {
   String get pending => 'लंबित';
 
   @override
-  String get parcelApproveConfirmation => 'पार্সल स्वीकृति पुष्टि';
+  String get parcelApproveConfirmation => 'पार्सल स्वीकृति पुष्टि';
 
   @override
-  String areYouSureYouWantToApprove(Object parcelBarcode, Object parcelId) {
-    return 'क्या आप निश्चित रूप से इस पार্সल को स्वीकृत करना चाहते हैं? (आईडी: #$parcelId)';
+  String areYouSureYouWantToApprove(Object parcelId) {
+    return 'क्या आप निश्चित रूप से इस पार्सल को स्वीकृत करना चाहते हैं? (आईडी: #$parcelId)';
   }
 
   @override
@@ -344,7 +344,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get deliveryConfirmationDescription =>
-      'पुष्टि करके, आप स्वीकार करते हैं कि पार্সल सफलतापूर्वक वितरित किया गया है।';
+      'पुष्टि करके, आप स्वीकार करते हैं कि पार्सल सफलतापूर्वक वितरित किया गया है।';
 
   @override
   String get confirm => 'पुष्टि करें';
@@ -458,4 +458,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get whatsAppNotInstalled => 'आपके डिवाइस पर व्हाट्सएप इंस्टॉल नहीं है';
+
+  @override
+  String get chooseWayOfSearching => 'खोजने का तरीका चुनें';
+
+  @override
+  String get barcodeScanner => 'बारकोड स्कैनर';
 }

@@ -21,7 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   static String m0(parcelId) =>
-      "Are you sure you want to approve this parcel?(id: #${parcelId})";
+      "Are you sure you want to approve this parcel?(ID: #${parcelId})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -38,18 +38,22 @@ class MessageLookup extends MessageLookupByLibrary {
       "Are you sure you want to log out?",
     ),
     "backToHome": MessageLookupByLibrary.simpleMessage("Back To Home"),
+    "barcodeScanner": MessageLookupByLibrary.simpleMessage("Barcode Scanner"),
     "bengali": MessageLookupByLibrary.simpleMessage("Bengali"),
     "cameronWilliamson": MessageLookupByLibrary.simpleMessage(
       "Cameron Williamson",
     ),
     "captureParcel": MessageLookupByLibrary.simpleMessage("Capture Parcel"),
     "changePassword": MessageLookupByLibrary.simpleMessage("Change Password"),
+    "chooseWayOfSearching": MessageLookupByLibrary.simpleMessage(
+      "Choose Way Of Searching",
+    ),
     "chooseYourLanguage": MessageLookupByLibrary.simpleMessage(
       "Choose your language",
     ),
     "codeNumber": MessageLookupByLibrary.simpleMessage("code Number"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
-    "confirmParcel": MessageLookupByLibrary.simpleMessage("Confirm Parcel"),
+    "confirmParcel": MessageLookupByLibrary.simpleMessage("Confirm"),
     "couldNotGenerateQr": MessageLookupByLibrary.simpleMessage(
       "Could not generate QR\n",
     ),
@@ -130,7 +134,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "more": MessageLookupByLibrary.simpleMessage("More"),
     "moreSettings": MessageLookupByLibrary.simpleMessage("More Settings"),
-    "myParcels": MessageLookupByLibrary.simpleMessage("My Parcels"),
+    "myParcels": MessageLookupByLibrary.simpleMessage("Delivery Points"),
     "myPickupPoints": MessageLookupByLibrary.simpleMessage("My Pickup Points"),
     "myPodus": MessageLookupByLibrary.simpleMessage("My PODUs"),
     "noAddressAvailable": MessageLookupByLibrary.simpleMessage(

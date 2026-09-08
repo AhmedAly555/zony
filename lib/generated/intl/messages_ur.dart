@@ -40,11 +40,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "کیا آپ واقعی لاگ آؤٹ کرنا چاہتے ہیں؟",
     ),
     "backToHome": MessageLookupByLibrary.simpleMessage("ہوم پر واپس جائیں"),
+    "barcodeScanner": MessageLookupByLibrary.simpleMessage("بارکوڈ اسکینر"),
     "bengali": MessageLookupByLibrary.simpleMessage("بنگالی"),
     "cameronWilliamson": MessageLookupByLibrary.simpleMessage("کیمرون ولیمسن"),
     "captureParcel": MessageLookupByLibrary.simpleMessage("پارسل کی تصویر لیں"),
     "changePassword": MessageLookupByLibrary.simpleMessage(
       "پاس ورڈ تبدیل کریں",
+    ),
+    "chooseWayOfSearching": MessageLookupByLibrary.simpleMessage(
+      "تلاش کا طریقہ منتخب کریں",
     ),
     "chooseYourLanguage": MessageLookupByLibrary.simpleMessage(
       "اپنی زبان منتخب کریں",
@@ -138,7 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout": MessageLookupByLibrary.simpleMessage("لاگ آؤٹ"),
     "more": MessageLookupByLibrary.simpleMessage("مزید"),
     "moreSettings": MessageLookupByLibrary.simpleMessage("مزید ترتیبات"),
-    "myParcels": MessageLookupByLibrary.simpleMessage("میرے پارسل"),
+    "myParcels": MessageLookupByLibrary.simpleMessage("ترسیل کے مقامات"),
     "myPickupPoints": MessageLookupByLibrary.simpleMessage(
       "میرے پک اپ پوائنٹس",
     ),

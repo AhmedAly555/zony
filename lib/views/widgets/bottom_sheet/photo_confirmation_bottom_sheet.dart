@@ -25,9 +25,9 @@ class PhotoConfirmationBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           // Handle bar line
-          HederBottomSheetLine(),
+          const HederBottomSheetLine(),
 
-          Spacer(),
+          const Spacer(),
 
           // icon
           //BottomSheetIcon(svgPath: 'assets/svgs/check_icon.svg'),
@@ -52,7 +52,7 @@ class PhotoConfirmationBottomSheet extends StatelessWidget {
             textAlign: TextAlign.center,
             style: AppTextStyles.bottomSheetDescription,
           ),*/
-          Spacer(),
+          const Spacer(),
 
           Row(
             children: [
@@ -67,7 +67,7 @@ class PhotoConfirmationBottomSheet extends StatelessWidget {
                     S.of(context).confirm,
                     textAlign: TextAlign.center,
 
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
@@ -75,12 +75,12 @@ class PhotoConfirmationBottomSheet extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Expanded(
                 child: CustomOutlineButton(
                   title: Text(
                     S.of(context).tryAgain,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF49159B),
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
@@ -90,7 +90,7 @@ class PhotoConfirmationBottomSheet extends StatelessWidget {
               ),
             ],
           ),
-          Padding(padding: const EdgeInsets.only(bottom: 16)),
+          const Padding(padding: EdgeInsets.only(bottom: 16)),
         ],
       ),
     );

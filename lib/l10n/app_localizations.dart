@@ -185,7 +185,7 @@ abstract class AppLocalizations {
   /// No description provided for @myParcels.
   ///
   /// In en, this message translates to:
-  /// **'My Parcels'**
+  /// **'Delivery Points'**
   String get myParcels;
 
   /// No description provided for @podus.
@@ -731,8 +731,8 @@ abstract class AppLocalizations {
   /// No description provided for @areYouSureYouWantToApprove.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to approve this parcel?(Barcode: {parcelBarcode})'**
-  String areYouSureYouWantToApprove(Object parcelBarcode, Object parcelId);
+  /// **'Are you sure you want to approve this parcel?(ID: #{parcelId})'**
+  String areYouSureYouWantToApprove(Object parcelId);
 
   /// No description provided for @noCancel.
   ///
@@ -967,6 +967,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'WhatsApp is not installed on your device'**
   String get whatsAppNotInstalled;
+
+  /// No description provided for @chooseWayOfSearching.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Way Of Searching'**
+  String get chooseWayOfSearching;
+
+  /// No description provided for @barcodeScanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Barcode Scanner'**
+  String get barcodeScanner;
 }
 
 class _AppLocalizationsDelegate

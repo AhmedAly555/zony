@@ -13,7 +13,7 @@
   "receiving": "Receiving",
   "delivering": "Delivering",
   "expired": "Expired",
-  "myParcels": "My Parcels",
+  "myParcels": "Delivery Points",
   "podus": "PODUs",
   "pudoParcelsRetrievedSuccessfully": "PUDO parcels retrieved successfully",
   "noQrCodeDetected": "⚠️ No QR code detected",
@@ -104,7 +104,7 @@
   "waiting": "Waiting",
   "pending": "Pending",
   "parcelApproveConfirmation": "Parcel Approve Confirmation",
-  "areYouSureYouWantToApprove": "Are you sure you want to approve this parcel?(Barcode: {parcelBarcode})",
+  "areYouSureYouWantToApprove": "Are you sure you want to approve this parcel?(ID: #{parcelId})",
   "noCancel": "No, cancel",
   "deliveryConfirmation": "Delivery Confirmation",
   "deliveryConfirmationDescription": "By confirming, you acknowledge that the parcel has been successfully delivered.",
@@ -143,5 +143,7 @@
   "enterPassword": "Enter Password",
   "rememberMe": "Remember me",
   "pressBackAgainToExit": "Press back again to exit",
-  "whatsAppNotInstalled": "WhatsApp is not installed on your device"
+  "whatsAppNotInstalled": "WhatsApp is not installed on your device",
+  "chooseWayOfSearching": "Choose Way Of Searching",
+  "barcodeScanner": "Barcode Scanner"
 }

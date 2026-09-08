@@ -11,14 +11,14 @@ import '../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../views/widgets/toasts.dart';
 import '../delivering/widgets/parcel_row.widget.dart';
 
-class MyParcelsScreen extends StatefulWidget {
-  const MyParcelsScreen({super.key});
+class DeliveryPointsScreen extends StatefulWidget {
+  const DeliveryPointsScreen({super.key});
 
   @override
-  State<MyParcelsScreen> createState() => _MyParcelsScreenState();
+  State<DeliveryPointsScreen> createState() => _DeliveryPointsScreenState();
 }
 
-class _MyParcelsScreenState extends State<MyParcelsScreen> {
+class _DeliveryPointsScreenState extends State<DeliveryPointsScreen> {
   late Future<ParcelsResponse> _parcelsFuture;
 
   @override

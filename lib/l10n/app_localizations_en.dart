@@ -48,7 +48,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get expired => 'Expired';
 
   @override
-  String get myParcels => 'My Parcels';
+  String get myParcels => 'Delivery Points';
 
   @override
   String get podus => 'PODUs';
@@ -325,8 +325,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get parcelApproveConfirmation => 'Parcel Approve Confirmation';
 
   @override
-  String areYouSureYouWantToApprove(Object parcelBarcode, Object parcelId) {
-    return 'Are you sure you want to approve this parcel?(Barcode: $parcelBarcode)';
+  String areYouSureYouWantToApprove(Object parcelId) {
+    return 'Are you sure you want to approve this parcel?(ID: #$parcelId)';
   }
 
   @override
@@ -446,4 +446,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get whatsAppNotInstalled => 'WhatsApp is not installed on your device';
+
+  @override
+  String get chooseWayOfSearching => 'Choose Way Of Searching';
+
+  @override
+  String get barcodeScanner => 'Barcode Scanner';
 }

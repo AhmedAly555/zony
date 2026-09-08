@@ -14,7 +14,7 @@
     "receiving": "الاستلام",
     "delivering": "التسليم",
     "expired": "منتهي الصلاحية",
-    "myParcels": "طرودي",
+    "myParcels": "نقاط التوصيل",
     "podus": "نقاط الاستلام",
     "pudoParcelsRetrievedSuccessfully": "تم استرجاع الطرود بنجاح",
     "noQrCodeDetected": "⚠️ لم يتم اكتشاف رمز الاستجابة السريعة",
@@ -144,5 +144,7 @@
     "enterPassword": "أدخل كلمة المرور",
     "rememberMe": "تذكرني",
     "pressBackAgainToExit": "اضغط مرة أخرى للخروج",
-    "whatsAppNotInstalled": "الواتساب غير مثبت على جهازك"
+    "whatsAppNotInstalled": "الواتساب غير مثبت على جهازك",
+    "chooseWayOfSearching": "اختر طريقة البحث",
+    "barcodeScanner": "ماسح الباركود"
 }

@@ -19,7 +19,7 @@ class CustomOutlineButton extends StatelessWidget {
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
-          side: BorderSide(
+          side: const BorderSide(
             width: 2,
             color: Color(0xFF49159B),
           ),
