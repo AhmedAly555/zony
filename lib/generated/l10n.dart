@@ -1273,6 +1273,66 @@ class S {
       args: [],
     );
   }
+
+  /// `No stops found`
+  String get noStopsFound {
+    return Intl.message(
+      'No stops found',
+      name: 'noStopsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load stops: `
+  String get failedToLoadStops {
+    return Intl.message(
+      'Failed to load stops: ',
+      name: 'failedToLoadStops',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Parcels`
+  String get parcels {
+    return Intl.message('Parcels', name: 'parcels', desc: '', args: []);
+  }
+
+  /// `Warehouse`
+  String get warehouse {
+    return Intl.message('Warehouse', name: 'warehouse', desc: '', args: []);
+  }
+
+  /// `Customer`
+  String get customer {
+    return Intl.message('Customer', name: 'customer', desc: '', args: []);
+  }
+
+  /// `PUDO`
+  String get pudoPlaceType {
+    return Intl.message('PUDO', name: 'pudoPlaceType', desc: '', args: []);
+  }
+
+  /// `Stop Parcels`
+  String get stopParcels {
+    return Intl.message(
+      'Stop Parcels',
+      name: 'stopParcels',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unassigned Stop`
+  String get unassignedStop {
+    return Intl.message(
+      'Unassigned Stop',
+      name: 'unassignedStop',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -146,5 +146,13 @@
     "pressBackAgainToExit": "बाहर निकलने के लिए फिर से दबाएं",
     "whatsAppNotInstalled": "आपके डिवाइस पर व्हाट्सएप इंस्टॉल नहीं है",
     "chooseWayOfSearching": "खोजने का तरीका चुनें",
-    "barcodeScanner": "बारकोड स्कैनर"
+    "barcodeScanner": "बारकोड स्कैनर",
+    "noStopsFound": "कोई स्टॉप नहीं मिला",
+    "failedToLoadStops": "स्टॉप लोड करने में विफल: ",
+    "parcels": "पार्सल",
+    "warehouse": "गोदाम",
+    "customer": "ग्राहक",
+    "pudoPlaceType": "पूडो",
+    "stopParcels": "स्टॉप पार्सल",
+    "unassignedStop": "अनिर्धारित स्टॉप"
 }

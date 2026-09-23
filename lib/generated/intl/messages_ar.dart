@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "couldNotGenerateQr": MessageLookupByLibrary.simpleMessage(
       "تعذر إنشاء رمز الاستجابة السريعة\n",
     ),
+    "customer": MessageLookupByLibrary.simpleMessage("عميل"),
     "deliverNewParcel": MessageLookupByLibrary.simpleMessage("تسليم طرد جديد"),
     "delivering": MessageLookupByLibrary.simpleMessage("التسليم"),
     "deliveryConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -98,6 +99,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "failedToLoadPudoData": MessageLookupByLibrary.simpleMessage(
       "فشل في تحميل بيانات نقطة الاستلام: ",
     ),
+    "failedToLoadStops": MessageLookupByLibrary.simpleMessage(
+      "فشل تحميل نقاط التوقف: ",
+    ),
     "failedToRetrieveCourierId": MessageLookupByLibrary.simpleMessage(
       "⚠️ فشل في الحصول على معرف المندوب",
     ),
@@ -130,7 +134,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "more": MessageLookupByLibrary.simpleMessage("المزيد"),
     "moreSettings": MessageLookupByLibrary.simpleMessage("المزيد من الإعدادات"),
-    "myParcels": MessageLookupByLibrary.simpleMessage("نقاط التوصيل"),
+    "myParcels": MessageLookupByLibrary.simpleMessage("نقاط التسليم"),
     "myPickupPoints": MessageLookupByLibrary.simpleMessage(
       "نقاط الاستلام الخاصة بي",
     ),
@@ -169,6 +173,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "noQrData": MessageLookupByLibrary.simpleMessage(
       "لا توجد بيانات رمز استجابة سريعة",
     ),
+    "noStopsFound": MessageLookupByLibrary.simpleMessage(
+      "لم يتم العثور على نقاط توقف",
+    ),
     "oneBag": MessageLookupByLibrary.simpleMessage("حقيبة واحدة"),
     "parcelApprove": MessageLookupByLibrary.simpleMessage("الموافقة على الطرد"),
     "parcelApproveConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -190,6 +197,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "parcelReceivedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "✅ تم استلام الطرد بنجاح!",
     ),
+    "parcels": MessageLookupByLibrary.simpleMessage("طرود"),
     "parcelsRefreshedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم تحديث الطرود بنجاح",
     ),
@@ -235,6 +243,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pudoParcelsRetrievedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم استرجاع الطرود بنجاح",
     ),
+    "pudoPlaceType": MessageLookupByLibrary.simpleMessage("نقطة استلام"),
     "qrCode": MessageLookupByLibrary.simpleMessage("رمز الاستجابة السريعة"),
     "qrScanner": MessageLookupByLibrary.simpleMessage(
       "ماسح رمز الاستجابة السريعة",
@@ -255,6 +264,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectedLanguage": MessageLookupByLibrary.simpleMessage("اللغة المحددة: "),
     "services": MessageLookupByLibrary.simpleMessage("الخدمات"),
     "somethingWentWrong": MessageLookupByLibrary.simpleMessage(" حدث خطأ ما: "),
+    "stopParcels": MessageLookupByLibrary.simpleMessage("طرود نقطة التوقف"),
     "successfulDeliveringProcess": MessageLookupByLibrary.simpleMessage(
       "عملية تسليم ناجحة",
     ),
@@ -273,6 +283,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "transfer": MessageLookupByLibrary.simpleMessage("نقل"),
     "tryAgain": MessageLookupByLibrary.simpleMessage("حاول مرة أخرى"),
     "twoBag": MessageLookupByLibrary.simpleMessage("حقيبتان"),
+    "unassignedStop": MessageLookupByLibrary.simpleMessage("نقطة غير محددة"),
     "unknown": MessageLookupByLibrary.simpleMessage("غير معروف"),
     "unknownAddress": MessageLookupByLibrary.simpleMessage("عنوان غير معروف"),
     "unknownCity": MessageLookupByLibrary.simpleMessage("مدينة غير معروفة"),
@@ -292,6 +303,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "اسم المستخدم أو رقم الهاتف",
     ),
     "waiting": MessageLookupByLibrary.simpleMessage("في الانتظار"),
+    "warehouse": MessageLookupByLibrary.simpleMessage("مستودع"),
     "whatsAppNotInstalled": MessageLookupByLibrary.simpleMessage(
       "الواتساب غير مثبت على جهازك",
     ),

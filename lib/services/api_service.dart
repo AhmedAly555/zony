@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:zony/modules/auth/view/widgets/login_cubit_route.dart';
@@ -65,16 +66,22 @@ class ApiService extends BaseApiService {
   // ---------------- Auth APIs (Login) ----------------
   Future<Map<String, dynamic>> login(String email, String password, int rememberMe) async {
     final url = Uri.parse('$baseUrl/auth/login');
+    final headers = {"Content-Type": "application/json"};
+    final requestBody = {
+      "email": email,
+      "password": password,
+      "remember_me": 1,
+    };
+
+    _logRequest("POST", url, headers, requestBody);
 
     final response = await http.post(
       url,
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode({
-        "email": email,
-        "password": password,
-        "remember_me": 1,
-      }),
+      headers: headers,
+      body: jsonEncode(requestBody),
     );
+
+    _logResponse(url, response.statusCode, response.body);
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
@@ -90,7 +97,10 @@ class ApiService extends BaseApiService {
   Future<void> logout() async {
     final url = Uri.parse('$baseUrl/auth/logout');
     try {
-       final response = await http.post(url, headers: _authorizedHeaders());
+       final headers = _authorizedHeaders();
+       _logRequest("POST", url, headers, null);
+       final response = await http.post(url, headers: headers);
+       _logResponse(url, response.statusCode, response.body);
        if (response.statusCode != 200) {
          debugPrint("Logout API warning: ${response.body}");
        }
@@ -111,14 +121,16 @@ class ApiService extends BaseApiService {
 
     // Endpoint for refreshing token
     final url = Uri.parse('$baseUrl/auth/refresh');
+    final headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $_refreshToken",
+    };
 
-    final response = await http.post(
-      url,
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $_refreshToken",
-      },
-    );
+    _logRequest("POST", url, headers, null);
+
+    final response = await http.post(url, headers: headers);
+
+    _logResponse(url, response.statusCode, response.body);
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
@@ -239,21 +251,63 @@ class ApiService extends BaseApiService {
       Uri url,
       Map<String, dynamic>? body,
       Map<String, String> headers,
-      ) {
+      ) async {
+    _logRequest(method.toUpperCase(), url, headers, body);
+
+    late final http.Response response;
     switch (method.toUpperCase()) {
       case 'GET':
-        return http.get(url, headers: headers);
+        response = await http.get(url, headers: headers);
+        break;
       case 'POST':
-        return http.post(url, headers: headers, body: jsonEncode(body));
+        response = await http.post(url, headers: headers, body: jsonEncode(body));
+        break;
       case 'PUT':
-        return http.put(url, headers: headers, body: jsonEncode(body));
+        response = await http.put(url, headers: headers, body: jsonEncode(body));
+        break;
       case 'PATCH':
-        return http.patch(url, headers: headers, body: jsonEncode(body));
+        response = await http.patch(url, headers: headers, body: jsonEncode(body));
+        break;
       case 'DELETE':
-        return http.delete(url, headers: headers);
+        response = await http.delete(url, headers: headers);
+        break;
       default:
         throw Exception("Unsupported HTTP method: $method");
     }
+
+    _logResponse(url, response.statusCode, response.body);
+    return response;
+  }
+
+  // ---------------- Debug Logging ----------------
+  static void _logRequest(
+      String method,
+      Uri url,
+      Map<String, String> headers,
+      Map<String, dynamic>? body,
+      ) {
+    if (!kDebugMode) return;
+    debugPrint('╔══════════════════════════════════════════════════════════════');
+    debugPrint('║ 📤 REQUEST');
+    debugPrint('╠══════════════════════════════════════════════════════════════');
+    debugPrint('║ Method: $method');
+    debugPrint('║ URL: $url');
+    debugPrint('║ Headers: $headers');
+    if (body != null) {
+      debugPrint('║ Body: ${jsonEncode(body)}');
+    }
+    debugPrint('╚══════════════════════════════════════════════════════════════');
+  }
+
+  static void _logResponse(Uri url, int statusCode, String body) {
+    if (!kDebugMode) return;
+    debugPrint('╔══════════════════════════════════════════════════════════════');
+    debugPrint('║ 📥 RESPONSE');
+    debugPrint('╠══════════════════════════════════════════════════════════════');
+    debugPrint('║ Status: $statusCode');
+    debugPrint('║ URL: $url');
+    debugPrint('║ Data: $body');
+    debugPrint('╚══════════════════════════════════════════════════════════════');
   }
 
   // ---------- Overrides from BaseApiService ----------

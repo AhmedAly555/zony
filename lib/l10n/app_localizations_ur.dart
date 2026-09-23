@@ -462,4 +462,28 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get barcodeScanner => 'بارکوڈ اسکینر';
+
+  @override
+  String get noStopsFound => 'کوئی اسٹاپ نہیں ملا';
+
+  @override
+  String get failedToLoadStops => 'اسٹاپس لوڈ کرنے میں ناکام: ';
+
+  @override
+  String get parcels => 'پارسل';
+
+  @override
+  String get warehouse => 'گودام';
+
+  @override
+  String get customer => 'کسٹمر';
+
+  @override
+  String get pudoPlaceType => 'پیوڈو';
+
+  @override
+  String get stopParcels => 'اسٹاپ پارسل';
+
+  @override
+  String get unassignedStop => 'غیر متعین اسٹاپ';
 }

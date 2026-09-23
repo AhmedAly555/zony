@@ -452,4 +452,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get barcodeScanner => 'Barcode Scanner';
+
+  @override
+  String get noStopsFound => 'No stops found';
+
+  @override
+  String get failedToLoadStops => 'Failed to load stops: ';
+
+  @override
+  String get parcels => 'Parcels';
+
+  @override
+  String get warehouse => 'Warehouse';
+
+  @override
+  String get customer => 'Customer';
+
+  @override
+  String get pudoPlaceType => 'PUDO';
+
+  @override
+  String get stopParcels => 'Stop Parcels';
+
+  @override
+  String get unassignedStop => 'Unassigned Stop';
 }

@@ -464,4 +464,28 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get barcodeScanner => 'बारकोड स्कैनर';
+
+  @override
+  String get noStopsFound => 'कोई स्टॉप नहीं मिला';
+
+  @override
+  String get failedToLoadStops => 'स्टॉप लोड करने में विफल: ';
+
+  @override
+  String get parcels => 'पार्सल';
+
+  @override
+  String get warehouse => 'गोदाम';
+
+  @override
+  String get customer => 'ग्राहक';
+
+  @override
+  String get pudoPlaceType => 'पूडो';
+
+  @override
+  String get stopParcels => 'स्टॉप पार्सल';
+
+  @override
+  String get unassignedStop => 'अनिर्धारित स्टॉप';
 }

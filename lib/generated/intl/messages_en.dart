@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "couldNotGenerateQr": MessageLookupByLibrary.simpleMessage(
       "Could not generate QR\n",
     ),
+    "customer": MessageLookupByLibrary.simpleMessage("Customer"),
     "deliverNewParcel": MessageLookupByLibrary.simpleMessage(
       "Deliver New Parcel",
     ),
@@ -99,6 +100,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "failedToLoadPudoData": MessageLookupByLibrary.simpleMessage(
       "Failed to load PUDO data: ",
+    ),
+    "failedToLoadStops": MessageLookupByLibrary.simpleMessage(
+      "Failed to load stops: ",
     ),
     "failedToRetrieveCourierId": MessageLookupByLibrary.simpleMessage(
       "⚠️ Failed to retrieve courier ID",
@@ -163,6 +167,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "⚠️ No QR code detected",
     ),
     "noQrData": MessageLookupByLibrary.simpleMessage("No QR data"),
+    "noStopsFound": MessageLookupByLibrary.simpleMessage("No stops found"),
     "oneBag": MessageLookupByLibrary.simpleMessage("1 Bag"),
     "parcelApprove": MessageLookupByLibrary.simpleMessage("Parcel Approve"),
     "parcelApproveConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -184,6 +189,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "parcelReceivedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "✅ Parcel Recieve successfully!",
     ),
+    "parcels": MessageLookupByLibrary.simpleMessage("Parcels"),
     "parcelsRefreshedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Parcels refreshed successfully",
     ),
@@ -231,6 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pudoParcelsRetrievedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "PUDO parcels retrieved successfully",
     ),
+    "pudoPlaceType": MessageLookupByLibrary.simpleMessage("PUDO"),
     "qrCode": MessageLookupByLibrary.simpleMessage("QR Code"),
     "qrScanner": MessageLookupByLibrary.simpleMessage("QR Scanner"),
     "readyToDeliver": MessageLookupByLibrary.simpleMessage("Ready to deliver"),
@@ -255,6 +262,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "somethingWentWrong": MessageLookupByLibrary.simpleMessage(
       " Something went wrong: ",
     ),
+    "stopParcels": MessageLookupByLibrary.simpleMessage("Stop Parcels"),
     "successfulDeliveringProcess": MessageLookupByLibrary.simpleMessage(
       "Successful Delivering process",
     ),
@@ -271,6 +279,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "transfer": MessageLookupByLibrary.simpleMessage("Transfer"),
     "tryAgain": MessageLookupByLibrary.simpleMessage("Try Again"),
     "twoBag": MessageLookupByLibrary.simpleMessage("2 Bag"),
+    "unassignedStop": MessageLookupByLibrary.simpleMessage("Unassigned Stop"),
     "unknown": MessageLookupByLibrary.simpleMessage("Unknown"),
     "unknownAddress": MessageLookupByLibrary.simpleMessage("Unknown address"),
     "unknownCity": MessageLookupByLibrary.simpleMessage("Unknown City"),
@@ -290,6 +299,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "username or e-mail",
     ),
     "waiting": MessageLookupByLibrary.simpleMessage("Waiting"),
+    "warehouse": MessageLookupByLibrary.simpleMessage("Warehouse"),
     "whatsAppNotInstalled": MessageLookupByLibrary.simpleMessage(
       "WhatsApp is not installed on your device",
     ),

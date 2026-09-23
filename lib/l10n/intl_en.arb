@@ -145,5 +145,13 @@
   "pressBackAgainToExit": "Press back again to exit",
   "whatsAppNotInstalled": "WhatsApp is not installed on your device",
   "chooseWayOfSearching": "Choose Way Of Searching",
-  "barcodeScanner": "Barcode Scanner"
+  "barcodeScanner": "Barcode Scanner",
+  "noStopsFound": "No stops found",
+  "failedToLoadStops": "Failed to load stops: ",
+  "parcels": "Parcels",
+  "warehouse": "Warehouse",
+  "customer": "Customer",
+  "pudoPlaceType": "PUDO",
+  "stopParcels": "Stop Parcels",
+  "unassignedStop": "Unassigned Stop"
 }

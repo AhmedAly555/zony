@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 
 /// Simple exception wrapper for HTTP errors.
 /// It carries statusCode, a human message and the original response body.
@@ -218,6 +219,8 @@ class BaseApiService {
       headers[HttpHeaders.contentLengthHeader] = contentLength.toString();
       _applyHeaders(request, headers);
 
+      _logRequest('PATCH', uri, headers, '<multipart: ${fields ?? {}}, file: $fileField ($filename, $contentLength bytes)>');
+
       // write bytes
       request.add(headerBytes);
       request.add(fileBytes);
@@ -225,6 +228,7 @@ class BaseApiService {
 
       final response = await request.close().timeout(timeout);
       final body = await utf8.decoder.bind(response).join();
+      _logResponse(uri, response.statusCode, body);
       return await _processResponse(response, body);
     } finally {
       client.close(force: true);
@@ -234,5 +238,31 @@ class BaseApiService {
   /// Debug helper to show a fully built URL (path + query params)
   String buildDebugUrl(String path, [Map<String, dynamic>? queryParameters]) {
     return _buildUri(path, queryParameters).toString();
+  }
+
+  // ---------------- Debug Logging ----------------
+  void _logRequest(String method, Uri url, Map<String, String> headers, Object? body) {
+    if (!kDebugMode) return;
+    debugPrint('╔══════════════════════════════════════════════════════════════');
+    debugPrint('║ 📤 REQUEST');
+    debugPrint('╠══════════════════════════════════════════════════════════════');
+    debugPrint('║ Method: $method');
+    debugPrint('║ URL: $url');
+    debugPrint('║ Headers: $headers');
+    if (body != null) {
+      debugPrint('║ Body: $body');
+    }
+    debugPrint('╚══════════════════════════════════════════════════════════════');
+  }
+
+  void _logResponse(Uri url, int statusCode, String body) {
+    if (!kDebugMode) return;
+    debugPrint('╔══════════════════════════════════════════════════════════════');
+    debugPrint('║ 📥 RESPONSE');
+    debugPrint('╠══════════════════════════════════════════════════════════════');
+    debugPrint('║ Status: $statusCode');
+    debugPrint('║ URL: $url');
+    debugPrint('║ Data: $body');
+    debugPrint('╚══════════════════════════════════════════════════════════════');
   }
 }

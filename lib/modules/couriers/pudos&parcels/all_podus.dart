@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zony/views/widgets/default_appbar.dart';
 import 'package:zony/generated/l10n.dart';
 import 'package:zony/views/widgets/loading.widget.dart';
 
 import '../../../../views/widgets/template_app_scaffold.widget.dart';
-import '../../../models/my_pudos_response.dart';
-import '../../../services/get_courier_pudos_service.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
-import '../../../views/widgets/notifacation_item.dart';
-import 'podu_details_and_parcels/podu_details_and_parcels.screen.dart';
+import '../../../views/widgets/no_data_found.widget.dart';
+import 'courier_stop_parcels.screen.dart';
+import 'cubit/courier_places_cubit.dart';
+import 'cubit/courier_places_state.dart';
+import 'widgets/courier_stop_card.widget.dart';
 
-class AllPODUsScreen extends StatefulWidget {
+class AllPODUsScreen extends StatelessWidget {
   const AllPODUsScreen({super.key});
 
   @override
-  State<AllPODUsScreen> createState() => _AllPODUsScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => CourierPlacesCubit()..fetchPlaces(direction: 'pickup'),
+      child: const _AllPODUsScreenBody(),
+    );
+  }
 }
 
-class _AllPODUsScreenState extends State<AllPODUsScreen> {
-  late Future<MyPudosResponse> _MypudosFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _MypudosFuture = GetCourierPudosService.instance.getAllPudos();
-  }
+class _AllPODUsScreenBody extends StatelessWidget {
+  const _AllPODUsScreenBody();
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +37,7 @@ class _AllPODUsScreenState extends State<AllPODUsScreen> {
           children: [
             AppBarHaveArrow(title: S.of(context).myPodus),
             const SizedBox(height: 28),
-            // Search Row with TextField
-            TextField(
+            /*TextField(
               decoration: InputDecoration(
                 hintText: S.of(context).allParcels,
                 prefixIcon: const Icon(
@@ -53,64 +53,70 @@ class _AllPODUsScreenState extends State<AllPODUsScreen> {
                 fillColor: Colors.white,
                 contentPadding: const EdgeInsets.symmetric(vertical: 12),
               ),
-            ),
+            ),*/
             const SizedBox(height: 24),
-            // Expanded to make the list scrollable
             Expanded(
-              child: FutureBuilder<MyPudosResponse>(
-                future: _MypudosFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
+              child: BlocBuilder<CourierPlacesCubit, CourierPlacesState>(
+                builder: (context, state) {
+                  if (state is CourierPlacesLoading || state is CourierPlacesInitial) {
                     return const Center(child: LoadingWidget());
                   }
 
-                  if (snapshot.hasError) {
+                  if (state is CourierPlacesFailure) {
                     return Center(
-                      child: Text("${S.of(context).error}${snapshot.error}"),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.error_outline, size: 64, color: Colors.grey[400]),
+                          const SizedBox(height: 16),
+                          Text(
+                            S.of(context).failedToLoadStops,
+                            style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                          ),
+                          const SizedBox(height: 24),
+                          ElevatedButton(
+                            onPressed: () => context
+                                .read<CourierPlacesCubit>()
+                                .fetchPlaces(direction: 'pickup'),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF49159B),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 32,
+                                vertical: 12,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: Text(
+                              S.of(context).tryAgain,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
                     );
                   }
 
-                  final pudos = snapshot.data?.pudos ?? [];
+                  final stops = (state as CourierPlacesSuccess).stops;
 
-                  if (pudos.isEmpty) {
-                    return Center(child: Text(S.of(context).noPodusFound));
+                  if (stops.isEmpty) {
+                    return const Center(child: NoDataFoundWidget());
                   }
 
                   return ListView.separated(
-                    itemCount: pudos.length,
+                    itemCount: stops.length,
                     separatorBuilder: (context, index) => const SizedBox(height: 12),
                     itemBuilder: (context, index) {
-                      final pudo = pudos[index];
-                      return GestureDetector(
+                      final stop = stops[index];
+                      return CourierStopCard(
+                        stop: stop,
                         onTap: () {
                           AppNavigator.navigateTo(
                             context,
-                            () => PudoDetailsAndParceis(
-                              pudoId: pudo.id.toString(),
-                            ),
+                            () => CourierStopParcelsScreen(stop: stop),
                           );
                         },
-                        child: Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.05),
-                                blurRadius: 10,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: NotificationItem(
-                            title: pudo.name,
-                            subtitle: pudo.address.isEmpty
-                                ? S.of(context).noAddressAvailable
-                                : pudo.address,
-                            time: '150 m',
-                          ),
-                        ),
                       );
                     },
                   );

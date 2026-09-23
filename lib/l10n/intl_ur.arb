@@ -146,5 +146,13 @@
     "pressBackAgainToExit": "باہر نکلنے کے لیے دوبارہ دبائیں",
     "whatsAppNotInstalled": "واٹس ایپ آپ کے آلے پر انسٹال نہیں ہے",
     "chooseWayOfSearching": "تلاش کا طریقہ منتخب کریں",
-    "barcodeScanner": "بارکوڈ اسکینر"
+    "barcodeScanner": "بارکوڈ اسکینر",
+    "noStopsFound": "کوئی اسٹاپ نہیں ملا",
+    "failedToLoadStops": "اسٹاپس لوڈ کرنے میں ناکام: ",
+    "parcels": "پارسل",
+    "warehouse": "گودام",
+    "customer": "کسٹمر",
+    "pudoPlaceType": "پیوڈو",
+    "stopParcels": "اسٹاپ پارسل",
+    "unassignedStop": "غیر متعین اسٹاپ"
 }

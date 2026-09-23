@@ -1,217 +1,125 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zony/generated/l10n.dart';
-import '../../../models/get_parcels_response_model.dart';
-import '../../../models/parcel_model.dart';
-import '../../../services/extensions/parcel_status_extension.dart';
-import '../../../services/parcel_service.dart';
+
+import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../views/widgets/default_appbar.dart';
 import '../../../views/widgets/loading.widget.dart';
+import '../../../views/widgets/no_data_found.widget.dart';
 import '../../../views/widgets/template_app_scaffold.widget.dart';
-import '../../../views/widgets/toasts.dart';
-import '../delivering/widgets/parcel_row.widget.dart';
+import 'courier_stop_parcels.screen.dart';
+import 'cubit/courier_places_cubit.dart';
+import 'cubit/courier_places_state.dart';
+import 'widgets/courier_stop_card.widget.dart';
 
-class DeliveryPointsScreen extends StatefulWidget {
+class DeliveryPointsScreen extends StatelessWidget {
   const DeliveryPointsScreen({super.key});
 
   @override
-  State<DeliveryPointsScreen> createState() => _DeliveryPointsScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => CourierPlacesCubit()..fetchPlaces(direction: 'deliver'),
+      child: const _DeliveryPointsScreenBody(),
+    );
+  }
 }
 
-class _DeliveryPointsScreenState extends State<DeliveryPointsScreen> {
-  late Future<ParcelsResponse> _parcelsFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _parcelsFuture = _loadParcels();
-  }
-
-  Future<ParcelsResponse> _loadParcels() async {
-    final response = await ParcelsService.instance.getGlobalAllParcel();
-    return response;
-  }
-
-  Future<void> _refreshParcels() async {
-    final response = await ParcelsService.instance.getGlobalAllParcel();
-
-    if (mounted) {
-      showCorrectToast(message: S.of(context).parcelsRefreshedSuccessfully);
-
-    }
-
-    setState(() {
-      _parcelsFuture = Future.value(response);
-    });
-  }
+class _DeliveryPointsScreenBody extends StatelessWidget {
+  const _DeliveryPointsScreenBody();
 
   @override
   Widget build(BuildContext context) {
     return TemplateAppScaffold(
-      body: RefreshIndicator(
-        onRefresh: _refreshParcels,
-        child: FutureBuilder<ParcelsResponse>(
-          future: _parcelsFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: LoadingWidget());
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  S.of(context).error + ': ${snapshot.error}',
-                  style: const TextStyle(color: Colors.red),
-                ),
-              );
-            } else if (!snapshot.hasData || snapshot.data!.parcels.isEmpty) {
-              return Center(child: Text(S.of(context).noParcelsFound));
-            }
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppBarHaveArrow(title: S.of(context).myParcels),
+            const SizedBox(height: 28),
+            Expanded(
+              child: RefreshIndicator(
+                onRefresh: () => context
+                    .read<CourierPlacesCubit>()
+                    .fetchPlaces(direction: 'deliver'),
+                child: BlocBuilder<CourierPlacesCubit, CourierPlacesState>(
+                  builder: (context, state) {
+                    if (state is CourierPlacesLoading || state is CourierPlacesInitial) {
+                      return const Center(child: LoadingWidget());
+                    }
 
-            final response = snapshot.data!;
-            final parcels = response.parcels;
-
-            return SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.all(18),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AppBarHaveArrow(title: S.of(context).myParcels),
-                  const SizedBox(height: 28),
-                  ...parcels.map((parcel) {
-                    final status = ParcelStatusTypeExtension.fromApiValue(
-                      parcel.status ?? 'pending',
-                    );
-
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              spreadRadius: 1,
-                              blurRadius: 4,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
-                        ),
+                    if (state is CourierPlacesFailure) {
+                      return Center(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Row(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(12),
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xFFF3F4F6),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: SvgPicture.asset(
-                                    'assets/svgs/bag_icon.svg',
-                                    color: Theme.of(context).primaryColor,
-                                    width: 19.5,
-                                    height: 22,
-                                  ),
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        parcel.clientName ?? S.of(context).unknownClient,
-                                        style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xFF49159B),
-                                        ),
-                                      ),
-                                      Text(
-                                        '#${parcel.parcelBarcode ?? '-'}',
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xFF929292),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      width: 10,
-                                      height: 10,
-                                      decoration: BoxDecoration(
-                                        color: status.color,
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 6),
-                                    Text(
-                                      status.displayName,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        color: status.color,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            const Divider(color: Color(0xFFF4F4F4), thickness: 1),
-                            const SizedBox(height: 24),
+                            Icon(Icons.error_outline, size: 64, color: Colors.grey[400]),
+                            const SizedBox(height: 16),
                             Text(
-                              S.of(context).productInfo,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF6B46C1),
+                              S.of(context).failedToLoadStops,
+                              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                            ),
+                            const SizedBox(height: 24),
+                            ElevatedButton(
+                              onPressed: () => context
+                                  .read<CourierPlacesCubit>()
+                                  .fetchPlaces(direction: 'deliver'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF49159B),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 32,
+                                  vertical: 12,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              child: Text(
+                                S.of(context).tryAgain,
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ),
-                            const SizedBox(height: 18),
-                            InfoItem(
-                              svgPath:
-                              'assets/svgs/profile_icon_with_background.svg',
-                              text: parcel.clientName ?? S.of(context).unknown,
-                            ),
-                            const SizedBox(height: 12),
-                            InfoItem(
-                              svgPath:
-                              'assets/svgs/profile_icon_with_background.svg',
-                              text: parcel.customerName ?? S.of(context).unknownZone,
-                            ),
-                            const SizedBox(height: 12),
-                            /*InfoItem(
-                              svgPath:
-                              'assets/svgs/location_icon_with_background.svg',
-                              text: parcel.zoneName ?? S.of(context).unknownCity,
-                            ),*/
-                            const SizedBox(height: 12),
-                            InfoItem(
-                              svgPath:
-                              'assets/svgs/call_icon_with_background.svg',
-                              text: parcel.customerName ?? S.of(context).unknownPhone,
-                            ),
                           ],
                         ),
-                      ),
+                      );
+                    }
+
+                    final stops = (state as CourierPlacesSuccess).stops;
+
+                    if (stops.isEmpty) {
+                      return ListView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        children: const [
+                          SizedBox(height: 80),
+                          NoDataFoundWidget(),
+                        ],
+                      );
+                    }
+
+                    return ListView.separated(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      itemCount: stops.length,
+                      separatorBuilder: (context, index) => const SizedBox(height: 12),
+                      itemBuilder: (context, index) {
+                        final stop = stops[index];
+                        return CourierStopCard(
+                          stop: stop,
+                          onTap: () {
+                            AppNavigator.navigateTo(
+                              context,
+                              () => CourierStopParcelsScreen(stop: stop),
+                            );
+                          },
+                        );
+                      },
                     );
-                  }).toList(),
-                ],
+                  },
+                ),
               ),
-            );
-          },
+            ),
+          ],
         ),
       ),
     );
   }
-
 }

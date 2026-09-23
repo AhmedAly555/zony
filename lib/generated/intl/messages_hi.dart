@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "couldNotGenerateQr": MessageLookupByLibrary.simpleMessage(
       "क्यूआर जेनरेट नहीं किया जा सका\n",
     ),
+    "customer": MessageLookupByLibrary.simpleMessage("ग्राहक"),
     "deliverNewParcel": MessageLookupByLibrary.simpleMessage(
       "नया पार्सल वितरित करें",
     ),
@@ -103,6 +104,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "failedToLoadPudoData": MessageLookupByLibrary.simpleMessage(
       "पिकअप बिंदु डेटा लोड करने में विफल: ",
+    ),
+    "failedToLoadStops": MessageLookupByLibrary.simpleMessage(
+      "स्टॉप लोड करने में विफल: ",
     ),
     "failedToRetrieveCourierId": MessageLookupByLibrary.simpleMessage(
       "⚠️ कूरियर आईडी प्राप्त करने में विफल",
@@ -171,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "⚠️ कोई क्यूआर कोड नहीं मिला",
     ),
     "noQrData": MessageLookupByLibrary.simpleMessage("कोई क्यूआर डेटा नहीं"),
+    "noStopsFound": MessageLookupByLibrary.simpleMessage("कोई स्टॉप नहीं मिला"),
     "oneBag": MessageLookupByLibrary.simpleMessage("एक बैग"),
     "parcelApprove": MessageLookupByLibrary.simpleMessage("पार्सल स्वीकृति"),
     "parcelApproveConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -192,6 +197,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "parcelReceivedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "✅ पार्सल सफलतापूर्वक प्राप्त हुआ!",
     ),
+    "parcels": MessageLookupByLibrary.simpleMessage("पार्सल"),
     "parcelsRefreshedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "पार्सल सफलतापूर्वक रीफ्रेश किए गए",
     ),
@@ -239,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pudoParcelsRetrievedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "पार्सल सफलतापूर्वक प्राप्त किए गए",
     ),
+    "pudoPlaceType": MessageLookupByLibrary.simpleMessage("पूडो"),
     "qrCode": MessageLookupByLibrary.simpleMessage("क्यूआर कोड"),
     "qrScanner": MessageLookupByLibrary.simpleMessage("क्यूआर स्कैनर"),
     "readyToDeliver": MessageLookupByLibrary.simpleMessage(
@@ -263,6 +270,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "somethingWentWrong": MessageLookupByLibrary.simpleMessage(
       " कुछ गलत हो गया: ",
     ),
+    "stopParcels": MessageLookupByLibrary.simpleMessage("स्टॉप पार्सल"),
     "successfulDeliveringProcess": MessageLookupByLibrary.simpleMessage(
       "सफल वितरण प्रक्रिया",
     ),
@@ -279,6 +287,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "transfer": MessageLookupByLibrary.simpleMessage("स्थानांतरण"),
     "tryAgain": MessageLookupByLibrary.simpleMessage("पुनः प्रयास करें"),
     "twoBag": MessageLookupByLibrary.simpleMessage("दो बैग"),
+    "unassignedStop": MessageLookupByLibrary.simpleMessage("अनिर्धारित स्टॉप"),
     "unknown": MessageLookupByLibrary.simpleMessage("अज्ञात"),
     "unknownAddress": MessageLookupByLibrary.simpleMessage("अज्ञात पता"),
     "unknownCity": MessageLookupByLibrary.simpleMessage("अज्ञात शहर"),
@@ -298,6 +307,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "उपयोगकर्ता नाम या फोन नंबर",
     ),
     "waiting": MessageLookupByLibrary.simpleMessage("प्रतीक्षा में"),
+    "warehouse": MessageLookupByLibrary.simpleMessage("गोदाम"),
     "whatsAppNotInstalled": MessageLookupByLibrary.simpleMessage(
       "आपके डिवाइस पर व्हाट्सएप इंस्टॉल नहीं है",
     ),

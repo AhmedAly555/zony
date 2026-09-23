@@ -461,4 +461,28 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get barcodeScanner => 'বারকোড স্ক্যানার';
+
+  @override
+  String get noStopsFound => 'কোনো স্টপ পাওয়া যায়নি';
+
+  @override
+  String get failedToLoadStops => 'স্টপ লোড করতে ব্যর্থ: ';
+
+  @override
+  String get parcels => 'পার্সেল';
+
+  @override
+  String get warehouse => 'গুদাম';
+
+  @override
+  String get customer => 'গ্রাহক';
+
+  @override
+  String get pudoPlaceType => 'পুডো';
+
+  @override
+  String get stopParcels => 'স্টপ পার্সেল';
+
+  @override
+  String get unassignedStop => 'অনির্ধারিত স্টপ';
 }

@@ -225,7 +225,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
 
                     },
                   ),
-                  CustomHomeServiceContainer(
+                  /*CustomHomeServiceContainer(
                     title: S.of(context).expired,
                     svgIconPath: 'assets/svgs/delivering.svg',
                     onTap: () {
@@ -234,7 +234,7 @@ class _CourierHomeScreenState extends State<CourierHomeScreen> {
                             () => const ExpiredReceivingScreen(),
                       );
                     },
-                  ),
+                  ),*/
                   CustomHomeServiceContainer(
                     title: S.of(context).myParcels,
                     svgIconPath: 'assets/svgs/my_parcels.svg',
