@@ -7,10 +7,13 @@ import 'package:zony/views/widgets/loading.widget.dart';
 import '../../../../views/widgets/template_app_scaffold.widget.dart';
 import '../../../services/navigator.services/app_navigator.services.dart';
 import '../../../views/widgets/no_data_found.widget.dart';
+import '../../../theme/app_colors.theme.dart';
 import 'courier_stop_parcels.screen.dart';
+import 'courier_stops_map.screen.dart';
 import 'cubit/courier_places_cubit.dart';
 import 'cubit/courier_places_state.dart';
 import 'widgets/courier_stop_card.widget.dart';
+import 'widgets/courier_stop_map_marker.widget.dart';
 
 class AllPODUsScreen extends StatelessWidget {
   const AllPODUsScreen({super.key});
@@ -35,7 +38,13 @@ class _AllPODUsScreenBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppBarHaveArrow(title: S.of(context).myPodus),
+            Stack(
+              alignment: AlignmentDirectional.centerEnd,
+              children: [
+                AppBarHaveArrow(title: S.of(context).myPodus),
+                const _StopsMapButton(),
+              ],
+            ),
             const SizedBox(height: 28),
             /*TextField(
               decoration: InputDecoration(
@@ -126,6 +135,45 @@ class _AllPODUsScreenBody extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// Opens all loaded stops on one map; hidden until there is at least one plottable stop.
+class _StopsMapButton extends StatelessWidget {
+  const _StopsMapButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CourierPlacesCubit, CourierPlacesState>(
+      builder: (context, state) {
+        if (state is! CourierPlacesSuccess ||
+            courierStopsToMapPoints(state.stops).isEmpty) {
+          return const SizedBox.shrink();
+        }
+
+        return GestureDetector(
+          onTap: () => AppNavigator.navigateTo(
+            context,
+            () => CourierStopsMapScreen(
+              stops: state.stops,
+              title: S.of(context).myPodus,
+            ),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: const EdgeInsets.all(12),
+            child: const Icon(
+              Icons.map_outlined,
+              color: AppColors.zonyPrimary,
+              size: 24,
+            ),
+          ),
+        );
+      },
     );
   }
 }

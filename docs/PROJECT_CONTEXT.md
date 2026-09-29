@@ -8,7 +8,8 @@
 **Package name**: `zony`
 **Type**: Flutter (Android + iOS)
 **Dart SDK**: `^3.7.2`
-**API Base URL**: `https://api.zony.sa` — hardcoded literal in `ApiService._internal()`. No `.env`, no `--dart-define`, no `AppConfig` class, no dev/staging flavors.
+**API Base URL**: `https://api.zony.sa` — hardcoded literal in `ApiService._internal()`. No `.env`, no `AppConfig` class, no dev/staging flavors.
+**Build-time secrets**: the Mapbox token is read via `String.fromEnvironment('MAPBOX_ACCESS_TOKEN')` in `MapboxConstants`. Run/build with `--dart-define-from-file=dart_defines.json` (git-ignored; copy `dart_defines.example.json` and fill in your token). Without it the token is empty and map tiles fail with 401. Never commit a token literal.
 **Version**: 1.0.9+10
 **Market**: Saudi Arabia (API domain `.sa`, Arabic locale, WhatsApp support link)
 **Fonts**: Poppins (default) / Cairo (Arabic) — chosen per-locale in `main.dart` (`locale.languageCode == 'ar' ? AppTheme.arabicTheme : AppTheme.englishTheme`). Each font only has a single `-Regular.ttf` weight registered.
@@ -39,7 +40,7 @@ Shared cross-role flows: QR/barcode scanning to identify a parcel, photo confirm
  Data access → lib/services/*.dart (manual singleton service classes calling ApiService directly)
 ```
 
-- **State management**: almost entirely `StatefulWidget` + `setState`. Bottom-tab index is managed via plain `ValueNotifier`-based controllers in `lib/controllers/` (not Cubits). The **only real Cubit/Bloc pair in the app** is `LoginCubit`/`LoginState` (`lib/modules/auth/cubit/`), provided via `BlocProvider` in `lib/modules/auth/view/widgets/login_cubit_route.dart`.
+- **State management**: almost entirely `StatefulWidget` + `setState`. Bottom-tab index is managed via plain `ValueNotifier`-based controllers in `lib/controllers/` (not Cubits). There are **two Cubits**: `LoginCubit`/`LoginState` (`lib/modules/auth/cubit/`, provided via `BlocProvider` in `login_cubit_route.dart`) and `CourierPlacesCubit`/`CourierPlacesState` (`lib/modules/couriers/pudos&parcels/cubit/`; states Initial/Loading/Success(stops)/Failure(message); `fetchPlaces(direction:)`), provided per-screen via `BlocProvider` in `AllPODUsScreen` and `DeliveryPointsScreen`.
 - **DI**: none. Every service is a manual singleton (private constructor + static `instance` getter), e.g. `ApiService.instance`, `UserService.instance`.
 - **HTTP**: `package:http`, wrapped by `ApiService` (which extends `BaseApiService`). Feature service classes (`UserService`, `ParcelsService`, etc.) call `ApiService.instance` directly — no repository abstraction.
 - **Navigation**: pure **Navigator 1.0**. No route table, no router package. `AppNavigator` (`lib/services/navigator.services/app_navigator.services.dart`) wraps `MaterialPageRoute` push/pop helpers; `NavigationService` holds a global `navigatorKey` so non-widget code (e.g. `ApiService` on refresh-token failure) can force-navigate to login.
@@ -48,7 +49,7 @@ Shared cross-role flows: QR/barcode scanning to identify a parcel, photo confirm
 - **Localization**: legacy `intl_utils`/`flutter_intl` codegen (class `S`, generated into `lib/generated/l10n.dart` + `lib/generated/intl/messages_*.dart`) from `.arb` files in `lib/l10n/intl_*.arb`. `main.dart` wires up `S.delegate`. Locale is switched/persisted via `LocaleLanguageService` (`ValueNotifier<Locale>`, key `languageCode`).
 - **QR/barcode scanning**: `mobile_scanner`, wrapped in `QRScannerBottomSheet` (`lib/views/widgets/bottom_sheet/qr_scanner.dart`) and the combined scan-or-manual screen `lib/modules/recieve_parcel/screens/scanner_qr_manual.dart`.
 - **Camera**: `camera` package via the reusable `CustomCameraScreen` (`lib/views/screens/custom_camera_screen.dart`), used to capture proof-of-delivery/receipt photos, uploaded through `ParcelImageService`'s 3-step signed-URL flow.
-- **Maps**: actual map screen (`lib/modules/couriers/pudos&parcels/podus_map.dart`, `MyPUDOsScreen`) uses `flutter_map` + OpenStreetMap tiles with mock/placeholder coordinates — **not** `google_maps_flutter`, even though that package is a declared dependency (see Known Issues).
+- **Maps**: the orphaned map screen (`lib/modules/couriers/pudos&parcels/podus_map.dart`, `MyPUDOsScreen` — not reachable from any home screen) uses `flutter_map` + OpenStreetMap tiles with mock/placeholder coordinates — **not** `google_maps_flutter`, even though that package is a declared dependency (see Known Issues).
 
 ---
 
@@ -72,7 +73,7 @@ dependencies:
   rename: ^3.1.0
   flutter_launcher_icons: ^0.14.4
   flutter_localization: ^0.3.3   # declared but NOT actually used — see Known Issues
-  flutter_bloc: ^9.1.1           # only used for LoginCubit
+  flutter_bloc: ^9.1.1           # used by LoginCubit and CourierPlacesCubit
   google_maps_flutter: ^2.14.0   # declared but NOT actually used — see Known Issues
 
 dev_dependencies:
@@ -108,8 +109,11 @@ lib/
 │   └── app_localizations*.dart        # flutter gen-l10n output (AppLocalizations class) — NOT wired
 │                                       # up in main.dart; appears to be an unused/leftover migration
 │
-├── models/                            # 19 plain Dart data models, manual fromJson/toJson, no codegen
+├── models/                            # 25 plain Dart data models, manual fromJson/toJson, no codegen
 │   ├── coordinates_model.dart
+│   ├── courier_places_response_model.dart  # GET /courier/places envelope: status, message, total_stops, stops[]
+│   ├── courier_stop_model.dart            # one stop: action, place_type, place, window, parcel_count, parcels[]
+│   ├── courier_stop_place_model.dart / courier_stop_window_model.dart / courier_stop_parcel_model.dart
 │   ├── parcel_model.dart / parcel_barcode_model.dart / parcel_barcode_response_model.dart
 │   ├── parcel_image_field_model.dart / upload_image_response_model.dart
 │   ├── get_parcel_response_model.dart / get_parcels_response_model.dart
@@ -132,8 +136,15 @@ lib/
 │   │
 │   ├── couriers/                      # Courier-role feature set
 │   │   ├── delivering/                # deliver parcels to a PUDO — screens + widgets
-│   │   ├── pudos&parcels/             # list/map/detail of assigned PUDOs and parcels
-│   │   │                              # (podus_map.dart: flutter_map + OSM, mock coordinates)
+│   │   ├── pudos&parcels/             # courier stops (pickup/deliver), backed by GET /courier/places
+│   │   │                              # all_podus.dart = AllPODUsScreen (direction=pickup, home card "PUDOs")
+│   │   │                              # delivery_points.dart = DeliveryPointsScreen (direction=deliver; formerly
+│   │   │                              #   my_parcels.dart; home card title uses l10n key `myParcels`)
+│   │   │                              # courier_stop_parcels.screen.dart = parcels of one tapped stop
+│   │   │                              # cubit/ = CourierPlacesCubit/State; widgets/courier_stop_card.widget.dart
+│   │   │                              # podu_details_and_parcels/ = older PUDO detail tabs (no longer linked
+│   │   │                              #   from AllPODUsScreen)
+│   │   │                              # podus_map.dart: orphaned flutter_map + OSM screen, mock coordinates
 │   │   ├── recieve/                   # receive parcels from warehouse
 │   │   ├── recieve_expired/           # expired-parcel handling/return flow
 │   │   └── views/
@@ -168,10 +179,15 @@ lib/
 │   │                                  # Completer-locked so concurrent 401s share one refresh call;
 │   │                                  # on refresh failure, clears local data and force-navigates to
 │   │                                  # LoginCubitRoute via NavigationService.navigatorKey.
+│   │                                  # Also has debug-only (kDebugMode) _logRequest/_logResponse boxes
+│   │                                  # around login/logout/refresh/_sendRequest — they print headers
+│   │                                  # (incl. Bearer tokens) and bodies; BaseApiService has the same for
+│   │                                  # patchMultipart.
 │   ├── user_profile_service.dart      # UserService — GET /profile, caches via ProfileStorage
 │   ├── get_res_pudos_service.dart     # ResponsiblePudoService — GET /pudos, caches via PudosStorage
 │   ├── get_courier_pudos_service.dart # GetCourierPudosService — GET /pudos, GET /pudos/{id},
-│   │                                  # GET /pudos?username=
+│   │                                  # GET /pudos?username=, GET /courier/places[?direction=]
+│   │                                  # (getCourierPlaces → CourierPlacesResponseModel)
 │   ├── parcel_service.dart            # ParcelsService — every "get parcels" endpoint exists in TWO
 │   │                                  # response-model flavors, called "old" and "New": e.g.
 │   │                                  # getParcelsByPudoId → ParcelsResponse vs. getNewParcelsByPudoId
@@ -307,6 +323,7 @@ assets/
 | `GET /pudos` | `ResponsiblePudoService`, `GetCourierPudosService` — cached via `PudosStorage` |
 | `GET /pudos/{id}` | `GetCourierPudosService` |
 | `GET /pudos?username=` | `GetCourierPudosService` |
+| `GET /courier/places?direction=pickup\|deliver` | `GetCourierPudosService.getCourierPlaces` → `CourierPlacesCubit` — courier stops with embedded `parcels[]` (no per-stop re-fetch). Design notes in `docs/COURIER_PLACES_INTEGRATION_PLAN.md` |
 
 ### Parcels
 | Endpoint | Used by |
@@ -330,8 +347,8 @@ All of `ParcelsService`'s methods pass their path **without** a leading slash ex
 ## Key Patterns & Conventions
 
 ### State management
-- Default to `StatefulWidget` + `setState` for screen-local state — that is the established pattern everywhere except login.
-- If a screen needs shared/cross-widget state, the existing precedent is a `ValueNotifier`-based controller (see `lib/controllers/`), not a new Cubit — `flutter_bloc` is present but only exercised once (`LoginCubit`). Follow the surrounding pattern in a given module rather than introducing a third state-management style.
+- Default to `StatefulWidget` + `setState` for screen-local state — that is the established pattern everywhere except login and the courier stops screens.
+- If a screen needs shared/cross-widget state, the existing precedent is a `ValueNotifier`-based controller (see `lib/controllers/`). For screens that load a remote list with loading/error states, `CourierPlacesCubit` is the newer precedent (screen-scoped `BlocProvider`, sealed-style state classes). Follow the surrounding pattern in a given module rather than introducing a third state-management style.
 
 ### Networking
 - Add new endpoints as methods on the relevant singleton service in `lib/services/` (or a new one following the same private-constructor/`instance` pattern), calling `ApiService.instance`. Don't reach for `package:http` directly from a screen.
@@ -356,11 +373,13 @@ All of `ParcelsService`'s methods pass their path **without** a leading slash ex
 ## Known Issues / Inconsistencies (worth knowing before touching related code)
 
 - **Two parallel localization codegens**: `S` (`flutter_intl`/`intl_utils`, actually used) and `AppLocalizations` (`flutter gen-l10n`, generated but unused/dead). `pubspec.yaml` has both `flutter_intl: enabled: true` and `generate: true`.
-- **`google_maps_flutter` is declared but never used.** The actual map screen (`podus_map.dart`) uses `flutter_map` + OpenStreetMap tiles with mock/placeholder coordinates (Washington DC area) instead. `flutter_map`/`latlong2` usage isn't reflected as a direct dependency comment concern beyond `flutter_map` itself being declared.
+- **`MyPUDOsScreen` (`podus_map.dart`) is orphaned** — nothing navigates to it. Likewise `podu_details_and_parcels/` is no longer reached from `AllPODUsScreen` (which now opens `CourierStopParcelsScreen`).
+- **Confusing naming**: `DeliveryPointsScreen`'s home-card title comes from l10n key `myParcels` ("Delivery Points"), and both home cards reuse `assets/svgs/my_parcels.svg`.
+- **`google_maps_flutter` is declared but never used.** The map screen (`podus_map.dart`) uses `flutter_map` + OpenStreetMap tiles with mock/placeholder coordinates (Washington DC area) instead. `flutter_map`/`latlong2` usage isn't reflected as a direct dependency comment concern beyond `flutter_map` itself being declared.
 - **`flutter_localization` package is declared but not actually used** — real localization goes through standard `flutter_localizations` SDK + generated `S` class.
 - **Two API client base classes**: `BaseApiService` (raw `dart:io HttpClient`) and `ApiService extends BaseApiService` (overrides everything to use `package:http` instead). The base class's own HTTP implementation is effectively dead code for the overridden methods.
 - **Duplicate notification item widgets**: `notifacation_item.dart` and `notification_Item.widget.dart` both exist in `lib/views/widgets/`.
-- **No environment/flavor config**: API base URL is a single hardcoded string; there's no dev/staging/prod split.
+- **No environment/flavor config**: API base URL is a single hardcoded string; there's no dev/staging/prod split. The only `--dart-define` in use is `MAPBOX_ACCESS_TOKEN` (see top of this file).
 - **`SplashScreen` bypasses `TokenStorage`**, reading `access_token`/`role` from `SharedPreferences` directly with duplicated key-name literals instead of calling `TokenStorage`'s methods.
 - **Folder name contains a literal `&`**: `lib/modules/couriers/pudos&parcels/` — be careful with shell quoting when touching this path.
 - **`SizeConfig.init(context)`** is required for `SizeConfig`'s percentage helpers to work but is inconsistently called (seen commented out in `template_app_scaffold.widget.dart`).
