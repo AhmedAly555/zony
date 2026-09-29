@@ -22,7 +22,7 @@ class ConfirmParcelBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           // Handle bar line
-          HederBottomSheetLine(),
+          const HederBottomSheetLine(),
 
           const Spacer(),
 
@@ -64,7 +64,7 @@ class ConfirmParcelBottomSheet extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Expanded(
                 child: CustomOutlineButton(
                   onTap: (){
@@ -72,7 +72,7 @@ class ConfirmParcelBottomSheet extends StatelessWidget {
                   },
                   title: Text(
                     S.of(context).noCancel,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF49159B),
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
@@ -82,7 +82,7 @@ class ConfirmParcelBottomSheet extends StatelessWidget {
               ),
             ],
           ),
-          Padding(padding: const EdgeInsets.only(bottom: 16)),
+          const Padding(padding: EdgeInsets.only(bottom: 16)),
         ],
       ),
     );

@@ -12,7 +12,7 @@ class HederBottomSheetLine extends StatelessWidget {
       width: 80,
       height: 4,
       decoration: BoxDecoration(
-        color: Color(0xFF929292),
+        color: const Color(0xFF929292),
         borderRadius: BorderRadius.circular(2),
       ),
     );

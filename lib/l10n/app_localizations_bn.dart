@@ -48,7 +48,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get expired => 'মেয়াদ উত্তীর্ণ';
 
   @override
-  String get myParcels => 'আমার পার্সেল';
+  String get myParcels => 'ডেলিভারি পয়েন্ট';
 
   @override
   String get podus => 'পিকআপ পয়েন্ট';
@@ -330,7 +330,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get parcelApproveConfirmation => 'পার্সেল অনুমোদন নিশ্চিতকরণ';
 
   @override
-  String areYouSureYouWantToApprove(Object parcelBarcode, Object parcelId) {
+  String areYouSureYouWantToApprove(Object parcelId) {
     return 'আপনি কি নিশ্চিত এই পার্সেলটি অনুমোদন করতে চান? (আইডি: #$parcelId)';
   }
 
@@ -455,4 +455,34 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get whatsAppNotInstalled =>
       'আপনার ডিভাইসে হোয়াটসঅ্যাপ ইনস্টল করা নেই';
+
+  @override
+  String get chooseWayOfSearching => 'অনুসন্ধানের পথ বেছে নিন';
+
+  @override
+  String get barcodeScanner => 'বারকোড স্ক্যানার';
+
+  @override
+  String get noStopsFound => 'কোনো স্টপ পাওয়া যায়নি';
+
+  @override
+  String get failedToLoadStops => 'স্টপ লোড করতে ব্যর্থ: ';
+
+  @override
+  String get parcels => 'পার্সেল';
+
+  @override
+  String get warehouse => 'গুদাম';
+
+  @override
+  String get customer => 'গ্রাহক';
+
+  @override
+  String get pudoPlaceType => 'পুডো';
+
+  @override
+  String get stopParcels => 'স্টপ পার্সেল';
+
+  @override
+  String get unassignedStop => 'অনির্ধারিত স্টপ';
 }

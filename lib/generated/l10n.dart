@@ -134,9 +134,14 @@ class S {
     return Intl.message('Expired', name: 'expired', desc: '', args: []);
   }
 
-  /// `My Parcels`
+  /// `Delivery Points`
   String get myParcels {
-    return Intl.message('My Parcels', name: 'myParcels', desc: '', args: []);
+    return Intl.message(
+      'Delivery Points',
+      name: 'myParcels',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `PODUs`
@@ -914,13 +919,13 @@ class S {
     );
   }
 
-  /// `Are you sure you want to approve this parcel?(Barcode: {parcelBarcode})`
-  String areYouSureYouWantToApprove(Object parcelBarcode) {
+  /// `Are you sure you want to approve this parcel?(ID: #{parcelId})`
+  String areYouSureYouWantToApprove(Object parcelId) {
     return Intl.message(
-      'Are you sure you want to approve this parcel?(Barcode: $parcelBarcode)',
+      'Are you sure you want to approve this parcel?(ID: #$parcelId)',
       name: 'areYouSureYouWantToApprove',
       desc: '',
-      args: [parcelBarcode],
+      args: [parcelId],
     );
   }
 
@@ -1244,6 +1249,86 @@ class S {
     return Intl.message(
       'WhatsApp is not installed on your device',
       name: 'whatsAppNotInstalled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose Way Of Searching`
+  String get chooseWayOfSearching {
+    return Intl.message(
+      'Choose Way Of Searching',
+      name: 'chooseWayOfSearching',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Barcode Scanner`
+  String get barcodeScanner {
+    return Intl.message(
+      'Barcode Scanner',
+      name: 'barcodeScanner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No stops found`
+  String get noStopsFound {
+    return Intl.message(
+      'No stops found',
+      name: 'noStopsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load stops: `
+  String get failedToLoadStops {
+    return Intl.message(
+      'Failed to load stops: ',
+      name: 'failedToLoadStops',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Parcels`
+  String get parcels {
+    return Intl.message('Parcels', name: 'parcels', desc: '', args: []);
+  }
+
+  /// `Warehouse`
+  String get warehouse {
+    return Intl.message('Warehouse', name: 'warehouse', desc: '', args: []);
+  }
+
+  /// `Customer`
+  String get customer {
+    return Intl.message('Customer', name: 'customer', desc: '', args: []);
+  }
+
+  /// `PUDO`
+  String get pudoPlaceType {
+    return Intl.message('PUDO', name: 'pudoPlaceType', desc: '', args: []);
+  }
+
+  /// `Stop Parcels`
+  String get stopParcels {
+    return Intl.message(
+      'Stop Parcels',
+      name: 'stopParcels',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unassigned Stop`
+  String get unassignedStop {
+    return Intl.message(
+      'Unassigned Stop',
+      name: 'unassignedStop',
       desc: '',
       args: [],
     );

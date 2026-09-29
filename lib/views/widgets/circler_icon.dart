@@ -9,8 +9,8 @@ class CirclerIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF3F4F6),
+      decoration: const BoxDecoration(
+        color: Color(0xFFF3F4F6),
         shape: BoxShape.circle,
         //borderRadius: BorderRadius.circular(8),
       ),

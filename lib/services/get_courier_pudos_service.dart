@@ -1,3 +1,4 @@
+import '../models/courier_places_response_model.dart';
 import '../models/my_pudos_response.dart';
 import '../models/single_pudo_response_model.dart';
 import 'api_service.dart';
@@ -37,6 +38,19 @@ class GetCourierPudosService {
       final url = '/pudos?username=$username';
       final response = await ApiService.instance.get(url);
       return MyPudosResponse.fromJson(response);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Fetch courier stops (pickup/deliver places), optionally filtered by direction
+  Future<CourierPlacesResponseModel> getCourierPlaces({String? direction}) async {
+    try {
+      final response = await ApiService.instance.get(
+        '/courier/places',
+        queryParameters: direction != null ? {'direction': direction} : null,
+      );
+      return CourierPlacesResponseModel.fromJson(response);
     } catch (e) {
       rethrow;
     }

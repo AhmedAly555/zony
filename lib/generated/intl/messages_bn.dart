@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "আপনি কি নিশ্চিত লগআউট করতে চান?",
     ),
     "backToHome": MessageLookupByLibrary.simpleMessage("হোমে ফিরে যান"),
+    "barcodeScanner": MessageLookupByLibrary.simpleMessage("বারকোড স্ক্যানার"),
     "bengali": MessageLookupByLibrary.simpleMessage("বাংলা"),
     "cameronWilliamson": MessageLookupByLibrary.simpleMessage(
       "ক্যামেরন উইলিয়ামসন",
@@ -49,6 +50,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "changePassword": MessageLookupByLibrary.simpleMessage(
       "পাসওয়ার্ড পরিবর্তন করুন",
+    ),
+    "chooseWayOfSearching": MessageLookupByLibrary.simpleMessage(
+      "অনুসন্ধানের পথ বেছে নিন",
     ),
     "chooseYourLanguage": MessageLookupByLibrary.simpleMessage(
       "আপনার ভাষা পছন্দ করুন",
@@ -61,6 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "couldNotGenerateQr": MessageLookupByLibrary.simpleMessage(
       "QR তৈরি করা যায়নি\n",
     ),
+    "customer": MessageLookupByLibrary.simpleMessage("গ্রাহক"),
     "deliverNewParcel": MessageLookupByLibrary.simpleMessage(
       "নতুন পার্সেল বিতরণ করুন",
     ),
@@ -108,6 +113,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "failedToLoadPudoData": MessageLookupByLibrary.simpleMessage(
       "পিকআপ পয়েন্ট ডেটা লোড করতে ব্যর্থ: ",
     ),
+    "failedToLoadStops": MessageLookupByLibrary.simpleMessage(
+      "স্টপ লোড করতে ব্যর্থ: ",
+    ),
     "failedToRetrieveCourierId": MessageLookupByLibrary.simpleMessage(
       "⚠️ কুরিয়ার আইডি উদ্ধার করতে ব্যর্থ",
     ),
@@ -142,7 +150,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout": MessageLookupByLibrary.simpleMessage("লগআউট"),
     "more": MessageLookupByLibrary.simpleMessage("আরো"),
     "moreSettings": MessageLookupByLibrary.simpleMessage("আরো সেটিংস"),
-    "myParcels": MessageLookupByLibrary.simpleMessage("আমার পার্সেল"),
+    "myParcels": MessageLookupByLibrary.simpleMessage("ডেলিভারি পয়েন্ট"),
     "myPickupPoints": MessageLookupByLibrary.simpleMessage(
       "আমার পিকআপ পয়েন্ট",
     ),
@@ -179,6 +187,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "⚠️ কোন QR কোড সনাক্ত করা যায়নি",
     ),
     "noQrData": MessageLookupByLibrary.simpleMessage("কোন QR ডেটা নেই"),
+    "noStopsFound": MessageLookupByLibrary.simpleMessage(
+      "কোনো স্টপ পাওয়া যায়নি",
+    ),
     "oneBag": MessageLookupByLibrary.simpleMessage("১ ব্যাগ"),
     "parcelApprove": MessageLookupByLibrary.simpleMessage("পার্সেল অনুমোদন"),
     "parcelApproveConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -200,6 +211,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "parcelReceivedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "✅ পার্সেল সফলভাবে গৃহীত হয়েছে!",
     ),
+    "parcels": MessageLookupByLibrary.simpleMessage("পার্সেল"),
     "parcelsRefreshedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "পার্সেল সফলভাবে রিফ্রেশ করা হয়েছে",
     ),
@@ -247,6 +259,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pudoParcelsRetrievedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "পার্সেল সফলভাবে উদ্ধার করা হয়েছে",
     ),
+    "pudoPlaceType": MessageLookupByLibrary.simpleMessage("পুডো"),
     "qrCode": MessageLookupByLibrary.simpleMessage("QR কোড"),
     "qrScanner": MessageLookupByLibrary.simpleMessage("QR স্ক্যানার"),
     "readyToDeliver": MessageLookupByLibrary.simpleMessage(
@@ -273,6 +286,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "somethingWentWrong": MessageLookupByLibrary.simpleMessage(
       " কিছু ভুল হয়েছে: ",
     ),
+    "stopParcels": MessageLookupByLibrary.simpleMessage("স্টপ পার্সেল"),
     "successfulDeliveringProcess": MessageLookupByLibrary.simpleMessage(
       "সফল বিতরণ প্রক্রিয়া",
     ),
@@ -289,6 +303,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "transfer": MessageLookupByLibrary.simpleMessage("স্থানান্তর"),
     "tryAgain": MessageLookupByLibrary.simpleMessage("আবার চেষ্টা করুন"),
     "twoBag": MessageLookupByLibrary.simpleMessage("২ ব্যাগ"),
+    "unassignedStop": MessageLookupByLibrary.simpleMessage("অনির্ধারিত স্টপ"),
     "unknown": MessageLookupByLibrary.simpleMessage("অজানা"),
     "unknownAddress": MessageLookupByLibrary.simpleMessage("অজানা ঠিকানা"),
     "unknownCity": MessageLookupByLibrary.simpleMessage("অজানা শহর"),
@@ -308,6 +323,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "ব্যবহারকারীর নাম বা ফোন নম্বর",
     ),
     "waiting": MessageLookupByLibrary.simpleMessage("অপেক্ষমান"),
+    "warehouse": MessageLookupByLibrary.simpleMessage("গুদাম"),
     "whatsAppNotInstalled": MessageLookupByLibrary.simpleMessage(
       "আপনার ডিভাইসে হোয়াটসঅ্যাপ ইনস্টল করা নেই",
     ),

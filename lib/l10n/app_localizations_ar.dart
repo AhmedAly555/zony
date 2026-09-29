@@ -48,7 +48,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get expired => 'منتهي الصلاحية';
 
   @override
-  String get myParcels => 'طرودي';
+  String get myParcels => 'نقاط التسليم';
 
   @override
   String get podus => 'نقاط الاستلام';
@@ -326,7 +326,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get parcelApproveConfirmation => 'تأكيد الموافقة على الطرد';
 
   @override
-  String areYouSureYouWantToApprove(Object parcelBarcode, Object parcelId) {
+  String areYouSureYouWantToApprove(Object parcelId) {
     return 'هل أنت متأكد من الموافقة على هذا الطرد؟ (المعرف: #$parcelId)';
   }
 
@@ -449,4 +449,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get whatsAppNotInstalled => 'الواتساب غير مثبت على جهازك';
+
+  @override
+  String get chooseWayOfSearching => 'اختر طريقة البحث';
+
+  @override
+  String get barcodeScanner => 'ماسح الباركود';
+
+  @override
+  String get noStopsFound => 'لم يتم العثور على نقاط توقف';
+
+  @override
+  String get failedToLoadStops => 'فشل تحميل نقاط التوقف: ';
+
+  @override
+  String get parcels => 'طرود';
+
+  @override
+  String get warehouse => 'مستودع';
+
+  @override
+  String get customer => 'عميل';
+
+  @override
+  String get pudoPlaceType => 'نقطة استلام';
+
+  @override
+  String get stopParcels => 'طرود نقطة التوقف';
+
+  @override
+  String get unassignedStop => 'نقطة غير محددة';
 }

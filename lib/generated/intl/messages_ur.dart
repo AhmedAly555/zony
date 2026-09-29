@@ -40,11 +40,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "کیا آپ واقعی لاگ آؤٹ کرنا چاہتے ہیں؟",
     ),
     "backToHome": MessageLookupByLibrary.simpleMessage("ہوم پر واپس جائیں"),
+    "barcodeScanner": MessageLookupByLibrary.simpleMessage("بارکوڈ اسکینر"),
     "bengali": MessageLookupByLibrary.simpleMessage("بنگالی"),
     "cameronWilliamson": MessageLookupByLibrary.simpleMessage("کیمرون ولیمسن"),
     "captureParcel": MessageLookupByLibrary.simpleMessage("پارسل کی تصویر لیں"),
     "changePassword": MessageLookupByLibrary.simpleMessage(
       "پاس ورڈ تبدیل کریں",
+    ),
+    "chooseWayOfSearching": MessageLookupByLibrary.simpleMessage(
+      "تلاش کا طریقہ منتخب کریں",
     ),
     "chooseYourLanguage": MessageLookupByLibrary.simpleMessage(
       "اپنی زبان منتخب کریں",
@@ -57,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "couldNotGenerateQr": MessageLookupByLibrary.simpleMessage(
       "کیو آر بنایا نہیں جا سکا\n",
     ),
+    "customer": MessageLookupByLibrary.simpleMessage("کسٹمر"),
     "deliverNewParcel": MessageLookupByLibrary.simpleMessage(
       "نیا پارسل پہنچائیں",
     ),
@@ -104,6 +109,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "failedToLoadPudoData": MessageLookupByLibrary.simpleMessage(
       "پک اپ پوائنٹ کا ڈیٹا لوڈ کرنے میں ناکامی: ",
     ),
+    "failedToLoadStops": MessageLookupByLibrary.simpleMessage(
+      "اسٹاپس لوڈ کرنے میں ناکام: ",
+    ),
     "failedToRetrieveCourierId": MessageLookupByLibrary.simpleMessage(
       "⚠️ کورئیر کی شناخت حاصل کرنے میں ناکامی",
     ),
@@ -138,7 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout": MessageLookupByLibrary.simpleMessage("لاگ آؤٹ"),
     "more": MessageLookupByLibrary.simpleMessage("مزید"),
     "moreSettings": MessageLookupByLibrary.simpleMessage("مزید ترتیبات"),
-    "myParcels": MessageLookupByLibrary.simpleMessage("میرے پارسل"),
+    "myParcels": MessageLookupByLibrary.simpleMessage("ترسیل کے مقامات"),
     "myPickupPoints": MessageLookupByLibrary.simpleMessage(
       "میرے پک اپ پوائنٹس",
     ),
@@ -173,6 +181,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "⚠️ کیو آر کوڈ کا پتہ نہیں چلا",
     ),
     "noQrData": MessageLookupByLibrary.simpleMessage("کوئی کیو آر ڈیٹا نہیں"),
+    "noStopsFound": MessageLookupByLibrary.simpleMessage("کوئی اسٹاپ نہیں ملا"),
     "oneBag": MessageLookupByLibrary.simpleMessage("ایک بیگ"),
     "parcelApprove": MessageLookupByLibrary.simpleMessage("پارسل کی منظوری"),
     "parcelApproveConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -194,6 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "parcelReceivedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "✅ پارسل کامیابی سے موصول ہوا!",
     ),
+    "parcels": MessageLookupByLibrary.simpleMessage("پارسل"),
     "parcelsRefreshedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "پارسل کامیابی سے تازہ کیے گئے",
     ),
@@ -241,6 +251,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pudoParcelsRetrievedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "پارسل کامیابی سے حاصل کیے گئے",
     ),
+    "pudoPlaceType": MessageLookupByLibrary.simpleMessage("پیوڈو"),
     "qrCode": MessageLookupByLibrary.simpleMessage("کیو آر کوڈ"),
     "qrScanner": MessageLookupByLibrary.simpleMessage("کیو آر اسکینر"),
     "readyToDeliver": MessageLookupByLibrary.simpleMessage("ترسیل کے لیے تیار"),
@@ -263,6 +274,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "somethingWentWrong": MessageLookupByLibrary.simpleMessage(
       " کچھ غلط ہو گیا: ",
     ),
+    "stopParcels": MessageLookupByLibrary.simpleMessage("اسٹاپ پارسل"),
     "successfulDeliveringProcess": MessageLookupByLibrary.simpleMessage(
       "کامیاب ترسیل کا عمل",
     ),
@@ -279,6 +291,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "transfer": MessageLookupByLibrary.simpleMessage("منتقلی"),
     "tryAgain": MessageLookupByLibrary.simpleMessage("دوبارہ کوشش کریں"),
     "twoBag": MessageLookupByLibrary.simpleMessage("دو بیگ"),
+    "unassignedStop": MessageLookupByLibrary.simpleMessage("غیر متعین اسٹاپ"),
     "unknown": MessageLookupByLibrary.simpleMessage("نامعلوم"),
     "unknownAddress": MessageLookupByLibrary.simpleMessage("نامعلوم پتہ"),
     "unknownCity": MessageLookupByLibrary.simpleMessage("نامعلوم شہر"),
@@ -298,6 +311,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "صارف نام یا فون نمبر",
     ),
     "waiting": MessageLookupByLibrary.simpleMessage("انتظار میں"),
+    "warehouse": MessageLookupByLibrary.simpleMessage("گودام"),
     "whatsAppNotInstalled": MessageLookupByLibrary.simpleMessage(
       "واٹس ایپ آپ کے آلے پر انسٹال نہیں ہے",
     ),

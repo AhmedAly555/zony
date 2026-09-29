@@ -48,7 +48,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get expired => 'میعاد ختم';
 
   @override
-  String get myParcels => 'میرے پارسل';
+  String get myParcels => 'ترسیل کے مقامات';
 
   @override
   String get podus => 'پک اپ پوائنٹس';
@@ -331,7 +331,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get parcelApproveConfirmation => 'پارسل کی منظوری کی تصدیق';
 
   @override
-  String areYouSureYouWantToApprove(Object parcelBarcode, Object parcelId) {
+  String areYouSureYouWantToApprove(Object parcelId) {
     return 'کیا آپ واقعی اس پارسل کی منظوری دینا چاہتے ہیں؟ (شناخت: #$parcelId)';
   }
 
@@ -456,4 +456,34 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get whatsAppNotInstalled => 'واٹس ایپ آپ کے آلے پر انسٹال نہیں ہے';
+
+  @override
+  String get chooseWayOfSearching => 'تلاش کا طریقہ منتخب کریں';
+
+  @override
+  String get barcodeScanner => 'بارکوڈ اسکینر';
+
+  @override
+  String get noStopsFound => 'کوئی اسٹاپ نہیں ملا';
+
+  @override
+  String get failedToLoadStops => 'اسٹاپس لوڈ کرنے میں ناکام: ';
+
+  @override
+  String get parcels => 'پارسل';
+
+  @override
+  String get warehouse => 'گودام';
+
+  @override
+  String get customer => 'کسٹمر';
+
+  @override
+  String get pudoPlaceType => 'پیوڈو';
+
+  @override
+  String get stopParcels => 'اسٹاپ پارسل';
+
+  @override
+  String get unassignedStop => 'غیر متعین اسٹاپ';
 }

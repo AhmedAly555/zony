@@ -45,3 +45,6 @@ app.*.map.json
 /android/app/release
 **/android/key.properties
 **/android/app/upload-keystore-zony.jks
+
+# Local build-time secrets (flutter run --dart-define-from-file=dart_defines.json)
+dart_defines.json

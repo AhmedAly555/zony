@@ -84,15 +84,15 @@ class _PasswordBottomSheetState
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            HederBottomSheetLine(),
+            const HederBottomSheetLine(),
             const Spacer(),
-            Text(
+            const Text(
               "Enter your Password",
               textAlign: TextAlign.center,
               style: AppTextStyles.bottomSheetTitle,
             ),
             const Spacer(),
-            Align(
+            const Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 "Password",
@@ -149,7 +149,7 @@ class _PasswordBottomSheetState
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
-                    color: _hasError ? Colors.red : Color(0xFF49159B),
+                    color: _hasError ? Colors.red : const Color(0xFF49159B),
                   ),
                 ),
                 contentPadding: const EdgeInsets.symmetric(
@@ -180,11 +180,11 @@ class _PasswordBottomSheetState
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(top: 6),
+                    padding: const EdgeInsets.only(top: 6),
                     child: Text(
                       S.of(context).usernameIsNotValid,
-                      key: ValueKey('error-text'),
-                      style: TextStyle(color: Colors.red, fontSize: 12),
+                      key: const ValueKey('error-text'),
+                      style: const TextStyle(color: Colors.red, fontSize: 12),
                     ),
                   ),
                 ),
@@ -230,7 +230,7 @@ class _PasswordBottomSheetState
                       ),
                       child: Text(
                         S.of(context).confirm,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
@@ -265,7 +265,7 @@ void showPasswordBottomSheet(BuildContext context) {
           maxHeight: SizeConfig.heightPercent(0.75),
           minHeight: SizeConfig.heightPercent(0.45),
         ),
-        child: IntrinsicHeight(child: PasswordBottomSheet()),
+        child: const IntrinsicHeight(child: PasswordBottomSheet()),
       );
     },
 

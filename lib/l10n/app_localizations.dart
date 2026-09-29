@@ -185,7 +185,7 @@ abstract class AppLocalizations {
   /// No description provided for @myParcels.
   ///
   /// In en, this message translates to:
-  /// **'My Parcels'**
+  /// **'Delivery Points'**
   String get myParcels;
 
   /// No description provided for @podus.
@@ -731,8 +731,8 @@ abstract class AppLocalizations {
   /// No description provided for @areYouSureYouWantToApprove.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to approve this parcel?(Barcode: {parcelBarcode})'**
-  String areYouSureYouWantToApprove(Object parcelBarcode, Object parcelId);
+  /// **'Are you sure you want to approve this parcel?(ID: #{parcelId})'**
+  String areYouSureYouWantToApprove(Object parcelId);
 
   /// No description provided for @noCancel.
   ///
@@ -967,6 +967,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'WhatsApp is not installed on your device'**
   String get whatsAppNotInstalled;
+
+  /// No description provided for @chooseWayOfSearching.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Way Of Searching'**
+  String get chooseWayOfSearching;
+
+  /// No description provided for @barcodeScanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Barcode Scanner'**
+  String get barcodeScanner;
+
+  /// No description provided for @noStopsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No stops found'**
+  String get noStopsFound;
+
+  /// No description provided for @failedToLoadStops.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load stops: '**
+  String get failedToLoadStops;
+
+  /// No description provided for @parcels.
+  ///
+  /// In en, this message translates to:
+  /// **'Parcels'**
+  String get parcels;
+
+  /// No description provided for @warehouse.
+  ///
+  /// In en, this message translates to:
+  /// **'Warehouse'**
+  String get warehouse;
+
+  /// No description provided for @customer.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer'**
+  String get customer;
+
+  /// No description provided for @pudoPlaceType.
+  ///
+  /// In en, this message translates to:
+  /// **'PUDO'**
+  String get pudoPlaceType;
+
+  /// No description provided for @stopParcels.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop Parcels'**
+  String get stopParcels;
+
+  /// No description provided for @unassignedStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Unassigned Stop'**
+  String get unassignedStop;
 }
 
 class _AppLocalizationsDelegate
