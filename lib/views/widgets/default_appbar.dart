@@ -38,6 +38,7 @@ class AppBarHaveArrow extends StatelessWidget {
               'assets/svgs/arrow_back.svg',
               width: 10,
               height: 15,
+              matchTextDirection: true,
               //color: const Color(0xFF49159B),
             ),
           ),

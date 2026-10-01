@@ -486,4 +486,13 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get unassignedStop => 'غیر متعین اسٹاپ';
+
+  @override
+  String get location => 'مقام';
+
+  @override
+  String get couldNotOpenMap => 'میپ ایپ نہیں کھل سکی';
+
+  @override
+  String get viewParcels => 'پارسل دیکھیں';
 }

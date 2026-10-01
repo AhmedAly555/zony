@@ -57,6 +57,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "couldNotGenerateQr": MessageLookupByLibrary.simpleMessage(
       "Could not generate QR\n",
     ),
+    "couldNotOpenMap": MessageLookupByLibrary.simpleMessage(
+      "Could not open the map app",
+    ),
     "customer": MessageLookupByLibrary.simpleMessage("Customer"),
     "deliverNewParcel": MessageLookupByLibrary.simpleMessage(
       "Deliver New Parcel",
@@ -127,6 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "languageSelectionDescription": MessageLookupByLibrary.simpleMessage(
       "Select your preferred language.",
     ),
+    "location": MessageLookupByLibrary.simpleMessage("Location"),
     "logIn": MessageLookupByLibrary.simpleMessage("Log in"),
     "logOutDescription": MessageLookupByLibrary.simpleMessage(
       "You will be returned to the login screen.",
@@ -298,6 +302,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "usernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "username or e-mail",
     ),
+    "viewParcels": MessageLookupByLibrary.simpleMessage("View parcels"),
     "waiting": MessageLookupByLibrary.simpleMessage("Waiting"),
     "warehouse": MessageLookupByLibrary.simpleMessage("Warehouse"),
     "whatsAppNotInstalled": MessageLookupByLibrary.simpleMessage(

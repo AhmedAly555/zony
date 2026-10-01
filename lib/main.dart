@@ -60,3 +60,5 @@ class _ZonyAppState extends State<ZonyApp> {
     );
   }
 }
+//flutter run --dart-define-from-file=dart_defines.json
+// FOR APK: flutter build apk --dart-define-from-file=dart_defines.json

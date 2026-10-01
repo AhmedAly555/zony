@@ -1027,6 +1027,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unassigned Stop'**
   String get unassignedStop;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get location;
+
+  /// No description provided for @couldNotOpenMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the map app'**
+  String get couldNotOpenMap;
+
+  /// No description provided for @viewParcels.
+  ///
+  /// In en, this message translates to:
+  /// **'View parcels'**
+  String get viewParcels;
 }
 
 class _AppLocalizationsDelegate

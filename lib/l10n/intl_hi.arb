@@ -154,5 +154,8 @@
     "customer": "ग्राहक",
     "pudoPlaceType": "पूडो",
     "stopParcels": "स्टॉप पार्सल",
-    "unassignedStop": "अनिर्धारित स्टॉप"
+    "unassignedStop": "अनिर्धारित स्टॉप",
+    "location": "स्थान",
+    "couldNotOpenMap": "मैप ऐप नहीं खुल सका",
+    "viewParcels": "पार्सल देखें"
 }

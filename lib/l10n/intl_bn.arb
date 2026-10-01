@@ -154,5 +154,8 @@
     "customer": "গ্রাহক",
     "pudoPlaceType": "পুডো",
     "stopParcels": "স্টপ পার্সেল",
-    "unassignedStop": "অনির্ধারিত স্টপ"
+    "unassignedStop": "অনির্ধারিত স্টপ",
+    "location": "অবস্থান",
+    "couldNotOpenMap": "ম্যাপ অ্যাপ খোলা যায়নি",
+    "viewParcels": "পার্সেল দেখুন"
 }

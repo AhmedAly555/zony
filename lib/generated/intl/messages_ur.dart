@@ -61,6 +61,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "couldNotGenerateQr": MessageLookupByLibrary.simpleMessage(
       "کیو آر بنایا نہیں جا سکا\n",
     ),
+    "couldNotOpenMap": MessageLookupByLibrary.simpleMessage(
+      "میپ ایپ نہیں کھل سکی",
+    ),
     "customer": MessageLookupByLibrary.simpleMessage("کسٹمر"),
     "deliverNewParcel": MessageLookupByLibrary.simpleMessage(
       "نیا پارسل پہنچائیں",
@@ -133,6 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "languageSelectionDescription": MessageLookupByLibrary.simpleMessage(
       "اپنی پسند کی زبان منتخب کریں۔ اس سے ایپ میں متن اپ ڈیٹ ہو جائے گا۔",
     ),
+    "location": MessageLookupByLibrary.simpleMessage("مقام"),
     "logIn": MessageLookupByLibrary.simpleMessage("لاگ ان کریں"),
     "logOutDescription": MessageLookupByLibrary.simpleMessage(
       "آپ کو لاگ ان اسکرین پر واپس بھیج دیا جائے گا۔",
@@ -310,6 +314,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "usernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "صارف نام یا فون نمبر",
     ),
+    "viewParcels": MessageLookupByLibrary.simpleMessage("پارسل دیکھیں"),
     "waiting": MessageLookupByLibrary.simpleMessage("انتظار میں"),
     "warehouse": MessageLookupByLibrary.simpleMessage("گودام"),
     "whatsAppNotInstalled": MessageLookupByLibrary.simpleMessage(

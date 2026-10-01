@@ -153,5 +153,8 @@
   "customer": "Customer",
   "pudoPlaceType": "PUDO",
   "stopParcels": "Stop Parcels",
-  "unassignedStop": "Unassigned Stop"
+  "unassignedStop": "Unassigned Stop",
+  "location": "Location",
+  "couldNotOpenMap": "Could not open the map app",
+  "viewParcels": "View parcels"
 }
