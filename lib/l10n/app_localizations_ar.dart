@@ -12,7 +12,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get account => 'الحساب';
 
   @override
-  String get myPodus => 'نقاط الاستلام الخاصة بي';
+  String get myPodus => 'نقاط الاستلام';
 
   @override
   String get allParcels => 'جميع الطرود';
@@ -479,4 +479,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unassignedStop => 'نقطة غير محددة';
+
+  @override
+  String get location => 'الموقع';
+
+  @override
+  String get couldNotOpenMap => 'تعذّر فتح تطبيق الخرائط';
+
+  @override
+  String get viewParcels => 'عرض الطرود';
 }

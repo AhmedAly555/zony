@@ -55,6 +55,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "couldNotGenerateQr": MessageLookupByLibrary.simpleMessage(
       "تعذر إنشاء رمز الاستجابة السريعة\n",
     ),
+    "couldNotOpenMap": MessageLookupByLibrary.simpleMessage(
+      "تعذّر فتح تطبيق الخرائط",
+    ),
     "customer": MessageLookupByLibrary.simpleMessage("عميل"),
     "deliverNewParcel": MessageLookupByLibrary.simpleMessage("تسليم طرد جديد"),
     "delivering": MessageLookupByLibrary.simpleMessage("التسليم"),
@@ -123,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "languageSelectionDescription": MessageLookupByLibrary.simpleMessage(
       "اختر لغتك المفضلة. سيؤدي هذا إلى تحديث النص في جميع أنحاء التطبيق.",
     ),
+    "location": MessageLookupByLibrary.simpleMessage("الموقع"),
     "logIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logOutDescription": MessageLookupByLibrary.simpleMessage(
       "سيتم إرجاعك إلى شاشة تسجيل الدخول.",
@@ -138,7 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "myPickupPoints": MessageLookupByLibrary.simpleMessage(
       "نقاط الاستلام الخاصة بي",
     ),
-    "myPodus": MessageLookupByLibrary.simpleMessage("نقاط الاستلام الخاصة بي"),
+    "myPodus": MessageLookupByLibrary.simpleMessage("نقاط الاستلام"),
     "noAddressAvailable": MessageLookupByLibrary.simpleMessage(
       "لا يوجد عنوان متاح",
     ),
@@ -302,6 +306,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "usernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "اسم المستخدم أو رقم الهاتف",
     ),
+    "viewParcels": MessageLookupByLibrary.simpleMessage("عرض الطرود"),
     "waiting": MessageLookupByLibrary.simpleMessage("في الانتظار"),
     "warehouse": MessageLookupByLibrary.simpleMessage("مستودع"),
     "whatsAppNotInstalled": MessageLookupByLibrary.simpleMessage(

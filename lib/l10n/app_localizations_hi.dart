@@ -488,4 +488,13 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get unassignedStop => 'अनिर्धारित स्टॉप';
+
+  @override
+  String get location => 'स्थान';
+
+  @override
+  String get couldNotOpenMap => 'मैप ऐप नहीं खुल सका';
+
+  @override
+  String get viewParcels => 'पार्सल देखें';
 }

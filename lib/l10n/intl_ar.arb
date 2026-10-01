@@ -2,7 +2,7 @@
 {
     "@@locale": "ar",
     "account": "الحساب",
-    "myPodus": "نقاط الاستلام الخاصة بي",
+    "myPodus": "نقاط الاستلام",
     "allParcels": "جميع الطرود",
     "unread": "غير مقروء",
     "error": "خطأ: ",
@@ -154,5 +154,8 @@
     "customer": "عميل",
     "pudoPlaceType": "نقطة استلام",
     "stopParcels": "طرود نقطة التوقف",
-    "unassignedStop": "نقطة غير محددة"
+    "unassignedStop": "نقطة غير محددة",
+    "location": "الموقع",
+    "couldNotOpenMap": "تعذّر فتح تطبيق الخرائط",
+    "viewParcels": "عرض الطرود"
 }

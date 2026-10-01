@@ -49,7 +49,11 @@ Shared cross-role flows: QR/barcode scanning to identify a parcel, photo confirm
 - **Localization**: legacy `intl_utils`/`flutter_intl` codegen (class `S`, generated into `lib/generated/l10n.dart` + `lib/generated/intl/messages_*.dart`) from `.arb` files in `lib/l10n/intl_*.arb`. `main.dart` wires up `S.delegate`. Locale is switched/persisted via `LocaleLanguageService` (`ValueNotifier<Locale>`, key `languageCode`).
 - **QR/barcode scanning**: `mobile_scanner`, wrapped in `QRScannerBottomSheet` (`lib/views/widgets/bottom_sheet/qr_scanner.dart`) and the combined scan-or-manual screen `lib/modules/recieve_parcel/screens/scanner_qr_manual.dart`.
 - **Camera**: `camera` package via the reusable `CustomCameraScreen` (`lib/views/screens/custom_camera_screen.dart`), used to capture proof-of-delivery/receipt photos, uploaded through `ParcelImageService`'s 3-step signed-URL flow.
-- **Maps**: the orphaned map screen (`lib/modules/couriers/pudos&parcels/podus_map.dart`, `MyPUDOsScreen` — not reachable from any home screen) uses `flutter_map` + OpenStreetMap tiles with mock/placeholder coordinates — **not** `google_maps_flutter`, even though that package is a declared dependency (see Known Issues).
+- **Maps**: `flutter_map` + `latlong2` with **Mapbox raster tiles** (`streets-v12`, 512px @2x) — **not** `google_maps_flutter`, even though that package is a declared dependency (see Known Issues). The live map is `CourierStopsMapScreen` (`lib/modules/couriers/pudos&parcels/courier_stops_map.screen.dart`), opened from the map-icon button in `AllPODUsScreen`'s app bar (the button only appears once `CourierPlacesSuccess` has at least one stop with valid coordinates). It plots the already-loaded stops — no extra fetch — and tapping a marker opens a bottom sheet with that stop's `CourierStopCard`. The building blocks are generic and reusable:
+  - `StopsMapView<T>` (`widgets/stops_map_view.widget.dart`) — renders a list of `MapMarkerPoint<T>` and fits the camera to all of them (`CameraFit.coordinates`, max fit zoom 16, rotation disabled). Tile layer and attribution are injectable; they default to Mapbox. `points` must not be empty.
+  - `mapboxTileLayer()` + `MapboxAttribution` (`widgets/mapbox_tile_layer.widget.dart`) — tile URL comes from `MapboxConstants` (`lib/constants/mapbox.constants.dart`); attribution (Mapbox wordmark + Mapbox/OSM/"Improve this map" credits) is required by the Mapbox ToS, so keep it on any Mapbox-tiled map.
+  - `courierStopsToMapPoints()` / `CourierStopMapMarker` / `showCourierStopInfoSheet()` (`widgets/courier_stop_map_marker.widget.dart`) — stop → map point conversion (stops with no place or with a `0` lat/lng are skipped, because `CoordinatesModel` parses missing values as `0`; the rule lives in the private `_stopPosition()`), the marker widget, and the tap sheet. The sheet shows `Row[CourierStopCard, arrow]` plus a full-width **Location** button: tapping the card just closes the sheet; the arrow (`_OpenParcelsButton`) pops the sheet and then pushes `CourierStopParcelsScreen(stop:)` from the map screen's context; Location (`_OpenInMapsButton`, only shown when `_stopPosition` is non-null) calls `openInMapsApp` and shows `couldNotOpenMap` on failure. These actions live only in the sheet — `CourierStopCard` is shared with `AllPODUsScreen`/`DeliveryPointsScreen`, so don't add sheet-specific UI to it.
+  - The older `MyPUDOsScreen` (`podus_map.dart`, OSM tiles + mock Washington-DC coordinates) is still orphaned.
 
 ---
 
@@ -66,7 +70,8 @@ dependencies:
   fluttertoast: ^8.2.12
   mobile_scanner: ^7.0.1
   camera: ^0.11.2
-  flutter_map: ^8.2.1
+  flutter_map: ^8.2.1            # Mapbox raster tiles via TileLayer (see Maps)
+  latlong2: ^0.9.1               # LatLng for flutter_map
   url_launcher: ^6.3.2
   qr_flutter: ^4.1.0
   loading_animation_widget: ^1.3.0
@@ -94,6 +99,11 @@ lib/
 │                                       # S.delegate + standard Flutter localization delegates, theme picked
 │                                       # by locale (ar → Cairo, else → Poppins), home: SplashScreen.
 │                                       # No routes:/onGenerateRoute table — navigation is imperative.
+│
+├── constants/
+│   └── mapbox.constants.dart          # MapboxConstants — accessToken (String.fromEnvironment
+│                                       # 'MAPBOX_ACCESS_TOKEN', never a literal), style (mapbox/streets-v12),
+│                                       # tileUrlTemplate, logo asset, attribution URLs
 │
 ├── controllers/                       # Plain ValueNotifier-based tab controllers (NOT Cubits)
 │   ├── main_home_base_controller.dart
@@ -128,7 +138,7 @@ lib/
 ├── modules/                           # Feature modules, role-split
 │   ├── auth/
 │   │   ├── cubit/                     # LoginCubit + LoginState (Initial/Loading/Success(role,message)/Failure)
-│   │   │                              # — the only real Bloc/Cubit pair in the app
+│   │   │                              # — one of the app's two Cubits (the other is CourierPlacesCubit)
 │   │   └── view/
 │   │       ├── screens/               # login, otp, forget/change password, select login role
 │   │       └── widgets/               # custom appbar, text fields, language picker,
@@ -137,11 +147,17 @@ lib/
 │   ├── couriers/                      # Courier-role feature set
 │   │   ├── delivering/                # deliver parcels to a PUDO — screens + widgets
 │   │   ├── pudos&parcels/             # courier stops (pickup/deliver), backed by GET /courier/places
-│   │   │                              # all_podus.dart = AllPODUsScreen (direction=pickup, home card "PUDOs")
+│   │   │                              # all_podus.dart = AllPODUsScreen (direction=pickup, home card "PUDOs");
+│   │   │                              #   app-bar map button → CourierStopsMapScreen
 │   │   │                              # delivery_points.dart = DeliveryPointsScreen (direction=deliver; formerly
 │   │   │                              #   my_parcels.dart; home card title uses l10n key `myParcels`)
 │   │   │                              # courier_stop_parcels.screen.dart = parcels of one tapped stop
-│   │   │                              # cubit/ = CourierPlacesCubit/State; widgets/courier_stop_card.widget.dart
+│   │   │                              # courier_stops_map.screen.dart = CourierStopsMapScreen (Mapbox map of
+│   │   │                              #   the loaded stops; marker tap → stop-card bottom sheet with an
+│   │   │                              #   arrow → CourierStopParcelsScreen and a Location → map-app button)
+│   │   │                              # cubit/ = CourierPlacesCubit/State
+│   │   │                              # widgets/: courier_stop_card, stops_map_view (generic StopsMapView<T>),
+│   │   │                              #   mapbox_tile_layer (tiles + attribution), courier_stop_map_marker
 │   │   │                              # podu_details_and_parcels/ = older PUDO detail tabs (no longer linked
 │   │   │                              #   from AllPODUsScreen)
 │   │   │                              # podus_map.dart: orphaned flutter_map + OSM screen, mock coordinates
@@ -214,7 +230,10 @@ lib/
 │   │
 │   ├── helpers/
 │   │   ├── get_phone_number.dart      # phone number formatting for tel:/WhatsApp links
-│   │   ├── open_in_google_maps.dart   # openInGoogleMaps({lat,lng}) via url_launcher, null/zero-guarded
+│   │   ├── open_in_google_maps.dart   # openInGoogleMaps({latitude,longitude}) via url_launcher, null/zero-guarded
+│   │   ├── open_in_maps_app.dart      # openInMapsApp({latitude,longitude,label}) — app-agnostic: Android `geo:`
+│   │   │                              # intent (system picks the map app), iOS Apple Maps URL; null/zero-guarded.
+│   │   │                              # Uses launchUrl only (no canLaunchUrl), so no `geo` <queries> entry needed
 │   │   └── dummy_image_provider.dart  # placeholder image provider for pre-load UI states
 │   │
 │   ├── extensions/
@@ -237,8 +256,9 @@ lib/
 │
 ├── theme/
 │   ├── app_colors.theme.dart          # AppColors — minimal: zonyPrimary (#49159B), zonyBackground
-│   │                                  # (#F4F4F4). Most other colors are inlined as raw hex literals
-│   │                                  # across widgets rather than centralized here — see Known Issues.
+│   │                                  # (#F4F4F4), zonyPrimaryTint (#DBD0EB, light purple icon/button bg).
+│   │                                  # Most other colors are inlined as raw hex literals across widgets
+│   │                                  # rather than centralized here — see Known Issues.
 │   ├── app_languages_theme.dart       # AppTheme.arabicTheme (fontFamily: Cairo) / AppTheme.englishTheme
 │   │                                  # (fontFamily: Poppins), both via ColorScheme.fromSeed(zonyPrimary)
 │   └── app_text_styles.dart           # AppTextStyles — partial design-system TextStyle constants
@@ -291,9 +311,10 @@ lib/
 assets/
 ├── images/                            # 6 files: zony-logo.png (also launcher icon source), splash_logo.jpg,
 │                                       # Parcel.jpg, user.jpg, 2057.jpg, image 13.png
-├── svgs/                              # ~49 status/action/nav icons (barcode, qr, approved, pending,
+├── svgs/                              # 50 status/action/nav icons (barcode, qr, approved, pending,
 │                                       # expired, receiving, delivering, ready_to_deliver, transfer,
-│                                       # location/map icons, home/more/account/logout nav icons, etc.)
+│                                       # location/map icons, home/more/account/logout nav icons,
+│                                       # mapbox_logo.svg for map attribution, etc.)
 │                                       # — a few look like un-renamed Figma exports (Frame 73509*.svg)
 └── fonts/
     ├── Poppins/Poppins-Regular.ttf     # single weight only
@@ -358,12 +379,19 @@ All of `ParcelsService`'s methods pass their path **without** a leading slash ex
 - Plain classes with manual `fromJson`/`toJson`, no `json_serializable`/codegen. Match this style for new models.
 
 ### Localization
-- The **live** localization class is `S` (`lib/generated/l10n.dart`), sourced from `lib/l10n/intl_*.arb`. Edit those `.arb` files and regenerate via the `flutter_intl`/`intl_utils` tooling (`flutter pub run intl_utils:generate`), not `flutter gen-l10n` — the `AppLocalizations` files under `lib/l10n/` are not wired into `main.dart` and should be treated as inert unless a deliberate migration is undertaken.
+- The **live** localization class is `S` (`lib/generated/l10n.dart`), sourced from `lib/l10n/intl_*.arb`. Edit those `.arb` files and regenerate with `dart pub global run intl_utils:generate` (or the Flutter Intl IDE plugin), not `flutter gen-l10n`. `intl_utils` is **not** in `pubspec.yaml`, so `flutter pub run intl_utils:generate` fails; activate it once with `dart pub global activate intl_utils`. Never hand-edit `lib/generated/`. The `AppLocalizations` files under `lib/l10n/` are not wired into `main.dart` and should be treated as inert unless a deliberate migration is undertaken.
 - 5 locales: ar, bn, en, hi, ur. Arabic gets the Cairo font automatically via `AppTheme`; no per-locale font logic is needed elsewhere.
 
 ### Theming
 - Centralize new colors in `AppColors` (`lib/theme/app_colors.theme.dart`) rather than inlining hex literals, even though most existing code does the latter — don't propagate the anti-pattern into new code.
 - Prefer `AppTextStyles` constants over ad-hoc `TextStyle(...)` where an existing style fits.
+
+### Maps
+- Build new maps on `StopsMapView<T>` + `MapMarkerPoint<T>` rather than a fresh `FlutterMap`; keep `MapboxAttribution` visible.
+- Filter out `0` lat/lng before plotting (see `courierStopsToMapPoints`) and don't render `StopsMapView` with an empty list.
+- Never hardcode a Mapbox (or any) token literal — add it to `dart_defines.json` and read it with `String.fromEnvironment`.
+- To open a location externally, use `openInMapsApp` (app-agnostic: the user's map app) unless Google Maps is specifically required (`openInGoogleMaps`). Both return `false` for null/`0` coordinates; show `showErrorToast` on `false`.
+- Map labels follow the Mapbox style (currently English `streets-v12`). The Static Tiles API has no `language` parameter — Arabic labels would need a custom Mapbox Studio style (see `docs/COURIER_MAP_BOTTOMSHEET_PLAN.md`, Change 1, postponed).
 
 ### Navigation
 - Use `AppNavigator` (`lib/services/navigator.services/app_navigator.services.dart`) for pushes/pops rather than calling `Navigator.of(context)` directly, to stay consistent with the rest of the app.
@@ -372,16 +400,17 @@ All of `ParcelsService`'s methods pass their path **without** a leading slash ex
 
 ## Known Issues / Inconsistencies (worth knowing before touching related code)
 
-- **Two parallel localization codegens**: `S` (`flutter_intl`/`intl_utils`, actually used) and `AppLocalizations` (`flutter gen-l10n`, generated but unused/dead). `pubspec.yaml` has both `flutter_intl: enabled: true` and `generate: true`.
+- **Two parallel localization codegens**: `S` (`flutter_intl`/`intl_utils`, actually used) and `AppLocalizations` (`flutter gen-l10n`, generated but unused/dead). `pubspec.yaml` has both `flutter_intl: enabled: true` and `generate: true` (with `l10n.yaml`), so `flutter pub get`/`flutter run`/the IDE regenerate `lib/l10n/app_localizations*.dart` whenever the `.arb` files change. Treat that as churn: revert those files (`git checkout -- lib/l10n/app_localizations*.dart`) instead of committing them.
 - **`MyPUDOsScreen` (`podus_map.dart`) is orphaned** — nothing navigates to it. Likewise `podu_details_and_parcels/` is no longer reached from `AllPODUsScreen` (which now opens `CourierStopParcelsScreen`).
 - **Confusing naming**: `DeliveryPointsScreen`'s home-card title comes from l10n key `myParcels` ("Delivery Points"), and both home cards reuse `assets/svgs/my_parcels.svg`.
-- **`google_maps_flutter` is declared but never used.** The map screen (`podus_map.dart`) uses `flutter_map` + OpenStreetMap tiles with mock/placeholder coordinates (Washington DC area) instead. `flutter_map`/`latlong2` usage isn't reflected as a direct dependency comment concern beyond `flutter_map` itself being declared.
+- **`google_maps_flutter` is declared but never used.** All maps use `flutter_map` — `CourierStopsMapScreen` with Mapbox tiles, and the orphaned `podus_map.dart` with OSM tiles and mock coordinates.
+- **Mapbox token is empty unless you pass the dart-define.** `String.fromEnvironment` defaults to `''`, so a plain `flutter run` builds fine but map tiles fail (401) with no error surfaced in the UI. The token is a public `pk.` token and ships inside the APK/IPA regardless, so give it minimal (public) scopes only. The comment in `mapbox.constants.dart` about restricting it "by bundle/package id" is unverified — Mapbox's documented restrictions are URL-based.
 - **`flutter_localization` package is declared but not actually used** — real localization goes through standard `flutter_localizations` SDK + generated `S` class.
 - **Two API client base classes**: `BaseApiService` (raw `dart:io HttpClient`) and `ApiService extends BaseApiService` (overrides everything to use `package:http` instead). The base class's own HTTP implementation is effectively dead code for the overridden methods.
 - **Duplicate notification item widgets**: `notifacation_item.dart` and `notification_Item.widget.dart` both exist in `lib/views/widgets/`.
 - **No environment/flavor config**: API base URL is a single hardcoded string; there's no dev/staging/prod split. The only `--dart-define` in use is `MAPBOX_ACCESS_TOKEN` (see top of this file).
 - **`SplashScreen` bypasses `TokenStorage`**, reading `access_token`/`role` from `SharedPreferences` directly with duplicated key-name literals instead of calling `TokenStorage`'s methods.
-- **Folder name contains a literal `&`**: `lib/modules/couriers/pudos&parcels/` — be careful with shell quoting when touching this path.
+- **Folder name contains a literal `&`**: `lib/modules/couriers/pudos&parcels/` — be careful with shell quoting when touching this path. On Windows, quoting isn't enough for `flutter`/`dart` commands: they are `.bat` wrappers, and cmd.exe splits the argument at `&` (e.g. `flutter analyze "lib/modules/couriers/pudos&parcels"` fails). Analyze a parent folder (`lib/modules/couriers`) and filter the output instead.
 - **`SizeConfig.init(context)`** is required for `SizeConfig`'s percentage helpers to work but is inconsistently called (seen commented out in `template_app_scaffold.widget.dart`).
 - Several SVG assets have un-renamed Figma export names (e.g. `Frame 73509.svg`).
 - **`ParcelsService` carries duplicate "old"/"New" method+model pairs** for nearly every read endpoint (e.g. `getParcelsByPudoId`/`ParcelsResponse` vs. `getNewParcelsByPudoId`/`NewParcelsResponse`), hitting identical URLs but decoding into different model classes. This looks like an in-progress API migration where the old methods were never removed — screens are split across both, so don't assume one model covers all parcel-list call sites.

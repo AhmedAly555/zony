@@ -485,4 +485,13 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get unassignedStop => 'অনির্ধারিত স্টপ';
+
+  @override
+  String get location => 'অবস্থান';
+
+  @override
+  String get couldNotOpenMap => 'ম্যাপ অ্যাপ খোলা যায়নি';
+
+  @override
+  String get viewParcels => 'পার্সেল দেখুন';
 }

@@ -57,6 +57,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "couldNotGenerateQr": MessageLookupByLibrary.simpleMessage(
       "क्यूआर जेनरेट नहीं किया जा सका\n",
     ),
+    "couldNotOpenMap": MessageLookupByLibrary.simpleMessage(
+      "मैप ऐप नहीं खुल सका",
+    ),
     "customer": MessageLookupByLibrary.simpleMessage("ग्राहक"),
     "deliverNewParcel": MessageLookupByLibrary.simpleMessage(
       "नया पार्सल वितरित करें",
@@ -131,6 +134,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "languageSelectionDescription": MessageLookupByLibrary.simpleMessage(
       "अपनी पसंदीदा भाषा चुनें। यह ऐप में टेक्स्ट को अपडेट करेगा।",
     ),
+    "location": MessageLookupByLibrary.simpleMessage("स्थान"),
     "logIn": MessageLookupByLibrary.simpleMessage("लॉग इन करें"),
     "logOutDescription": MessageLookupByLibrary.simpleMessage(
       "आपको लॉगिन स्क्रीन पर वापस भेजा जाएगा।",
@@ -306,6 +310,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "usernameOrPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "उपयोगकर्ता नाम या फोन नंबर",
     ),
+    "viewParcels": MessageLookupByLibrary.simpleMessage("पार्सल देखें"),
     "waiting": MessageLookupByLibrary.simpleMessage("प्रतीक्षा में"),
     "warehouse": MessageLookupByLibrary.simpleMessage("गोदाम"),
     "whatsAppNotInstalled": MessageLookupByLibrary.simpleMessage(

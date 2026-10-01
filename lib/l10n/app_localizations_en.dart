@@ -476,4 +476,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unassignedStop => 'Unassigned Stop';
+
+  @override
+  String get location => 'Location';
+
+  @override
+  String get couldNotOpenMap => 'Could not open the map app';
+
+  @override
+  String get viewParcels => 'View parcels';
 }

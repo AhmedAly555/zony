@@ -154,5 +154,8 @@
     "customer": "کسٹمر",
     "pudoPlaceType": "پیوڈو",
     "stopParcels": "اسٹاپ پارسل",
-    "unassignedStop": "غیر متعین اسٹاپ"
+    "unassignedStop": "غیر متعین اسٹاپ",
+    "location": "مقام",
+    "couldNotOpenMap": "میپ ایپ نہیں کھل سکی",
+    "viewParcels": "پارسل دیکھیں"
 }

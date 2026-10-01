@@ -1333,6 +1333,31 @@ class S {
       args: [],
     );
   }
+
+  /// `Location`
+  String get location {
+    return Intl.message('Location', name: 'location', desc: '', args: []);
+  }
+
+  /// `Could not open the map app`
+  String get couldNotOpenMap {
+    return Intl.message(
+      'Could not open the map app',
+      name: 'couldNotOpenMap',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View parcels`
+  String get viewParcels {
+    return Intl.message(
+      'View parcels',
+      name: 'viewParcels',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
